@@ -1,4 +1,4 @@
-name: '🏗 deploy_dev → rundgang-frontend-23.dev.medienhaus.udk-berlin.de
+name: '🏗 deploy_dev → rundgang-frontend-23.dev.medienhaus.udk-berlin.de'
 
 on:
   #push:
