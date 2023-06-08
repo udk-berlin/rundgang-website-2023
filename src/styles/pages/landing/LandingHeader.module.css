@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .rundgang {
@@ -9,9 +9,5 @@
 }
 
 .date {
-  justify-self: center;
-}
-
-.language {
   justify-self: end;
 }

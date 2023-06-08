@@ -5,13 +5,14 @@ export default function LandingFooter() {
   return (
     <div className={styles.container}>
       <div className={styles.contact}>
-        <Link href="/contact">Kontakt</Link>
+        <Link href="https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/kontakt/1">
+          Kontakt
+        </Link>
       </div>
       <div className={styles.imprint}>
-        <Link href="/imprint">Impressum</Link>
-      </div>
-      <div className={styles.faq}>
-        <Link href="/faq">FAQ</Link>
+        <Link href="https://www.udk-berlin.de/schnellzugriff/impressum/">
+          Impressum
+        </Link>
       </div>
     </div>
   );

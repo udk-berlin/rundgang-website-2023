@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .contact {
@@ -8,10 +8,6 @@
 }
 
 .imprint {
-  justify-self: center;
-}
-
-.faq {
   justify-self: end;
 }
 
@@ -21,6 +17,5 @@
 }
 
 .container a:hover {
-  color: var(--color-pink);
   text-decoration: underline;
 }

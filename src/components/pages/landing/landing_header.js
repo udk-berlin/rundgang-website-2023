@@ -5,7 +5,6 @@ export default function LandingHeader() {
     <div className={styles.container}>
       <div className={styles.rundgang}>UdK Berlin Rundgang </div>
       <div className={styles.date}>21. – 23.07.2023 </div>
-      <div className={styles.language}>DE / EN </div>
     </div>
   );
 }
