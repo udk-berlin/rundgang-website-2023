@@ -1,6 +1,5 @@
-import '@/styles/globals.css'
-import '/public/assets/css/maplibre-gl.css'
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
