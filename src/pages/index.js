@@ -8,7 +8,7 @@ export default function Home() {
         <MetaHeader />
       <main>
         <BackgroundVideo />
-        <LandingLayout></LandingLayout>
+        <LandingLayout />
       </main>
     </>
   );

@@ -1,14 +1,15 @@
-import FooterLanding from "./landing_footer";
-import HeaderLanding from "./landing_header";
 import styles from "@/styles/pages/landing/LandingLayout.module.css";
-import Announcement from "./landing_announcement";
 
-export default function LandingLayout({ children }) {
+import LandingAnnouncement from "@/components/pages/landing/landing_announcement";
+import LandingFooter from "@/components/pages/landing/landing_footer";
+import LandingHeader from "@/components/pages/landing/landing_header";
+
+export default function LandingLayout() {
   return (
     <div className={styles.container}>
-      <HeaderLanding />
-      <Announcement />
-      <FooterLanding />
+      <LandingHeader />
+      <LandingAnnouncement />
+      <LandingFooter />
     </div>
   );
 }
