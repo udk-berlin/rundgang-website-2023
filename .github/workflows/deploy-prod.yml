@@ -24,22 +24,22 @@ jobs:
         env:
           HOST: rundgang.udk-berlin.de
           KEY: ${{secrets.SSH_RUNDGANG_UDK_BERLIN_DE}}
-          TARGET: /opt/rundgang-frontend-23/
+          TARGET: /opt/rundgang-website-2023/
           VERBOSE: true
           USER: root
           PORT: 22
-          ARGS: --recursive --update --delete --compress --exclude=/.git/
+          ARGS: --recursive --update --delete --compress --exclude=/.git/ --exclude=/public/fonts/
           SSH_ARGS: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
           SOURCE: .
 
-      - name: Restart rundgang-frontend-23 service
+      - name: Restart rundgang-website-2023 service
         uses: fifsky/ssh-action@v0.0.5
         with:
           command: |
-            cd /opt/rundgang-frontend-23/
+            cd /opt/rundgang-website-2023/
             npm clean-install
             npm run build
-            systemctl restart rundgang-frontend-23.service
+            systemctl restart rundgang-website-2023.service
           host: rundgang.udk-berlin.de
           user: root
           key: ${{secrets.SSH_RUNDGANG_UDK_BERLIN_DE}}
