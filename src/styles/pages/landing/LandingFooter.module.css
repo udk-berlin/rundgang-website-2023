@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.contact {
+  justify-self: start;
+}
+
+.imprint {
+  justify-self: center;
+}
+
+.faq {
+  justify-self: end;
+}
+
+.container a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.container a:hover {
+  color: var(--color-pink);
+  text-decoration: underline;
+}

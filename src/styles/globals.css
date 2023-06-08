@@ -1,4 +1,15 @@
-:root {}
+@import url("./fonts.css");
+
+:root {
+  --color-pink: #d1acd0;
+  --color-green: #1a3f2b;
+
+  --border-width: 2px;
+  --border-color: #000;
+
+  --info-border-width: 2px;
+  --info-border-color: #000;
+}
 
 * {
   box-sizing: border-box;
@@ -6,13 +17,30 @@
   margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+html {
+  font-family: "Denim", sans-serif;
+  font-weight: 400;
+  height: 100%;
+  line-height: 1.3;
+  scroll-behavior: smooth;
+  font-size: calc(1em + 0.5vmin);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: black;
-  background: white;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+p {
+  padding-bottom: 1rem;
+}
+
+img {
+  width: 100%;
 }

@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Gabriella";
+  font-style: normal;
+  src: url("/fonts/Gabriella.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Denim";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/fonts/DenimINK-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Denim";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/DenimINK-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Denim";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/DenimINK-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Denim";
+  font-weight: 600;
+  src: url("/fonts/DenimINK-SemiBold.woff2") format("woff2");
+}

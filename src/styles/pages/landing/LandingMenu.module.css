@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container > div {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Gabriella";
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000; */
+}
+
+.places {
+  font-size: 90%;
+}
+
+.times {
+  font-size: 90%;
+}
+
+/* .container svg {
+  width: 100%;
+  height: 100%;
+  fill: #231f20;
+  font-family: Gabriella, Gabriella;
+} */
+.textwrapper {
+  position: relative;
+}
+
+.textwrapper:after {
+  display: block;
+  padding-top: calc((9 / 16) * 30%);
+  content: "";
+}
+
+.text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.textwrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+.text > svg text:hover {
+  fill: #fff;
+}
+
+.container a {
+  text-decoration: none;
+}
