@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const Line = styled.div`
   flex-grow: 1;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid var(--color-pink);
   margin: 5px;
 `;
 

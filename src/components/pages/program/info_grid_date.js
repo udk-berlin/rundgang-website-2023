@@ -18,8 +18,6 @@ const Container = styled.div`
 `;
 
 const Date = styled.div`
-  display: flex;
-  justify-content: space-evenly;
   outline: var(--info-border-width) solid var(--info-border-color);
   margin-top: var(--info-border-width);
   margin-left: var(--info-border-width);
@@ -29,38 +27,40 @@ const Date = styled.div`
 
 const ClickableDate = styled(Date)`
   pointer-events: auto;
+  grid-column-start: ${(props) => props.position};
+  pointer-events: none;
 
   &:hover {
     background-color: var(--color-pink);
+    color: #fff;
+  }
+  & > a {
+    pointer-events: auto;
+    display: block;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  & > a:hover {
+    color: #fff;
   }
 `;
 
-export default function InfoGridDate({ children }) {
+export default function InfoGridDate({ Day }) {
   return (
     <Container>
       <Date>
         <span>Date:</span>
       </Date>
-      <Link href="/">
-        <ClickableDate>
+      <ClickableDate position={Day}>
+        <Link href="/">
           <span>Fri</span>
           <span>16.07.</span>
-        </ClickableDate>
-      </Link>
-
-      <Link href="/">
-        <ClickableDate>
-          <span>Sat</span>
-          <span>17.07.</span>
-        </ClickableDate>
-      </Link>
-
-      <Link href="/">
-        <ClickableDate>
-          <span>Sun</span>
-          <span>18.07.</span>
-        </ClickableDate>
-      </Link>
+        </Link>
+      </ClickableDate>
     </Container>
   );
 }
+
+// function checkDate(day) {
+//   if day
+// }
