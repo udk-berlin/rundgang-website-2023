@@ -1,6 +1,14 @@
 import Link from "next/link";
 import styles from "@/styles/layout/Footer.module.css";
 import Slider from "./slider";
+import { HoverLink } from "../hoverLink";
+import styled from "styled-components";
+
+// const FooterHoverLink = styled(HoverLink)`
+//   text-align: center;
+//   font-weight: 600;
+//   font-size: 1.2rem;
+// `;
 
 export default function Footer() {
   return (
@@ -8,9 +16,11 @@ export default function Footer() {
       <div className={styles.slider}>
         <Slider />
       </div>
-      <div className={styles.rundgang}>
-        <Link href="/program"> UdK Berlin Rundgang</Link>
-      </div>
+      <HoverLink>
+        <Link href="/program">
+          <div className={styles.rundgang}> UdK Berlin Rundgang</div>
+        </Link>
+      </HoverLink>
       <div className={styles.static}>
         <div className={styles.contact}>
           <Link href="/contact">Kontakt</Link>

@@ -1,20 +1,10 @@
+import { HoverLink } from "@/components/hoverLink";
 import Link from "next/link";
 import styled from "styled-components";
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr;
-
-  pointer-events: none;
-
-  & > a {
-    text-align: center;
-  }
-
-  & > a:hover {
-    color: #fff;
-    text-decoration: none;
-  }
 `;
 
 const Date = styled.div`
@@ -26,23 +16,12 @@ const Date = styled.div`
 `;
 
 const ClickableDate = styled(Date)`
-  pointer-events: auto;
-  grid-column-start: ${(props) => props.position};
-  pointer-events: none;
+  display: flex;
+  justify-content: space-evenly;
+`;
 
-  &:hover {
-    background-color: var(--color-pink);
-    color: #fff;
-  }
-  & > a {
-    pointer-events: auto;
-    display: block;
-    display: flex;
-    justify-content: space-evenly;
-  }
-  & > a:hover {
-    color: #fff;
-  }
+const HoverLinkDate = styled(HoverLink)`
+  grid-column-start: ${(props) => props.position};
 `;
 
 export default function InfoGridDate({ Day }) {
@@ -51,12 +30,14 @@ export default function InfoGridDate({ Day }) {
       <Date>
         <span>Date:</span>
       </Date>
-      <ClickableDate position={Day}>
+      <HoverLinkDate position={Day}>
         <Link href="/">
-          <span>Fri</span>
-          <span>16.07.</span>
+          <ClickableDate>
+            <span>Fri</span>
+            <span>16.07.</span>
+          </ClickableDate>
         </Link>
-      </ClickableDate>
+      </HoverLinkDate>
     </Container>
   );
 }

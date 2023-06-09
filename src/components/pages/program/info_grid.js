@@ -9,6 +9,15 @@ const Container = styled.div`
   justify-items: start;
   font-size: 0.7rem;
   font-weight: 500;
+
+  & a {
+    pointer-events: auto;
+    display: block;
+  }
+
+  a:hover {
+    color: #fff;
+  }
 `;
 
 export default function InfoGrid() {

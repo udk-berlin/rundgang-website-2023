@@ -15,35 +15,19 @@
 }
 
 .rundgang {
-  pointer-events: none;
-}
-
-.rundgang:hover {
-  background-color: var(--color-pink);
-}
-
-.rundgang > a {
-  pointer-events: auto;
-  display: block;
   text-align: center;
   font-weight: 600;
   font-size: 1.2rem;
-}
-
-.rundgang > a:hover {
-  color: #fff;
+  padding: 0.4rem 0.8rem;
 }
 
 .static {
   display: flex;
   justify-content: space-around;
-}
-
-.container > * {
-  border-right: var(--border-width) solid var(--border-color);
   padding: 0.4rem 0.8rem;
 }
 
-.container > *:nth-last-child(1) {
-  border: none;
+.container > *:nth-child(2) {
+  border-right: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
 }
