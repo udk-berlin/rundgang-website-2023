@@ -7,7 +7,7 @@ export default function LandingFooter() {
     <div className={styles.container}>
       <div className={styles.contact}>
         <Link
-          href="https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/kontakt/1"
+          href="https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/kontakt/"
           target="_blank"
         >
           Kontakt

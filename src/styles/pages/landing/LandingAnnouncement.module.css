@@ -11,7 +11,3 @@
 .container a {
   color: #fff;
 }
-
-.container a:hover {
-  text-decoration: underline;
-}
