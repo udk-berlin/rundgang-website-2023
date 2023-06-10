@@ -4,6 +4,8 @@ import InfoGridTime from "./info_grid_time";
 import { InfoGridEvent } from "./info_grid_event";
 import { InfoGridContext, InfoGridLocation } from "./info_grid_cards";
 import { useRef } from "react";
+import CarouselOld from "@/components/carousel_old";
+import { InfoGridCarousel } from "./info_grid_carousel";
 
 const Container = styled.div`
   display: grid;
@@ -22,36 +24,18 @@ const Container = styled.div`
   }
 `;
 
-const ScrollableContainer = styled(Container)`
-  width: 100%;
-  grid-template-columns: repeat(3, 100%);
-  align-items: start;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 2px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  & > * {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-  }
-`;
-
 export default function InfoGrid() {
   return (
     <Container>
       <InfoGridEvent EventType="Tanz"></InfoGridEvent>
-      <ScrollableContainer>
+      <InfoGridCarousel>
         <div>
           <InfoGridDate Day="3" />
           <InfoGridTime begin="10:00" end="20:00" />
         </div>
         <InfoGridLocation />
         <InfoGridContext />
-      </ScrollableContainer>
+      </InfoGridCarousel>
     </Container>
   );
 }

@@ -39,7 +39,7 @@ export const InfoGridLocation = ({ prop }) => {
 export const InfoGridContext = ({ prop }) => {
   return (
     <Container>
-      <Item margin="200px">Fakultät Bildende Künste</Item>
+      <Item margin="50px">Fakultät Bildende Künste</Item>
       <Item margin="150px">Institut für Kunst</Item>
       <Item margin="100px">Malerei / Zeichnen</Item>
       <Item margin="50px">Fachklasse Streuli</Item>
