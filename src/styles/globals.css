@@ -24,6 +24,7 @@ html {
   line-height: 1.3;
   scroll-behavior: smooth;
   font-size: calc(1em + 0.5vmin);
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

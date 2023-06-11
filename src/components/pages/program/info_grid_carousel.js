@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 const ScrollableDiv = styled.div`
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   /* scroll-snap-type: x mandatory; */
 
   &::-webkit-scrollbar {
@@ -25,7 +25,6 @@ const InfoCard = styled.div`
 export const InfoGridCarousel = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [carouselHeight, setCarouselHeight] = useState(0);
-  const [scrollDir, setScrollDir] = useState("");
   const carouselRef = useRef(null);
 
   const scrollToCurrentIndex = () => {
@@ -50,44 +49,32 @@ export const InfoGridCarousel = ({ children }) => {
     const currentSlide = carouselRef.current.children[currentIndex];
     setCarouselHeight(currentSlide.clientHeight);
     scrollToCurrentIndex();
+
+    console.log(currentIndex);
   }, [currentIndex]);
-  console.log(currentIndex);
 
   useEffect(() => {
-    if (scrollDir == "right") {
-      handleNext();
-    } else if (scrollDir == "left") {
-      handlePrevious();
-    }
-    const carousel = carouselRef.current;
-    const threshold = 50;
-    let lastScrollX = carousel.scrollLeft;
-    let ticking = false;
-
-    const updateScrollDir = () => {
-      const scrollX = carousel.scrollLeft;
-
-      if (Math.abs(scrollX - lastScrollX) < threshold) {
-        ticking = false;
-        return;
+    const onScroll = (event) => {
+      event.preventDefault();
+      console.log(event.deltaX);
+      let thr = 0;
+      if (event.deltaX > thr) {
+        handleNext();
+      } else if (event.deltaX < -thr) {
+        handlePrevious();
       }
-      setScrollDir(scrollX > lastScrollX ? "right" : "left");
-      lastScrollX = scrollX > 0 ? scrollX : 0;
-      ticking = false;
+      carouselRef.current.removeEventListener("wheel", onScroll);
+      setTimeout(() => {
+        carouselRef.current.addEventListener("wheel", onScroll);
+      }, 1000); // return event after 1 second
     };
 
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateScrollDir);
-        ticking = true;
-      }
-    };
-
-    carousel.addEventListener("scroll", onScroll);
-    console.log(scrollDir);
-
-    return () => carousel.removeEventListener("scroll", onScroll);
-  }, [scrollDir]);
+    carouselRef.current.addEventListener("wheel", onScroll);
+    return () =>
+      carouselRef.current.removeEventListener("wheel", (e) => {
+        onScroll(e);
+      });
+  }, []);
 
   return (
     <>
