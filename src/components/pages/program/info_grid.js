@@ -3,8 +3,6 @@ import InfoGridDate from "./info_grid_date";
 import InfoGridTime from "./info_grid_time";
 import { InfoGridEvent } from "./info_grid_event";
 import { InfoGridContext, InfoGridLocation } from "./info_grid_cards";
-import { useRef } from "react";
-import CarouselOld from "@/components/carousel_old";
 import { InfoGridCarousel } from "./info_grid_carousel";
 
 const Container = styled.div`
@@ -39,17 +37,3 @@ export default function InfoGrid() {
     </Container>
   );
 }
-
-// const ScrollDemo = () => {
-//   const myRef = useRef(null)
-
-//   const executeScroll = () => myRef.current.scrollIntoView()
-//   // run this function from an event handler or an effect to execute scroll
-
-//   return (
-//      <>
-//         <div ref={myRef}>Element to scroll to</div>
-//         <button onClick={executeScroll}> Click to scroll </button>
-//      </>
-//   )
-// }

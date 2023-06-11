@@ -1,4 +1,3 @@
-import styles from "@/styles/pages/Program.module.css";
 import Layout from "@/components/layout/layout";
 import ProjectCell from "@/components/pages/program/project_cell";
 import styled from "styled-components";
