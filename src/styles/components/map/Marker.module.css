@@ -1,0 +1,10 @@
+.image {
+    z-index: 20;
+    cursor: pointer;
+}
+
+.textBoxContainer {
+    background: var(--transparent-black);
+    color: var(--white);
+    padding: var(--map-marker-text-box-padding);
+}

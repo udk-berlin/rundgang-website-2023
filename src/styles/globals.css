@@ -1,4 +1,9 @@
-:root {}
+:root {
+  --white: white;
+  --transparent-black: rgba(1, 1, 1, 0.8);
+
+  --map-marker-text-box-padding: 3px 12px;
+}
 
 * {
   box-sizing: border-box;

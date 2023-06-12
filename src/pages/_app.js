@@ -1,5 +1,8 @@
-import '@/styles/globals.css'
+import React from 'react'
 
-export default function App({ Component, pageProps }) {
+import '@/styles/globals.css'
+import '@/styles/maplibre-gl.css'
+
+export default function App ({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
