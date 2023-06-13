@@ -1,8 +1,10 @@
-import React, { forwardRef, useRef } from 'react'
+import React from 'react'
 
-export default forwardRef(function Popup ({ location }) {
-  const containerRef = useRef(null)
+import styles from '@/styles/components/map/Popup.module.css'
+
+export default function Popup({ location }) {
+
   return (
-        <div ref={containerRef}></div>
+        <div className={styles.container}>{location.name}</div>
   )
-})
+}

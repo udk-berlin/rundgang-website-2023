@@ -5,6 +5,7 @@ import maplibregl from 'maplibre-gl'
 import styles from '@/styles/components/map/Map.module.css'
 
 import ResponsiveMarker from '@/components/map/marker'
+import Popup from "@/components/map/popup";
 
 const MAP_CONFIGURATION = {
   style: 'https://api.maptiler.com/maps/06aff06f-bb9b-4079-9249-48c949cefa44/style.json?key=a8EEiDlcUdsARq8hI6PH',
@@ -41,19 +42,33 @@ export default function Map ({ locations }) {
     )
 
     mapRef.current.on('load', () => {
-      locations.forEach(location => {
-        const marker = document.createElement('div')
-        createRoot(marker).render(<ResponsiveMarker location={location} />)
+        locations.forEach(location => {
+            const marker = document.createElement('div')
+            createRoot(marker).render(<ResponsiveMarker location={location} />)
 
-        new maplibregl.Marker({ element: marker, pitchAlignment: 'map' })
-          .setLngLat(
-            [
-              location.allocation.physical[0].lng,
-              location.allocation.physical[0].lat
-            ]
-          )
-          .addTo(mapRef.current)
-      })
+            new maplibregl.Marker({ element: marker, pitchAlignment: 'map' })
+                .setLngLat(
+                    [
+                        location.allocation.physical[0].lng,
+                        location.allocation.physical[0].lat
+                    ]
+                )
+                .addTo(mapRef.current)
+        })
+
+        mapRef.current.on("click", e => {
+            locations.forEach(location => {
+                const otherElement = document.getElementById(`popup-${location.id}`);
+                otherElement.style.zIndex = "-1";
+                otherElement.style.marginLeft = "-1000";
+            });
+            if (e.originalEvent.target.id) {
+                let id = e.originalEvent.target.id.replaceAll("marker-", "");
+                const popupElement = document.getElementById(`popup-${id}`);
+                popupElement.style.zIndex = "100";
+                popupElement.style.marginLeft = "0";
+            }
+        });
     })
 
     mapRef.current.addControl(new maplibregl.NavigationControl(), 'bottom-right')
@@ -62,6 +77,7 @@ export default function Map ({ locations }) {
   return (
         <>
             <div ref={mapContainerRef} className={styles.container}/>
+            <div>{locations.map(location => <Popup location={location} />)}</div>
         </>
   )
 }
