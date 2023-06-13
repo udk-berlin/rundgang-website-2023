@@ -1,17 +1,13 @@
 import Layout from "@/components/layout/layout";
 import StaticLayout from "@/components/layout/static_layout";
-import { StaticTitle } from "./faq";
 
 export default function Imprint() {
   return (
     <Layout>
-      <StaticLayout>
-        <StaticTitle>Impressum</StaticTitle>
+      <StaticLayout title={'Impressum'}>
         <div>
           <p>
-            Universität der Künste Berlin<br></br>
-            Körperschaft des öffentlichen Rechts<br></br>
-            gesetzlich vertreten durch den Präsidenten Prof. Dr. Norbert Palz
+            Universität der Künste Berlin<br></br>Körperschaft des öffentlichen Rechts<br></br>gesetzlich vertreten durch den Präsidenten Prof. Dr. Norbert Palz
             <br></br>
             Einsteinufer 43<br></br>
             D-10587 Berlin<br></br>

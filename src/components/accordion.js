@@ -1,8 +1,31 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Keyframes } from "styled-components";
 
-export const Accordion = styled.div`
+export default function Accordion({ items }) {
+    return (
+        <AccordionWrapper>
+            {items.map(item => <AccordionItem item={item}/>)}
+        </AccordionWrapper>
+    )
+}
+
+function AccordionItem({ item }) {
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <AccordionItemWrapper>
+      <AccordionItemTitle onClick={() => setIsActive(!isActive)}>{item.title}</AccordionItemTitle>
+      {isActive && (
+        <AccordionItemContentWrapper>
+          <AccordionItemContentLine />
+          <AccordionItemContent>{item.content}</AccordionItemContent>
+        </AccordionItemContentWrapper>
+      )}
+    </AccordionItemWrapper>
+  );
+}
+
+const AccordionWrapper = styled.div`
   border: var(--border-width) solid var(--border-color);
 
   & > div {
@@ -14,47 +37,29 @@ export const Accordion = styled.div`
   }
 `;
 
-export function AccordionItem({ title, content }) {
-  const [isActive, setIsActive] = useState(false);
-  return (
-    <AccordionWrapper>
-      <AccordionTitle onClick={() => setIsActive(!isActive)}>
-        {title}
-        {/* <div>{isActive ? "-" : "+"}</div> */}
-      </AccordionTitle>
-      {isActive && (
-        <AccordionContentWrapper>
-          <AccordionLine />
-          <AccordionContent>{content}</AccordionContent>
-        </AccordionContentWrapper>
-      )}
-    </AccordionWrapper>
-  );
-}
-
-export const AccordionWrapper = styled.div`
+const AccordionItemWrapper = styled.div`
   display: flex;
   padding: 0.5rem;
   transition: height 2s ease-in-out;
 `;
 
-const AccordionTitle = styled.div`
+const AccordionItemTitle = styled.div`
   cursor: pointer;
   flex-shrink: 0;
   vertical-align: middle;
   font-weight: 500;
 `;
 
-const AccordionContentWrapper = styled.div`
+const AccordionItemContentWrapper = styled.div`
   display: grid;
   grid-template-columns: min-content 1fr;
 `;
 
-const AccordionLine = styled.div`
+const AccordionItemContentLine = styled.div`
   width: 65px;
   border-bottom: 2px solid #000;
   margin: 0.7rem 0.5rem;
   align-self: start;
 `;
 
-const AccordionContent = styled.div``;
+const AccordionItemContent = styled.div``;

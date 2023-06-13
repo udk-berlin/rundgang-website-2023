@@ -1,13 +1,18 @@
-import Footer from "./footer";
-import Header from "./header";
 import styles from "@/styles/layout/Layout.module.css";
+
+import MetaHeader from "@/components/meta_header";
+import Footer from "@/components/layout/footer";
+import Header from "@/components/layout/header";
 
 export default function Layout({ children }) {
   return (
-    <div className={styles.container}>
-      <Header />
-      <div className={styles.content}>{children}</div>
-      <Footer />
-    </div>
+      <>
+          <MetaHeader />
+          <main className={styles.container}>
+              <Header />
+              <div className={styles.content}>{children}</div>
+              <Footer />
+          </main>
+      </>
   );
 }
