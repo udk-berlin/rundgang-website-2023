@@ -22,7 +22,7 @@ const InfoCard = styled.div`
   height: 100%;
 `;
 
-export const InfoGridCarousel = ({ children }) => {
+export default function InfoGridCarousel({ children }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [carouselHeight, setCarouselHeight] = useState(0);
   const carouselRef = useRef(null);

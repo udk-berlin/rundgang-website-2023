@@ -2,7 +2,7 @@ import Layout from "@/components/layout/layout";
 import ProjectCell from "@/components/pages/program/project_cell";
 import styled from "styled-components";
 
-export default function Programm() {
+export default function Program() {
   return (
     <Layout>
       <Grid>

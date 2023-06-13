@@ -1,4 +1,4 @@
-import { HoverLink } from "@/components/hoverLink";
+import { HoverLink } from "@/components/hover_link";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -11,11 +11,11 @@ const Container = styled.div`
   padding: 0.2rem 0.4rem;
 `;
 
-export const InfoGridEvent = ({ EventType }) => {
+export default function InfoGridEvent({ eventType }) {
   return (
     <HoverLinkEvent>
       <Link href="/">
-        <Container>{EventType}</Container>
+        <Container>{eventType}</Container>
       </Link>
     </HoverLinkEvent>
   );

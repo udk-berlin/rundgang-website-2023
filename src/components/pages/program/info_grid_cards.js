@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -18,7 +17,7 @@ const ItemWrapper = styled.div`
   }
 `;
 
-const Item = ({ margin, children }) => {
+function Item({ margin, children }) {
   return (
     <ItemWrapper margin={margin}>
       <div>{children}</div>
@@ -26,7 +25,7 @@ const Item = ({ margin, children }) => {
   );
 };
 
-export const InfoGridLocation = ({ prop }) => {
+export function InfoGridLocation() {
   return (
     <Container>
       <Item margin="170px">Hardenbergstr. 33</Item>
@@ -34,9 +33,9 @@ export const InfoGridLocation = ({ prop }) => {
       <Item margin="50px">Raum: 243/244</Item>
     </Container>
   );
-};
+}
 
-export const InfoGridContext = ({ prop }) => {
+export function InfoGridContext() {
   return (
     <Container>
       <Item margin="50px">Fakultät Bildende Künste</Item>
@@ -45,4 +44,4 @@ export const InfoGridContext = ({ prop }) => {
       <Item margin="50px">Fachklasse Streuli</Item>
     </Container>
   );
-};
+}

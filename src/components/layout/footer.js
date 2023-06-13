@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "@/styles/layout/Footer.module.css";
-import Slider from "./slider";
-import { HoverLink } from "../hoverLink";
+import Slider from "@/components/layout/slider";
+import { HoverLink } from "@/components/hover_link";
 import styled from "styled-components";
 
 // const FooterHoverLink = styled(HoverLink)`

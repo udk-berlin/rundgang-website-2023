@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import InfoGridDate from "./info_grid_date";
-import InfoGridTime from "./info_grid_time";
-import { InfoGridEvent } from "./info_grid_event";
-import { InfoGridContext, InfoGridLocation } from "./info_grid_cards";
-import { InfoGridCarousel } from "./info_grid_carousel";
+
+import InfoGridDate from "@/components/pages/program/info_grid_date";
+import InfoGridTime from "@/components/pages/program/info_grid_time";
+import InfoGridEvent from "@/components/pages/program/info_grid_event";
+import { InfoGridContext, InfoGridLocation } from "@/components/pages/program/info_grid_cards";
+import InfoGridCarousel from "@/components/pages/program/info_grid_carousel";
 
 const Container = styled.div`
   display: grid;
@@ -25,10 +26,10 @@ const Container = styled.div`
 export default function InfoGrid() {
   return (
     <Container>
-      <InfoGridEvent EventType="Tanz"></InfoGridEvent>
+      <InfoGridEvent eventType="Tanz" />
       <InfoGridCarousel>
         <div>
-          <InfoGridDate Day="3" />
+          <InfoGridDate day="3" />
           <InfoGridTime begin="10:00" end="20:00" />
         </div>
         <InfoGridLocation />

@@ -1,4 +1,4 @@
-import { HoverLink } from "@/components/hoverLink";
+import { HoverLink } from "@/components/hover_link";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -24,13 +24,13 @@ const HoverLinkDate = styled(HoverLink)`
   grid-column-start: ${(props) => props.position};
 `;
 
-export default function InfoGridDate({ Day }) {
+export default function InfoGridDate({ day }) {
   return (
     <Container>
       <Date>
         <span>Date:</span>
       </Date>
-      <HoverLinkDate position={Day}>
+      <HoverLinkDate position={day}>
         <Link href="/">
           <ClickableDate>
             <span>Fri</span>

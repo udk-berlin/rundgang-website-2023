@@ -1,8 +1,10 @@
-import styles from "@/styles/pages/program/ProjectCell.module.css";
-import ProjectPageTitle from "../project_page/projectpage_title";
-import ProjectPageAuthors from "../project_page/projectpage_authors";
-import InfoGrid from "./info_grid";
 import Link from "next/link";
+
+import styles from "@/styles/pages/program/ProjectCell.module.css";
+
+import ProjectPageTitle from "@/components/pages/project_page/projectpage_title";
+import ProjectPageAuthors from "@/components/pages/project_page/projectpage_authors";
+import InfoGrid from "@/components/pages/program/info_grid";
 
 export default function ProjectCell({ src }) {
   return (
