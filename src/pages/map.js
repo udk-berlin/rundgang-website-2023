@@ -1,15 +1,16 @@
 import React from 'react'
 
-import { getLocations } from '@/utils/api/api'
+import { getItemsWithLocation} from '@/utils/api/api'
 import Map from '@/components/map/map'
 
 export async function getStaticProps () {
-  const locations = await getLocations(false)
-  return { props: { locations } }
+  // const locations = await getLocations(false)
+  const items = await getItemsWithLocation()
+  return { props: { items } }
 }
 
-export default function MapLayout ({ locations }) {
-  console.log(locations)
+export default function MapLayout ({ items }) {
+  console.log(items)
 
-  return <Map locations={locations}/>
+  return <Map locations={[]}/>
 }
