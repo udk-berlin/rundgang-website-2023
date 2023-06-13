@@ -11,6 +11,5 @@ export async function getStaticProps () {
 
 export default function MapLayout ({ items }) {
   console.log(items)
-
   return <Map locations={[]}/>
 }
