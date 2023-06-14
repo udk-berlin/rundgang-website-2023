@@ -1,11 +1,14 @@
+import React from "react";
 import styles from '@/styles/pages/landing/LandingHeader.module.css'
+import { SwitchLocalizationLink } from "@/components/localization/links";
+
 
 export default function LandingHeader () {
   return (
     <div className={styles.container}>
       <div className={styles.rundgang}>UdK Berlin Rundgang </div>
       <div className={styles.date}>21. – 23.07.2023 </div>
-      <div className={styles.language}>DE / EN </div>
+      <div className={styles.localization}><SwitchLocalizationLink /></div>
     </div>
   )
 }

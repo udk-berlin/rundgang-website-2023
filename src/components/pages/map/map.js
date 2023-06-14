@@ -2,10 +2,11 @@ import React, { useRef, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import maplibregl from 'maplibre-gl'
 
-import styles from '@/styles/components/map/Map.module.css'
+import styles from '@/styles/pages/map/Map.module.css'
 
-import ResponsiveMarker from '@/components/map/marker'
-import Popup from '@/components/map/popup'
+import ResponsiveMarker from '@/components/pages/map/marker'
+import Popup from '@/components/pages/map/popup'
+import Layout from "@/components/layout/layout";
 
 const MAP_CONFIGURATION = {
   style: 'https://api.maptiler.com/maps/d450193f-53a4-40fc-8f3f-97a0321d7139/style.json?key=Zn4TzWj4KtRhJ9I5TDxf',
@@ -70,9 +71,9 @@ export default function Map ({ locations }) {
   })
 
   return (
-        <>
-            <div ref={mapContainerRef} className={styles.container}/>
-            <div>{Object.values(locations).map(location => <Popup location={location} />)}</div>
-        </>
+    <Layout>
+        <div ref={mapContainerRef} className={styles.container}/>
+        <div>{Object.values(locations).map(location => <Popup location={location} />)}</div>
+    </Layout>
   )
 }

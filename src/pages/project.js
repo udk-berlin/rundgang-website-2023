@@ -1,10 +1,10 @@
-import Layout from '@/components/layout/layout.js'
-import ProjectPage from '@/components/pages/project/project'
+import Page from "@/components/page/page";
+import Project from '@/components/pages/project/project'
 
-export default function Project () {
+export default function ProjectPage () {
   return (
-    <Layout>
-      <ProjectPage />
-    </Layout>
+    <Page>
+      <Project />
+    </Page>
   )
 }

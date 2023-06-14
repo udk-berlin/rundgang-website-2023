@@ -1,32 +1,55 @@
-import Link from 'next/link'
-
+import { FormattedMessage } from "react-intl";
 import styles from '@/styles/layout/Footer.module.css'
 
 import Slider from '@/components/layout/slider'
 import { HoverLink } from '@/components/hover_link'
+import { LocalizedLink } from "@/components/localization/links";
 
 export default function Footer () {
   return (
     <div className={styles.container}>
-      <div>
-        <Slider />
-      </div>
-      <HoverLink>
-        <Link href="/program">
-          <div className={styles.rundgang}> UdK Berlin Rundgang</div>
-        </Link>
-      </HoverLink>
-      <div className={styles.static}>
-        <div>
-          <Link href="/contact">Kontakt</Link>
-        </div>
-        <div>
-          <Link href="/imprint">Impressum</Link>
-        </div>
-        <div>
-          <Link href="/faq">FAQ</Link>
-        </div>
-      </div>
+      <FooterLeft />
+      <FooterCenter />
+      <FooterRight />
+    </div>
+  )
+}
+
+function FooterLeft () {
+  return (
+    <div>
+      <Slider />
+    </div>
+  )
+}
+
+function FooterCenter () {
+  return (
+    <HoverLink>
+      <LocalizedLink href="/program">
+        <div className={styles.center}> UdK Berlin Rundgang</div>
+      </LocalizedLink>
+    </HoverLink>
+  )
+}
+
+function FooterRight () {
+  const links = [
+    {href: '/contact', id: 'contact'},
+    {href: '/imprint', id: 'imprint'},
+    {href: '/faq', id: 'faq'},
+  ]
+
+  return (
+    <div className={styles.right}>
+      {
+        links.map(link => {
+          return (
+            <LocalizedLink href={link.href}>
+              <FormattedMessage id={link.id} />
+            </LocalizedLink>)
+        })
+      }
     </div>
   )
 }

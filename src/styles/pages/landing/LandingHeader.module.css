@@ -12,6 +12,10 @@
   justify-self: center;
 }
 
-.language {
+.localization {
   justify-self: end;
+}
+
+.localization > a {
+  color: white;
 }

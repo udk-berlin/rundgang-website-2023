@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FormattedMessage } from "react-intl";
 
 export default function StaticLayout ({
   layout = 'default',
@@ -29,9 +30,17 @@ const FaqStaticTitle = styled(StaticTitle)`
 const staticTitle = (layout, title) => {
   switch (layout) {
     case 'faq':
-      return <FaqStaticTitle>{title}</FaqStaticTitle>
+      return (
+          <FaqStaticTitle>
+            <FormattedMessage id={title} />
+          </FaqStaticTitle>
+      )
     default:
-      return <StaticTitle>{title}</StaticTitle>
+      return (
+          <StaticTitle>
+            <FormattedMessage id={title} />
+          </StaticTitle>
+      )
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import styles from '@/styles/components/map/Marker.module.css'
+import styles from '@/styles/pages/map/Marker.module.css'
 
 const MARKER_IMAGE_FOLDER_PATH = '/assets/svg/map/marker/'
 const SIMPLE_MARKER_IMAGE_SRC = `${MARKER_IMAGE_FOLDER_PATH}/simple.svg`
