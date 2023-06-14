@@ -16,9 +16,13 @@
   margin-top: -5vw;
 }
 
-.svg {
+.svgTop {
   width: 100vw;
-  margin-right: -50vw;
+}
+
+.svgBottom {
+  width: 100vw;
+  margin-right: -40vw;
 }
 
 .svgText {

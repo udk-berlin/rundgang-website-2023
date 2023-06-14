@@ -3,39 +3,60 @@ import { FormattedMessage } from "react-intl";
 import styles from '@/styles/pages/landing/LandingMenu.module.css'
 import { LocalizedLink } from "@/components/localization/links";
 
+const hrefMapper = {
+  'program': '/program',
+  'places': '/places',
+  'dates': '/dates',
+}
+
+const classNameMapper = {
+  'program': {
+    svg: styles.svgTop,
+    text: styles.svgTextL,
+  },
+  'places': {
+    svg: styles.svgBottom,
+    text: styles.svgTextM,
+  },
+  'dates': {
+    svg: styles.svgBottom,
+    text: styles.svgTextM,
+  },
+}
+
 export default function LandingMenu () {
 
   return (
     <div className={styles.container}>
       <div className={[styles.row].join(' ')}>
-        <SvgLink href={'/program'} title={'program'} className={styles.svgTextL} />
+        <SvgLink id={'program'} />
       </div>
 
       <div className={[styles.row, styles.bottomRow].join(' ')}>
-        <SvgLink href={'/places'} title={'places'} className={styles.svgTextM} />
-        <SvgLink href={'/calendar'} title={'dates'} className={styles.svgTextM} />
+        <SvgLink id={'places'} />
+        <SvgLink id={'dates'} />
       </div>
     </div>
   )
 }
 
-function SvgLink ({ href, title, className }) {
+function SvgLink ({ id }) {
   return (
-    <Svg>
-      <LocalizedLink href={href}>
-        <text className={[styles.svgText, className].join(' ')} x="0%" y="75%">
-          <FormattedMessage id={title}/>
+    <Svg id={id}>
+      <LocalizedLink href={hrefMapper[id]}>
+        <text className={[styles.svgText, classNameMapper[id].text].join(' ')} x="0%" y="75%">
+          <FormattedMessage id={id}/>
         </text>
       </LocalizedLink>
     </Svg>
   )
 }
 
-function Svg ({ children }) {
+function Svg ({ children, id }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={styles.svg}
+      className={classNameMapper[id].svg}
       preserveAspectRatio="200w"
       viewBox="0 0 548 80"
     >
