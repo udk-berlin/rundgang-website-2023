@@ -16,6 +16,6 @@ const Container = styled.div`
   }
 `;
 
-export default function ProjectPageTitle({ fontSize = 2, children }) {
+export default function ProjectTitle({ fontSize = 2, children }) {
   return <Container fontSize={fontSize}>{children}</Container>;
 }

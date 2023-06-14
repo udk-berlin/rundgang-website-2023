@@ -1,27 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
 
-const ScrollableDiv = styled.div`
-  display: flex;
-  overflow-x: hidden;
-  /* scroll-snap-type: x mandatory; */
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* & > * {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-  } */
-`;
-
-const InfoCard = styled.div`
-  padding-bottom: 5px;
-  flex: 0 0 100%;
-  height: 100%;
-`;
-
 export default function InfoGridCarousel({ children }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [carouselHeight, setCarouselHeight] = useState(0);
@@ -49,32 +28,7 @@ export default function InfoGridCarousel({ children }) {
     const currentSlide = carouselRef.current.children[currentIndex];
     setCarouselHeight(currentSlide.clientHeight);
     scrollToCurrentIndex();
-
-    console.log(currentIndex);
   }, [currentIndex]);
-
-  useEffect(() => {
-    const onScroll = (event) => {
-      event.preventDefault();
-      console.log(event.deltaX);
-      let thr = 0;
-      if (event.deltaX > thr) {
-        handleNext();
-      } else if (event.deltaX < -thr) {
-        handlePrevious();
-      }
-      carouselRef.current.removeEventListener("wheel", onScroll);
-      setTimeout(() => {
-        carouselRef.current.addEventListener("wheel", onScroll);
-      }, 1000); // return event after 1 second
-    };
-
-    carouselRef.current.addEventListener("wheel", onScroll);
-    return () =>
-      carouselRef.current.removeEventListener("wheel", (e) => {
-        onScroll(e);
-      });
-  }, []);
 
   return (
     <>
@@ -104,4 +58,19 @@ export default function InfoGridCarousel({ children }) {
       </button>
     </>
   );
-};
+}
+
+const ScrollableDiv = styled.div`
+  display: flex;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const InfoCard = styled.div`
+  padding-bottom: 5px;
+  flex: 0 0 100%;
+  height: 100%;
+`;

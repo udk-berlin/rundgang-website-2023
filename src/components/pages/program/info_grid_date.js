@@ -2,39 +2,20 @@ import { HoverLink } from "@/components/hover_link";
 import Link from "next/link";
 import styled from "styled-components";
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr;
-`;
+const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-const Date = styled.div`
-  outline: var(--info-border-width) solid var(--info-border-color);
-  margin-top: var(--info-border-width);
-  margin-left: var(--info-border-width);
-
-  padding: 0.2rem 0.4rem;
-`;
-
-const ClickableDate = styled(Date)`
-  display: flex;
-  justify-content: space-evenly;
-`;
-
-const HoverLinkDate = styled(HoverLink)`
-  grid-column-start: ${(props) => props.position};
-`;
-
-export default function InfoGridDate({ day }) {
+export default function InfoGridDate({ start, end }) {
+  const date = new Date((start - 7200) * 1000);
   return (
     <Container>
-      <Date>
+      <DateWrapper>
         <span>Date:</span>
-      </Date>
-      <HoverLinkDate position={day}>
+      </DateWrapper>
+      <HoverLinkDate date={date}>
         <Link href="/">
           <ClickableDate>
-            <span>Fri</span>
-            <span>16.07.</span>
+            <span>{weekday[date.getDay()]}</span>
+            <span>{date.getDate() + "." + date.getMonth() + "."}</span>
           </ClickableDate>
         </Link>
       </HoverLinkDate>
@@ -42,6 +23,42 @@ export default function InfoGridDate({ day }) {
   );
 }
 
-// function checkDate(day) {
-//   if day
-// }
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr;
+`;
+
+const DateWrapper = styled.div`
+  outline: var(--info-border-width) solid var(--info-border-color);
+  margin-top: var(--info-border-width);
+  margin-left: var(--info-border-width);
+
+  padding: 0.2rem 0.4rem;
+`;
+
+const ClickableDate = styled(DateWrapper)`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+const HoverLinkDate = styled(HoverLink)`
+  grid-column-start: ${(prop) => dateToPosition(prop.date)};
+`;
+
+function dateToPosition(date) {
+  let position;
+  switch (date.getDay()) {
+    case 5:
+      position = 2;
+      break;
+    case 6:
+      position = 3;
+      break;
+    case 0:
+      position = 4;
+      break;
+    default:
+      position = 2;
+  }
+  return position;
+}
