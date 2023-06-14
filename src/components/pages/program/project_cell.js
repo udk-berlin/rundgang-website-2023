@@ -1,12 +1,15 @@
-import styles from "@/styles/pages/program/ProjectCell.module.css";
-import ProjectPageTitle from "../project_page/projectpage_title";
-import ProjectPageAuthors from "../project_page/projectpage_authors";
-import InfoGrid from "./info_grid";
 import Link from "next/link";
+import styled from "styled-components";
+
+import ProjectPageTitle from "@/components/pages/project/project_title";
+import ProjectPageAuthors from "@/components/pages/project/project_authors";
+import InfoGrid from "@/components/pages/program/info_grid";
+
+const authors = ["Marisa Nest", "Juan Pablo Gaviria Bedoya", "Lukas Esser"];
 
 export default function ProjectCell({ src }) {
   return (
-    <div className={styles.container}>
+    <Container>
       <Link href="/project">
         <img src={src}></img>
       </Link>
@@ -15,14 +18,14 @@ export default function ProjectCell({ src }) {
           REM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD
         </ProjectPageTitle>
       </Link>
-      <div className={styles.authors}>
-        <ProjectPageAuthors fontSize={0.8}>Marisa Nest</ProjectPageAuthors>
-        <ProjectPageAuthors fontSize={0.8}>Lukas Esser</ProjectPageAuthors>
-        <ProjectPageAuthors fontSize={0.8}>
-          Juan Pablo Gaviria Bedoya
-        </ProjectPageAuthors>
-      </div>
-      <InfoGrid />
-    </div>
+      <ProjectPageAuthors fontSize={0.8} authors={authors} />
+      <InfoGrid eventType="Tanz" />
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.75rem;
+`;

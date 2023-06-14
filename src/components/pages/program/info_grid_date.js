@@ -1,25 +1,35 @@
 import Link from "next/link";
 import styled from "styled-components";
 
+import { HoverLink } from "@/components/hover_link";
+
+const dayToWeekDayMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+export default function InfoGridDate({ start, end }) {
+  const date = new Date((start - 7200) * 1000);
+  return (
+    <Container>
+      <DateWrapper>
+        <span>Date:</span>
+      </DateWrapper>
+      <HoverLinkDate date={date}>
+        <Link href="/">
+          <ClickableDate>
+            <span>{dayToWeekDayMapper[date.getDay()]}</span>
+            <span>{date.getDate() + "." + date.getMonth() + "."}</span>
+          </ClickableDate>
+        </Link>
+      </HoverLinkDate>
+    </Container>
+  );
+}
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr;
-
-  pointer-events: none;
-
-  & > a {
-    text-align: center;
-  }
-
-  & > a:hover {
-    color: #fff;
-    text-decoration: none;
-  }
 `;
 
-const Date = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+const DateWrapper = styled.div`
   outline: var(--info-border-width) solid var(--info-border-color);
   margin-top: var(--info-border-width);
   margin-left: var(--info-border-width);
@@ -27,40 +37,29 @@ const Date = styled.div`
   padding: 0.2rem 0.4rem;
 `;
 
-const ClickableDate = styled(Date)`
-  pointer-events: auto;
-
-  &:hover {
-    background-color: var(--color-pink);
-  }
+const ClickableDate = styled(DateWrapper)`
+  display: flex;
+  justify-content: space-evenly;
 `;
 
-export default function InfoGridDate({ children }) {
-  return (
-    <Container>
-      <Date>
-        <span>Date:</span>
-      </Date>
-      <Link href="/">
-        <ClickableDate>
-          <span>Fri</span>
-          <span>16.07.</span>
-        </ClickableDate>
-      </Link>
+const HoverLinkDate = styled(HoverLink)`
+  grid-column-start: ${(prop) => dateToPosition(prop.date)};
+`;
 
-      <Link href="/">
-        <ClickableDate>
-          <span>Sat</span>
-          <span>17.07.</span>
-        </ClickableDate>
-      </Link>
-
-      <Link href="/">
-        <ClickableDate>
-          <span>Sun</span>
-          <span>18.07.</span>
-        </ClickableDate>
-      </Link>
-    </Container>
-  );
+function dateToPosition(date) {
+  let position;
+  switch (date.getDay()) {
+    case 5:
+      position = 2;
+      break;
+    case 6:
+      position = 3;
+      break;
+    case 0:
+      position = 4;
+      break;
+    default:
+      position = 2;
+  }
+  return position;
 }

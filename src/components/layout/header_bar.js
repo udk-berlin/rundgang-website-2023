@@ -1,8 +1,8 @@
-import styles from "@/styles/layout/HeaderBar.module.css";
 import React, { useState } from "react";
 import Link from "next/link";
 import { ReactSVG } from "react-svg";
-import styled from "styled-components";
+
+import styles from "@/styles/layout/HeaderBar.module.css";
 
 export default function HeaderBar() {
   return (

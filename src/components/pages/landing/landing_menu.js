@@ -1,5 +1,6 @@
-import styles from "@/styles/pages/landing/LandingMenu.module.css";
 import Link from "next/link";
+
+import styles from "@/styles/pages/landing/LandingMenu.module.css";
 
 export default function LandingMenu() {
   return (

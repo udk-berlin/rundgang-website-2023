@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <>
         <MetaHeader />
-      <main>
-        <BackgroundVideo />
-        <LandingLayout></LandingLayout>
-      </main>
+        <main>
+            <BackgroundVideo />
+            <LandingLayout></LandingLayout>
+        </main>
     </>
   );
 }
