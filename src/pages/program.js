@@ -1,39 +1,39 @@
-import Layout from "@/components/layout/layout";
-import ProjectCell from "@/components/pages/program/project_cell";
-import styled from "styled-components";
+import Layout from '@/components/layout/layout'
+import ProjectCell from '@/components/pages/program/project_cell'
+import styled from 'styled-components'
 
-export default function Program() {
+export default function Program () {
   return (
     <Layout>
       <Grid>
-        <ProjectCell src={"https://placehold.co/900x400"} />
-        <ProjectCell src={"https://placehold.co/300x250"} />
-        <ProjectCell src={"https://placehold.co/900x400"} />
-        <ProjectCell src={"https://placehold.co/500x900"} />
-        <ProjectCell src={"https://placehold.co/900x500"} />
-        <ProjectCell src={"https://placehold.co/910x400"} />
-        <ProjectCell src={"https://placehold.co/920"} />
-        <ProjectCell src={"https://placehold.co/900"} />
-        <ProjectCell src={"https://placehold.co/300"} />
-        <ProjectCell src={"https://placehold.co/900x400"} />
-        <ProjectCell src={"https://placehold.co/400x900"} />
-        <ProjectCell src={"https://placehold.co/900x500"} />
-        <ProjectCell src={"https://placehold.co/910"} />
-        <ProjectCell src={"https://placehold.co/920"} />
-        <ProjectCell src={"https://placehold.co/900"} />
-        <ProjectCell src={"https://placehold.co/300"} />
-        <ProjectCell src={"https://placehold.co/900x400"} />
-        <ProjectCell src={"https://placehold.co/400x900"} />
-        <ProjectCell src={"https://placehold.co/900x500"} />
-        <ProjectCell src={"https://placehold.co/910"} />
-        <ProjectCell src={"https://placehold.co/920"} />
+        <ProjectCell src={'https://placehold.co/900x400'} />
+        <ProjectCell src={'https://placehold.co/300x250'} />
+        <ProjectCell src={'https://placehold.co/900x400'} />
+        <ProjectCell src={'https://placehold.co/500x900'} />
+        <ProjectCell src={'https://placehold.co/900x500'} />
+        <ProjectCell src={'https://placehold.co/910x400'} />
+        <ProjectCell src={'https://placehold.co/920'} />
+        <ProjectCell src={'https://placehold.co/900'} />
+        <ProjectCell src={'https://placehold.co/300'} />
+        <ProjectCell src={'https://placehold.co/900x400'} />
+        <ProjectCell src={'https://placehold.co/400x900'} />
+        <ProjectCell src={'https://placehold.co/900x500'} />
+        <ProjectCell src={'https://placehold.co/910'} />
+        <ProjectCell src={'https://placehold.co/920'} />
+        <ProjectCell src={'https://placehold.co/900'} />
+        <ProjectCell src={'https://placehold.co/300'} />
+        <ProjectCell src={'https://placehold.co/900x400'} />
+        <ProjectCell src={'https://placehold.co/400x900'} />
+        <ProjectCell src={'https://placehold.co/900x500'} />
+        <ProjectCell src={'https://placehold.co/910'} />
+        <ProjectCell src={'https://placehold.co/920'} />
 
         <Break />
         <Break />
         <Break />
       </Grid>
     </Layout>
-  );
+  )
 }
 
 const Grid = styled.div`
@@ -61,7 +61,7 @@ const Grid = styled.div`
   & > *:nth-of-type(4n) {
     order: 4;
   }
-`;
+`
 
 const Break = styled.span`
   /* Force new columns */
@@ -70,4 +70,4 @@ const Break = styled.span`
   margin: 0;
   content: "";
   padding: 0;
-`;
+`

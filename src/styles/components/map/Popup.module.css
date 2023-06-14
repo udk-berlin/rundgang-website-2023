@@ -9,5 +9,5 @@
     min-width: var(--map-popup-container-width);
     max-width: var(--map-popup-container-width);
 
-    background: var(--transparent-black);
+    background: var(--color-transparent-black);
 }

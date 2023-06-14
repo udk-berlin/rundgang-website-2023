@@ -1,6 +1,6 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-export default function MetaHeader() {
+export default function MetaHeader () {
   return (
     <Head>
       <title>UdK Rundgang 2023</title>
@@ -8,5 +8,5 @@ export default function MetaHeader() {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico" />
     </Head>
-  );
+  )
 }

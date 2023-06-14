@@ -1,62 +1,58 @@
-import { get, getTree } from "@/utils/api/api";
+import { get, getTree } from '@/utils/api/api'
 
 const ROOT_LOCATION_ID = '!QEMZncAAlhtFVagfSI:content.udk-berlin.de'
 
 export async function getLocations () {
-    const tree = await getTree(ROOT_LOCATION_ID)
-    const locations = {}
+  const tree = await getTree(ROOT_LOCATION_ID)
+  const locations = {}
 
-    const hasItems = (current) => {
-        if (current.children.length === 0)
-            return false
+  const hasItems = (current) => {
+    if (current.children.length === 0) { return false }
 
-        let childrenHasItem = []
+    const childrenHasItem = []
 
-        Object.values(current.children).forEach(child => {
-            if (child.type === 'item')
-                childrenHasItem.push(true)
-            else
-                childrenHasItem.push(hasItems(child))
-        })
+    Object.values(current.children).forEach(child => {
+      if (child.type === 'item') { childrenHasItem.push(true) } else { childrenHasItem.push(hasItems(child)) }
+    })
 
-        return childrenHasItem.some(c => c)
+    return childrenHasItem.some(c => c)
+  }
+
+  Object.entries(tree.children).forEach(([id, location]) => {
+    if (hasItems(location)) {
+      locations[id] = location
     }
+  })
 
-    Object.entries(tree.children).forEach(([id, location]) => {
-        if (hasItems(location)) {
-            locations[id] = location
-        }
-    })
+  const locationDetails = await getLocationDetails(Object.keys(locations))
 
-    const locationDetails = await getLocationDetails(Object.keys(locations))
+  Object.keys(locations).forEach(id => {
+    locations[id] = { ...locations[id], ...locationDetails[id] }
+  })
 
-    Object.keys(locations).forEach(id => {
-        locations[id] = {...locations[id], ...locationDetails[id]}
-    })
-
-    return locations;
+  return locations
 }
 
 export async function getLocationDetails (locationIds) {
-    const promises = []
-    const locationDetails = {}
+  const promises = []
+  const locationDetails = {}
 
-    const buildLocationDetail = (data) => {
-        const locationDetail = {id: data.id}
+  const buildLocationDetail = (data) => {
+    const locationDetail = { id: data.id }
 
-        if ('physical' in data.allocation) {
-            locationDetail.lng = data.allocation.physical[0].lng
-            locationDetail.lat = data.allocation.physical[0].lat
-        }
-
-        return locationDetail
+    if ('physical' in data.allocation) {
+      locationDetail.lng = data.allocation.physical[0].lng
+      locationDetail.lat = data.allocation.physical[0].lat
     }
 
-    locationIds.forEach(locationId => {promises.push(get(locationId))})
+    return locationDetail
+  }
 
-    await Promise
-        .all(promises)
-        .then(data => {data.forEach(d => {locationDetails[d.id] = buildLocationDetail(d)})})
+  locationIds.forEach(locationId => { promises.push(get(locationId)) })
 
-    return locationDetails
+  await Promise
+    .all(promises)
+    .then(data => { data.forEach(d => { locationDetails[d.id] = buildLocationDetail(d) }) })
+
+  return locationDetails
 }

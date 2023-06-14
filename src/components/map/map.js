@@ -5,7 +5,7 @@ import maplibregl from 'maplibre-gl'
 import styles from '@/styles/components/map/Map.module.css'
 
 import ResponsiveMarker from '@/components/map/marker'
-import Popup from "@/components/map/popup";
+import Popup from '@/components/map/popup'
 
 const MAP_CONFIGURATION = {
   style: 'https://api.maptiler.com/maps/d450193f-53a4-40fc-8f3f-97a0321d7139/style.json?key=Zn4TzWj4KtRhJ9I5TDxf',
@@ -42,28 +42,28 @@ export default function Map ({ locations }) {
     )
 
     mapRef.current.on('load', () => {
+      Object.values(locations).forEach(location => {
+        const marker = document.createElement('div')
+        createRoot(marker).render(<ResponsiveMarker location={location} />)
+
+        new maplibregl.Marker({ element: marker, pitchAlignment: 'map' })
+          .setLngLat([location.lng, location.lat])
+          .addTo(mapRef.current)
+      })
+
+      mapRef.current.on('click', e => {
         Object.values(locations).forEach(location => {
-            const marker = document.createElement('div')
-            createRoot(marker).render(<ResponsiveMarker location={location} />)
-
-            new maplibregl.Marker({ element: marker, pitchAlignment: 'map' })
-                .setLngLat([location.lng, location.lat])
-                .addTo(mapRef.current)
+          const otherElement = document.getElementById(`popup-${location.id}`)
+          otherElement.style.zIndex = '-1'
+          otherElement.style.marginLeft = '-1000'
         })
-
-        mapRef.current.on("click", e => {
-            Object.values(locations).forEach(location => {
-                const otherElement = document.getElementById(`popup-${location.id}`);
-                otherElement.style.zIndex = "-1";
-                otherElement.style.marginLeft = "-1000";
-            });
-            if (e.originalEvent.target.id) {
-                let id = e.originalEvent.target.id.replaceAll("marker-", "");
-                const popupElement = document.getElementById(`popup-${id}`);
-                popupElement.style.zIndex = "100";
-                popupElement.style.marginLeft = "0";
-            }
-        });
+        if (e.originalEvent.target.id) {
+          const id = e.originalEvent.target.id.replaceAll('marker-', '')
+          const popupElement = document.getElementById(`popup-${id}`)
+          popupElement.style.zIndex = '100'
+          popupElement.style.marginLeft = '0'
+        }
+      })
     })
 
     mapRef.current.addControl(new maplibregl.NavigationControl(), 'bottom-right')

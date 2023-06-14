@@ -1,13 +1,13 @@
-import Link from "next/link";
-import styled from "styled-components";
+import Link from 'next/link'
+import styled from 'styled-components'
 
-import ProjectPageTitle from "@/components/pages/project/project_title";
-import ProjectPageAuthors from "@/components/pages/project/project_authors";
-import InfoGrid from "@/components/pages/program/info_grid";
+import ProjectPageTitle from '@/components/pages/project/project_title'
+import ProjectPageAuthors from '@/components/pages/project/project_authors'
+import InfoGrid from '@/components/pages/program/info_grid'
 
-const authors = ["Marisa Nest", "Juan Pablo Gaviria Bedoya", "Lukas Esser"];
+const authors = ['Marisa Nest', 'Juan Pablo Gaviria Bedoya', 'Lukas Esser']
 
-export default function ProjectCell({ src }) {
+export default function ProjectCell ({ src }) {
   return (
     <Container>
       <Link href="/project">
@@ -21,11 +21,11 @@ export default function ProjectCell({ src }) {
       <ProjectPageAuthors fontSize={0.8} authors={authors} />
       <InfoGrid eventType="Tanz" />
     </Container>
-  );
+  )
 }
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 0.75rem;
-`;
+`

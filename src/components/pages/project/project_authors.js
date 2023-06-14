@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export default function ProjectAuthors({ fontSize = 1, authors }) {
+export default function ProjectAuthors ({ fontSize = 1, authors }) {
   return (
     <Container fontSize={fontSize}>
       {authors.map((author) => (
         <span>{author}</span>
       ))}
     </Container>
-  );
+  )
 }
 
 const Container = styled.span`
@@ -34,4 +34,4 @@ const Container = styled.span`
     content: "/";
     padding: 0 1rem;
   }
-`;
+`

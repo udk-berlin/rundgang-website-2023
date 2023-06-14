@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import InfoGridDate from "@/components/pages/program/info_grid_date";
-import InfoGridTime from "@/components/pages/program/info_grid_time";
-import InfoGridEvent from "@/components/pages/program/info_grid_event";
+import InfoGridDate from '@/components/pages/program/info_grid_date'
+import InfoGridTime from '@/components/pages/program/info_grid_time'
+import InfoGridEvent from '@/components/pages/program/info_grid_event'
 import {
   InfoGridContext,
-  InfoGridLocation,
-} from "@/components/pages/program/info_grid_cards";
-import InfoGridCarousel from "@/components/pages/program/info_grid_carousel";
+  InfoGridLocation
+} from '@/components/pages/program/info_grid_cards'
+import InfoGridCarousel from '@/components/pages/program/info_grid_carousel'
 
 const Container = styled.div`
   display: grid;
@@ -24,9 +24,9 @@ const Container = styled.div`
   a:hover {
     color: #fff;
   }
-`;
+`
 
-export default function InfoGrid() {
+export default function InfoGrid () {
   return (
     <Container>
       <InfoGridEvent eventType="Beratungsangebot" />
@@ -39,5 +39,5 @@ export default function InfoGrid() {
         <InfoGridContext />
       </InfoGridCarousel>
     </Container>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import styles from "@/styles/pages/landing/BackgroundVideo.module.css";
+import styles from '@/styles/pages/landing/BackgroundVideo.module.css'
 
-export default function BackgroundVideo() {
+export default function BackgroundVideo () {
   return (
     <video
       className={styles.container}
@@ -11,9 +11,9 @@ export default function BackgroundVideo() {
       poster="/assets/media/images/background_video1_fallback.jpg"
     >
       <source
-        src={"/assets/media/videos/background_video1.webm"}
+        src={'/assets/media/videos/background_video1.webm'}
         type="video/webm"
       />
     </video>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import ProjectAuthors from "@/components/pages/project/project_authors";
-import ProjectTitle from "@/components/pages/project/project_title";
+import ProjectAuthors from '@/components/pages/project/project_authors'
+import ProjectTitle from '@/components/pages/project/project_title'
 
-const author = ["Marisa Nest", "Juan Pablo Gaviria Bedoya", "Lukas Esser"];
+const author = ['Marisa Nest', 'Juan Pablo Gaviria Bedoya', 'Lukas Esser']
 
-export default function Project({ children }) {
+export default function Project ({ children }) {
   return (
     <Container>
       <ImageContainer>
@@ -38,13 +38,13 @@ export default function Project({ children }) {
         </ProjectText>
       </InfoContainer>
     </Container>
-  );
+  )
 }
 
 const Container = styled.div`
   position: relative;
   height: 100%;
-`;
+`
 
 const ImageContainer = styled.div`
   position: absolute;
@@ -53,7 +53,7 @@ const ImageContainer = styled.div`
   left: 0;
   width: 60%;
   overflow-y: scroll;
-`;
+`
 
 const InfoContainer = styled.div`
   padding: 1rem;
@@ -64,12 +64,12 @@ const InfoContainer = styled.div`
   left: 60%;
   width: 40%;
   overflow-y: scroll;
-`;
+`
 
-export function ProjectImages({ link }) {
-  return <img src={link}></img>;
+export function ProjectImages ({ link }) {
+  return <img src={link}></img>
 }
 
-export function ProjectText({ children }) {
-  return <div>{children}</div>;
+export function ProjectText ({ children }) {
+  return <div>{children}</div>
 }
