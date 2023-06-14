@@ -42,22 +42,17 @@ export default function Map ({ locations }) {
     )
 
     mapRef.current.on('load', () => {
-        locations.forEach(location => {
+        Object.values(locations).forEach(location => {
             const marker = document.createElement('div')
             createRoot(marker).render(<ResponsiveMarker location={location} />)
 
             new maplibregl.Marker({ element: marker, pitchAlignment: 'map' })
-                .setLngLat(
-                    [
-                        location.allocation.physical[0].lng,
-                        location.allocation.physical[0].lat
-                    ]
-                )
+                .setLngLat([location.lng, location.lat])
                 .addTo(mapRef.current)
         })
 
         mapRef.current.on("click", e => {
-            locations.forEach(location => {
+            Object.values(locations).forEach(location => {
                 const otherElement = document.getElementById(`popup-${location.id}`);
                 otherElement.style.zIndex = "-1";
                 otherElement.style.marginLeft = "-1000";
@@ -77,7 +72,7 @@ export default function Map ({ locations }) {
   return (
         <>
             <div ref={mapContainerRef} className={styles.container}/>
-            <div>{locations.map(location => <Popup location={location} />)}</div>
+            <div>{Object.values(locations).map(location => <Popup location={location} />)}</div>
         </>
   )
 }
