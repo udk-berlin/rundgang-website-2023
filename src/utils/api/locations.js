@@ -51,17 +51,7 @@ export async function getLocationRooms () {
 
 export async function getItemsWithLocation () {
     const tree = await getTree(ROOT_LOCATION_ID)
-    const locations = {}
-
-    const buildLocation = (location, item, data) => {
-        return {
-            id: location.id,
-            name: location.name,
-            type: location.type,
-            template: location.template,
-            items: {[item.id]: buildItem(item, data)}
-        }
-    }
+    const items = {}
 
     const buildItem = (item, data) => {
         const _item = {
@@ -88,19 +78,7 @@ export async function getItemsWithLocation () {
 
         Object.values(current.children).forEach(child => {
             if (child.type === 'item') {
-                let location = null;
-
-                if ('location-building' in data)
-                    location = data['location-building']
-                else if ('location-external' in data)
-                    location = data['location-external']
-                else
-                    throw new Error('no location given!')
-
-                if (location.id in locations)
-                    locations[location.id].items[child.id] = buildItem(child, data)
-                else
-                    locations[location.id] = buildLocation(location, child, data)
+                items[child.id] = buildItem(child, data)
             } else {
                 extractChildren(child, data)
             }
@@ -109,6 +87,36 @@ export async function getItemsWithLocation () {
 
     Object.values(tree.children).forEach(location => {
         extractChildren(location)
+    })
+
+    return items;
+}
+
+
+export async function getLocationsWithItems () {
+    const tree = await getTree(ROOT_LOCATION_ID)
+    const locations = {}
+
+    const hasItems = (current) => {
+        if (current.children.length === 0)
+            return false
+
+        let childrenHasItem = []
+
+        Object.values(current.children).forEach(child => {
+            if (child.type === 'item')
+                childrenHasItem.push(true)
+            else
+                childrenHasItem.push(hasItems(child))
+        })
+
+        return childrenHasItem.some(c => c)
+    }
+
+    Object.entries(tree.children).forEach(([id, location]) => {
+        if (hasItems(location)) {
+            locations[id] = location
+        }
     })
 
     const detailedLocations = await getLocations();
