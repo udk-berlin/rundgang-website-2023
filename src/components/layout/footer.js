@@ -1,11 +1,11 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import styles from "@/styles/layout/Footer.module.css";
+import styles from '@/styles/layout/Footer.module.css'
 
-import Slider from "@/components/layout/slider";
-import { HoverLink } from "@/components/hover_link";
+import Slider from '@/components/layout/slider'
+import { HoverLink } from '@/components/hover_link'
 
-export default function Footer() {
+export default function Footer () {
   return (
     <div className={styles.container}>
       <div>
@@ -28,5 +28,5 @@ export default function Footer() {
         </div>
       </div>
     </div>
-  );
+  )
 }

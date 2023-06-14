@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HoverLink = styled.div`
   pointer-events: none;
@@ -12,4 +12,4 @@ export const HoverLink = styled.div`
     display: block;
     text-align: center;
   }
-`;
+`

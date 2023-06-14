@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Container = styled.div`
   font-weight: 600;
@@ -14,8 +14,8 @@ const Container = styled.div`
     color: var(--color-pink);
     padding-right: 4px;
   }
-`;
+`
 
-export default function ProjectTitle({ fontSize = 2, children }) {
-  return <Container fontSize={fontSize}>{children}</Container>;
+export default function ProjectTitle ({ fontSize = 2, children }) {
+  return <Container fontSize={fontSize}>{children}</Container>
 }

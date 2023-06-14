@@ -1,9 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import styles from "@/styles/pages/landing/LandingFooter.module.css";
+import styles from '@/styles/pages/landing/LandingFooter.module.css'
 
-
-export default function LandingFooter() {
+export default function LandingFooter () {
   return (
     <div className={styles.container}>
       <div className={styles.contact}>
@@ -16,5 +15,5 @@ export default function LandingFooter() {
         <Link href="/faq">FAQ</Link>
       </div>
     </div>
-  );
+  )
 }

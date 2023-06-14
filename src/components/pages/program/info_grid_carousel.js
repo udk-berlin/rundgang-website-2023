@@ -1,44 +1,44 @@
-import styled from "styled-components";
-import React, { useState, useEffect, useRef } from "react";
+import styled from 'styled-components'
+import React, { useState, useEffect, useRef } from 'react'
 
-export default function InfoGridCarousel({ children }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [carouselHeight, setCarouselHeight] = useState(0);
-  const carouselRef = useRef(null);
+export default function InfoGridCarousel ({ children }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [carouselHeight, setCarouselHeight] = useState(0)
+  const carouselRef = useRef(null)
 
   const scrollToCurrentIndex = () => {
     if (carouselRef.current) {
-      const { offsetWidth } = carouselRef.current;
+      const { offsetWidth } = carouselRef.current
       carouselRef.current.scrollTo({
         left: offsetWidth * currentIndex,
-        behavior: "smooth",
-      });
+        behavior: 'smooth'
+      })
     }
-  };
+  }
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
-  };
+    setCurrentIndex((prevIndex) => prevIndex + 1)
+  }
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => prevIndex - 1);
-  };
+    setCurrentIndex((prevIndex) => prevIndex - 1)
+  }
 
   useEffect(() => {
-    const currentSlide = carouselRef.current.children[currentIndex];
-    setCarouselHeight(currentSlide.clientHeight);
-    scrollToCurrentIndex();
-  }, [currentIndex]);
+    const currentSlide = carouselRef.current.children[currentIndex]
+    setCarouselHeight(currentSlide.clientHeight)
+    scrollToCurrentIndex()
+  }, [currentIndex])
 
   return (
     <>
       <div
         style={{
           height: carouselHeight,
-          overflowX: "auto",
-          overflowY: "hidden",
-          width: "100%",
-          transition: "all 0.3s",
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          width: '100%',
+          transition: 'all 0.3s'
         }}
       >
         <ScrollableDiv ref={carouselRef}>
@@ -57,7 +57,7 @@ export default function InfoGridCarousel({ children }) {
         Next
       </button>
     </>
-  );
+  )
 }
 
 const ScrollableDiv = styled.div`
@@ -67,10 +67,10 @@ const ScrollableDiv = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 const InfoCard = styled.div`
   padding-bottom: 5px;
   flex: 0 0 100%;
   height: 100%;
-`;
+`

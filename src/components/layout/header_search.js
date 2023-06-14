@@ -1,6 +1,6 @@
-import styles from "@/styles/layout/HeaderSearch.module.css";
+import styles from '@/styles/layout/HeaderSearch.module.css'
 
-export default function HeaderSearch() {
+export default function HeaderSearch () {
   return (
     <div className={styles.container}>
       <div></div>
@@ -9,5 +9,5 @@ export default function HeaderSearch() {
       </div>
       <div></div>
     </div>
-  );
+  )
 }

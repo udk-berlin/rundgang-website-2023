@@ -1,12 +1,12 @@
-import Link from "next/link";
-import styled from "styled-components";
+import Link from 'next/link'
+import styled from 'styled-components'
 
-import { HoverLink } from "@/components/hover_link";
+import { HoverLink } from '@/components/hover_link'
 
-const dayToWeekDayMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const dayToWeekDayMapper = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-export default function InfoGridDate({ start, end }) {
-  const date = new Date((start - 7200) * 1000);
+export default function InfoGridDate ({ start, end }) {
+  const date = new Date((start - 7200) * 1000)
   return (
     <Container>
       <DateWrapper>
@@ -16,18 +16,18 @@ export default function InfoGridDate({ start, end }) {
         <Link href="/">
           <ClickableDate>
             <span>{dayToWeekDayMapper[date.getDay()]}</span>
-            <span>{date.getDate() + "." + date.getMonth() + "."}</span>
+            <span>{date.getDate() + '.' + date.getMonth() + '.'}</span>
           </ClickableDate>
         </Link>
       </HoverLinkDate>
     </Container>
-  );
+  )
 }
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr;
-`;
+`
 
 const DateWrapper = styled.div`
   outline: var(--info-border-width) solid var(--info-border-color);
@@ -35,31 +35,31 @@ const DateWrapper = styled.div`
   margin-left: var(--info-border-width);
 
   padding: 0.2rem 0.4rem;
-`;
+`
 
 const ClickableDate = styled(DateWrapper)`
   display: flex;
   justify-content: space-evenly;
-`;
+`
 
 const HoverLinkDate = styled(HoverLink)`
   grid-column-start: ${(prop) => dateToPosition(prop.date)};
-`;
+`
 
-function dateToPosition(date) {
-  let position;
+function dateToPosition (date) {
+  let position
   switch (date.getDay()) {
     case 5:
-      position = 2;
-      break;
+      position = 2
+      break
     case 6:
-      position = 3;
-      break;
+      position = 3
+      break
     case 0:
-      position = 4;
-      break;
+      position = 4
+      break
     default:
-      position = 2;
+      position = 2
   }
-  return position;
+  return position
 }

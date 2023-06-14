@@ -1,10 +1,10 @@
-import styles from "@/styles/layout/Layout.module.css";
+import styles from '@/styles/layout/Layout.module.css'
 
-import MetaHeader from "@/components/meta_header";
-import Footer from "@/components/layout/footer";
-import Header from "@/components/layout/header";
+import MetaHeader from '@/components/meta_header'
+import Footer from '@/components/layout/footer'
+import Header from '@/components/layout/header'
 
-export default function Layout({ children }) {
+export default function Layout ({ children }) {
   return (
       <>
           <MetaHeader />
@@ -14,5 +14,5 @@ export default function Layout({ children }) {
               <Footer />
           </main>
       </>
-  );
+  )
 }

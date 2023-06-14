@@ -1,0 +1,13 @@
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    margin-left: -1000px;
+
+    width: var(--map-popup-container-width);
+    min-width: var(--map-popup-container-width);
+    max-width: var(--map-popup-container-width);
+
+    background: var(--color-transparent-black);
+}

@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import styles from "@/styles/pages/landing/LandingMenu.module.css";
+import styles from '@/styles/pages/landing/LandingMenu.module.css'
 
-export default function LandingMenu() {
+export default function LandingMenu () {
   return (
     <div className={styles.container}>
       <div className={styles.textwrapper}>
@@ -84,5 +84,5 @@ export default function LandingMenu() {
         </div>
       </div>
     </div>
-  );
+  )
 }
