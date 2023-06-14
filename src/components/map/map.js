@@ -8,7 +8,7 @@ import ResponsiveMarker from '@/components/map/marker'
 import Popup from "@/components/map/popup";
 
 const MAP_CONFIGURATION = {
-  style: 'https://api.maptiler.com/maps/06aff06f-bb9b-4079-9249-48c949cefa44/style.json?key=a8EEiDlcUdsARq8hI6PH',
+  style: 'https://api.maptiler.com/maps/d450193f-53a4-40fc-8f3f-97a0321d7139/style.json?key=Zn4TzWj4KtRhJ9I5TDxf',
   bounds: {
     longitude: { min: 13.2397254, max: 13.4871903 },
     latitude: { min: 52.442394, max: 52.586099 }
