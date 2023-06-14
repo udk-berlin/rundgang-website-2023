@@ -17,7 +17,6 @@ const Container = styled.div`
   width: 30%;
 
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
 
   outline: var(--info-border-width) solid var(--info-border-color);

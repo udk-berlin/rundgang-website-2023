@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import ProjectAuthors from "@/components/pages/project/project_authors";
 import ProjectTitle from "@/components/pages/project/project_title";
 

@@ -1,8 +1,9 @@
-import { HoverLink } from "@/components/hover_link";
 import Link from "next/link";
 import styled from "styled-components";
 
-const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+import { HoverLink } from "@/components/hover_link";
+
+const dayToWeekDayMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function InfoGridDate({ start, end }) {
   const date = new Date((start - 7200) * 1000);
@@ -14,7 +15,7 @@ export default function InfoGridDate({ start, end }) {
       <HoverLinkDate date={date}>
         <Link href="/">
           <ClickableDate>
-            <span>{weekday[date.getDay()]}</span>
+            <span>{dayToWeekDayMapper[date.getDay()]}</span>
             <span>{date.getDate() + "." + date.getMonth() + "."}</span>
           </ClickableDate>
         </Link>

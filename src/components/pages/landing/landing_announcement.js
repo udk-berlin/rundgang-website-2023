@@ -1,4 +1,4 @@
-import styles from "@/styles/components/Announcement.module.css";
+import styles from "@/styles/pages/landing/Announcement.module.css";
 
 export default function Announcement() {
   return (

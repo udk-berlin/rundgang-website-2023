@@ -1,12 +1,14 @@
 import Link from "next/link";
+
 import styles from "@/styles/layout/Footer.module.css";
+
 import Slider from "@/components/layout/slider";
 import { HoverLink } from "@/components/hover_link";
 
 export default function Footer() {
   return (
     <div className={styles.container}>
-      <div className={styles.slider}>
+      <div>
         <Slider />
       </div>
       <HoverLink>
@@ -15,13 +17,13 @@ export default function Footer() {
         </Link>
       </HoverLink>
       <div className={styles.static}>
-        <div className={styles.contact}>
+        <div>
           <Link href="/contact">Kontakt</Link>
         </div>
-        <div className={styles.imprint}>
+        <div>
           <Link href="/imprint">Impressum</Link>
         </div>
-        <div className={styles.faq}>
+        <div>
           <Link href="/faq">FAQ</Link>
         </div>
       </div>
