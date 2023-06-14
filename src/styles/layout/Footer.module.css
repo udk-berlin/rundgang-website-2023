@@ -1,0 +1,33 @@
+.container {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  border: var(--border-width) solid var(--border-color);
+
+  background-color: #fff;
+  /* background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px); */
+}
+
+.rundgang {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.static {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.4rem 0.8rem;
+}
+
+.container > *:nth-child(2) {
+  border-right: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
+}

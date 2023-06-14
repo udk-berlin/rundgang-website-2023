@@ -1,17 +1,17 @@
 import React from 'react'
-import Head from 'next/head'
+
+import MetaHeader from "@/components/meta_header";
+import BackgroundVideo from "@/components/pages/landing/background_video";
+import LandingLayout from "@/components/pages/landing/landing_layout";
 
 export default function Home () {
   return (
     <>
-      <Head>
-        <title>UdK Rundgang 2023</title>
-        <meta name="description" content="UdK Rundgang 2023" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main>
-        <div>Hello world!</div>
-      </main>
+        <MetaHeader />
+        <main>
+            <BackgroundVideo />
+            <LandingLayout></LandingLayout>
+        </main>
     </>
-  )
+  );
 }

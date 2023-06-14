@@ -1,0 +1,22 @@
+.container {
+  display: grid;
+  grid-template-columns: 2rem 1fr 2rem;
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+.container > * {
+  border-right: var(--border-width) solid var(--border-color);
+}
+
+.container > *:nth-last-child(1) {
+  border: none;
+}
+
+.search {
+  padding-left: 1rem;
+}
+
+.search input[type="text"] {
+  border: none;
+  width: 100%;
+}
