@@ -7,6 +7,9 @@ const ROOT_CONTEXT_ID = '!suNRlIyeorKnuZHfld:content.udk-berlin.de'
 let itemsCached = false;
 const items = {};
 
+let itemDetailsCached = false;
+const itemDetails = {};
+
 export async function getListFilterTypeItems () {
   return await get(`${ROOT_ID}/list/filter/type/item`)
 }
@@ -77,35 +80,38 @@ export async function getItems () {
       items[id] = { ...items[id], ...itemDetails[id] }
     })
 
-    itemsCached = true
+    itemsCached = true;
   }
 
-  return items
+  return items;
 }
 
 async function getItemDetails (itemIds) {
-  const promises = []
-  const itemDetails = {}
+  if (!itemDetailsCached) {
+    const promises = []
 
-  const buildItemDetail = (data) => {
-    const itemDetail = {
-      id: data.id,
-      thumbnail: data.thumbnail,
-      thumbnail_full_size: data.thumbnail_full_size,
-      description: data.description,
-      authors: data.origin.authors
+    const buildItemDetail = (data) => {
+      const itemDetail = {
+        id: data.id,
+        thumbnail: data.thumbnail,
+        thumbnail_full_size: data.thumbnail_full_size,
+        description: data.description,
+        authors: data.origin.authors
+      }
+
+      if ('temporal' in data.allocation) { itemDetail.temporal = data.allocation.temporal }
+
+      return itemDetail
     }
 
-    if ('temporal' in data.allocation) { itemDetail.temporal = data.allocation.temporal }
+    itemIds.forEach(itemId => { promises.push(getId(itemId)) })
 
-    return itemDetail
+    await Promise
+      .all(promises)
+      .then(data => { data.forEach(d => { itemDetails[d.id] = buildItemDetail(d) }) })
+
+    itemDetailsCached= true;
   }
 
-  itemIds.forEach(itemId => { promises.push(getId(itemId)) })
-
-  await Promise
-    .all(promises)
-    .then(data => { data.forEach(d => { itemDetails[d.id] = buildItemDetail(d) }) })
-
-  return itemDetails
+  return itemDetails;
 }

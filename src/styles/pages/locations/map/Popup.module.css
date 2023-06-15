@@ -1,0 +1,12 @@
+.container {
+    position: absolute;
+    top: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
+    left: var(--border-width);
+    /*display: none;*/
+
+    /*width: var(--map-popup-container-width);*/
+    /*min-width: var(--map-popup-container-width);*/
+    /*max-width: var(--map-popup-container-width);*/
+
+    background:  var(--color-transparent-black);
+}

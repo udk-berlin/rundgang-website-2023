@@ -14,7 +14,10 @@
   --info-border-color: #000;
 
   --map-marker-text-box-padding: 3px 12px;
-  --map-popup-container-width: 100px;
+  --map-popup-container-width: 200px;
+
+  --layout-header-bar-container-height: 70px;
+  --layout-header-search-container-height: 40px;
 }
 
 * {
