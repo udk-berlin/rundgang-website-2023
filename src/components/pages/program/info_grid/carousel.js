@@ -1,7 +1,33 @@
 import styled from 'styled-components'
 import React, { useState, useEffect, useRef } from 'react'
+import InfoGridDate from "@/components/pages/program/info_grid/date";
+import InfoGridTime from "@/components/pages/program/info_grid/time";
+import {InfoGridContext, InfoGridLocation} from "@/components/pages/program/info_grid/cards";
 
-export default function InfoGridCarousel ({ children }) {
+export default function InfoGridCarousel ({ project }) {
+  let projectTimes = []
+
+  if ('temporal' in project) {
+    project.temporal.forEach(date => {
+      projectTimes.push((
+        <div>
+          <InfoGridDate start={date.start}/>
+          <InfoGridTime start={date.start} end={date.end}/>
+        </div>
+      ))
+    })
+  }
+
+  return (
+    <Carousel>
+      {projectTimes.map(projectTime => projectTime)}
+      <InfoGridLocation project={project} />
+      <InfoGridContext project={project} />
+    </Carousel>
+  )
+}
+
+function Carousel ({ children }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [carouselHeight, setCarouselHeight] = useState(0)
   const carouselRef = useRef(null)

@@ -1,63 +1,84 @@
-import { get, getTree } from '@/utils/api/api'
+import { get, getId, getTree } from '@/utils/api/api'
 
+const ROOT_ID ='!CszUweVEGwuKVEiJBg:content.udk-berlin.de'
 const ROOT_LOCATION_ID = '!QEMZncAAlhtFVagfSI:content.udk-berlin.de'
 const ROOT_CONTEXT_ID = '!suNRlIyeorKnuZHfld:content.udk-berlin.de'
 
+let itemsCached = false;
+const items = {};
+
+export async function getListFilterTypeItems () {
+  return await get(`${ROOT_ID}/list/filter/type/item`)
+}
+
+export async function getItemIds() {
+  const items = await getListFilterTypeItems();
+  let ids = items.map(item => item.id)
+  return [...new Set(ids)];
+}
+
+export async function getItem (id) {
+  const items = await getItems();
+  return items[id]
+}
+
 export async function getItems () {
-  const locationTree = await getTree(ROOT_LOCATION_ID)
-  const contextTree = await getTree(ROOT_CONTEXT_ID)
+  if (!itemsCached) {
+    const locationTree = await getTree(ROOT_LOCATION_ID)
+    const contextTree = await getTree(ROOT_CONTEXT_ID)
 
-  const items = {}
+    const buildItem = (item, data) => {
+      const _item = {
+        id: item.id,
+        name: item.name,
+        type: item.type,
+        template: item.template
+      }
 
-  const buildItem = (item, data) => {
-    const _item = {
-      id: item.id,
-      name: item.name,
-      type: item.type,
-      template: item.template
+      Object.entries(data).forEach(([key, value]) => {
+        _item[key] = {
+          id: value.id,
+          name: value.name,
+          type: value.type,
+          template: value.template
+        }
+      })
+
+      return _item
     }
 
-    Object.entries(data).forEach(([key, value]) => {
-      _item[key] = {
-        id: value.id,
-        name: value.name,
-        type: value.type,
-        template: value.template
-      }
-    })
+    const extractChildren = (current, data) => {
+      data = { ...data, [current.template]: current }
 
-    return _item
-  }
-
-  const extractChildren = (current, data) => {
-    data = { ...data, [current.template]: current }
-
-    Object.values(current.children).forEach(child => {
-      if (child.type === 'item') {
-        if (child.id in items) {
-          items[child.id] = { ...items[child.id], ...buildItem(child, data) }
+      Object.values(current.children).forEach(child => {
+        if (child.type === 'item') {
+          if (child.id in items) {
+            items[child.id] = { ...items[child.id], ...buildItem(child, data) }
+          } else {
+            items[child.id] = buildItem(child, data)
+          }
         } else {
-          items[child.id] = buildItem(child, data)
+          extractChildren(child, data)
         }
-      } else {
-        extractChildren(child, data)
-      }
+      })
+    }
+
+    Object.values(locationTree.children).forEach(location => {
+      extractChildren(location)
     })
+
+    Object.values(contextTree.children).forEach(context => {
+      extractChildren(context)
+    })
+
+    const itemDetails = await getItemDetails(Object.keys(items))
+
+    Object.keys(items).forEach(id => {
+      items[id] = { ...items[id], ...itemDetails[id] }
+    })
+
+    itemsCached = true
   }
-
-  Object.values(locationTree.children).forEach(location => {
-    extractChildren(location)
-  })
-
-  Object.values(contextTree.children).forEach(context => {
-    extractChildren(context)
-  })
-
-  const itemDetails = await getItemDetails(Object.keys(items))
-
-  Object.keys(items).forEach(id => {
-    items[id] = { ...items[id], ...itemDetails[id] }
-  })
 
   return items
 }
@@ -80,7 +101,7 @@ async function getItemDetails (itemIds) {
     return itemDetail
   }
 
-  itemIds.forEach(itemId => { promises.push(get(itemId)) })
+  itemIds.forEach(itemId => { promises.push(getId(itemId)) })
 
   await Promise
     .all(promises)

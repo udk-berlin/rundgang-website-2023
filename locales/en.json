@@ -1,8 +1,8 @@
 {
-  "places": "Places",
-  "dates": "Dates",
+  "locations": "Locations",
+  "timeline": "Timeline",
   "program": "Program",
-  "calender": "Calender",
+  "calender": "Calendar",
   "search": "Search",
   "imprint": "Imprint",
   "contact": "Contact",

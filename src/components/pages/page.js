@@ -1,4 +1,4 @@
-import MetaHeader from '@/components/page/meta_header'
+import MetaHeader from '@/components/pages/meta_header'
 import LocalizationProvider from "@/components/localization/provider";
 
 export default function Page ({ children }) {

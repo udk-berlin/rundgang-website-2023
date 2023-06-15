@@ -8,10 +8,10 @@ const dayToWeekDayMapper = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export default function InfoGridDate ({ start, end }) {
   const date = new Date((start - 7200) * 1000)
   return (
-    <Container>
-      <DateWrapper>
+    <InfoGridDateContainer>
+      <DateContainer>
         <span>Date:</span>
-      </DateWrapper>
+      </DateContainer>
       <HoverLinkDate date={date}>
         <LocalizedLink href="/">
           <ClickableDate>
@@ -20,16 +20,16 @@ export default function InfoGridDate ({ start, end }) {
           </ClickableDate>
         </LocalizedLink>
       </HoverLinkDate>
-    </Container>
+    </InfoGridDateContainer>
   )
 }
 
-const Container = styled.div`
+const InfoGridDateContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr;
 `
 
-const DateWrapper = styled.div`
+const DateContainer = styled.div`
   outline: var(--info-border-width) solid var(--info-border-color);
   margin-top: var(--info-border-width);
   margin-left: var(--info-border-width);
@@ -37,7 +37,7 @@ const DateWrapper = styled.div`
   padding: 0.2rem 0.4rem;
 `
 
-const ClickableDate = styled(DateWrapper)`
+const ClickableDate = styled(DateContainer)`
   display: flex;
   justify-content: space-evenly;
 `

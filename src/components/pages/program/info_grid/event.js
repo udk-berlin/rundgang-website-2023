@@ -34,11 +34,16 @@ export default function InfoGridEvent ({ eventType }) {
   return (
     <HoverLinkEvent eventType={eventType}>
       <LocalizedLink href="/">
-        <Container>{eventType}</Container>
+        <InfoGridEventContainer>{eventType}</InfoGridEventContainer>
       </LocalizedLink>
     </HoverLinkEvent>
   )
 }
+
+
+const InfoGridEventContainer = styled.div`
+  padding: 0.2rem 0.4rem;
+`
 
 const HoverLinkEvent = styled(HoverLink)`
   outline: var(--info-border-width) solid var(--info-border-color);
@@ -46,8 +51,4 @@ const HoverLinkEvent = styled(HoverLink)`
     prop.eventType in eventTypeToMarginLeftMapper
       ? eventTypeToMarginLeftMapper[prop.eventType]
       : eventTypeToMarginLeftMapper.default};
-`
-
-const Container = styled.div`
-  padding: 0.2rem 0.4rem;
 `

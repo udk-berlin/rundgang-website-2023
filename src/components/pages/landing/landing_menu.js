@@ -5,8 +5,8 @@ import { LocalizedLink } from "@/components/localization/links";
 
 const hrefMapper = {
   'program': '/program',
-  'places': '/places',
-  'dates': '/dates',
+  'locations': '/locations',
+  'timeline': '/timeline',
 }
 
 const classNameMapper = {
@@ -14,11 +14,11 @@ const classNameMapper = {
     svg: styles.svgTop,
     text: styles.svgTextL,
   },
-  'places': {
+  'locations': {
     svg: styles.svgBottom,
     text: styles.svgTextM,
   },
-  'dates': {
+  'timeline': {
     svg: styles.svgBottom,
     text: styles.svgTextM,
   },
@@ -33,8 +33,8 @@ export default function LandingMenu () {
       </div>
 
       <div className={[styles.row, styles.bottomRow].join(' ')}>
-        <SvgLink id={'places'} />
-        <SvgLink id={'dates'} />
+        <SvgLink id={'locations'} />
+        <SvgLink id={'timeline'} />
       </div>
     </div>
   )
