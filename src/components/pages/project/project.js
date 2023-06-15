@@ -1,12 +1,10 @@
 import styled from 'styled-components'
 
-import ProjectAuthors from '@/components/pages/project/project_authors'
-import ProjectTitle from '@/components/pages/project/project_title'
+import ProjectAuthors from '@/components/pages/project/authors'
+import ProjectTitle from '@/components/pages/project/title'
 import Layout from "@/components/layout/layout";
 
-const author = ['Marisa Nest', 'Juan Pablo Gaviria Bedoya', 'Lukas Esser']
-
-export default function Project ({ children }) {
+export default function Project ({ project }) {
   return (
     <Layout>
       <Container>
@@ -16,10 +14,8 @@ export default function Project ({ children }) {
           <ProjectImages link="https://placeholder.co/800x600" />
         </ImageContainer>
         <InfoContainer>
-          <ProjectTitle>
-            rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          </ProjectTitle>
-          <ProjectAuthors authors={author}></ProjectAuthors>
+          <ProjectTitle project={project} />
+          <ProjectAuthors project={project} />
           <ProjectText>
             Dolore aliqua anim culpa adipisicing dolor quis do proident nisi
             deserunt mollit magna nisi. Et ullamco magna eiusmod minim Lorem sunt

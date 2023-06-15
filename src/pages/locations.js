@@ -3,8 +3,8 @@ import React from 'react'
 import { getLocations } from '@/utils/api/locations'
 import { getItems } from '@/utils/api/items'
 
-import Page from "@/components/page/page";
-import Map from '@/components/pages/map/map'
+import Page from "@/components/pages/page";
+import Locations from "@/components/pages/locations/locations";
 
 export async function getStaticProps () {
   const items = await getItems()
@@ -12,10 +12,10 @@ export async function getStaticProps () {
   return { props: { items, locations } }
 }
 
-export default function MapPage ({ items, locations }) {
+export default function LocationsPage ({ items, locations }) {
   return (
        <Page>
-         <Map locations={locations}/>
+         <Locations locations={locations}/>
        </Page>
   )
 }

@@ -1,4 +1,4 @@
-import Page from "@/components/page/page";
+import Page from "@/components/pages/page";
 import Contact from "@/components/pages/contact";
 
 export default function ContactPage () {

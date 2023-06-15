@@ -1,6 +1,8 @@
 import {IntlProvider} from 'react-intl';
 import {useRouter} from 'next/router';
 
+export const LOCALES = ['en', 'de']
+
 import english from '/locales/en.json';
 import german from '/locales/de.json';
 

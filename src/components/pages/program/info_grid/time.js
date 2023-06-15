@@ -4,15 +4,15 @@ export default function InfoGridTime ({ start, end }) {
   const startTime = new Date((start - 7200) * 1000)
   const endTime = new Date((end - 7200) * 1000)
   return (
-    <Container>
+    <InfoGridTimeContainer>
       <TimeContainer date={startTime} />
       <Line />
       <TimeContainer date={endTime} />
-    </Container>
+    </InfoGridTimeContainer>
   )
 }
 
-const Container = styled.div`
+const InfoGridTimeContainer = styled.div`
   margin-left: 60%;
   width: 30%;
 
@@ -24,12 +24,6 @@ const Container = styled.div`
   padding: 0.2rem 0.4rem;
 `
 
-const Line = styled.div`
-  flex-grow: 1;
-  border-bottom: 2px solid var(--color-pink);
-  margin: 5px;
-`
-
 export function TimeContainer ({ date }) {
   return (
     <div>
@@ -39,3 +33,9 @@ export function TimeContainer ({ date }) {
     </div>
   )
 }
+
+const Line = styled.div`
+  flex-grow: 1;
+  border-bottom: 2px solid var(--color-pink);
+  margin: 5px;
+`

@@ -20,7 +20,7 @@ const MAP_CONFIGURATION = {
   }
 }
 
-export default function Map ({ locations }) {
+export default function Locations ({ locations }) {
   const mapContainerRef = useRef(null)
   const mapRef = useRef(null)
 

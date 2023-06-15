@@ -1,18 +1,14 @@
 import styled from 'styled-components'
 
-export default function ProjectAuthors ({ event }) {
+export default function ProjectAuthors ({ project }) {
   return (
-    <Container>
-      {
-        event.authors.map(author => (
-          <span>{author.name}</span>
-        ))
-      }
-    </Container>
+    <ProjectAuthorsContainer>
+      {project.authors.map(author => (<span>{author.name}</span>))}
+    </ProjectAuthorsContainer>
   )
 }
 
-const Container = styled.span`
+const ProjectAuthorsContainer = styled.span`
   font-size: 0.8rem;
   text-transform: uppercase;
 
