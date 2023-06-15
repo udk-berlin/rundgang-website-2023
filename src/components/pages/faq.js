@@ -1,4 +1,4 @@
-import { useIntl } from "reac t-intl";
+import { useIntl } from "react-intl";
 
 import Layout from "@/components/layout/layout";
 import StaticLayout from '@/components/layout/static_layout'

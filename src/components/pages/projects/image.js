@@ -1,4 +1,4 @@
-import ProjectLink from "@/components/pages/project/link";
+import ProjectLink from "@/components/pages/projects/link";
 
 const IMAGE_PLACEHOLDER_SIZES = [
   { height: 400 },
