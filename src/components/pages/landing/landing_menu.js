@@ -1,88 +1,66 @@
-import Link from 'next/link'
+import { FormattedMessage } from "react-intl";
 
 import styles from '@/styles/pages/landing/LandingMenu.module.css'
+import { LocalizedLink } from "@/components/localization/links";
+
+const hrefMapper = {
+  'program': '/program',
+  'places': '/places',
+  'dates': '/dates',
+}
+
+const classNameMapper = {
+  'program': {
+    svg: styles.svgTop,
+    text: styles.svgTextL,
+  },
+  'places': {
+    svg: styles.svgBottom,
+    text: styles.svgTextM,
+  },
+  'dates': {
+    svg: styles.svgBottom,
+    text: styles.svgTextM,
+  },
+}
 
 export default function LandingMenu () {
+
   return (
     <div className={styles.container}>
-      <div className={styles.textwrapper}>
-        <div className={styles.text}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100%"
-            preserveAspectRatio="xMinYMin"
-            viewBox="0 0 548 80"
-          >
-            <Link href="/program">
-              <text
-                x="0%"
-                y="75%"
-                alignmentBaseline="central"
-                dominantBaseline="central"
-                fontSize="62px"
-                fill="none"
-                stroke="#fff"
-                strokeWidth="0.1%"
-              >
-                Programm
-              </text>
-            </Link>
-          </svg>
-        </div>
+      <div className={[styles.row].join(' ')}>
+        <SvgLink id={'program'} />
       </div>
 
-      <div className={styles.textwrapper}>
-        <div>
-          <div className={styles.text}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              preserveAspectRatio="xMinYMin"
-              viewBox="0 0 548 80"
-            >
-              <Link href="/places">
-                <text
-                  x="0%"
-                  y="25%"
-                  alignmentBaseline="central"
-                  dominantBaseline="central"
-                  fontSize="51px"
-                  fill="none"
-                  stroke="#fff"
-                  strokeWidth="0.1%"
-                >
-                  Orte
-                </text>
-              </Link>
-            </svg>
-          </div>
-        </div>
-        <div>
-          <div className={styles.text}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              preserveAspectRatio="xMinYMin"
-              viewBox="0 0 548 80"
-            >
-              <Link href="/calendar">
-                <text
-                  x="0%"
-                  y="25%"
-                  alignmentBaseline="central"
-                  dominantBaseline="central"
-                  fontSize="51px"
-                  fill="none"
-                  stroke="#fff"
-                  strokeWidth="0.1%"
-                >
-                  Zeiten
-                </text>
-              </Link>
-            </svg>
-          </div>
-        </div>
+      <div className={[styles.row, styles.bottomRow].join(' ')}>
+        <SvgLink id={'places'} />
+        <SvgLink id={'dates'} />
       </div>
     </div>
+  )
+}
+
+function SvgLink ({ id }) {
+  return (
+    <Svg id={id}>
+      <LocalizedLink href={hrefMapper[id]}>
+        <text className={[styles.svgText, classNameMapper[id].text].join(' ')} x="0%" y="75%">
+          <FormattedMessage id={id}/>
+        </text>
+      </LocalizedLink>
+    </Svg>
+  )
+}
+
+function Svg ({ children, id }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={classNameMapper[id].svg}
+      preserveAspectRatio="200w"
+      viewBox="0 0 548 80"
+    >
+      {children}
+    </svg>
   )
 }

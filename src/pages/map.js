@@ -2,7 +2,9 @@ import React from 'react'
 
 import { getLocations } from '@/utils/api/locations'
 import { getItems } from '@/utils/api/items'
-import Map from '@/components/map/map'
+
+import Page from "@/components/page/page";
+import Map from '@/components/pages/map/map'
 
 export async function getStaticProps () {
   const items = await getItems()
@@ -10,7 +12,10 @@ export async function getStaticProps () {
   return { props: { items, locations } }
 }
 
-export default function MapLayout ({ items, locations }) {
-  console.log(locations)
-  return <Map locations={locations}/>
+export default function MapPage ({ items, locations }) {
+  return (
+       <Page>
+         <Map locations={locations}/>
+       </Page>
+  )
 }

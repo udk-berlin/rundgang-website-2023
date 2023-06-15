@@ -1,33 +1,33 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { ReactSVG } from 'react-svg'
 
 import styles from '@/styles/layout/HeaderBar.module.css'
+import { LocalizedLink, SwitchLocalizationLink } from "@/components/localization/links";
 
 export default function HeaderBar () {
   return (
     <div className={styles.container}>
       <div className={styles.map}>
-        <Link href="/map">
+        <LocalizedLink href="/map">
           <Hover
             path_passive="/assets/svg/layout/map_passive.svg"
             path_active="/assets/svg/layout/map_active.svg"
           />
-        </Link>
+        </LocalizedLink>
       </div>
       <div className={styles.date}>
-        <Link href="/calendar">21. – 23.07.2023</Link>
+        <LocalizedLink href="/calendar">21. – 23.07.2023</LocalizedLink>
       </div>
       <div className={styles.subgrid}>
-        <div className={styles.saved}>
-          <Link href="/">
+        <div>
+          <LocalizedLink href="/">
             <Hover
               path_passive="/assets/svg/layout/shop_passive_1.svg"
               path_active="/assets/svg/layout/shop_active_1.svg"
             />
-          </Link>
+          </LocalizedLink>
         </div>
-        <div className={styles.language}>DE/EN</div>
+        <div className={styles.localization}><SwitchLocalizationLink /></div>
       </div>
     </div>
   )

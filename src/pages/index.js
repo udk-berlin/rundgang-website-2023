@@ -1,17 +1,12 @@
 import React from 'react'
 
-import MetaHeader from '@/components/meta_header'
-import BackgroundVideo from '@/components/pages/landing/background_video'
-import LandingLayout from '@/components/pages/landing/landing_layout'
+import Page from "@/components/page/page";
+import Index from "@/components/pages/index";
 
-export default function Home () {
+export default function IndexPage () {
   return (
-    <>
-        <MetaHeader />
-        <main>
-            <BackgroundVideo />
-            <LandingLayout></LandingLayout>
-        </main>
-    </>
+    <Page>
+      <Index />
+    </Page>
   )
 }

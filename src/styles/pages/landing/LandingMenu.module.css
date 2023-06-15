@@ -2,55 +2,45 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  overflow: hidden;
 }
 
-.container > div {
+.row {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+}
+
+.bottomRow {
+  margin-top: -5vw;
+}
+
+.svgTop {
+  width: 100vw;
+}
+
+.svgBottom {
+  width: 100vw;
+  margin-right: -40vw;
+}
+
+.svgText {
   font-family: "Gabriella";
-  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000; */
+  fill: none;
+  stroke: #fff;
+  stroke-width: 0.1%;
 }
 
-.places {
-  font-size: 90%;
+.svgTextL {
+  font-size: 62px
 }
 
-.times {
-  font-size: 90%;
+.svgTextM {
+  font-size: 51px
 }
 
-/* .container svg {
-  width: 100%;
-  height: 100%;
-  fill: #231f20;
-  font-family: Gabriella, Gabriella;
-} */
-.textwrapper {
-  position: relative;
-}
 
-.textwrapper:after {
-  display: block;
-  padding-top: calc((9 / 16) * 30%);
-  content: "";
-}
-
-.text {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.textwrapper svg {
-  width: 100%;
-  height: 100%;
-}
-
-.text > svg text:hover {
+.svgText:hover {
   fill: #fff;
-}
-
-.container a {
-  text-decoration: none;
 }

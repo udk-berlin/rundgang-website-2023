@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import styled from 'styled-components'
 
 import { HoverLink } from '@/components/hover_link'
+import { LocalizedLink } from "@/components/localization/links";
 
 const eventTypeToMarginLeftMapper = {
   Ausstellung: '73%',
@@ -33,9 +33,9 @@ const eventTypeToMarginLeftMapper = {
 export default function InfoGridEvent ({ eventType }) {
   return (
     <HoverLinkEvent eventType={eventType}>
-      <Link href="/">
+      <LocalizedLink href="/">
         <Container>{eventType}</Container>
-      </Link>
+      </LocalizedLink>
     </HoverLinkEvent>
   )
 }

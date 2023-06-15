@@ -18,12 +18,12 @@
   font-weight: 600;
 }
 
-.language {
-  justify-self: end;
-}
-
 .date {
   justify-self: center;
+}
+
+.localization {
+  justify-self: end;
 }
 
 .date > a {

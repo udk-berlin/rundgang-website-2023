@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import styled from 'styled-components'
 
 import { HoverLink } from '@/components/hover_link'
+import { LocalizedLink } from "@/components/localization/links";
 
 const dayToWeekDayMapper = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -13,12 +13,12 @@ export default function InfoGridDate ({ start, end }) {
         <span>Date:</span>
       </DateWrapper>
       <HoverLinkDate date={date}>
-        <Link href="/">
+        <LocalizedLink href="/">
           <ClickableDate>
             <span>{dayToWeekDayMapper[date.getDay()]}</span>
             <span>{date.getDate() + '.' + date.getMonth() + '.'}</span>
           </ClickableDate>
-        </Link>
+        </LocalizedLink>
       </HoverLinkDate>
     </Container>
   )

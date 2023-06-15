@@ -1,8 +1,8 @@
 .container {
   position: fixed;
   width: 100%;
-  bottom: 0px;
-  left: 0px;
+  bottom: 0;
+  left: 0;
 
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -10,24 +10,22 @@
   border: var(--border-width) solid var(--border-color);
 
   background-color: #fff;
-  /* background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px); */
 }
 
-.rundgang {
+.container > *:nth-child(2) {
+  border-right: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
+}
+
+.center {
   text-align: center;
   font-weight: 600;
   font-size: 1.2rem;
   padding: 0.4rem 0.8rem;
 }
 
-.static {
+.right {
   display: flex;
   justify-content: space-around;
   padding: 0.4rem 0.8rem;
-}
-
-.container > *:nth-child(2) {
-  border-right: var(--border-width) solid var(--border-color);
-  border-left: var(--border-width) solid var(--border-color);
 }
