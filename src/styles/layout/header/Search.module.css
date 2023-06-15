@@ -1,0 +1,21 @@
+.container {
+  display: grid;
+  grid-template-columns: 2rem 1fr 2rem;
+  border-top: var(--border-width) solid var(--border-color);
+
+  height: var(--layout-header-search-container-height);
+}
+
+.container > * {
+  border-right: var(--border-width) solid var(--border-color);
+}
+
+.container > *:nth-last-child(1) {
+  border: none;
+}
+
+.search {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}

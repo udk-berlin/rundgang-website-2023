@@ -1,16 +1,12 @@
-import Head from 'next/head'
+import React from 'react'
 
-export default function Home() {
+import Page from "@/components/pages/page";
+import Index from "@/components/pages/index";
+
+export default function IndexPage () {
   return (
-    <>
-      <Head>
-        <title>UdK Rundgang 2023</title>
-        <meta name="description" content="UdK Rundgang 2023" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main>
-        <div>Hello world!</div>
-      </main>
-    </>
+    <Page>
+      <Index />
+    </Page>
   )
 }

@@ -1,4 +1,24 @@
-:root {}
+@import url("./fonts.css");
+
+:root {
+  --color-pink: #d1acd0;
+  --color-transparent-pink: rgba(209, 172, 208, 0.4);
+  --color-green: #1a3f2b;
+  --color-white: white;
+  --color-transparent-black: rgba(1, 1, 1, 0.8);
+
+  --border-width: 2px;
+  --border-color: #000;
+
+  --info-border-width: 2px;
+  --info-border-color: #000;
+
+  --map-marker-text-box-padding: 3px 12px;
+  --map-popup-container-width: 200px;
+
+  --layout-header-bar-container-height: 70px;
+  --layout-header-search-container-height: 40px;
+}
 
 * {
   box-sizing: border-box;
@@ -6,13 +26,31 @@
   margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
+html {
+  font-family: "Denim", sans-serif;
+  font-weight: 400;
+  height: 100%;
+  line-height: 1.3;
+  scroll-behavior: smooth;
+  font-size: calc(1em + 0.5vmin);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: black;
-  background: white;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+p {
+  padding-bottom: 1rem;
+}
+
+img {
+  width: 100%;
 }
