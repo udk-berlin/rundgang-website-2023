@@ -1,49 +1,54 @@
-import styles from '@/styles/pages/projects/Project.module.css'
+import styled from "styled-components";
 
-import ProjectAuthors from '@/components/pages/projects/authors'
-import ProjectTitle from '@/components/pages/projects/title'
+import ProjectAuthors from "@/components/pages/projects/authors";
+import ProjectTitle from "@/components/pages/projects/title";
 import Layout from "@/components/layout/layout";
+import ProjectImage from "@/components/pages/projects/image";
+import ProjectInfoGrid from "@/components/pages/projects/info_grid";
 
-export default function Project ({ project }) {
+export default function Project({ project }) {
   return (
     <Layout>
-      <div className={styles.container}>
-        <div className={styles.images}>
-          <ProjectImage link="https://placeholder.co/800" />
-          <ProjectImage link="https://placeholder.co/500x800" />
-          <ProjectImage link="https://placeholder.co/800x600" />
-        </div>
-        <div>
+      <Container>
+        <ImageContainer>
+          <ProjectInfoGrid project={project} />
+          <ProjectImage project={project} />
+        </ImageContainer>
+        <InfoContainer>
           <ProjectTitle project={project} />
-          <ProjectAuthors project={project} />
-          <ProjectText>
-            Dolore aliqua anim culpa adipisicing dolor quis do proident nisi
-            deserunt mollit magna nisi. Et ullamco magna eiusmod minim Lorem sunt
-            anim duis officia exercitation. Ex Lorem sunt minim ad duis incididunt
-            magna sunt tempor irure mollit mollit. Ea ex cillum magna non est sint
-            consequat deserunt fugiat elit est. Nisi ex nisi cupidatat tempor qui
-            excepteur dolore ipsum ullamco aute nisi elit. Ut culpa laborum
-            laborum sunt dolore dolore aute laborum minim officia consequat
-            aliqua. In id labore Lorem adipisicing mollit dolore in laborum.
-            Reprehenderit pariatur aliqua duis incididunt. Qui duis proident do
-            Lorem nostrud. Fugiat sunt esse sint deserunt. Aute exercitation
-            cillum consectetur magna do et eiusmod ut anim non Lorem ut
-            reprehenderit eiusmod. Aliquip proident aliquip officia fugiat sint in
-            qui sit voluptate qui in amet minim qui. Minim minim ex veniam eiusmod
-            sint aliquip ea. Reprehenderit consequat commodo sint anim eiusmod
-            culpa veniam. Est velit consequat nostrud esse sit culpa amet labore
-            anim aliquip reprehenderit irure.
-          </ProjectText>
-        </div>
-      </div>
+          <ProjectAuthors project={project} fontSize={1} />
+          <ProjectText project={project} />
+        </InfoContainer>
+      </Container>
     </Layout>
-  )
+  );
 }
 
-export function ProjectImage ({ link }) {
-  return <img src={link}></img>
-}
+const Container = styled.div`
+  display: flex;
+`;
 
-export function ProjectText ({ children }) {
-  return <div>{children}</div>
+const ImageContainer = styled.div`
+  flex: 6;
+  height: calc(
+    100vh - var(--layout-header-search-container-height) -
+      calc(var(--layout-header-bar-container-height) * 2)
+  );
+  color: white;
+  overflow: scroll;
+  position: relative;
+`;
+
+const InfoContainer = styled.div`
+  padding: 1rem;
+  flex: 4;
+  height: calc(
+    100vh - var(--layout-header-search-container-height) -
+      calc(var(--layout-header-bar-container-height) * 2)
+  );
+  overflow: scroll;
+`;
+
+export function ProjectText({ project }) {
+  return <div>{project.description.default}</div>;
 }

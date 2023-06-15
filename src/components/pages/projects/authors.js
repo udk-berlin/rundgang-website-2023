@@ -1,16 +1,19 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-export default function ProjectAuthors ({ project }) {
+export default function ProjectAuthors({ project, fontSize = 1 }) {
   return (
-    <ProjectAuthorsContainer>
-      {project.authors.map(author => (<span>{author.name}</span>))}
+    <ProjectAuthorsContainer fontSize={fontSize}>
+      {project.authors.map((author) => (
+        <span>{author.name}</span>
+      ))}
     </ProjectAuthorsContainer>
-  )
+  );
 }
 
 const ProjectAuthorsContainer = styled.span`
-  font-size: 0.8rem;
+  font-size: ${(props) => props.fontSize}rem;
   text-transform: uppercase;
+  padding: 0.5rem 0 1rem 0;
 
   display: flex;
   flex-wrap: nowrap;
@@ -31,4 +34,4 @@ const ProjectAuthorsContainer = styled.span`
     content: "/";
     padding: 0 1rem;
   }
-`
+`;
