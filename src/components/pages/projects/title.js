@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import ProjectLink from "@/components/pages/project/link";
+import ProjectLink from "@/components/pages/projects/link";
 
 export default function ProjectTitle ({ project }) {
   return (

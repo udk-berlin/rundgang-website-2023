@@ -1,19 +1,19 @@
-import styled from 'styled-components'
+import styles from '@/styles/pages/projects/Project.module.css'
 
-import ProjectAuthors from '@/components/pages/project/authors'
-import ProjectTitle from '@/components/pages/project/title'
+import ProjectAuthors from '@/components/pages/projects/authors'
+import ProjectTitle from '@/components/pages/projects/title'
 import Layout from "@/components/layout/layout";
 
 export default function Project ({ project }) {
   return (
     <Layout>
-      <Container>
-        <ImageContainer>
-          <ProjectImages link="https://placeholder.co/800" />
-          <ProjectImages link="https://placeholder.co/500x800" />
-          <ProjectImages link="https://placeholder.co/800x600" />
-        </ImageContainer>
-        <InfoContainer>
+      <div className={styles.container}>
+        <div className={styles.images}>
+          <ProjectImage link="https://placeholder.co/800" />
+          <ProjectImage link="https://placeholder.co/500x800" />
+          <ProjectImage link="https://placeholder.co/800x600" />
+        </div>
+        <div>
           <ProjectTitle project={project} />
           <ProjectAuthors project={project} />
           <ProjectText>
@@ -34,38 +34,13 @@ export default function Project ({ project }) {
             culpa veniam. Est velit consequat nostrud esse sit culpa amet labore
             anim aliquip reprehenderit irure.
           </ProjectText>
-        </InfoContainer>
-      </Container>
+        </div>
+      </div>
     </Layout>
   )
 }
 
-const Container = styled.div`
-  position: relative;
-  height: 100%;
-`
-
-const ImageContainer = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 60%;
-  overflow-y: scroll;
-`
-
-const InfoContainer = styled.div`
-  padding: 1rem;
-
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 60%;
-  width: 40%;
-  overflow-y: scroll;
-`
-
-export function ProjectImages ({ link }) {
+export function ProjectImage ({ link }) {
   return <img src={link}></img>
 }
 

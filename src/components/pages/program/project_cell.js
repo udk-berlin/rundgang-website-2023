@@ -1,8 +1,8 @@
-import ProjectTitle from "@/components/pages/project/title";
-import ProjectAuthors from "@/components/pages/project/authors";
+import ProjectTitle from "@/components/pages/projects/title";
+import ProjectAuthors from "@/components/pages/projects/authors";
 
 import InfoGrid from '@/components/pages/program/info_grid/info_grid'
-import ProjectImage from "@/components/pages/project/image";
+import ProjectImage from "@/components/pages/projects/image";
 
 export default function ProjectCell ({ project }) {
   return (
