@@ -1,0 +1,44 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  align-items: center;
+}
+
+.container > * {
+  padding: 0.4rem 0.8rem;
+}
+
+.subgrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  font-weight: 600;
+}
+
+.date {
+  justify-self: center;
+}
+
+.localization {
+  justify-self: end;
+}
+
+.date > a {
+  color: black;
+}
+
+.date > a::after {
+  content: " / Kalendar";
+  display: none;
+  color: var(--color-pink);
+}
+
+.date > a:hover::after {
+  display: inline;
+}
+
+.map {
+}
