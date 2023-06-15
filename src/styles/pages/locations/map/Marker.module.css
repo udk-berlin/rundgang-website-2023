@@ -1,6 +1,6 @@
-.image {
-    z-index: 20;
+.container {
     cursor: pointer;
+    z-index: 20;
 }
 
 .textBoxContainer {

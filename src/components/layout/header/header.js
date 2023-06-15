@@ -1,7 +1,7 @@
-import styles from '@/styles/layout/Header.module.css'
+import styles from '@/styles/layout/header/Header.module.css'
 
-import HeaderBar from './header_bar'
-import HeaderSearch from './header_search'
+import HeaderBar from './bar'
+import HeaderSearch from './search'
 
 export default function Header () {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import styles from '@/styles/pages/map/Marker.module.css'
+import styles from '@/styles/pages/locations/map/Marker.module.css'
 
 const MARKER_IMAGE_FOLDER_PATH = '/assets/svg/map/marker/'
 const SIMPLE_MARKER_IMAGE_SRC = `${MARKER_IMAGE_FOLDER_PATH}/simple.svg`
@@ -44,13 +44,19 @@ export default function ResponsiveMarker ({ location }) {
   const isMobile = false
   const useTextBox = true
 
+  let marker =  <OutlineMarker location={location} />
+
   if (useTextBox) {
-    return <TextBoxMarker location={location} />
+    marker = <TextBoxMarker location={location} />
   } else if (isMobile || !(location.id in idToOutlineMarkerImageIdMapper)) {
-    return <SimpleMarker location={location} />
-  } else {
-    return <OutlineMarker location={location} />
+    marker = <SimpleMarker location={location} />
   }
+
+  return (
+    <div className={styles.container}>
+      {marker}
+    </div>
+  )
 }
 
 function OutlineMarker ({ location }) {
@@ -62,20 +68,17 @@ function SimpleMarker ({ location }) {
 }
 
 function TextBoxMarker ({ location }) {
-  return (
-        <div className={styles.textBoxContainer}>
-            {location.name}
-        </div>
-  )
+  return <div id={`marker-${location.id}`} className={styles.textBoxContainer}>{location.name}</div>
 }
 
 function Marker ({ location, size, asOutline = false }) {
   return (
-        <StyledMarkerImage
-            id={`marker-${location.id}`}
-            className={styles.image}
-            size={size}
-            src={asOutline ? idToOutlineMarkerImageSrcMapper(location.id) : SIMPLE_MARKER_IMAGE_SRC}
-        />
+    <StyledMarkerImage
+      id={`marker-${location.id}`}
+      alt={location.name}
+      src={asOutline ? idToOutlineMarkerImageSrcMapper(location.id) : SIMPLE_MARKER_IMAGE_SRC}
+      size={size}
+      loading="lazy"
+    />
   )
 }
