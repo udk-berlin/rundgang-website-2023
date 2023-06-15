@@ -1,10 +1,17 @@
+import { getItems } from "@/utils/api/items";
+
 import Page from "@/components/page/page";
 import Program from "@/components/pages/program/program";
 
-export default function ProgramPage () {
+export async function getStaticProps () {
+  const events = await getItems()
+  return { props: { events } }
+}
+
+export default function ProgramPage ({ events }) {
   return (
     <Page>
-     <Program />
+     <Program events={Object.values(events)} />
     </Page>
   )
 }

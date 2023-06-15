@@ -3,11 +3,23 @@ import ProjectPageAuthors from '@/components/pages/project/project_authors'
 import InfoGrid from '@/components/pages/program/info_grid'
 import { LocalizedLink } from "@/components/localization/links";
 
-const authors = ['Marisa Nest', 'Juan Pablo Gaviria Bedoya', 'Lukas Esser']
+const IMAGE_PLACEHOLDER_SIZES = [
+  { height: 400 },
+  { height: 500 },
+  { height: 600 },
+  { height: 700 },
+  { height: 800 },
+  { height: 900 },
+]
+
+const getRandomImagePlaceholderSize = () => {
+  return IMAGE_PLACEHOLDER_SIZES[Math.floor(Math.random() * IMAGE_PLACEHOLDER_SIZES.length)]
+}
 
 export default function ProjectCell ({ event }) {
+  console.log(event)
   return (
-    <div key={event.src}>
+    <div key={event.id}>
       <EventImage event={event}/>
       <EventTitle event={event}/>
       <EventAuthors event={event} />
@@ -16,14 +28,34 @@ export default function ProjectCell ({ event }) {
   )
 }
 function EventImage ({ event }) {
-  return (
-    <EventLink event={event}>
+  let image = <></>
+
+  if ('thumbnail' in event && event.thumbnail) {
+    image = (
       <img
-        src={event.src}
+        src={event.thumbnail}
         alt={event.name}
         loading="lazy"
         style={{width: '100%'}}
       />
+    )
+  } else {
+    const size = getRandomImagePlaceholderSize()
+    image = (
+      <div
+        style={{
+          width: '100%',
+          height: size.height,
+          minHeight: size.height,
+          background: 'var(--color-transparent-pink)',
+        }} />
+    )
+  }
+
+
+  return (
+    <EventLink event={event}>
+      {image}
     </EventLink>
   )
 }
@@ -31,8 +63,8 @@ function EventImage ({ event }) {
 function EventTitle ({ event }) {
   return (
     <EventLink event={event}>
-      <ProjectPageTitle fontSize={1}>
-        REM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD
+      <ProjectPageTitle>
+        {event.name}
       </ProjectPageTitle>
     </EventLink>
   )
@@ -40,13 +72,13 @@ function EventTitle ({ event }) {
 
 function EventAuthors ({ event }) {
   return (
-    <ProjectPageAuthors fontSize={0.8} authors={authors} />
+    <ProjectPageAuthors event={event} />
   )
 }
 
 function EventInfos({ event }) {
   return (
-    <InfoGrid eventType="Tanz" />
+    <InfoGrid event={event} />
   )
 }
 

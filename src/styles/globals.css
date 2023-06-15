@@ -2,6 +2,7 @@
 
 :root {
   --color-pink: #d1acd0;
+  --color-transparent-pink: rgba(209, 172, 208, 0.4);
   --color-green: #1a3f2b;
   --color-white: white;
   --color-transparent-black: rgba(1, 1, 1, 0.8);
