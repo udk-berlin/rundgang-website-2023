@@ -10,6 +10,7 @@ import styled from "styled-components";
 
 export default function ProjectInfoGrid(project) {
   let projectTimes = [];
+
   if ("temporal" in project) {
     project.temporal.forEach((date) => {
       projectTimes.push(
@@ -22,14 +23,29 @@ export default function ProjectInfoGrid(project) {
   }
   return (
     <ProjectInfoGridContainer>
-      <InfoGridEvent eventType="Tanz" />
+      {projectTimes.map((projectTime) => projectTime)}
+      <InfoGridLocation project={project.project} />
+      <InfoGridContext project={project.project} />
     </ProjectInfoGridContainer>
   );
 }
 
 const ProjectInfoGridContainer = styled.div`
+  display: flex;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 40px;
+  left: 20px;
   width: 900px;
+
+  font-size: 0.7rem;
+  font-weight: 500;
+
+  & a {
+    pointer-events: auto;
+    display: block;
+  }
+
+  a:hover {
+    color: #fff;
+  }
 `;

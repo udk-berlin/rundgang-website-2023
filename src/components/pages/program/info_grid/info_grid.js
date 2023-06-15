@@ -1,18 +1,18 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import InfoGridEvent from '@/components/pages/program/info_grid/event'
-import InfoGridCarousel from '@/components/pages/program/info_grid/carousel'
+import InfoGridEvent from "@/components/pages/program/info_grid/event";
+import InfoGridCarousel from "@/components/pages/program/info_grid/carousel";
 
-export default function InfoGrid ({ project }) {
+export default function InfoGrid({ project }) {
   return (
     <InfoGridContainer>
       <InfoGridEvent eventType="Beratungsangebot" />
       <InfoGridCarousel project={project} />
     </InfoGridContainer>
-  )
+  );
 }
 
-const InfoGridContainer = styled.div`
+export const InfoGridContainer = styled.div`
   display: grid;
   justify-items: start;
   row-gap: 0.75rem;
@@ -27,5 +27,4 @@ const InfoGridContainer = styled.div`
   a:hover {
     color: #fff;
   }
-`
-
+`;
