@@ -26,17 +26,27 @@ const Container = styled.div`
   }
 `
 
-export default function InfoGrid () {
+export default function InfoGrid ({ event }) {
+  let eventTimes = []
+
+  if ('temporal' in event) {
+    event.temporal.forEach(date => {
+      eventTimes.push((
+        <div>
+          <InfoGridDate start={date.start}/>
+          <InfoGridTime start={date.start} end={date.end}/>
+        </div>
+      ))
+    })
+  }
+
   return (
     <Container>
       <InfoGridEvent eventType="Beratungsangebot" />
       <InfoGridCarousel>
-        <div>
-          <InfoGridDate start="1686912397" />
-          <InfoGridTime start="1658595600" end="1658596800" />
-        </div>
-        <InfoGridLocation />
-        <InfoGridContext />
+        {eventTimes.map(eventTime => eventTime)}
+        <InfoGridLocation event={event} />
+        <InfoGridContext event={event} />
       </InfoGridCarousel>
     </Container>
   )

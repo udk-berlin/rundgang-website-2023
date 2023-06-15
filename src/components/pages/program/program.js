@@ -6,10 +6,6 @@ import ProjectCell from '@/components/pages/program/project_cell'
 import Layout from "@/components/layout/layout";
 
 const EVENTS = [
-    {src: 'https://placehold.co/900x400', height: '900', width: '400'},
-    {src: 'https://placehold.co/300x250', height: '300', width: '250'},
-    {src: 'https://placehold.co/900x400', height: '900', width: '400'},
-    {src: 'https://placehold.co/500x900', height: '500', width: '900'},
     {src: 'https://placehold.co/900x500', height: '900', width: '500'},
     {src: 'https://placehold.co/910x400', height: '910', width: '400'},
     {src: 'https://placehold.co/920', height: '920', width: '920'},
@@ -29,21 +25,16 @@ const EVENTS = [
     {src: 'https://placehold.co/920', height: '920', width: '920'},
 ]
 
-export default function Program () {
-  return (
-
-    <Layout>
-        <MasonryWrapper>
-            <Masonry columns={4} spacing={3}>
-                {
-                    EVENTS.map((event, index) => (
-                      <ProjectCell event={event} />
-                    ))
-                }
-            </Masonry>
-        </MasonryWrapper>
-    </Layout>
-  )
+export default function Program ({ events }) {
+    return (
+      <Layout>
+          <MasonryWrapper>
+              <Masonry columns={4} spacing={3}>
+                  {events.map(event => (<ProjectCell event={event} />))}
+              </Masonry>
+          </MasonryWrapper>
+      </Layout>
+    )
 }
 
 const MasonryWrapper = styled.div`

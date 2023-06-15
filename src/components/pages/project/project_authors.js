@@ -1,24 +1,25 @@
 import styled from 'styled-components'
 
-export default function ProjectAuthors ({ fontSize = 1, authors }) {
+export default function ProjectAuthors ({ event }) {
   return (
-    <Container fontSize={fontSize}>
-      {authors.map((author) => (
-        <span>{author}</span>
-      ))}
+    <Container>
+      {
+        event.authors.map(author => (
+          <span>{author.name}</span>
+        ))
+      }
     </Container>
   )
 }
 
 const Container = styled.span`
-  font-size: ${(props) => props.fontSize}rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
 
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
 
-  /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none;
   scrollbar-width: none;
 

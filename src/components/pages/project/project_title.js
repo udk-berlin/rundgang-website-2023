@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   font-weight: 600;
-  font-size: ${(props) => props.fontSize}rem;
+  font-size: 1rem;
   text-transform: uppercase;
   line-height: 1;
   display: block;
@@ -16,6 +16,6 @@ const Container = styled.div`
   }
 `
 
-export default function ProjectTitle ({ fontSize = 2, children }) {
-  return <Container fontSize={fontSize}>{children}</Container>
+export default function ProjectTitle ({ children }) {
+  return <Container>{children}</Container>
 }
