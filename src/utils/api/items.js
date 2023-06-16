@@ -1,27 +1,27 @@
 import { get, getId, getTree } from '@/utils/api/api'
 
-const ROOT_ID ='!CszUweVEGwuKVEiJBg:content.udk-berlin.de'
+const ROOT_ID = '!CszUweVEGwuKVEiJBg:content.udk-berlin.de'
 const ROOT_LOCATION_ID = '!QEMZncAAlhtFVagfSI:content.udk-berlin.de'
 const ROOT_CONTEXT_ID = '!suNRlIyeorKnuZHfld:content.udk-berlin.de'
 
-let itemsCached = false;
-const items = {};
+let itemsCached = false
+const items = {}
 
-let itemDetailsCached = false;
-const itemDetails = {};
+let itemDetailsCached = false
+const itemDetails = {}
 
 export async function getListFilterTypeItems () {
   return await get(`${ROOT_ID}/list/filter/type/item`)
 }
 
-export async function getItemIds() {
-  const items = await getListFilterTypeItems();
-  let ids = items.map(item => item.id)
-  return [...new Set(ids)];
+export async function getItemIds () {
+  const items = await getListFilterTypeItems()
+  const ids = items.map(item => item.id)
+  return [...new Set(ids)]
 }
 
 export async function getItem (id) {
-  const items = await getItems();
+  const items = await getItems()
   return items[id]
 }
 
@@ -80,10 +80,10 @@ export async function getItems () {
       items[id] = { ...items[id], ...itemDetails[id] }
     })
 
-    itemsCached = true;
+    itemsCached = true
   }
 
-  return items;
+  return items
 }
 
 async function getItemDetails (itemIds) {
@@ -110,8 +110,8 @@ async function getItemDetails (itemIds) {
       .all(promises)
       .then(data => { data.forEach(d => { itemDetails[d.id] = buildItemDetail(d) }) })
 
-    itemDetailsCached= true;
+    itemDetailsCached = true
   }
 
-  return itemDetails;
+  return itemDetails
 }

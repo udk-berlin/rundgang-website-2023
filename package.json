@@ -20,7 +20,8 @@
     "react-dom": "18.2.0",
     "react-intl": "^6.4.4",
     "react-svg": "^16.1.15",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "swr": "^2.1.5"
   },
   "devDependencies": {
     "eslint": "^8.42.0",
