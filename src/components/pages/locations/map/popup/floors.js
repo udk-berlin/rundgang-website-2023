@@ -5,6 +5,12 @@ import styles from '@/styles/pages/locations/map/popup/Floors.module.css'
 import { useLocation, useLocationDispatch } from '@/providers/location'
 
 export default function PopupFloors ({ location }) {
+  const locationFilter = useLocation()
+
+  if (!locationFilter.location || locationFilter.location.id !== location.id) {
+    return <></>
+  }
+
   const floors = getFloors(location)
 
   return (

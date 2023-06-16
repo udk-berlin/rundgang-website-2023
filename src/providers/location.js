@@ -33,6 +33,9 @@ function locationReducer (location, action) {
         location: action.location
       }
     }
+    case 'all-locations': {
+      return {}
+    }
     case 'select-floor': {
       return {
         location: location.location,

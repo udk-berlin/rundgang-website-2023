@@ -4,6 +4,7 @@ import maplibregl from 'maplibre-gl'
 
 import styles from '@/styles/pages/locations/map/Map.module.css'
 
+import { useLocationDispatch } from '@/providers/location'
 import ResponsiveMarker from '@/components/pages/locations/map/marker'
 import Popup from '@/components/pages/locations/map/popup/popup'
 
@@ -22,6 +23,7 @@ const MAP_CONFIGURATION = {
 export default function Map ({ locations }) {
   const mapContainerRef = useRef(null)
   const mapRef = useRef(null)
+  const dispatch = useLocationDispatch()
 
   useEffect(() => {
     mapRef.current = new maplibregl.Map(
@@ -42,7 +44,7 @@ export default function Map ({ locations }) {
     )
 
     mapRef.current.on('load', () => {
-      Object.values(locations).slice(0,-1).forEach(location => {
+      Object.values(locations).forEach(location => {
         const marker = document.createElement('div')
         createRoot(marker).render(<ResponsiveMarker location={location} />)
 
@@ -52,14 +54,25 @@ export default function Map ({ locations }) {
       })
 
       mapRef.current.on('click', e => {
-        Object.values(locations).slice(0,-1).forEach(location => {
-          const otherElement = document.getElementById(`popup-${location.id}`)
-          otherElement.style.display = 'none'
+        Object.values(locations).forEach(location => {
+          const popup = document.getElementById(`popup-${location.id}`)
+          popup.style.display = 'none'
         })
         if (e.originalEvent.target.id) {
           const id = e.originalEvent.target.id.replaceAll('marker-', '')
-          const popupElement = document.getElementById(`popup-${id}`)
-          popupElement.style.display = 'inline'
+          const popup = document.getElementById(`popup-${id}`)
+          popup.style.display = 'inline'
+
+          dispatch(
+            {
+              type: 'select-location',
+              location: locations[id]
+            })
+        } else {
+          dispatch(
+            {
+              type: 'all-locations'
+            })
         }
       })
     })
@@ -68,7 +81,7 @@ export default function Map ({ locations }) {
   return (
     <>
       <div ref={mapContainerRef} className={styles.container}/>
-      <div>{Object.values(locations).slice(0,-1).map(location => <Popup location={location} />)}</div>
+      <div>{Object.values(locations).map(location => <Popup location={location} />)}</div>
     </>
   )
 }

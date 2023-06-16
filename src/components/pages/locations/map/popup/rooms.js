@@ -4,8 +4,14 @@ import { FormattedMessage } from 'react-intl'
 import styles from '@/styles/pages/locations/map/popup/Rooms.module.css'
 import { useLocation, useLocationDispatch } from '@/providers/location'
 
-export default function PopupFloors ({ floor }) {
-  const rooms = getRooms(floor)
+export default function PopupFloors ({ location }) {
+  const locationFilter = useLocation()
+
+  if (!locationFilter.floor || locationFilter.location.id !== location.id) {
+    return <></>
+  }
+
+  const rooms = getRooms(locationFilter.floor)
 
   return (
     <div className={styles.roomsContainer}>
