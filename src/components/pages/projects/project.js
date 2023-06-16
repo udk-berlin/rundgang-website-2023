@@ -1,10 +1,17 @@
+import React from 'react'
+import useSWR from 'swr'
+
 import styles from '@/styles/pages/projects/Project.module.css'
 
 import ProjectAuthors from '@/components/pages/projects/authors'
 import ProjectTitle from '@/components/pages/projects/title'
-import Layout from "@/components/layout/layout";
+import Layout from '@/components/layout/layout'
+
+import { getRenderJsonUrl, fetcher } from '@/utils/api/api'
 
 export default function Project ({ project }) {
+  const { data, error, isLoading } = useSWR(getRenderJsonUrl(project.id), fetcher)
+
   return (
     <Layout>
       <div className={styles.container}>
