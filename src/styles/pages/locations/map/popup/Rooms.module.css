@@ -1,0 +1,53 @@
+.roomsContainer {
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+
+    overflow: scroll;
+
+    background: var(--color-white);
+}
+
+.roomContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    padding: 0.1rem;
+
+    border-top: calc(0.5 * var(--border-width)) solid var(--border-color);
+    border-right: var(--border-width) solid var(--border-color);
+    border-bottom: calc(0.5 * var(--border-width)) solid var(--border-color);
+    border-left: var(--border-width) solid var(--border-color);
+
+    cursor: pointer;
+}
+
+.roomContainer:nth-child(1) {
+    border-top: 0 !important;
+}
+
+.roomContainer:nth-last-child(1) {
+    border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.roomContainer:hover {
+    background-color: var(--color-pink);
+    color: var(--color-white);
+
+    border-top: 0;
+    border-right: calc(0.5 * var(--border-width)) solid var(--border-color);
+    border-bottom: var(--border-width) solid var(--border-color);
+    border-left: calc(2 * var(--border-width)) solid var(--border-color);
+}
+
+.roomSelected {
+    background-color: var(--color-pink);
+    color: var(--color-white);
+
+    border-top: 0;
+    border-right: calc(0.5 * var(--border-width)) solid var(--border-color);
+    border-bottom: var(--border-width) solid var(--border-color);
+    border-left: calc(2 * var(--border-width)) solid var(--border-color);
+}

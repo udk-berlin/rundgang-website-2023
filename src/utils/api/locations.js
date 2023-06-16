@@ -2,11 +2,11 @@ import { get, getTree } from '@/utils/api/api'
 
 const ROOT_LOCATION_ID = '!QEMZncAAlhtFVagfSI:content.udk-berlin.de'
 
-let locationsCached = false;
-const locations = {};
+let locationsCached = false
+const locations = {}
 
-let locationDetailsCached = false;
-const locationDetails = {};
+let locationDetailsCached = false
+const locationDetails = {}
 
 export async function getLocations () {
   if (!locationsCached) {
@@ -63,8 +63,8 @@ export async function getLocationDetails (locationIds) {
       .all(promises)
       .then(data => { data.forEach(d => { locationDetails[d.id] = buildLocationDetail(d) }) })
 
-    locationDetailsCached = false;
+    locationDetailsCached = false
   }
 
-  return locationDetails;
+  return locationDetails
 }

@@ -6,5 +6,5 @@
 .textBoxContainer {
     background: var(--color-transparent-black);
     color: var(--color-white);
-    padding: var(--map-marker-text-box-padding);
+    padding: var(--locations-map-marker-text-box-padding);
 }

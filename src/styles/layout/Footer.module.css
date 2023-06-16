@@ -11,7 +11,7 @@
   align-items: center;
 
   border: var(--border-width) solid var(--border-color);
-  background-color: #fff;
+  background: var(--color-white);
 }
 
 .container > *:nth-child(2) {

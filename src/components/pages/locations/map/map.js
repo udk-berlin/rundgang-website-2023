@@ -4,8 +4,8 @@ import maplibregl from 'maplibre-gl'
 
 import styles from '@/styles/pages/locations/map/Map.module.css'
 
-import ResponsiveMarker from "@/components/pages/locations/map/marker";
-import Popup from "@/components/pages/locations/map/popup";
+import ResponsiveMarker from '@/components/pages/locations/map/marker'
+import Popup from '@/components/pages/locations/map/popup/popup'
 
 const MAP_CONFIGURATION = {
   style: 'https://api.maptiler.com/maps/d450193f-53a4-40fc-8f3f-97a0321d7139/style.json?key=Zn4TzWj4KtRhJ9I5TDxf',
@@ -42,7 +42,7 @@ export default function Map ({ locations }) {
     )
 
     mapRef.current.on('load', () => {
-      Object.values(locations).forEach(location => {
+      Object.values(locations).slice(0,-1).forEach(location => {
         const marker = document.createElement('div')
         createRoot(marker).render(<ResponsiveMarker location={location} />)
 
@@ -52,9 +52,9 @@ export default function Map ({ locations }) {
       })
 
       mapRef.current.on('click', e => {
-        Object.values(locations).forEach(location => {
+        Object.values(locations).slice(0,-1).forEach(location => {
           const otherElement = document.getElementById(`popup-${location.id}`)
-          otherElement.style.display = 'none';
+          otherElement.style.display = 'none'
         })
         if (e.originalEvent.target.id) {
           const id = e.originalEvent.target.id.replaceAll('marker-', '')
@@ -68,7 +68,7 @@ export default function Map ({ locations }) {
   return (
     <>
       <div ref={mapContainerRef} className={styles.container}/>
-      <div>{Object.values(locations).map(location => <Popup location={location} />)}</div>
+      <div>{Object.values(locations).slice(0,-1).map(location => <Popup location={location} />)}</div>
     </>
   )
 }

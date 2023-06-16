@@ -5,6 +5,7 @@
   --color-transparent-pink: rgba(209, 172, 208, 0.4);
   --color-green: #1a3f2b;
   --color-white: white;
+  --color-dark-gray: rgb(40, 40, 40);
   --color-transparent-black: rgba(1, 1, 1, 0.8);
 
   --border-width: 2px;
@@ -13,11 +14,15 @@
   --info-border-width: 2px;
   --info-border-color: #000;
 
-  --map-marker-text-box-padding: 3px 12px;
-  --map-popup-container-width: 200px;
+  --locations-map-height: calc(100vh - 2 * var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 * var(--border-width));
+  --locations-map-popup-top: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
+  --locations-map-popup-ground-plan-height: calc(0.7 * var(--locations-map-height));
+  --locations-map-popup-infos-height: calc(0.3 * var(--locations-map-height) + 2 * var(--border-width));
+  --locations-map-marker-text-box-padding: 3px 12px;
 
   --layout-header-bar-container-height: 70px;
   --layout-header-search-container-height: 40px;
+
 }
 
 * {
