@@ -1,6 +1,6 @@
 import {getItemIds, getItem} from "@/utils/api/items";
 import Page from "@/components/pages/page";
-import Project from "@/components/pages/project/project";
+import Project from "@/components/pages/projects/project";
 
 import {LOCALES} from "@/components/localization/provider";
 
