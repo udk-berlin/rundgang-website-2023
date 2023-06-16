@@ -7,40 +7,39 @@ const IMAGE_PLACEHOLDER_SIZES = [
   { height: 700 },
   { height: 800 },
   { height: 900 },
-]
+];
 
 const getRandomImagePlaceholderSize = () => {
-  return IMAGE_PLACEHOLDER_SIZES[Math.floor(Math.random() * IMAGE_PLACEHOLDER_SIZES.length)]
-}
+  return IMAGE_PLACEHOLDER_SIZES[
+    Math.floor(Math.random() * IMAGE_PLACEHOLDER_SIZES.length)
+  ];
+};
 
-export default function ProjectImage ({ project }) {
-  let image = <></>
+export default function ProjectImage({ project, full_size = 0 }) {
+  let image = <></>;
 
-  if ('thumbnail' in project && project.thumbnail) {
+  if ("thumbnail" in project && project.thumbnail) {
     image = (
       <img
-        src={project.thumbnail}
+        src={full_size ? project.thumbnail_full_size : project.thumbnail}
         alt={project.name}
         loading="lazy"
-        style={{width: '100%'}}
+        style={{ width: "100%" }}
       />
-    )
+    );
   } else {
-    const size = getRandomImagePlaceholderSize()
+    const size = getRandomImagePlaceholderSize();
     image = (
       <div
         style={{
-          width: '100%',
+          width: "100%",
           height: size.height,
           minHeight: size.height,
-          background: 'var(--color-transparent-pink)',
-        }} />
-    )
+          background: "var(--color-transparent-pink)",
+        }}
+      />
+    );
   }
 
-  return (
-    <ProjectLink project={project}>
-      {image}
-    </ProjectLink>
-  )
+  return <ProjectLink project={project}>{image}</ProjectLink>;
 }

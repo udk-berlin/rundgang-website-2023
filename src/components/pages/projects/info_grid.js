@@ -11,8 +11,8 @@ import styled from "styled-components";
 export default function ProjectInfoGrid(project) {
   let projectTimes = [];
 
-  if ("temporal" in project) {
-    project.temporal.forEach((date) => {
+  if ("temporal" in project.project) {
+    project.project.temporal.forEach((date) => {
       projectTimes.push(
         <div>
           <InfoGridDate start={date.start} />
@@ -32,10 +32,11 @@ export default function ProjectInfoGrid(project) {
 
 const ProjectInfoGridContainer = styled.div`
   display: flex;
+  align-items: start;
   position: absolute;
   top: 40px;
   left: 20px;
-  width: 900px;
+  /* width: 900px; */
 
   font-size: 0.7rem;
   font-weight: 500;

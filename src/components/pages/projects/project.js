@@ -12,7 +12,7 @@ export default function Project({ project }) {
       <Container>
         <ImageContainer>
           <ProjectInfoGrid project={project} />
-          <ProjectImage project={project} />
+          <ProjectImage project={project} full_size={1} />
         </ImageContainer>
         <InfoContainer>
           <ProjectTitle project={project} />
@@ -37,6 +37,7 @@ const ImageContainer = styled.div`
   color: white;
   overflow: scroll;
   position: relative;
+  top: 4px;
 `;
 
 const InfoContainer = styled.div`
