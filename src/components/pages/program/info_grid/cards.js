@@ -1,3 +1,6 @@
+import InfoGridItemLink, {
+  InfoGridItem,
+} from "@/components/pages/program/info_grid/item";
 import styled from "styled-components";
 
 export function InfoGridLocation({ project }) {
@@ -7,18 +10,34 @@ export function InfoGridLocation({ project }) {
   let centre = <></>;
 
   if ("location-building" in project)
-    location = <Item margin="170px">{project["location-building"].name}</Item>;
+    location = (
+      <InfoGridItem margin="170px">
+        {project["location-building"].name}
+      </InfoGridItem>
+    );
   else if ("external-location" in project)
-    location = <Item margin="170px">{project["external-location"].name}</Item>;
+    location = (
+      <InfoGridItem margin="170px">
+        {project["external-location"].name}
+      </InfoGridItem>
+    );
 
   if ("location-level" in project)
-    level = <Item margin="10px">Etage: {project["location-level"].name}</Item>;
+    level = (
+      <InfoGridItem margin="10px">
+        Etage: {project["location-level"].name}
+      </InfoGridItem>
+    );
 
   if ("location-room" in project)
-    room = <Item margin="50px">Raum: {project["location-room"].name}</Item>;
+    room = (
+      <InfoGridItem margin="50px">
+        Raum: {project["location-room"].name}
+      </InfoGridItem>
+    );
 
   if ("centre" in project)
-    centre = <Item margin="50px">{project.centre.name}</Item>;
+    centre = <InfoGridItem margin="50px">{project.centre.name}</InfoGridItem>;
 
   return (
     <Container>
@@ -38,23 +57,27 @@ export function InfoGridContext({ project }) {
   let clazz = <></>;
 
   if ("faculty" in project) {
-    faculty = <Item margin="50px">{project.faculty.name}</Item>;
+    faculty = <InfoGridItem margin="50px">{project.faculty.name}</InfoGridItem>;
   }
 
   if ("institute" in project) {
-    institute = <Item margin="150px">{project.institute.name}</Item>;
+    institute = (
+      <InfoGridItem margin="150px">{project.institute.name}</InfoGridItem>
+    );
   }
 
   if ("subject" in project) {
-    subject = <Item margin="100px">{project.subject.name}</Item>;
+    subject = (
+      <InfoGridItem margin="100px">{project.subject.name}</InfoGridItem>
+    );
   }
 
   if ("course" in project) {
-    course = <Item margin="50px">{project.course.name}</Item>;
+    course = <InfoGridItem margin="50px">{project.course.name}</InfoGridItem>;
   }
 
   if ("class" in project) {
-    clazz = <Item margin="200px">{project.class.name}</Item>;
+    clazz = <InfoGridItem margin="200px">{project.class.name}</InfoGridItem>;
   }
 
   return (

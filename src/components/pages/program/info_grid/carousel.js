@@ -8,22 +8,9 @@ import {
 } from "@/components/pages/program/info_grid/cards";
 
 export default function InfoGridCarousel({ project }) {
-  let projectTimes = [];
-
-  if ("temporal" in project) {
-    project.temporal.forEach((date) => {
-      projectTimes.push(
-        <div>
-          <InfoGridDate start={date.start} />
-          <InfoGridTime start={date.start} end={date.end} />
-        </div>
-      );
-    });
-  }
-
   return (
     <Carousel>
-      {projectTimes.map((projectTime) => projectTime)}
+      <InfoGridDate project={project} />
       <InfoGridLocation project={project} />
       <InfoGridContext project={project} />
     </Carousel>

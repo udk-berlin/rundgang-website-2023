@@ -6,7 +6,7 @@ import InfoGridCarousel from "@/components/pages/program/info_grid/carousel";
 export default function InfoGrid({ project }) {
   return (
     <InfoGridContainer>
-      <InfoGridEvent eventType="Beratungsangebot" />
+      <InfoGridEvent eventType="Installation" />
       <InfoGridCarousel project={project} />
     </InfoGridContainer>
   );
@@ -18,13 +18,4 @@ export const InfoGridContainer = styled.div`
   row-gap: 0.75rem;
   font-size: 0.7rem;
   font-weight: 500;
-
-  & a {
-    pointer-events: auto;
-    display: block;
-  }
-
-  a:hover {
-    color: #fff;
-  }
 `;

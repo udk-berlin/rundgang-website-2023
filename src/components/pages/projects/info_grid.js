@@ -5,41 +5,35 @@ import {
 import InfoGridCarousel from "@/components/pages/program/info_grid/carousel";
 import InfoGridDate from "@/components/pages/program/info_grid/date";
 import InfoGridEvent from "@/components/pages/program/info_grid/event";
+import { InfoGridContainer } from "@/components/pages/program/info_grid/info_grid";
 import InfoGridTime from "@/components/pages/program/info_grid/time";
 import styled from "styled-components";
 
-export default function ProjectInfoGrid(project) {
-  let projectTimes = [];
-
-  if ("temporal" in project.project) {
-    project.project.temporal.forEach((date) => {
-      projectTimes.push(
-        <div>
-          <InfoGridDate start={date.start} />
-          <InfoGridTime start={date.start} end={date.end} />
-        </div>
-      );
-    });
-  }
+export default function ProjectInfoGrid({ project }) {
   return (
     <ProjectInfoGridContainer>
-      {projectTimes.map((projectTime) => projectTime)}
-      <InfoGridLocation project={project.project} />
-      <InfoGridContext project={project.project} />
+      <ProjectInfoGridEventDateContainer>
+        <InfoGridEvent eventType="Tanz" />
+        <InfoGridDate project={project} />
+      </ProjectInfoGridEventDateContainer>
+      <InfoGridLocation project={project} />
+      <InfoGridContext project={project} />
     </ProjectInfoGridContainer>
   );
 }
 
-const ProjectInfoGridContainer = styled.div`
+const ProjectInfoGridContainer = styled(InfoGridContainer)`
   display: flex;
   align-items: start;
   position: absolute;
-  top: 40px;
-  left: 20px;
-  /* width: 900px; */
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 1.5rem 1rem;
 
-  font-size: 0.7rem;
-  font-weight: 500;
+  & > * {
+    flex: 1;
+  }
 
   & a {
     pointer-events: auto;
@@ -48,5 +42,19 @@ const ProjectInfoGridContainer = styled.div`
 
   a:hover {
     color: #fff;
+  }
+`;
+
+const ProjectInfoGridEventDateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &:first-child {
+    align-items: start;
+  }
+
+  & > :nth-child(2) {
+    width: 100%;
   }
 `;
