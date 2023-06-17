@@ -9,9 +9,9 @@ export default function InfoGridDate({ start, end }) {
   const date = new Date((start - 7200) * 1000);
   return (
     <InfoGridDateContainer>
-      <DateContainer>
+      <TitleContainer>
         <span>Date:</span>
-      </DateContainer>
+      </TitleContainer>
       <HoverLinkDate date={date}>
         <LocalizedLink href="/">
           <ClickableDate>
@@ -26,26 +26,36 @@ export default function InfoGridDate({ start, end }) {
 
 const InfoGridDateContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr;
+  grid-template-columns: min-content 2fr 2fr 2fr;
+
+  & > * {
+    outline: var(--info-border-width) solid var(--info-border-color);
+    margin-top: var(--info-border-width);
+    margin-left: var(--info-border-width);
+
+    padding: 0.2rem 0.4rem;
+    background-color: var(--color-white);
+    color: #000;
+  }
+
+  & > *:nth-last-child(1) {
+    margin-right: var(--info-border-width);
+  }
 `;
 
-const DateContainer = styled.div`
-  outline: var(--info-border-width) solid var(--info-border-color);
-  margin-top: var(--info-border-width);
-  margin-left: var(--info-border-width);
-
-  padding: 0.2rem 0.4rem;
-  background-color: var(--color-white);
-  color: #000;
+const TitleContainer = styled.div`
+  align-self: start;
+  width: fit-content;
 `;
 
-const ClickableDate = styled(DateContainer)`
+const ClickableDate = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
 
 const HoverLinkDate = styled(HoverLink)`
   grid-column-start: ${(prop) => dateToPosition(prop.date)};
+  align-self: stretch;
 `;
 
 function dateToPosition(date) {
