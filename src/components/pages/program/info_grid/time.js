@@ -41,10 +41,12 @@ function timeToMarginWidth(start, end) {
   let endOfDay = 23;
   let lengthOfDay = endOfDay - startOfDay;
 
-  let length = end.getHours() - start.getHours();
-
-  let margin = scale(start.getHours(), startOfDay, endOfDay, 0, 100);
-  let width = scale(length, 0, lengthOfDay, 0, 100);
+  let margin =
+    scale(start.getHours(), startOfDay, endOfDay, 0, 100) +
+    scale(start.getMinutes(), 0, 59, 0, 100 / lengthOfDay);
+  let width =
+    scale(end.getHours() - start.getHours(), 0, lengthOfDay, 0, 100) +
+    scale(end.getHours() - start.getHours(), 0, 59, 0, 100 / lengthOfDay);
 
   return [margin, width];
 }
