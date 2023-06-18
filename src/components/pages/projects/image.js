@@ -1,5 +1,3 @@
-import ProjectLink from "@/components/pages/projects/link";
-
 const IMAGE_PLACEHOLDER_SIZES = [
   { height: 400 },
   { height: 500 },
@@ -41,5 +39,5 @@ export default function ProjectImage({ project, full_size = 0 }) {
     );
   }
 
-  return <ProjectLink project={project}>{image}</ProjectLink>;
+  return image;
 }

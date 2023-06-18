@@ -1,14 +1,11 @@
 import styled from "styled-components";
 
-import ProjectLink from "@/components/pages/projects/link";
-
 export default function ProjectTitle({ project, fontSize = 2.5 }) {
   return (
-    <ProjectLink project={project}>
-      <ProjectTitleContainer fontSize={fontSize}>
-        {project.name}
-      </ProjectTitleContainer>
-    </ProjectLink>
+    <ProjectTitleContainer fontSize={fontSize}>
+      <DropCap fontSize={fontSize}>{project.name.substring(0, 1)}</DropCap>
+      {project.name.substring(1)}
+    </ProjectTitleContainer>
   );
 }
 
@@ -18,12 +15,30 @@ const ProjectTitleContainer = styled.div`
   text-transform: uppercase;
   line-height: 1;
   display: block;
+`;
 
-  &::first-letter {
-    initial-letter: 2;
-    font-family: "Gabriella";
-    font-size: 2.5rem;
-    color: var(--color-pink);
-    padding-right: 8px;
+const DropCap = styled.span`
+  float: left;
+  font-family: "Gabriella";
+  font-size: ${(props) => props.fontSize * 2.5}rem;
+  color: var(--color-pink);
+
+  line-height: 1;
+  margin-top: 0.1em;
+  padding-right: 0.05em;
+  /* margin: 0.1em 0 0.1em 0em; */
+  /* padding: 0.1em 0.1em 0.1em 0; */
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+  }
+
+  &:before {
+    margin-top: -0.2em;
+  }
+  &:after {
+    margin-bottom: -0.15em;
   }
 `;
