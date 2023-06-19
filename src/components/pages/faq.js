@@ -21,7 +21,7 @@ export default function Faq () {
     const language = useIntl();
 
     let faqs = FAQS.de
-    if (language.locale === 'en' && 'en' in FAQ)
+    if (language.locale === 'en' && 'en' in FAQS)
         faqs = FAQS.en;
 
     return (
