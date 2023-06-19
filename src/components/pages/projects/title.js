@@ -25,6 +25,7 @@ const DropCap = styled.span`
 
   line-height: 1;
   margin-top: 0.1em;
+  margin-left: -0.05em;
   padding-right: 0.05em;
 
   &:before,

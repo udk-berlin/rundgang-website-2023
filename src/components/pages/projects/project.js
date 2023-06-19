@@ -1,6 +1,5 @@
 import React from "react";
 import useSWR from "swr";
-
 import styled from "styled-components";
 
 import ProjectAuthors from "@/components/pages/projects/authors";
@@ -10,9 +9,9 @@ import ProjectImage, {
   ProjectAdditionalMedia,
 } from "@/components/pages/projects/image";
 import ProjectInfoGrid from "@/components/pages/projects/info_grid";
-
-import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
+import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/text";
+import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
 
 export default function Project({ project }) {
   const { data, error, isLoading } = useSWR(
@@ -31,6 +30,7 @@ export default function Project({ project }) {
         <InfoContainer>
           <ProjectTitle project={project} />
           <ProjectAuthors project={project} fontSize={1} />
+          <InfoGrid project={project} />
           <ProjectText project={project} data={data} />
         </InfoContainer>
       </Container>

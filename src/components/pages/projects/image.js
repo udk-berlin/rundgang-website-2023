@@ -56,7 +56,7 @@ export function ProjectAdditionalMedia({ project, data }) {
 
       switch (item.type) {
         case "video":
-          media.push(<iframe className={styles.video} ref={iFrameRef} src={getEmbeddedLink(item.content)} />);
+          media.push(<iframe className={styles.video} ref={iFrameRef} src={getEmbeddedLink(item.content)} frameBorder="0" />);
           break;
         case "image":
           media.push(
@@ -64,7 +64,6 @@ export function ProjectAdditionalMedia({ project, data }) {
               className={styles.image}
               src={item.content}
               alt={project.name}
-              loading="lazy"
             />
           );
           break;
