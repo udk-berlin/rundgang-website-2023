@@ -1,28 +1,24 @@
 import React from "react";
-import useSWR from "swr";
 import styled from "styled-components";
 
-import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
+import getLocalizedData from "@/components/localization/data";
 
-export function ProjectText({ project }) {
-  const { data, error, isLoading } = useSWR(
-    getRenderJsonUrl(project.id),
-    fetcher
-  );
-  let texts = [];
+export function ProjectText({ project, data }) {
+  let description = getLocalizedData(project.description)
+  let texts = []
+
   if (data) {
-    let element = data.languages.EN.content;
-    for (const key in element) {
-      switch (element[key].type) {
-        case "text":
-          texts.push(element[key].formatted_content);
-          break;
+    let content = getLocalizedData(data.languages).content
+    Object.values(content).forEach(item => {
+      if(item.type === 'text') {
+        texts.push(item.formatted_content);
       }
-    }
+    })
   }
+
   return (
     <ProjectTextContainer>
-      {project.description.default}
+      {description}
       {texts.map((text) => (
         <div dangerouslySetInnerHTML={{ __html: text }}></div>
       ))}

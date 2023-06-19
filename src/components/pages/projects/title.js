@@ -19,16 +19,13 @@ const ProjectTitleContainer = styled.div`
 
 const DropCap = styled.span`
   float: left;
-  font-family: "Gabriella";
+  font-family: Gabriella;
   font-size: ${(props) => props.fontSize * 2.5}rem;
-  /* font-size: ${(props) => props.fontSize * 1.3}rem; */
   color: var(--color-pink);
 
   line-height: 1;
   margin-top: 0.1em;
   padding-right: 0.05em;
-  /* margin: 0.1em 0 0.1em 0em; */
-  /* padding: 0.1em 0.1em 0.1em 0; */
 
   &:before,
   &:after {

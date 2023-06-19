@@ -12,25 +12,26 @@ import ProjectImage, {
 import ProjectInfoGrid from "@/components/pages/projects/info_grid";
 
 import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
-import InfoGrid, {
-  InfoGridContainer,
-} from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/text";
 
 export default function Project({ project }) {
+  const { data, error, isLoading } = useSWR(
+    getRenderJsonUrl(project.id),
+    fetcher
+  );
+
   return (
     <Layout>
       <Container>
         <ImageContainer>
           <ProjectInfoGrid project={project} />
-          <ProjectImage project={project} full_size={1} />
-          <ProjectAdditionalMedia project={project} />
+          <ProjectImage project={project} fullSize={true} />
+          <ProjectAdditionalMedia project={project} data={data} />
         </ImageContainer>
         <InfoContainer>
           <ProjectTitle project={project} />
           <ProjectAuthors project={project} fontSize={1} />
-          {/* <InfoGrid project={project} /> */}
-          <ProjectText project={project} />
+          <ProjectText project={project} data={data} />
         </InfoContainer>
       </Container>
     </Layout>
