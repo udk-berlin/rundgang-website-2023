@@ -17,6 +17,13 @@
     font-size: 16px;
 }
 
+.floorPlanContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
 .groundPlanContainer {
     height: var(--locations-map-popup-ground-plan-height);
     min-height: var(--locations-map-popup-ground-plan-height);

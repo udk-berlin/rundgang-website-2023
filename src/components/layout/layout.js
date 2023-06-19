@@ -19,7 +19,7 @@ const Container = styled.div`
   grid-template-rows:
     calc(
       var(--layout-header-bar-container-height) +
-        var(--layout-header-search-container-height)
+        var(--layout-header-search-container-height) + 2 * var(--border-width)
     )
     1fr var(--layout-header-bar-container-height);
 `;

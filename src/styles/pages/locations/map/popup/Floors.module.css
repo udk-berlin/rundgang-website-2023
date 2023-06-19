@@ -16,7 +16,7 @@
     align-items: center;
     flex-grow: 1;
 
-    padding: 0.1rem;
+    padding: 0.1rem 0.3rem;
 
     border: calc(0.5 * var(--border-width)) solid var(--border-color);
 
@@ -26,21 +26,11 @@
 .floorContainer:hover {
     background-color: var(--color-pink);
     color: var(--color-white);
-
-    border-top: 0;
-    border-right: 0;
-    border-bottom: calc(var(--border-width)) solid var(--border-color);
-    border-left: calc(var(--border-width)) solid var(--border-color);
 }
 
 .floorSelected {
     background-color: var(--color-pink);
     color: var(--color-white);
-
-    border-top: 0;
-    border-right: 0;
-    border-bottom: calc(var(--border-width)) solid var(--border-color);
-    border-left: calc(var(--border-width)) solid var(--border-color);
 }
 
 .emptyFloorContainer {

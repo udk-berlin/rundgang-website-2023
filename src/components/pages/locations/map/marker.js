@@ -6,7 +6,7 @@ import GroundPlan from '@/components/pages/locations/map/ground_plan'
 
 export default function ResponsiveMarker ({ location }) {
   const isMobile = false
-  const useTextBox = true
+  const useTextBox = false
 
   let marker = <></>
 
