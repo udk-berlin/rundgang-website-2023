@@ -1,8 +1,8 @@
 import { FormattedMessage } from "react-intl";
 import styles from "@/styles/layout/Footer.module.css";
 
-import Slider from "@/components/layout/footer/slider";
 import { HoverLink } from "@/components/hover_link";
+import SliderContainer from "@/components/layout/footer/slider";
 
 import {
   ProgramLink,
@@ -11,11 +11,11 @@ import {
   FaqLink,
 } from "@/components/localization/links";
 
-export default function Footer() {
+export default function Footer({ updateState }) {
   return (
     <div className={styles.container}>
       <div>
-        <Slider />
+        <SliderContainer updateState={updateState} />
       </div>
       <Title />
       <InfoPages />

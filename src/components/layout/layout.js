@@ -1,14 +1,21 @@
+import { useState } from "react";
 import styled from "styled-components";
 
+import { SliderContext } from "@/components/contexts/slider_context";
 import Footer from "@/components/layout/footer/footer";
 import Header from "@/components/layout/header/header";
 
 export default function Layout({ children }) {
+  const [sliderValue, setSliderValue] = useState(0);
   return (
     <Container>
       <Header />
-      <Content>{children}</Content>
-      <Footer />
+      <Content>
+        <SliderContext.Provider value={sliderValue}>
+          {children}
+        </SliderContext.Provider>
+      </Content>
+      <Footer updateState={setSliderValue} />
     </Container>
   );
 }

@@ -1,9 +1,10 @@
+import { useContext } from "react";
 import styled from "styled-components";
 
+import { SliderContext } from "@/components/contexts/slider_context";
 import ProjectLink from "@/components/pages/projects/link";
 import ProjectTitle from "@/components/pages/projects/title";
 import ProjectAuthors from "@/components/pages/projects/authors";
-
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import ProjectImage from "@/components/pages/projects/image";
 
