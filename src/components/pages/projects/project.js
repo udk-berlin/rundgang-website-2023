@@ -1,6 +1,3 @@
-import React from "react";
-import useSWR from "swr";
-
 import styled from "styled-components";
 
 import ProjectAuthors from "@/components/pages/projects/authors";
@@ -11,10 +8,6 @@ import ProjectImage, {
 } from "@/components/pages/projects/image";
 import ProjectInfoGrid from "@/components/pages/projects/info_grid";
 
-import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
-import InfoGrid, {
-  InfoGridContainer,
-} from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/text";
 
 export default function Project({ project }) {
@@ -29,7 +22,7 @@ export default function Project({ project }) {
         <InfoContainer>
           <ProjectTitle project={project} />
           <ProjectAuthors project={project} fontSize={1} />
-          {/* <InfoGrid project={project} /> */}
+          <InfoGrid project={project} />
           <ProjectText project={project} />
         </InfoContainer>
       </Container>
