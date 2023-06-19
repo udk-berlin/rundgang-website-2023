@@ -7,7 +7,7 @@ import ProjectImage, {
   ProjectAdditionalMedia,
 } from "@/components/pages/projects/image";
 import ProjectInfoGrid from "@/components/pages/projects/info_grid";
-
+import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/text";
 
 export default function Project({ project }) {
