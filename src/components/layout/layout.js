@@ -1,14 +1,30 @@
 import styles from '@/styles/layout/Layout.module.css'
 
-import Footer from '@/components/layout/footer/footer'
-import Header from '@/components/layout/header/header'
+import Footer from "@/components/layout/footer/footer";
+import Header from "@/components/layout/header/header";
 
-export default function Layout ({ children }) {
+export default function Layout({ children }) {
   return (
-      <>
-        <Header />
-        <div className={styles.content}>{children}</div>
-        <Footer />
-      </>
-  )
+    <Container>
+      <Header />
+      <Content>{children}</Content>
+      <Footer />
+    </Container>
+  );
 }
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows:
+    calc(
+      var(--layout-header-bar-container-height) +
+        var(--layout-header-search-container-height)
+    )
+    1fr var(--layout-header-bar-container-height);
+`;
+
+const Content = styled.div`
+  border-left: var(--border-width) solid var(--border-color);
+  border-right: var(--border-width) solid var(--border-color);
+`;

@@ -1,0 +1,14 @@
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.placeholder {
+    width: 100%;
+    background: var(--color-transparent-pink);
+}
+
+.video {
+    width: 100%;
+}
