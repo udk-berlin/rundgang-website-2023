@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 2rem 1fr 2rem;
   border-top: var(--border-width) solid var(--border-color);
+  font-size: 0.8rem;
 
   height: var(--layout-header-search-container-height);
 }

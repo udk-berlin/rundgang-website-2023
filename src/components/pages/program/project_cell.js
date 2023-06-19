@@ -25,4 +25,8 @@ export default function ProjectCell({ project }) {
 const ProjectCellContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  & > * {
+    width: 100%;
+  }
 `;

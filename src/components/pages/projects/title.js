@@ -14,13 +14,14 @@ const ProjectTitleContainer = styled.div`
   font-size: ${(props) => props.fontSize}rem;
   text-transform: uppercase;
   line-height: 1;
-  display: block;
+  display: inline-block;
 `;
 
 const DropCap = styled.span`
   float: left;
   font-family: "Gabriella";
   font-size: ${(props) => props.fontSize * 2.5}rem;
+  /* font-size: ${(props) => props.fontSize * 1.3}rem; */
   color: var(--color-pink);
 
   line-height: 1;
