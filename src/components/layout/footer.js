@@ -1,8 +1,8 @@
 import { FormattedMessage } from "react-intl";
-import styles from "@/styles/layout/Footer.module.css";
+import styles from '@/styles/layout/Footer.module.css'
 
-import Slider from "@/components/layout/slider";
-import { HoverLink } from "@/components/hover_link";
+import Slider from '@/components/layout/slider'
+import { HoverLink } from '@/components/hover_link'
 import { LocalizedLink } from "@/components/localization/links";
 
 export default function Footer() {

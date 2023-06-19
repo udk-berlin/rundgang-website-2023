@@ -20,11 +20,6 @@ export async function getItemIds () {
   return [...new Set(ids)]
 }
 
-export async function getItem (id) {
-  const items = await getItems()
-  return items[id]
-}
-
 export async function getItems () {
   if (!itemsCached) {
     const locationTree = await getTree(ROOT_LOCATION_ID)

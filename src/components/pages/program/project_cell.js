@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import styled from "styled-components";
 
-import { SliderContext } from "@/components/contexts/slider_context";
 import ProjectLink from "@/components/pages/projects/link";
 import ProjectTitle from "@/components/pages/projects/title";
 import ProjectAuthors from "@/components/pages/projects/authors";

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useRef, useContext } from "react";
 import InfoGridDate from "@/components/pages/program/info_grid/date";
-import InfoGridTime from "@/components/pages/program/info_grid/time";
 import {
   InfoGridContext,
   InfoGridLocation,

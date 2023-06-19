@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import useSWR from "swr";
-import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
-import { useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+import styles from "@/styles/pages/projects/Image.module.css"
+import getLocalizedData from "@/components/localization/data";
 
 const IMAGE_PLACEHOLDER_SIZES = [
   { height: 400 },
@@ -18,77 +19,51 @@ const getRandomImagePlaceholderSize = () => {
   ];
 };
 
-export default function ProjectImage({ project, full_size = 0 }) {
-  let image = <></>;
+export default function ProjectImage({ project, fullSize = false }) {
+  let image;
 
   if ("thumbnail" in project && project.thumbnail) {
     image = (
       <img
-        src={full_size ? project.thumbnail_full_size : project.thumbnail}
+        className={styles.image}
+        src={fullSize ? project.thumbnail_full_size : project.thumbnail}
         alt={project.name}
         loading="lazy"
-        style={{ width: "100%", display: "block" }}
       />
     );
   } else {
-    const size = getRandomImagePlaceholderSize();
-    image = (
-      <div
-        style={{
-          width: "100%",
-          height: size.height,
-          minHeight: size.height,
-          background: "var(--color-transparent-pink)",
-        }}
-      />
-    );
+    image = <ProjectPlaceholderImage className={styles.placeholder} height={getRandomImagePlaceholderSize().height} />
   }
 
   return image;
 }
 
-export function ProjectAdditionalMedia({ project }) {
-  const { data, error, isLoading } = useSWR(
-    getRenderJsonUrl(project.id),
-    fetcher
-  );
-
-  const ref = useRef(null);
-  const [messageData, setMessageData] = useState(undefined);
-
-  const onResized = (data) => setMessageData(data);
-
-  const onMessage = (data) => {
-    setMessageData(data);
-    ref.current.sendMessage("Hello back from parent page");
-  };
-
+export function ProjectAdditionalMedia({ project, data }) {
+  const iFrameRef = useRef(null);
   let media = [];
 
+  useEffect(() => {
+    if (iFrameRef.current){
+      iFrameRef.current.style.height = Math.round(parseInt(getComputedStyle(iFrameRef.current).width) / 1.777777777) + 'px';
+    }
+  }, [data])
+
   if (data) {
-    let additionalContent = data.languages.EN.content;
-    // console.log(data.languages.EN.content);
+    let additionalContent = getLocalizedData(data.languages).content
+
     for (const key in additionalContent) {
       let item = additionalContent[key];
-      console.log(item);
 
       switch (item.type) {
         case "video":
-          media.push(
-            <iframe
-              src={getEmbededLink(item.content)}
-              width="100%"
-              height="700px"
-              frameBorder="0"
-            />
-          );
+          media.push(<iframe className={styles.video} ref={iFrameRef} src={getEmbeddedLink(item.content)} frameBorder="0" />);
           break;
         case "image":
           media.push(
             <img
+              className={styles.image}
               src={item.content}
               alt={project.name}
-              style={{ width: "100%", display: "block" }}
             />
           );
           break;
@@ -104,6 +79,11 @@ export function ProjectAdditionalMedia({ project }) {
   );
 }
 
+const ProjectPlaceholderImage = styled.div`
+  height: ${(props) => `${props.height}px`};
+  min-height: ${(props) => `${props.height}px`};
+`;
+
 const ProjectAdditionalMediaContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -112,8 +92,8 @@ const ProjectAdditionalMediaContainer = styled.div`
   padding-top: 0.5rem;
 `;
 
-function getEmbededLink(input) {
+function getEmbeddedLink(input) {
   let regex =
     /https:\/\/stream\.udk-berlin\.de\/w\/([A-Za-z]+([0-9]+[A-Za-z]+)+)/i;
-  return input.replace(regex, "http://stream.udk-berlin.de/videos/embed/$1");
+  return input.replace(regex, "https://stream.udk-berlin.de/videos/embed/$1");
 }
