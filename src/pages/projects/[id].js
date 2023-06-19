@@ -1,11 +1,12 @@
-import {getItemIds, getItem} from "@/utils/api/items";
+import {getItemIds, getItems} from "@/utils/api/items";
 import Page from "@/components/pages/page";
 import Project from "@/components/pages/projects/project";
 
 import {LOCALES} from "@/components/localization/provider";
 
 export async function getStaticProps ({ params }) {
-  const project = await getItem(params.id)
+  const projects = await getItems()
+  const project = projects[params.id]
   return { props: { project } }
 }
 
