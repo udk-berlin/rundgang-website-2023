@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import IframeResizer from "iframe-resizer-react";
 import useSWR from "swr";
 import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
-import MessageData from "@/utils/message-data";
 import { useRef, useState } from "react";
 
 const IMAGE_PLACEHOLDER_SIZES = [
@@ -72,25 +70,17 @@ export function ProjectAdditionalMedia({ project }) {
     // console.log(data.languages.EN.content);
     for (const key in additionalContent) {
       let item = additionalContent[key];
+      console.log(item);
 
       switch (item.type) {
         case "video":
           media.push(
-            <>
-              <IframeResizer
-                log
-                inPageLinks
-                forwardRef={ref}
-                onMessage={onMessage}
-                onResized={onResized}
-                src={getEmbededLink(item.content)}
-                width="100%"
-                scrolling="no"
-              />
-              <p id="callback">
-                <MessageData data={messageData} />
-              </p>
-            </>
+            <iframe
+              src={getEmbededLink(item.content)}
+              width="100%"
+              height="700px"
+              frameBorder="0"
+            />
           );
           break;
         case "image":
@@ -98,7 +88,6 @@ export function ProjectAdditionalMedia({ project }) {
             <img
               src={item.content}
               alt={project.name}
-              loading="lazy"
               style={{ width: "100%", display: "block" }}
             />
           );
