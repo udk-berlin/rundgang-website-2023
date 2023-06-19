@@ -1,4 +1,4 @@
-import {LocalizedLink} from "@/components/localization/links";
+import { LocalizedLink } from "@/components/localization/links";
 
 export default function ProjectLink ({ project, children }) {
   return (

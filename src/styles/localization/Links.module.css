@@ -1,4 +1,5 @@
 .link {
-    width: fit-content;
-    height: fit-content;
+  width: fit-content;
+  height: fit-content;
+  display: inline;
 }
