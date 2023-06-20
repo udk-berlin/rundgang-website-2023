@@ -2,29 +2,35 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import styles from '@/styles/pages/locations/map/popup/Rooms.module.css'
-import { useLocation, useLocationDispatch } from '@/providers/location'
+import { useFilter, useFilterDispatch } from '@/providers/filter'
+import { sortByName } from "@/components/pages/locations/map/popup/popup";
 
 export default function PopupFloors ({ location }) {
-  const locationFilter = useLocation()
+  const filter = useFilter()
 
-  if (!locationFilter.floor || locationFilter.location.id !== location.id) {
+  if (!filter.floor || filter.location.id !== location.id) {
     return <></>
   }
 
-  const rooms = getRooms(locationFilter.floor)
+  const rooms = getRooms(filter.floor)
 
   return (
-    <div className={styles.roomsContainer}>
-      <PopupRoomsAll />
-      {Object.values(rooms).map((room, index) => <PopupRoom key={index} room={room} />)}
-    </div>
+    <>
+      <div className={styles.roomsContainer}>
+        <PopupRoomsAll />
+        {
+          Object.values(rooms)
+            .sort(sortByName).map((room, index) => <PopupRoom key={index} room={room} />)
+        }
+      </div>
+    </>
   )
 }
 
 function PopupRoom ({ key, room }) {
-  const locationFilter = useLocation()
-  const dispatch = useLocationDispatch()
-  const roomSelected = ('room' in locationFilter && locationFilter.room.id === room.id)
+  const filter = useFilter()
+  const dispatch = useFilterDispatch()
+  const roomSelected = ('room' in filter && filter.room.id === room.id)
 
   const handleClick = (e) => {
     dispatch(
@@ -45,9 +51,9 @@ function PopupRoom ({ key, room }) {
 }
 
 function PopupRoomsAll () {
-  const locationFilter = useLocation()
-  const dispatch = useLocationDispatch()
-  const roomSelected = !('room' in locationFilter)
+  const filter = useFilter()
+  const dispatch = useFilterDispatch()
+  const roomSelected = !('room' in filter)
 
   const handleClick = (e) => {
     dispatch(
@@ -70,6 +76,7 @@ function getRooms (floor) {
 
   Object.values(floor.children).forEach(child => {
     if (child.template === 'location-room') {
+      console.log(child.children)
       rooms[child.id] = child
     }
   })

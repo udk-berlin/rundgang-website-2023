@@ -1,32 +1,32 @@
 import { createContext, useContext, useReducer } from 'react'
 
-const LocationContext = createContext(null)
-const LocationDispatchContext = createContext(null)
+const FilterContext = createContext(null)
+const FilterDispatchContext = createContext(null)
 
-export function LocationProvider ({ children }) {
-  const [location, dispatch] = useReducer(
-    locationReducer,
-    initialLocation
+export function FilterProvider ({ children }) {
+  const [filter, dispatch] = useReducer(
+    filterReducer,
+    initialFilter
   )
 
   return (
-    <LocationContext.Provider value={location}>
-      <LocationDispatchContext.Provider value={dispatch}>
+    <FilterContext.Provider value={filter}>
+      <FilterDispatchContext.Provider value={dispatch}>
         {children}
-      </LocationDispatchContext.Provider>
-    </LocationContext.Provider>
+      </FilterDispatchContext.Provider>
+    </FilterContext.Provider>
   )
 }
 
-export function useLocation () {
-  return useContext(LocationContext)
+export function useFilter () {
+  return useContext(FilterContext)
 }
 
-export function useLocationDispatch () {
-  return useContext(LocationDispatchContext)
+export function useFilterDispatch () {
+  return useContext(FilterDispatchContext)
 }
 
-function locationReducer (location, action) {
+function filterReducer (filter, action) {
   switch (action.type) {
     case 'select-location': {
       return {
@@ -66,4 +66,4 @@ function locationReducer (location, action) {
   }
 }
 
-const initialLocation = {}
+const initialFilter = {}

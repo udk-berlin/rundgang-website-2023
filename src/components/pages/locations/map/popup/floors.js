@@ -2,12 +2,13 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import styles from '@/styles/pages/locations/map/popup/Floors.module.css'
-import { useLocation, useLocationDispatch } from '@/providers/location'
+import { useFilter, useFilterDispatch } from '@/providers/filter'
+import { sortByName } from "@/components/pages/locations/map/popup/popup";
 
 export default function PopupFloors ({ location }) {
-  const locationFilter = useLocation()
+  const filter = useFilter()
 
-  if (!locationFilter.location || locationFilter.location.id !== location.id) {
+  if (!filter.location || filter.location.id !== location.id) {
     return <></>
   }
 
@@ -16,16 +17,16 @@ export default function PopupFloors ({ location }) {
   return (
     <div className={styles.floorsContainer}>
       <PopupFloorAll />
-      {Object.values(floors).map((floor, index) => <PopupFloor key={index} floor={floor} />)}
+      {Object.values(floors).sort(sortByName).map((floor, index) => <PopupFloor key={index} floor={floor} />)}
       <PopupFloorEmpty />
     </div>
   )
 }
 
 function PopupFloor ({ key, floor }) {
-  const locationFilter = useLocation()
-  const dispatch = useLocationDispatch()
-  const floorSelected = ('floor' in locationFilter && locationFilter.floor.id === floor.id)
+  const filter = useFilter()
+  const dispatch = useFilterDispatch()
+  const floorSelected = ('floor' in filter && filter.floor.id === floor.id)
 
   const handleClick = (e) => {
     dispatch(
@@ -45,9 +46,9 @@ function PopupFloor ({ key, floor }) {
 }
 
 function PopupFloorAll () {
-  const locationFilter = useLocation()
-  const dispatch = useLocationDispatch()
-  const floorSelected = !('floor' in locationFilter)
+  const filter = useFilter()
+  const dispatch = useFilterDispatch()
+  const floorSelected = !('floor' in filter)
 
   const handleClick = (e) => {
     dispatch(

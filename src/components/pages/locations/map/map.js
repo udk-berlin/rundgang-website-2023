@@ -4,7 +4,7 @@ import maplibregl from 'maplibre-gl'
 
 import styles from '@/styles/pages/locations/map/Map.module.css'
 
-import { useLocationDispatch } from '@/providers/location'
+import { useFilterDispatch } from '@/providers/filter'
 import ResponsiveMarker from '@/components/pages/locations/map/marker'
 import Popup from '@/components/pages/locations/map/popup/popup'
 
@@ -23,7 +23,7 @@ const MAP_CONFIGURATION = {
 export default function Map ({ locations }) {
   const mapContainerRef = useRef(null)
   const mapRef = useRef(null)
-  const dispatch = useLocationDispatch()
+  const dispatch = useFilterDispatch()
 
   useEffect(() => {
     mapRef.current = new maplibregl.Map(

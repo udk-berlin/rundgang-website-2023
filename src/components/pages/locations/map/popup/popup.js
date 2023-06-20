@@ -8,73 +8,77 @@ import GroundPlan from '@/components/pages/locations/map/ground_plan'
 import PopupFloors from '@/components/pages/locations/map/popup/floors'
 import PopupRooms from '@/components/pages/locations/map/popup/rooms'
 
-import { useLocation, useLocationDispatch } from '@/providers/location'
+import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { getUrl, fetcher } from "@/utils/api/api";
-
 
 export default function Popup ({ location }) {
   const isMobile = false
   let groundPlan
-  const locationFilter = useLocation()
+  const filter = useFilter()
+  const dispatch = useFilterDispatch()
 
   if (isMobile) {
     groundPlan = <GroundPlan id={location.id} type='popup' alt={location.name} useSimpleGroundPlan={true} />
   } else {
-    groundPlan = <GroundPlan id={location.id} type='popup' alt={location.name} id={location.id} />
+    groundPlan = <GroundPlan id={location.id} type='popup' alt={location.name} />
   }
 
   let floorData;
-  if ('floor' in locationFilter) {
+  if ('floor' in filter) {
     const { data, error, isLoading } = useSWR(
-      getUrl(locationFilter.floor.id),
+      getUrl(filter.floor.id),
       fetcher
     );
 
     floorData = data;
   }
 
-  let roomData;
-  if ('room' in locationFilter) {
-    const { data, error, isLoading } = useSWR(
-      getUrl(locationFilter.room.id),
-      fetcher
-    );
-
-    roomData = data;
-  }
-
   const handleSelectRoom = (e) => {
-    // let roomRect = document.querySelectorAll(
-    //   `[data-id="udk-berlin|4008|2|R-202"]`,
-    // )[0];
-    //
-    // console.log(roomRect)
-    // roomRect.style.fill = "#E2FF5D";
-    // if (roomRect) {
-      // let newname = raumnamen.find(n => n.id == data.id)?.newname;
-      // let showname = roomname(data, newname);
-      // if (showname) {
-      //   roomRect.style.fill = "#E2FF5D";
-      //   uiStore.setSelectedRoom({ ...data, showname });
-      //   uiStore.setFloorLevel(uiStore.floorLevel);
-      // }
-    // }
+    Object.values(filter.floor.children).forEach(child => {
+      if (child.template === 'location-room') {
+        let rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
+        rooms.forEach(room => room.style.fill = '')
+      }
+    })
+    const roomId = e.target.getAttribute('data-production')
+
+    if (roomId) {
+      e.target.style.fill = 'var(--color-pink)';
+      dispatch(
+        {
+          type: 'select-room',
+          room: filter.floor.children[roomId]
+        })
+    }
   }
 
   let floorPlan;
   if (floorData) {
-    floorPlan =  <ReactSVG className={styles.selectedRoom} src={floorData.thumbnail_full_size} onClick={e => handleSelectRoom(e)} />
+    floorPlan =  (
+      <div className={styles.floorPlanContainer} onClick={handleSelectRoom}>
+        <ReactSVG src={floorData.thumbnail_full_size}/>
+      </div>
+    )
+    Object.values(filter.floor.children).forEach(child => {
+      if (child.template === 'location-room') {
+        let rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
+        rooms.forEach(room => room.style.fill = '')
+      }
+    })
+
+    if ('room' in filter) {
+      let rooms = document.querySelectorAll(`[data-production="${locationFilter.room.id}"]`);
+      rooms.forEach(room => room.style.fill = 'var(--color-pink)')
+    }
   }
 
   return (
     <>
       <div id={`popup-${location.id}`} className={styles.container}>
-        <div className={styles.floorPlanContainer}>
-          {floorPlan}
-        </div>
         <div className={styles.groundPlanContainer}>
           <div>{groundPlan}</div>
         </div>
+        {floorPlan}
         <PopupInfos>
           <PopupFloors location={location} />
           <PopupRooms location={location} />
@@ -88,4 +92,14 @@ function PopupInfos ({ children }) {
   return (
     <div className={styles.infosContainer}>{children}</div>
   )
+}
+
+export function sortByName(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
 }
