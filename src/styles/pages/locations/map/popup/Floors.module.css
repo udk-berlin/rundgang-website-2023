@@ -1,15 +1,3 @@
-.floorsContainer {
-    display: flex;
-    flex-wrap: wrap;
-
-    width: var(--locations-map-popup-ground-plan-height);
-    min-width: var(--locations-map-popup-ground-plan-height);
-    max-width: var(--locations-map-popup-ground-plan-height);
-
-    border: calc(0.5 * var(--border-width)) solid var(--border-color);
-    background: var(--color-white);
-}
-
 .floorContainer {
     display: flex;
     justify-content: center;

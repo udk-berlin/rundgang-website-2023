@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import styled from 'styled-components'
 
 import styles from '@/styles/pages/locations/map/popup/Floors.module.css'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
@@ -15,13 +16,25 @@ export default function PopupFloors ({ location }) {
   const floors = getFloors(location)
 
   return (
-    <div className={styles.floorsContainer}>
+    <PopupFloorsContainer>
       <PopupFloorAll />
       {Object.values(floors).sort(sortByName).map((floor, index) => <PopupFloor key={index} floor={floor} />)}
       <PopupFloorEmpty />
-    </div>
+    </PopupFloorsContainer>
   )
 }
+
+const PopupFloorsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+
+  border: calc(0.5 * var(--border-width)) solid var(--border-color);
+  background: var(--color-white);
+`
 
 function PopupFloor ({ key, floor }) {
   const filter = useFilter()

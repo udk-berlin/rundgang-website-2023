@@ -15,9 +15,9 @@ const ProjectAuthorsContainer = styled.span`
   text-transform: uppercase;
   padding: 0.5rem 0 1rem 0;
 
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  //display: flex;
+  //flex-wrap: nowrap;
+  //overflow-x: auto;
 
   -ms-overflow-style: none;
   scrollbar-width: none;

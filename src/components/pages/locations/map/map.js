@@ -1,12 +1,10 @@
 import React, { useRef, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import maplibregl from 'maplibre-gl'
-
-import styles from '@/styles/pages/locations/map/Map.module.css'
+import styled from 'styled-components'
 
 import { useFilterDispatch } from '@/providers/filter'
 import ResponsiveMarker from '@/components/pages/locations/map/marker'
-import Popup from '@/components/pages/locations/map/popup/popup'
 
 const MAP_CONFIGURATION = {
   style: 'https://api.maptiler.com/maps/d450193f-53a4-40fc-8f3f-97a0321d7139/style.json?key=Zn4TzWj4KtRhJ9I5TDxf',
@@ -20,7 +18,7 @@ const MAP_CONFIGURATION = {
   }
 }
 
-export default function Map ({ locations }) {
+export default function LocationsMap ({ locations }) {
   const mapContainerRef = useRef(null)
   const mapRef = useRef(null)
   const dispatch = useFilterDispatch()
@@ -54,15 +52,8 @@ export default function Map ({ locations }) {
       })
 
       mapRef.current.on('click', e => {
-        Object.values(locations).forEach(location => {
-          const popup = document.getElementById(`popup-${location.id}`)
-          popup.style.display = 'none'
-        })
         if (e.originalEvent.target.id) {
           const id = e.originalEvent.target.id.replaceAll('marker-', '')
-          const popup = document.getElementById(`popup-${id}`)
-          popup.style.display = 'inline'
-
           dispatch(
             {
               type: 'select-location',
@@ -78,10 +69,15 @@ export default function Map ({ locations }) {
     })
   })
 
-  return (
-    <>
-      <div ref={mapContainerRef} className={styles.container}/>
-      <div>{Object.values(locations).map(location => <Popup location={location} />)}</div>
-    </>
-  )
+  return <MapContainer ref={mapContainerRef}/>
 }
+
+const MapContainer = styled.div`
+  height: var(--locations-map-height);
+  min-height: var(--locations-map-height);
+  width: 100%;
+  min-width: 100%;
+
+  overflow: hidden;
+`
+

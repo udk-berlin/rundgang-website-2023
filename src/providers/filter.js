@@ -3,10 +3,10 @@ import { createContext, useContext, useReducer } from 'react'
 const FilterContext = createContext(null)
 const FilterDispatchContext = createContext(null)
 
-export function FilterProvider ({ children }) {
+export function FilterProvider ({ projects, children }) {
   const [filter, dispatch] = useReducer(
     filterReducer,
-    initialFilter
+    {projects: projects, filteredProjects: projects}
   )
 
   return (
@@ -26,38 +26,75 @@ export function useFilterDispatch () {
   return useContext(FilterDispatchContext)
 }
 
-function filterReducer (filter, action) {
+function filterReducer (state, action) {
   switch (action.type) {
     case 'select-location': {
+      const filteredProjects = {}
+      Object.values(state.projects).forEach(project => {
+        if (
+          ('location-building' in project && project['location-building'].id === action.location.id) ||
+          ('external-location' in project && project['external-location'].id === action.location.id)
+        ) {
+          filteredProjects[project.id] = project
+        }
+      })
+
       return {
+        projects: state.projects,
+        filteredProjects: filteredProjects,
         location: action.location
       }
     }
     case 'all-locations': {
-      return {}
+      return {
+        projects: state.projects,
+        filteredProjects: state.projects,
+      }
     }
     case 'select-floor': {
+      const filteredProjects = {}
+      Object.values(state.projects).forEach(project => {
+        if ('location-floor' in project && project['location-floor'].id === action.floor.id) {
+          filteredProjects[project.id] = project
+        }
+      })
+
       return {
-        location: location.location,
+        projects: state.projects,
+        filteredProjects: filteredProjects,
+        location: state.location,
         floor: action.floor
       }
     }
     case 'all-floors': {
       return {
-        location: location.location
+        projects: state.projects,
+        filteredProjects: state.projects,
+        location: state.location
       }
     }
     case 'select-room': {
+      const filteredProjects = {}
+      Object.values(state.projects).forEach(project => {
+        if ('location-room' in project && project['location-room'].id === action.room.id) {
+          filteredProjects[project.id] = project
+        }
+      })
+
       return {
-        location: location.location,
-        floor: location.floor,
+        projects: state.projects,
+        filteredProjects: filteredProjects,
+        location: state.location,
+        floor: state.floor,
         room: action.room
       }
     }
     case 'all-rooms': {
       return {
-        location: location.location,
-        floor: location.floor
+        projects: state.projects,
+        filteredProjects: state.projects,
+        location: state.location,
+        floor: state.floor
       }
     }
     default: {
@@ -65,5 +102,3 @@ function filterReducer (filter, action) {
     }
   }
 }
-
-const initialFilter = {}

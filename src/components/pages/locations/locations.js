@@ -2,21 +2,17 @@ import React from 'react'
 
 import { FilterProvider } from '@/providers/filter'
 import Layout from '@/components/layout/layout'
-import Map from '@/components/pages/locations/map/map'
-import {Masonry} from "@mui/lab";
-import ProjectCell from "@/components/pages/program/project_cell";
+import LocationsMap from '@/components/pages/locations/map/map'
+import LocationsProgram from "@/components/pages/locations/program";
+import LocationsPopup from "@/components/pages/locations/popup";
 
 export default function Locations ({ locations, projects }) {
-  console.log(projects)
   return (
     <Layout>
-      <FilterProvider>
-        <div>
-          <Map locations={locations}/>
-          {/*<Masonry columns={1} spacing={3}>*/}
-          {/*  {Object.values(projects).map(project => (<ProjectCell project={project} />))}*/}
-          {/*</Masonry>*/}
-        </div>
+      <FilterProvider projects={projects}>
+        <LocationsMap locations={locations}/>
+        <LocationsPopup locations={locations} />
+        <LocationsProgram/>
       </FilterProvider>
     </Layout>
   )
