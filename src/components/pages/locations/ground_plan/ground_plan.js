@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from 'styled-components'
 
 import GroundPlan from '@/components/pages/locations/map/ground_plan'
@@ -23,12 +23,11 @@ export default function LocationsGroundPlan() {
 }
 
 const LocationsGroundPlanContainer = styled.div`
-  height: var(--locations-map-popup-ground-plan-height);
-  min-height: var(--locations-map-popup-ground-plan-height);
-  max-height: var(--locations-map-popup-ground-plan-height);
+  height: var(--locations-ground-plan-height);
+  min-height: var(--locations-ground-plan-height);
+  max-height: var(--locations-ground-plan-height);
 
-  background:  var(--color-transparent-black);
-
+  background:  var(--color-dark-gray);
   border-right: var(--border-width) solid var(--border-color);
 
   > div {

@@ -34,9 +34,9 @@ const LocationsGroundPlanContentContainer = styled.div`
 `
 
 const LocationsGroundPlanInfoContainer = styled.div`
-  height: var(--locations-map-popup-infos-height);
-  min-height: var(--locations-map-popup-infos-height);
-  max-height: var(--locations-map-popup-infos-height);
+  height: var(--locations-ground-plan-infos-height);
+  min-height: var(--locations-ground-plan-infos-height);
+  max-height: var(--locations-ground-plan-infos-height);
 
   overflow: hidden;
 `

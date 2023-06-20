@@ -64,9 +64,9 @@ export default function LocationsFloorPlan() {
 }
 
 const LocationsFloorPlanContainer = styled.div`
-  height: var(--locations-map-popup-ground-plan-height);
-  min-height: var(--locations-map-popup-ground-plan-height);
-  max-height: var(--locations-map-popup-ground-plan-height);
+  height: var(--locations-ground-plan-height);
+  min-height: var(--locations-ground-plan-height);
+  max-height: var(--locations-ground-plan-height);
 
   width: 100%;
   min-width: 100%;

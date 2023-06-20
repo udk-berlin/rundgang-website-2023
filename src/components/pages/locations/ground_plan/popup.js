@@ -28,8 +28,7 @@ const LocationsGroundPlanEmptyColumn = styled.div`
 
 const LocationsGroundPlanPopupContainer = styled.div`
   position: absolute;
-  top: var(--locations-map-popup-top);
-  left: 1px;
+  top: var(--locations-overlays-top);
   z-index: 3;
 
   display: grid;

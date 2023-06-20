@@ -28,7 +28,7 @@ const LocationsProgramEmptyColumn = styled.div`
 
 const LocationsProgramContainer = styled.div`
   position: absolute;
-  top: var(--locations-map-popup-top);
+  top: var(--locations-overlays-top);
   left: 0;
   z-index: 3;
 

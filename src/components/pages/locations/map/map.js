@@ -9,12 +9,12 @@ import ResponsiveMarker from '@/components/pages/locations/map/marker'
 const MAP_CONFIGURATION = {
   style: 'https://api.maptiler.com/maps/d450193f-53a4-40fc-8f3f-97a0321d7139/style.json?key=Zn4TzWj4KtRhJ9I5TDxf',
   bounds: {
-    longitude: { min: 13.2397254, max: 13.4871903 },
+    longitude: { min: 13.1397254, max: 13.5871903 },
     latitude: { min: 52.442394, max: 52.586099 }
   },
   center: {
-    longitude: 13.384236255348906,
-    latitude: 52.48817872121975
+    longitude: 13.369633,
+    latitude: 52.515813
   }
 }
 
@@ -30,7 +30,7 @@ export default function LocationsMap ({ locations }) {
         style: MAP_CONFIGURATION.style,
         maxBounds: [[MAP_CONFIGURATION.bounds.longitude.min, MAP_CONFIGURATION.bounds.latitude.min], [MAP_CONFIGURATION.bounds.longitude.max, MAP_CONFIGURATION.bounds.latitude.max]],
         center: [MAP_CONFIGURATION.center.longitude, MAP_CONFIGURATION.center.latitude],
-        zoom: 12,
+        zoom: 12.5,
         maxZoom: 18,
         minZoom: 10,
         pitchWithRotate: false,
