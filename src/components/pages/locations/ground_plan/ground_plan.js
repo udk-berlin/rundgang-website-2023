@@ -2,25 +2,27 @@ import React from "react";
 import styled from 'styled-components'
 
 import GroundPlan from '@/components/pages/locations/map/ground_plan'
+import { useFilter } from "@/providers/filter";
 
-export default function PopupGroundPlan({ location }) {
+export default function LocationsGroundPlan() {
+  const filter = useFilter()
   const isMobile = false
   let groundPlan
 
   if (isMobile) {
-    groundPlan = <GroundPlan id={location.id} type='popup' alt={location.name} useSimpleGroundPlan={true} />
+    groundPlan = <GroundPlan id={filter.location.id} type='popup' alt={filter.location.name} useSimpleGroundPlan={true} />
   } else {
-    groundPlan = <GroundPlan id={location.id} type='popup' alt={location.name} />
+    groundPlan = <GroundPlan id={filter.location.id} type='popup' alt={filter.location.name} />
   }
 
   return (
-    <GroundPlanContainer>
+    <LocationsGroundPlanContainer>
       <div>{groundPlan}</div>
-    </GroundPlanContainer>
+    </LocationsGroundPlanContainer>
   )
 }
 
-const GroundPlanContainer = styled.div`
+const LocationsGroundPlanContainer = styled.div`
   height: var(--locations-map-popup-ground-plan-height);
   min-height: var(--locations-map-popup-ground-plan-height);
   max-height: var(--locations-map-popup-ground-plan-height);

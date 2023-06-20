@@ -4,27 +4,22 @@ import styled from 'styled-components'
 
 import styles from '@/styles/pages/locations/map/popup/Floors.module.css'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
-import { sortByName } from "@/components/pages/locations/map/popup/popup";
+import { sortByName } from "@/components/pages/locations/ground_plan/content";
 
-export default function PopupFloors ({ location }) {
+export default function LocationsGroundPlanFloors () {
   const filter = useFilter()
-
-  if (!filter.location || filter.location.id !== location.id) {
-    return <></>
-  }
-
-  const floors = getFloors(location)
+  const floors = getFloors(filter.location)
 
   return (
-    <PopupFloorsContainer>
-      <PopupFloorAll />
+    <LocationsGroundPlanFloorsContainer>
+      <LocationsGroundPlanFloorAll />
       {Object.values(floors).sort(sortByName).map((floor, index) => <PopupFloor key={index} floor={floor} />)}
-      <PopupFloorEmpty />
-    </PopupFloorsContainer>
+      <LocationsGroundPlanFloorEmpty />
+    </LocationsGroundPlanFloorsContainer>
   )
 }
 
-const PopupFloorsContainer = styled.div`
+const LocationsGroundPlanFloorsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 
@@ -58,7 +53,7 @@ function PopupFloor ({ key, floor }) {
   )
 }
 
-function PopupFloorAll () {
+function LocationsGroundPlanFloorAll () {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
   const floorSelected = !('floor' in filter)
@@ -79,7 +74,7 @@ function PopupFloorAll () {
   )
 }
 
-function PopupFloorEmpty () {
+function LocationsGroundPlanFloorEmpty () {
   return (
     <div key={-2} className={styles.emptyFloorContainer}>
       <div></div>

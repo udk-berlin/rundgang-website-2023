@@ -2,9 +2,9 @@ import React from "react";
 import styled from 'styled-components'
 
 import { useFilter } from "@/providers/filter";
-import Popup from "@/components/pages/locations/map/popup/popup";
+import LocationsGroundPlanContent from "@/components/pages/locations/ground_plan/content";
 
-export default function LocationsPopup({ locations }) {
+export default function LocationsGroundPlanPopup() {
   const filter = useFilter()
 
   if (!('location' in filter)) {
@@ -12,21 +12,21 @@ export default function LocationsPopup({ locations }) {
   }
 
   return (
-    <LocationsPopupContainer>
-      <LocationsPopupContentColumn>
-        {Object.values(locations).map(location => <Popup location={location} />)}
-      </LocationsPopupContentColumn>
-      <LocationsPopupEmptyColumn />
-      <LocationsPopupEmptyColumn />
-    </LocationsPopupContainer>
+    <LocationsGroundPlanPopupContainer>
+      <LocationsGroundPlanContentColumn>
+        <LocationsGroundPlanContent />
+      </LocationsGroundPlanContentColumn>
+      <LocationsGroundPlanEmptyColumn />
+      <LocationsGroundPlanEmptyColumn />
+    </LocationsGroundPlanPopupContainer>
   )
 }
 
-const LocationsPopupEmptyColumn = styled.div`
+const LocationsGroundPlanEmptyColumn = styled.div`
   pointer-events: none;
 `
 
-const LocationsPopupContainer = styled.div`
+const LocationsGroundPlanPopupContainer = styled.div`
   position: absolute;
   top: var(--locations-map-popup-top);
   left: 1px;
@@ -49,7 +49,7 @@ const LocationsPopupContainer = styled.div`
   font-size: 16px;
 `
 
-const LocationsPopupContentColumn = styled.div`
+const LocationsGroundPlanContentColumn = styled.div`
   width: 100%;
   min-width: 100%;
   max-width: 100%;

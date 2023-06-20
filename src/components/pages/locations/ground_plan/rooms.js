@@ -3,12 +3,12 @@ import { FormattedMessage } from 'react-intl'
 
 import styles from '@/styles/pages/locations/map/popup/Rooms.module.css'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
-import { sortByName } from "@/components/pages/locations/map/popup/popup";
+import { sortByName } from "@/components/pages/locations/ground_plan/content";
 
-export default function PopupFloors ({ location }) {
+export default function LocationsGroundPlanRooms () {
   const filter = useFilter()
 
-  if (!filter.floor || filter.location.id !== location.id) {
+  if (!filter.floor) {
     return <></>
   }
 
@@ -17,17 +17,17 @@ export default function PopupFloors ({ location }) {
   return (
     <>
       <div className={styles.roomsContainer}>
-        <PopupRoomsAll />
+        <LocationsGroundPlanRoomsAll />
         {
           Object.values(rooms)
-            .sort(sortByName).map((room, index) => <PopupRoom key={index} room={room} />)
+            .sort(sortByName).map((room, index) => <LocationsGroundPlanRoom key={index} room={room} />)
         }
       </div>
     </>
   )
 }
 
-function PopupRoom ({ key, room }) {
+function LocationsGroundPlanRoom ({ key, room }) {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
   const roomSelected = ('room' in filter && filter.room.id === room.id)
@@ -50,7 +50,7 @@ function PopupRoom ({ key, room }) {
   )
 }
 
-function PopupRoomsAll () {
+function LocationsGroundPlanRoomsAll () {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
   const roomSelected = !('room' in filter)

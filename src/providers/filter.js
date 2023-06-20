@@ -33,7 +33,7 @@ function filterReducer (state, action) {
       Object.values(state.projects).forEach(project => {
         if (
           ('location-building' in project && project['location-building'].id === action.location.id) ||
-          ('external-location' in project && project['external-location'].id === action.location.id)
+          ('location-external' in project && project['location-external'].id === action.location.id)
         ) {
           filteredProjects[project.id] = project
         }
@@ -54,7 +54,7 @@ function filterReducer (state, action) {
     case 'select-floor': {
       const filteredProjects = {}
       Object.values(state.projects).forEach(project => {
-        if ('location-floor' in project && project['location-floor'].id === action.floor.id) {
+        if ('location-level' in project && project['location-level'].id === action.floor.id) {
           filteredProjects[project.id] = project
         }
       })
@@ -67,9 +67,19 @@ function filterReducer (state, action) {
       }
     }
     case 'all-floors': {
+      const filteredProjects = {}
+      Object.values(state.projects).forEach(project => {
+        if (
+          ('location-building' in project && project['location-building'].id === state.location.id) ||
+          ('location-external' in project && project['location-external'].id === state.location.id)
+        ) {
+          filteredProjects[project.id] = project
+        }
+      })
+
       return {
         projects: state.projects,
-        filteredProjects: state.projects,
+        filteredProjects: filteredProjects,
         location: state.location
       }
     }
@@ -90,9 +100,16 @@ function filterReducer (state, action) {
       }
     }
     case 'all-rooms': {
+      const filteredProjects = {}
+      Object.values(state.projects).forEach(project => {
+        if ('location-level' in project && project['location-level'].id === state.floor.id) {
+          filteredProjects[project.id] = project
+        }
+      })
+
       return {
         projects: state.projects,
-        filteredProjects: state.projects,
+        filteredProjects: filteredProjects,
         location: state.location,
         floor: state.floor
       }
