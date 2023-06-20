@@ -1,5 +1,6 @@
 import React from "react";
 import useSWR from "swr";
+import { ReactSVG } from 'react-svg'
 
 import styles from '@/styles/pages/locations/map/popup/Popup.module.css'
 
@@ -32,17 +33,45 @@ export default function Popup ({ location }) {
     floorData = data;
   }
 
-  let floorPlan = 'test';
+  let roomData;
+  if ('room' in locationFilter) {
+    const { data, error, isLoading } = useSWR(
+      getUrl(locationFilter.room.id),
+      fetcher
+    );
+
+    roomData = data;
+  }
+
+  const handleSelectRoom = (e) => {
+    // let roomRect = document.querySelectorAll(
+    //   `[data-id="udk-berlin|4008|2|R-202"]`,
+    // )[0];
+    //
+    // console.log(roomRect)
+    // roomRect.style.fill = "#E2FF5D";
+    // if (roomRect) {
+      // let newname = raumnamen.find(n => n.id == data.id)?.newname;
+      // let showname = roomname(data, newname);
+      // if (showname) {
+      //   roomRect.style.fill = "#E2FF5D";
+      //   uiStore.setSelectedRoom({ ...data, showname });
+      //   uiStore.setFloorLevel(uiStore.floorLevel);
+      // }
+    // }
+  }
+
+  let floorPlan;
   if (floorData) {
-    floorPlan = <img src={floorData.thumbnail_full_size}/>
+    floorPlan =  <ReactSVG className={styles.selectedRoom} src={floorData.thumbnail_full_size} onClick={e => handleSelectRoom(e)} />
   }
 
   return (
     <>
-      <div className={styles.floorPlanContainer}>
-        <div>{floorPlan}</div>
-      </div>
       <div id={`popup-${location.id}`} className={styles.container}>
+        <div className={styles.floorPlanContainer}>
+          {floorPlan}
+        </div>
         <div className={styles.groundPlanContainer}>
           <div>{groundPlan}</div>
         </div>
