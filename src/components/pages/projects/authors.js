@@ -1,8 +1,12 @@
+import { SliderContext } from "@/components/contexts/slider_context";
+import Collapsible from "@/components/pages/program/info_grid/collapsible";
+import { useContext } from "react";
 import styled from "styled-components";
 
 export default function ProjectAuthors({ project, fontSize = 1 }) {
+  const slider = useContext(SliderContext);
   return (
-    <ProjectAuthorsContainer fontSize={fontSize}>
+    <ProjectAuthorsContainer fontSize={fontSize} slider={slider} idx={2}>
       {project.authors.map((author) => (
         <span>{author.name}</span>
       ))}
@@ -10,10 +14,15 @@ export default function ProjectAuthors({ project, fontSize = 1 }) {
   );
 }
 
-const ProjectAuthorsContainer = styled.span`
+const ProjectAuthorsContainer = styled.div`
   font-size: ${(props) => props.fontSize}rem;
   text-transform: uppercase;
-  padding: 0.5rem 0 1rem 0;
+  /* margin: ${(props) => (props.slider >= 2 ? "0.5rem 0 1rem 0" : "0px")} */
+  max-height: ${(props) => (props.slider >= 2 ? "500px" : "0px")};
+  overflow-y: hidden;
+  transition: all 0.3s;
+
+  padding-top: ${(props) => (props.slider >= 1 ? "0.25rem" : "0")};
 
   display: flex;
   flex-wrap: nowrap;

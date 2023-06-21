@@ -26,16 +26,21 @@ function Carousel({ children }) {
     if (carouselRef.current) {
       const { offsetWidth } = carouselRef.current;
       carouselRef.current.scrollTo({
-        left: offsetWidth * slider,
+        left: offsetWidth * (slider - 4),
         behavior: "smooth",
       });
     }
   };
 
   useEffect(() => {
-    const currentSlide = carouselRef.current.children[slider];
-    setCarouselHeight(currentSlide.clientHeight);
-    scrollToCurrentIndex();
+    if (slider >= 4) {
+      let child = slider - 4;
+      const currentSlide = carouselRef.current.children[child];
+      setCarouselHeight(currentSlide.clientHeight);
+      scrollToCurrentIndex();
+    } else {
+      setCarouselHeight("0px");
+    }
   }, [slider]);
 
   return (
@@ -66,10 +71,15 @@ const ScrollableDiv = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  & > :nth-last-child(1) {
+    /* background-color: red; */
+    margin-right: var(--info-border-width);
+  }
 `;
 
 const InfoCard = styled.div`
-  padding-bottom: 5px;
+  padding-bottom: 0.5rem;
   flex: 0 0 100%;
   height: 100%;
 `;
