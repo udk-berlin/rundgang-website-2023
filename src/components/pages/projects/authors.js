@@ -1,5 +1,4 @@
 import { SliderContext } from "@/components/contexts/slider_context";
-import Collapsible from "@/components/pages/program/info_grid/collapsible";
 import { useContext } from "react";
 import styled from "styled-components";
 

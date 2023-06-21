@@ -5,7 +5,6 @@ import InfoGridItemLink, {
 } from "@/components/pages/program/info_grid/item";
 import { useContext } from "react";
 import { SliderContext } from "@/components/contexts/slider_context";
-import Collapsible from "@/components/pages/program/info_grid/collapsible";
 
 const eventTypeToMarginLeftMapper = {
   Ausstellung: "73%",
