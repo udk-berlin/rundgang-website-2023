@@ -1,9 +1,3 @@
-.roomsContainer {
-    max-height: 100%;
-    overflow: scroll;
-    background: var(--color-white);
-}
-
 .roomContainer {
     display: flex;
     justify-content: center;

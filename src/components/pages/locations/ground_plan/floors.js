@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect} from 'react'
 import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
@@ -6,30 +6,23 @@ import styles from '@/styles/pages/locations/map/popup/Floors.module.css'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
 
-export default function LocationsGroundPlanFloors () {
+export default function LocationsGroundPlanFloors ({ setLocationsGroundPlanFloorsContainerHeight }) {
+  const ref = useRef();
   const filter = useFilter()
   const floors = getFloors(filter.location)
 
+  useEffect(() => {
+    setLocationsGroundPlanFloorsContainerHeight(ref.current.offsetHeight)
+  }, [])
+
   return (
-    <LocationsGroundPlanFloorsContainer>
+    <LocationsGroundPlanFloorsContainer ref={ref}>
       <LocationsGroundPlanFloorAll />
       {Object.values(floors).sort(sortByName).map((floor, index) => <PopupFloor key={index} floor={floor} />)}
       <LocationsGroundPlanFloorEmpty />
     </LocationsGroundPlanFloorsContainer>
   )
 }
-
-const LocationsGroundPlanFloorsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-
-  border: calc(0.5 * var(--border-width)) solid var(--border-color);
-  background: var(--color-white);
-`
 
 function PopupFloor ({ key, floor }) {
   const filter = useFilter()
@@ -81,6 +74,18 @@ function LocationsGroundPlanFloorEmpty () {
     </div>
   )
 }
+
+const LocationsGroundPlanFloorsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+
+  border: calc(0.5 * var(--border-width)) solid var(--border-color);
+  background: var(--color-white);
+`
 
 function getFloors (location) {
   const floors = {}

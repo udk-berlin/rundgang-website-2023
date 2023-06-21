@@ -1,30 +1,58 @@
 import React from 'react'
-
-import styles from '@/styles/pages/locations/map/Marker.module.css'
+import styled from 'styled-components'
 
 import GroundPlan from '@/components/pages/locations/map/ground_plan'
 
-export default function ResponsiveMarker ({ location }) {
-  const isMobile = false
-  const useTextBox = true
-
+export default function ResponsiveMarker ({ location, scale = null, useTextBox = false}) {
   let marker
 
   if (useTextBox) {
-    marker = <TextBoxMarker location={location} />
-  } else if (isMobile) {
-    marker = <GroundPlan id={location.id} type='marker' alt={location.name} useSimpleGroundPlan={true} />
+    marker = <TextBoxContainer id={`marker-${location.id}`} selected={false}>{location.name}</TextBoxContainer>
   } else {
-    marker = <GroundPlan id={location.id} type='marker' alt={location.name} />
+    marker = <GroundPlanMarker location={location} type='marker' scale={scale} />
   }
 
   return (
-    <div className={styles.container}>
+    <>
       {marker}
-    </div>
+    </>
   )
 }
 
-function TextBoxMarker ({ location }) {
-  return <div id={`marker-${location.id}`} className={styles.textBoxContainer}>{location.name}</div>
+function GroundPlanMarker ({ location, scale=null }) {
+  const isMobile = false
+  let marker
+
+  if (isMobile) {
+    marker = <GroundPlan id={location.id} type='marker' alt={location.name} useSimpleGroundPlan={true} />
+  } else {
+    marker = <GroundPlan id={location.id} type='marker' alt={location.name} scale={scale}/>
+  }
+
+  return (
+    <GroundPlanContainer id={`marker-${location.id}`} selected={false}>
+      {marker}
+    </GroundPlanContainer>
+  )
 }
+
+const GroundPlanContainer = styled.div`
+  cursor: pointer;
+  filter: ${(props) => props.selected ? 'drop-shadow(var(--color-green) 0px 0px 1px)' :  ''};
+
+  > img:hover {
+    filter: drop-shadow(var(--color-green) 0px 0px 1px);
+  }
+`
+
+const TextBoxContainer = styled.div`
+  cursor: pointer;
+  background: ${(props) => props.selected ? 'var(--color-pink)' :  'var(--color-dark-gray)'};
+  color: var(--color-white);
+  padding: var(--locations-map-marker-text-box-padding);
+
+  :hover {
+    background: var(--color-pink);
+    color: var(--color-white);
+  }
+`

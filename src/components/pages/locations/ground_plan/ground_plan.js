@@ -4,6 +4,25 @@ import styled from 'styled-components'
 import GroundPlan from '@/components/pages/locations/map/ground_plan'
 import { useFilter } from "@/providers/filter";
 
+const LOCATION_ID_TO_PADDING_MAPPER = {
+  '!uAswzmPHWtAVmjhIYx:content.udk-berlin.de': "2rem",
+  '!hjTkjNaIDkzxNWQZTR:content.udk-berlin.de': "2rem",
+  '!XaBVrlwEHUifKOmMPa:content.udk-berlin.de': "2rem",
+  '!aLyedVYnhynRwlhXUm:content.udk-berlin.de': "0",
+  '!amwvMUTwucDiRylpJQ:content.udk-berlin.de': "0",
+  '!LiVonEpyzckeIAyOIb:content.udk-berlin.de': "0",
+  '!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': "0",
+  '!FYglBKPJHZGUNIYcBt:content.udk-berlin.de': "0",
+  '!fwsuOeorRCZtTqwukc:content.udk-berlin.de': "2rem",
+  '!ozXLGbrpCVNrRScjQJ:content.udk-berlin.de': "0",
+  '!nOMmizEAkvzoapuqCK:content.udk-berlin.de': "0",
+  '!PkpdUouHNyPWmVReTC:content.udk-berlin.de': "2rem",
+  '!dYAxemkkcQCGTMQgTS:content.udk-berlin.de': "2rem",
+  '!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': "2rem",
+  '!bwyfqxrdHCbwOYLLgp:content.udk-berlin.de': "2rem",
+  '!jocCvZKGntdCmvmmUG:content.udk-berlin.de': "2rem",
+}
+
 export default function LocationsGroundPlan() {
   const filter = useFilter()
   const isMobile = false
@@ -16,7 +35,7 @@ export default function LocationsGroundPlan() {
   }
 
   return (
-    <LocationsGroundPlanContainer>
+    <LocationsGroundPlanContainer location={filter.location}>
       <div>{groundPlan}</div>
     </LocationsGroundPlanContainer>
   )
@@ -39,7 +58,7 @@ const LocationsGroundPlanContainer = styled.div`
     align-items: center;
 
     > img {
-      padding: 2rem;
+      padding: ${(props) => LOCATION_ID_TO_PADDING_MAPPER[props.location.id]};
       max-width: 100%;
       max-height: 100%;
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {ReactSVG} from "react-svg";
 
 const GROUND_PLAN_FOLDER_PATH = '/assets/svg/map/ground_plan/'
 const SIMPLE_GROUND_PLAN_FILENAME = 'simple.svg'
@@ -22,8 +23,8 @@ const ID_TO_GROUNDPLAN_FILENAME_MAPPER = {
 
 const TYPE_TO_SIZE_MAPPER = {
   marker: {
-    simple: 30,
-    default: 100
+    simple: 20,
+    default: 60
   },
   popup: {
     simple: 30,
@@ -43,9 +44,14 @@ function getGroundPlanSrc (id, type) {
   }
 }
 
-export default function GroundPlan ({ id, type, alt, useSimpleGroundPlan = false }) {
+export default function GroundPlan ({ id, type, alt, useSimpleGroundPlan = false, scale = null }) {
   if (!useSimpleGroundPlan && !(id in ID_TO_GROUNDPLAN_FILENAME_MAPPER)) {
     useSimpleGroundPlan = true
+  }
+
+  let size = TYPE_TO_SIZE_MAPPER[type][useSimpleGroundPlan ? 'simple' : 'default']
+  if (scale) {
+    size = size * 2 ** scale
   }
 
   return (
@@ -53,7 +59,7 @@ export default function GroundPlan ({ id, type, alt, useSimpleGroundPlan = false
       id={id}
       alt={alt}
       src={useSimpleGroundPlan ? getSimpleGroundPlanSrc(type) : getGroundPlanSrc(id, type)}
-      size={TYPE_TO_SIZE_MAPPER[type][useSimpleGroundPlan ? 'simple' : 'default']}
+      size={size}
       loading="lazy"
     />
   )

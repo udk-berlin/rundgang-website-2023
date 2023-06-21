@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from 'styled-components'
 
 import LocationsGroundPlan from "@/components/pages/locations/ground_plan/ground_plan";
@@ -6,12 +6,14 @@ import LocationsGroundPlanFloors from '@/components/pages/locations/ground_plan/
 import LocationsGroundPlanRooms from '@/components/pages/locations/ground_plan/rooms'
 
 export default function LocationsGroundPlanContent () {
+  const [locationsGroundPlanFloorsContainerHeight, setLocationsGroundPlanFloorsContainerHeight] = useState()
+
   return (
     <LocationsGroundPlanContentContainer>
       <LocationsGroundPlan />
       <LocationsGroundPlanInfoContainer>
-        <LocationsGroundPlanFloors />
-        <LocationsGroundPlanRooms />
+        <LocationsGroundPlanFloors setLocationsGroundPlanFloorsContainerHeight={setLocationsGroundPlanFloorsContainerHeight}/>
+        <LocationsGroundPlanRooms locationsGroundPlanFloorsContainerHeight={locationsGroundPlanFloorsContainerHeight}/>
       </LocationsGroundPlanInfoContainer>
     </LocationsGroundPlanContentContainer>
   )
