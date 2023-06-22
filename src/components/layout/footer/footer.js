@@ -59,7 +59,6 @@ const FooterContainer = styled.div`
   border: var(--border-width) solid var(--border-color);
   background: var(--color-white);
 
-
   > *:nth-child(1) {
     border-right: var(--border-width) solid var(--border-color);
   }
@@ -67,7 +66,7 @@ const FooterContainer = styled.div`
   > *:nth-child(3) {
     border-left: var(--border-width) solid var(--border-color);
   }
-`
+`;
 
 const TitleContainer = styled.div`
   width: 100%;
@@ -76,7 +75,7 @@ const TitleContainer = styled.div`
   > div {
     width: 100%;
     height: 100%;
-    
+
     > a {
       width: 100% !important;
       height: 100% !important;
@@ -89,7 +88,7 @@ const TitleContainer = styled.div`
       font-size: 1.2rem;
     }
   }
-`
+`;
 
 const InfoPagesContainer = styled.div`
   display: grid;
@@ -99,4 +98,8 @@ const InfoPagesContainer = styled.div`
 
   width: 100%;
   height: 100%;
-`
+
+  & > *:hover {
+    text-decoration: underline;
+  }
+`;
