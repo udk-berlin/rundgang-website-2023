@@ -54,7 +54,9 @@ const FILTERS = {
 export default function FilterOverlay({ active, hideModal }) {
   const language = useIntl();
   let filters = FILTERS.de;
-  if (language.locale === "en" && "en" in FILTERS) filter = FILTERS.en;
+  if (language.locale === "en" && "en" in FILTERS) {
+    filters = FILTERS.en;
+  }
 
   return (
     <FilterOverlayContainer active={active}>
@@ -81,7 +83,7 @@ const FilterOverlayContainer = styled.div`
     var(--layout-header-bar-container-height) +
       var(--layout-header-search-container-height) + 4px
   );
-  left: 1;
+  left: 1px;
   margin-right: var(--border-width);
   backdrop-filter: blur(8px);
 `;
