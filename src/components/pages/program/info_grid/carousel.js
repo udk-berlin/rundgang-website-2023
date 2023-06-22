@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import InfoGridDate from "@/components/pages/program/info_grid/date";
 import {
   InfoGridContext,
