@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Slider from "@mui/material/Slider";
 
 export default function SliderContainer({ updateState }) {
-  function changeState(event, value) {
+  function handleChangeCommitted(event, value) {
     updateState(value);
   }
   return (
@@ -11,7 +11,7 @@ export default function SliderContainer({ updateState }) {
       <CustomSlider
         defaultValue={0}
         valueLabelDisplay="off"
-        onChangeCommitted={changeState}
+        onChangeCommitted={handleChangeCommitted}
         marks
         min={0}
         max={6}
@@ -24,13 +24,14 @@ const CustomSlider = styled(Slider)`
   color: black;
 
   & > .MuiSlider-rail {
-    color: #646464;
+    color: var(--color-pink) !important;
   }
 
   & > .MuiSlider-thumb {
-    color: var(--color-white);
-    outline: var(--info-border-width) solid var(--info-border-color);
-    width: 15px;
-    height: 15px;
+    box-shadow: none !important;
+    color: var(--color-white) !important;
+    outline: var(--info-border-width) solid var(--info-border-color) !important;
+    width: 15px !important;
+    height: 15px !important;
   }
 `;

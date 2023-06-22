@@ -9,13 +9,13 @@ export default function Layout({ children }) {
   const [sliderValue, setSliderValue] = useState(0);
   return (
     <Container>
-      <Header />
-      <Content>
-        <SliderContext.Provider value={sliderValue}>
+      <SliderContext.Provider value={sliderValue}>
+        <Header />
+        <Content>
           {children}
-        </SliderContext.Provider>
-      </Content>
-      <Footer updateState={setSliderValue} />
+        </Content>
+        <Footer updateState={setSliderValue} />
+      </SliderContext.Provider>
     </Container>
   );
 }

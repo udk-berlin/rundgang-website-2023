@@ -5,7 +5,7 @@ import {
   InfoGridContext,
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
-import { SliderContext } from "@/contexts/slider";
+import { useSlider } from "@/contexts/slider";
 
 export default function InfoGridCarousel({ project }) {
   return (
@@ -18,7 +18,7 @@ export default function InfoGridCarousel({ project }) {
 }
 
 function Carousel({ children }) {
-  const slider = useContext(SliderContext);
+  const slider = useSlider();
   const [carouselHeight, setCarouselHeight] = useState(0);
   const carouselRef = useRef(null);
 

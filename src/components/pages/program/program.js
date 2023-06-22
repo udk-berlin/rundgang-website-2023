@@ -4,11 +4,14 @@ import Masonry from "react-responsive-masonry";
 import ProjectCell from "@/components/pages/program/project_cell";
 import Layout from "@/components/layout/layout";
 
+export const MASONRY_COLUMNS = 4
+export const MASONRY_GUTTER = "0.75rem"
+
 export default function Program({ projects }) {
   return (
     <Layout>
       <ProgramContainer>
-        <Masonry columnsCount={4} gutter={"0.75rem"}>
+        <Masonry columnsCount={MASONRY_COLUMNS} gutter={MASONRY_GUTTER}>
           {projects.map((project) => (
             <ProjectCell project={project} />
           ))}
@@ -19,5 +22,5 @@ export default function Program({ projects }) {
 }
 
 const ProgramContainer = styled.div`
-  padding: 1rem;
+  padding: var(--program-padding);
 `;
