@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { SliderProvider } from "@/providers/slider";
 import Footer from "@/components/layout/footer/footer";
 import Header from "@/components/layout/header/header";
 import { useState } from "react";
@@ -18,12 +19,14 @@ export default function Layout({ children }) {
 
   return (
     <Container>
-      <Header activateModal={activateModal} />
-      <Content>
-        <FilterOverlay active={FilterModal} hideModal={hideModal} />
-        {children}
-      </Content>
-      <Footer />
+      <SliderProvider>
+        <Header activateModal={activateModal} />
+        <Content>
+          <FilterOverlay active={FilterModal} hideModal={hideModal} />
+          {children}
+        </Content>
+        <Footer />
+      </SliderProvider>
     </Container>
   );
 }
@@ -34,12 +37,12 @@ const Container = styled.div`
   grid-template-rows:
     calc(
       var(--layout-header-bar-container-height) +
-        var(--layout-header-search-container-height) + 4px
+        var(--layout-header-search-container-height) + 2 * var(--border-width)
     )
     1fr var(--layout-header-bar-container-height);
   padding-top: calc(
-    var(--layout-header-bar-container-height) +
-      var(--layout-header-search-container-height)
+          var(--layout-header-bar-container-height) +
+          var(--layout-header-search-container-height)
   );
 `;
 

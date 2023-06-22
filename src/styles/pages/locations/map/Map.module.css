@@ -1,8 +1,0 @@
-.container {
-    height: var(--locations-map-height);
-    min-height: var(--locations-map-height);
-    width: 100vw;
-    min-width: 100vw;
-
-    overflow: hidden
-}

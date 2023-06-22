@@ -2,7 +2,7 @@ const API_ENDPOINT = 'https://api.rundgang.udk-berlin.de/api/v2'
 
 export async function fetcher (url) { return fetch(url).then((res) => res.json()) }
 
-function getUrl (query) {
+export function getUrl (query) {
   return `${API_ENDPOINT}/${query}`
 }
 

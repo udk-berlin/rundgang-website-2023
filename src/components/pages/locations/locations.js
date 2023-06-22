@@ -1,15 +1,21 @@
 import React from 'react'
 
-import { LocationProvider } from '@/providers/location'
+import { FilterProvider } from '@/providers/filter'
 import Layout from '@/components/layout/layout'
-import Map from '@/components/pages/locations/map/map'
+import LocationsMap from '@/components/pages/locations/map/map'
+import LocationsProgram from "@/components/pages/locations/program";
+import LocationsGroundPlanPopup from "@/components/pages/locations/ground_plan/popup";
+import LocationsFloorPlanPopup from "@/components/pages/locations/floor_plan/popup";
 
-export default function Locations ({ locations }) {
+export default function Locations ({ locations, projects }) {
   return (
     <Layout>
-      <LocationProvider>
-        <Map locations={locations}/>
-      </LocationProvider>
+      <FilterProvider projects={projects}>
+        <LocationsMap locations={locations}/>
+        <LocationsGroundPlanPopup />
+        <LocationsFloorPlanPopup />
+        <LocationsProgram />
+      </FilterProvider>
     </Layout>
   )
 }

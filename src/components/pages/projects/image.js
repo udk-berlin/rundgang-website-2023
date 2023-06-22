@@ -1,23 +1,8 @@
 import styled from "styled-components";
 import { useEffect, useRef } from "react";
 
-import styles from "@/styles/pages/projects/Image.module.css"
+import styles from "@/styles/pages/projects/Image.module.css";
 import getLocalizedData from "@/components/localization/data";
-
-const IMAGE_PLACEHOLDER_SIZES = [
-  { height: 400 },
-  { height: 500 },
-  { height: 600 },
-  { height: 700 },
-  { height: 800 },
-  { height: 900 },
-];
-
-const getRandomImagePlaceholderSize = () => {
-  return IMAGE_PLACEHOLDER_SIZES[
-    Math.floor(Math.random() * IMAGE_PLACEHOLDER_SIZES.length)
-  ];
-};
 
 export default function ProjectImage({ project, fullSize = false }) {
   let image;
@@ -32,7 +17,7 @@ export default function ProjectImage({ project, fullSize = false }) {
       />
     );
   } else {
-    image = <ProjectPlaceholderImage className={styles.placeholder} height={getRandomImagePlaceholderSize().height} />
+    image = <ProjectPlaceholderImage />;
   }
 
   return image;
@@ -43,20 +28,30 @@ export function ProjectAdditionalMedia({ project, data }) {
   let media = [];
 
   useEffect(() => {
-    if (iFrameRef.current){
-      iFrameRef.current.style.height = Math.round(parseInt(getComputedStyle(iFrameRef.current).width) / 1.777777777) + 'px';
+    if (iFrameRef.current) {
+      iFrameRef.current.style.height =
+        Math.round(
+          parseInt(getComputedStyle(iFrameRef.current).width) / 1.777777777
+        ) + "px";
     }
-  }, [data])
+  }, [data]);
 
-  if (data) {
-    let additionalContent = getLocalizedData(data.languages).content
+  if (data  && 'languages' in data) {
+    let additionalContent = getLocalizedData(data.languages).content;
 
     for (const key in additionalContent) {
       let item = additionalContent[key];
 
       switch (item.type) {
         case "video":
-          media.push(<iframe className={styles.video} ref={iFrameRef} src={getEmbeddedLink(item.content)} frameBorder="0" />);
+          media.push(
+            <iframe
+              className={styles.video}
+              ref={iFrameRef}
+              src={getEmbeddedLink(item.content)}
+              frameBorder="0"
+            />
+          );
           break;
         case "image":
           media.push(
@@ -80,8 +75,9 @@ export function ProjectAdditionalMedia({ project, data }) {
 }
 
 const ProjectPlaceholderImage = styled.div`
-  height: ${(props) => `${props.height}px`};
-  min-height: ${(props) => `${props.height}px`};
+  width: 100%;
+  padding-bottom: 100%;
+  background: var(--color-pink);
 `;
 
 const ProjectAdditionalMediaContainer = styled.div`

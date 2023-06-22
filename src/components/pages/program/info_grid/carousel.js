@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
 import InfoGridDate from "@/components/pages/program/info_grid/date";
-import InfoGridTime from "@/components/pages/program/info_grid/time";
 import {
   InfoGridContext,
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
+import { useSlider } from "@/providers/slider"
 
 export default function InfoGridCarousel({ project }) {
   return (
@@ -18,7 +18,7 @@ export default function InfoGridCarousel({ project }) {
 }
 
 function Carousel({ children }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const slider = useSlider();
   const [carouselHeight, setCarouselHeight] = useState(0);
   const carouselRef = useRef(null);
 
@@ -26,25 +26,22 @@ function Carousel({ children }) {
     if (carouselRef.current) {
       const { offsetWidth } = carouselRef.current;
       carouselRef.current.scrollTo({
-        left: offsetWidth * currentIndex,
+        left: offsetWidth * (slider.position - 4),
         behavior: "smooth",
       });
     }
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
-  };
-
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => prevIndex - 1);
-  };
-
   useEffect(() => {
-    const currentSlide = carouselRef.current.children[currentIndex];
-    setCarouselHeight(currentSlide.clientHeight);
-    scrollToCurrentIndex();
-  }, [currentIndex]);
+    if (slider.position >= 4) {
+      let child = slider.position - 4;
+      const currentSlide = carouselRef.current.children[child];
+      setCarouselHeight(currentSlide.clientHeight);
+      scrollToCurrentIndex();
+    } else {
+      setCarouselHeight("0px");
+    }
+  }, [slider.position]);
 
   return (
     <>
@@ -63,15 +60,6 @@ function Carousel({ children }) {
           ))}
         </ScrollableDiv>
       </div>
-      <button onClick={handlePrevious} disabled={currentIndex === 0}>
-        Previous
-      </button>
-      <button
-        onClick={handleNext}
-        disabled={currentIndex === children.length - 1}
-      >
-        Next
-      </button>
     </>
   );
 }
@@ -83,10 +71,15 @@ const ScrollableDiv = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  & > :nth-last-child(1) {
+    /* background-color: red; */
+    margin-right: var(--info-border-width);
+  }
 `;
 
 const InfoCard = styled.div`
-  padding-bottom: 5px;
+  padding-bottom: 0.5rem;
   flex: 0 0 100%;
   height: 100%;
 `;
