@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import Masonry from "react-responsive-masonry";
 
 import ProjectCell from "@/components/pages/program/project_cell";
 import Layout from "@/components/layout/layout";
