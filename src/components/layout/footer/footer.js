@@ -1,11 +1,10 @@
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
-import Slider from "@/components/layout/footer/slider";
 import { HoverLink } from "@/components/hover_link";
+import SliderContainer from "@/components/layout/footer/slider";
 
 import {
-  ProgramLink,
   ContactLink,
   ImprintLink,
   FaqLink,
@@ -14,9 +13,9 @@ import {
 export default function Footer() {
   return (
     <FooterContainer>
-      <SliderContainer>
-        <Slider />
-      </SliderContainer>
+      <div>
+        <SliderContainer />
+      </div>
       <Title />
       <InfoPages />
     </FooterContainer>

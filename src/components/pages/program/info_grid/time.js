@@ -18,6 +18,10 @@ const InfoGridTimeContainer = styled(InfoGridItem)`
 
   display: flex;
   align-items: center;
+
+  & > :nth-last-child(1) {
+    margin-right: var(--info-border-width);
+  }
 `;
 
 export function TimeContainer({ date }) {
