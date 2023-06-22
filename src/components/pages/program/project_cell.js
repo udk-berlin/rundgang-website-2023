@@ -13,7 +13,7 @@ export default function ProjectCell({ project }) {
         <ProjectImage project={project} />
       </ProjectLink>
       <ProjectLink project={project}>
-        <ProjectTitle project={project} fontSize={1} />
+        <ProjectTitle project={project} fontSize={1.3} />
       </ProjectLink>
       <ProjectAuthors project={project} fontSize={0.8} />
       <InfoGrid project={project} />

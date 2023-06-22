@@ -3,6 +3,8 @@ import styled from "styled-components";
 import InfoGridItemLink, {
   InfoGridItem,
 } from "@/components/pages/program/info_grid/item";
+import { useContext } from "react";
+import { SliderContext } from "@/components/contexts/slider_context";
 
 const eventTypeToMarginLeftMapper = {
   Ausstellung: "73%",
@@ -32,15 +34,31 @@ const eventTypeToMarginLeftMapper = {
 };
 
 export default function InfoGridEvent({ eventType, margin }) {
+  const slider = useContext(SliderContext);
   return (
-    <InfoGridItemLink
-      margin={
-        eventType in eventTypeToMarginLeftMapper && !margin
-          ? eventTypeToMarginLeftMapper[eventType]
-          : eventTypeToMarginLeftMapper.default
-      }
-    >
-      {eventType}
-    </InfoGridItemLink>
+    <Container slider={slider} idx={3}>
+      <InfoGridItemLink
+        margin={
+          eventType in eventTypeToMarginLeftMapper && !margin
+            ? eventTypeToMarginLeftMapper[eventType]
+            : eventTypeToMarginLeftMapper.default
+        }
+      >
+        {eventType}
+      </InfoGridItemLink>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  max-height: ${(props) => (props.slider >= props.idx ? "500px" : "0px")};
+  overflow-y: hidden;
+  transition: all 0.3s;
+  padding: ${(props) =>
+    props.slider >= props.idx ? "0.75rem 0 0.5rem 0" : "0"};
+
+  & > * {
+    width: max-content;
+  }
+`;

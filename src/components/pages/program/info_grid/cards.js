@@ -100,9 +100,13 @@ function Item({ margin, children }) {
 }
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  & > * {
+    margin-right: var(--info-border-width);
+  }
 `;
 
 const ItemContainer = styled.div`

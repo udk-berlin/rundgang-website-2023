@@ -14,7 +14,7 @@ export default function SliderContainer({ updateState }) {
         onChangeCommitted={changeState}
         marks
         min={0}
-        max={2}
+        max={6}
       />
     </div>
   );
