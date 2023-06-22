@@ -1,4 +1,4 @@
-import { useSlider } from "@/contexts/slider";
+import { useSlider } from "@/providers/slider"
 import styled from "styled-components";
 
 const SLIDER_INDEX = 2
@@ -17,12 +17,12 @@ export default function ProjectAuthors({ project, fontSize = 1 }) {
 const ProjectAuthorsContainer = styled.div`
   font-size: ${(props) => props.fontSize}rem;
   text-transform: uppercase;
-  /* margin: ${(props) => (props.slider >= SLIDER_INDEX ? "0.5rem 0 1rem 0" : "0px")} */
-  height: ${(props) => (props.slider >= SLIDER_INDEX && props.hasAuthors ? "30px" : "0px")};
+  /* margin: ${(props) => (props.slider.position >= SLIDER_INDEX ? "0.5rem 0 1rem 0" : "0px")} */
+  height: ${(props) => (props.slider.position >= SLIDER_INDEX && props.hasAuthors ? "30px" : "0px")};
   overflow-y: hidden;
   transition: all 0.4s;
 
-  padding-top: ${(props) => (props.slider >= SLIDER_INDEX ? "0.25rem" : "0")};
+  padding-top: ${(props) => (props.slider.position >= SLIDER_INDEX ? "0.25rem" : "0")};
 
   display: flex;
   flex-wrap: nowrap;

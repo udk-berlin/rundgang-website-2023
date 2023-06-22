@@ -1,10 +1,16 @@
 import styles from "@/styles/layout/Slider.module.css";
 import styled from "styled-components";
 import Slider from "@mui/material/Slider";
+import {useSliderDispatch} from "@/providers/slider";
 
-export default function SliderContainer({ updateState }) {
+export default function SliderContainer() {
+  const dispatch = useSliderDispatch();
+
   function handleChangeCommitted(event, value) {
-    updateState(value);
+    dispatch({
+      type: 'update',
+      position: value
+    })
   }
   return (
     <div className={styles.container}>

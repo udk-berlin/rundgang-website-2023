@@ -5,17 +5,16 @@ import { HoverLink } from "@/components/hover_link";
 import SliderContainer from "@/components/layout/footer/slider";
 
 import {
-  ProgramLink,
   ContactLink,
   ImprintLink,
   FaqLink,
 } from "@/components/localization/links";
 
-export default function Footer({ updateState }) {
+export default function Footer() {
   return (
     <div className={styles.container}>
       <div>
-        <SliderContainer updateState={updateState} />
+        <SliderContainer />
       </div>
       <Title />
       <InfoPages />

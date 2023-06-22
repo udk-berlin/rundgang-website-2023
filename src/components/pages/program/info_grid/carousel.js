@@ -5,7 +5,7 @@ import {
   InfoGridContext,
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
-import { useSlider } from "@/contexts/slider";
+import { useSlider } from "@/providers/slider"
 
 export default function InfoGridCarousel({ project }) {
   return (
@@ -26,22 +26,22 @@ function Carousel({ children }) {
     if (carouselRef.current) {
       const { offsetWidth } = carouselRef.current;
       carouselRef.current.scrollTo({
-        left: offsetWidth * (slider - 4),
+        left: offsetWidth * (slider.position - 4),
         behavior: "smooth",
       });
     }
   };
 
   useEffect(() => {
-    if (slider >= 4) {
-      let child = slider - 4;
+    if (slider.position >= 4) {
+      let child = slider.position - 4;
       const currentSlide = carouselRef.current.children[child];
       setCarouselHeight(currentSlide.clientHeight);
       scrollToCurrentIndex();
     } else {
       setCarouselHeight("0px");
     }
-  }, [slider]);
+  }, [slider.position]);
 
   return (
     <>
