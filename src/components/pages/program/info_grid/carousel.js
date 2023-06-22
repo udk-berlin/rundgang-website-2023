@@ -5,7 +5,7 @@ import {
   InfoGridContext,
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
-import { SliderContext } from "@/components/contexts/slider_context";
+import { SliderContext } from "@/contexts/slider";
 
 export default function InfoGridCarousel({ project }) {
   return (

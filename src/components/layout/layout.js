@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { SliderContext } from "@/components/contexts/slider_context";
+import { SliderContext } from "@/contexts/slider";
 import Footer from "@/components/layout/footer/footer";
 import Header from "@/components/layout/header/header";
 

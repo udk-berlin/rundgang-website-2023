@@ -1,4 +1,4 @@
-import { SliderContext } from "@/components/contexts/slider_context";
+import { SliderContext } from "@/contexts/slider";
 import { useContext } from "react";
 import styled from "styled-components";
 

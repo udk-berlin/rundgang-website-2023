@@ -4,7 +4,7 @@ import InfoGridItemLink, {
   InfoGridItem,
 } from "@/components/pages/program/info_grid/item";
 import { useContext } from "react";
-import { SliderContext } from "@/components/contexts/slider_context";
+import { SliderContext } from "@/contexts/slider";
 
 const eventTypeToMarginLeftMapper = {
   Ausstellung: "73%",
