@@ -30,6 +30,9 @@
   --layout-footer-grid-template-columns: var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3);
 
   --program-padding: 0.75rem;
+
+  --info-grid-font-size: 0.7rem;
+  --info-grid-font-weight: 500;
 }
 
 * {

@@ -2,7 +2,6 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
-import styles from '@/styles/pages/locations/map/popup/Rooms.module.css'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
 
@@ -28,7 +27,6 @@ export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsCon
 function LocationsGroundPlanRoom ({ key, room }) {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
-  const roomSelected = ('room' in filter && filter.room.id === room.id)
 
   const handleClick = (e) => {
     dispatch(
@@ -39,12 +37,11 @@ function LocationsGroundPlanRoom ({ key, room }) {
   }
 
   return (
-    <div key={key} className={[styles.roomContainer, roomSelected ? styles.roomSelected : ''].join(' ')}
-         onClick={handleClick}>
+    <LocationsGroundPlanRoomContainer key={key} selected={('room' in filter && filter.room.id === room.id)} onClick={handleClick}>
       <div>
         <FormattedMessage id={'room'}/>: {room.name}
       </div>
-    </div>
+    </LocationsGroundPlanRoomContainer>
   )
 }
 
@@ -61,11 +58,11 @@ function LocationsGroundPlanRoomsAll () {
   }
 
   return (
-    <div key={-1} className={[styles.roomContainer, roomSelected ? styles.roomSelected : ''].join(' ')} onClick={handleClick}>
+    <LocationsGroundPlanRoomContainer key={-1} onClick={handleClick}>
       <div>
         <FormattedMessage id={'rooms.all'}/>
       </div>
-    </div>
+    </LocationsGroundPlanRoomContainer>
   )
 }
 
@@ -73,6 +70,42 @@ const LocationsGroundPlanRoomsContainer = styled.div`
   max-height: ${(props) => `calc(var(--locations-map-height) - var(--locations-ground-plan-height) - ${props.locationsGroundPlanFloorsContainerHeight + 'px'} + var(--border-width))`};
   overflow: scroll;
   background: var(--color-white);
+
+  font-size: var(--info-grid-font-size);
+  font-weight: var(--info-grid-font-weight);
+}
+`
+
+const LocationsGroundPlanRoomContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  padding: 0.2rem 0.4rem;
+
+  border-top: calc(0.5 * var(--border-width)) solid var(--border-color);
+  border-right: var(--border-width) solid var(--border-color);
+  border-bottom: calc(0.5 * var(--border-width)) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
+
+  cursor: pointer;
+
+  :nth-child(1) {
+    border-top: 0 !important;
+  }
+
+  :nth-last-child(1) {
+    border-bottom: var(--border-width) solid var(--border-color);
+  }
+
+  :hover {
+    background-color: var(--color-pink);
+    color: var(--color-white);
+  }
+
+  background-color: ${(props) => (props.selected ? 'var(--color-pink)' : 'var(--color-white)')};
+  color: ${(props) => (props.selected ? 'var(--color-white)' : 'var(--color-black)')};
 `
 
 function getRooms (floor) {

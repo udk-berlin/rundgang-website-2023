@@ -55,13 +55,13 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
 
 
 const ProjectTitleContainer = styled.div`
-  display: inline-block;
+   display: inline-block;
 
   max-height: ${(props) => (props.slider.position >= SLIDER_INDEX ? `calc(${props.height}px + ${MASONRY_GUTTER}) ` : "0px")};
   overflow-y: hidden;
   padding-top: ${(props) => (props.slider.position >= SLIDER_INDEX ? MASONRY_GUTTER : "0")};
   padding-bottom: ${(props) => (props.slider.position >= SLIDER_INDEX ? "2px" : "0")};
-  
+
   font-weight: 600;
   font-size: ${(props) => props.fontSize}rem;
   line-height: 1;

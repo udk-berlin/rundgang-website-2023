@@ -18,16 +18,15 @@ export default function LocationsGroundPlanFloors ({ setLocationsGroundPlanFloor
   return (
     <LocationsGroundPlanFloorsContainer ref={ref}>
       <LocationsGroundPlanFloorAll />
-      {Object.values(floors).sort(sortByName).map((floor, index) => <PopupFloor key={index} floor={floor} />)}
+      {Object.values(floors).sort(sortByName).map((floor, index) => <LocationsGroundPlanFloor key={index} floor={floor} />)}
       <LocationsGroundPlanFloorEmpty />
     </LocationsGroundPlanFloorsContainer>
   )
 }
 
-function PopupFloor ({ key, floor }) {
+function LocationsGroundPlanFloor ({ key, floor }) {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
-  const floorSelected = ('floor' in filter && filter.floor.id === floor.id)
 
   const handleClick = (e) => {
     dispatch(
@@ -38,18 +37,17 @@ function PopupFloor ({ key, floor }) {
   }
 
   return (
-    <div key={key} className={[styles.floorContainer, floorSelected ? styles.floorSelected : ''].join(' ')} onClick={handleClick}>
+    <LocationsGroundPlanFloorContainer key={key} selected={('floor' in filter && filter.floor.id === floor.id)} onClick={handleClick}>
       <div>
         <FormattedMessage id={'floor'}/>: {floor.name}
       </div>
-    </div>
+    </LocationsGroundPlanFloorContainer>
   )
 }
 
 function LocationsGroundPlanFloorAll () {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
-  const floorSelected = !('floor' in filter)
 
   const handleClick = (e) => {
     dispatch(
@@ -59,11 +57,11 @@ function LocationsGroundPlanFloorAll () {
   }
 
   return (
-    <div key={-1} className={[styles.floorContainer, floorSelected ? styles.floorSelected : ''].join(' ')} onClick={handleClick}>
+    <LocationsGroundPlanFloorContainer key={-1} selected={!('floor' in filter)} onClick={handleClick}>
       <div>
         <FormattedMessage id={'floors.all'}/>
       </div>
-    </div>
+    </LocationsGroundPlanFloorContainer>
   )
 }
 
@@ -85,6 +83,30 @@ const LocationsGroundPlanFloorsContainer = styled.div`
 
   border: calc(0.5 * var(--border-width)) solid var(--border-color);
   background: var(--color-white);
+
+  font-size: var(--info-grid-font-size);
+  font-weight: var(--info-grid-font-weight);
+`
+
+const LocationsGroundPlanFloorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  padding: 0.2rem 0.4rem;
+
+  border: calc(0.5 * var(--border-width)) solid var(--border-color);
+
+  cursor: pointer;
+  
+  :hover {
+    background-color: var(--color-pink);
+    color: var(--color-white);
+  }
+
+  background-color: ${(props) => (props.selected ? 'var(--color-pink)' : 'var(--color-white)')};
+  color: ${(props) => (props.selected ? 'var(--color-white)' : 'var(--color-black)')};
 `
 
 function getFloors (location) {

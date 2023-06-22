@@ -58,6 +58,10 @@ const LocationsProgramContentColumn = styled.div`
   pointer-events: all;
   overflow: scroll;
   background: var(--color-white);
-  padding: 1rem;
+  padding: var(--program-padding);
   border-left: var(--border-width) solid var(--border-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--program-padding);
 `

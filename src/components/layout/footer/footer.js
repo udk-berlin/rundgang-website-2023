@@ -2,7 +2,7 @@ import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 import { HoverLink } from "@/components/hover_link";
-import SliderContainer from "@/components/layout/footer/slider";
+import FooterSlider from "@/components/layout/footer/slider";
 
 import {
   ContactLink,
@@ -13,9 +13,7 @@ import {
 export default function Footer() {
   return (
     <FooterContainer>
-      <div>
-        <SliderContainer />
-      </div>
+      <FooterSlider />
       <Title />
       <InfoPages />
     </FooterContainer>
@@ -69,11 +67,6 @@ const FooterContainer = styled.div`
   > *:nth-child(3) {
     border-left: var(--border-width) solid var(--border-color);
   }
-`
-
-const SliderContainer = styled.div`
-  width: 100%;
-  height: 100%;
 `
 
 const TitleContainer = styled.div`
