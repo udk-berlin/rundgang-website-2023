@@ -6,9 +6,9 @@ import ProjectAuthors from "@/components/pages/projects/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import ProjectImage from "@/components/pages/projects/image";
 
-export default function ProjectCell({ project }) {
+export default function ProjectCell({ key, project }) {
   return (
-    <ProjectCellContainer key={project.id}>
+    <ProjectCellContainer key={key}>
       <ProjectLink project={project}>
         <ProjectImage project={project} />
       </ProjectLink>

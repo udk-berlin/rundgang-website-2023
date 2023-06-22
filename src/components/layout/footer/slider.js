@@ -1,9 +1,9 @@
-import styles from "@/styles/layout/Slider.module.css";
 import styled from "styled-components";
-import Slider from "@mui/material/Slider";
-import {useSliderDispatch} from "@/providers/slider";
 
-export default function SliderContainer() {
+import Slider from "@mui/material/Slider";
+import { useSliderDispatch } from "@/providers/slider";
+
+export default function FooterSlider() {
   const dispatch = useSliderDispatch();
 
   function handleChangeCommitted(event, value) {
@@ -13,7 +13,7 @@ export default function SliderContainer() {
     })
   }
   return (
-    <div className={styles.container}>
+    <SliderContainer>
       <CustomSlider
         defaultValue={0}
         valueLabelDisplay="off"
@@ -22,9 +22,24 @@ export default function SliderContainer() {
         min={0}
         max={6}
       />
-    </div>
+    </SliderContainer>
   );
 }
+
+const SliderContainer = styled.div`
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 0.8rem;
+
+  input {
+    width: 100%;
+  }
+`;
 
 const CustomSlider = styled(Slider)`
   color: black;

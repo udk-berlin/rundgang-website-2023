@@ -4,9 +4,11 @@
   --color-pink: #d1acd0;
   --color-transparent-pink: rgba(209, 172, 208, 0.4);
   --color-green: #1a3f2b;
+  --color-green-transparent: rgba(26, 63, 43, 0.45);
   --color-white: white;
-  --color-dark-gray: rgb(40, 40, 40);
-  --color-transparent-black: rgba(1, 1, 1, 0.8);
+  --color-dark-gray: rgb(52, 52, 52);
+  --color-black: black;
+  --color-black-transparent: rgba(1, 1, 1, 0.8);
 
   --border-width: 2px;
   --border-color: #000;
@@ -15,15 +17,22 @@
   --info-border-color: #000;
 
   --locations-map-height: calc(100vh - 2 * var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 * var(--border-width));
-  --locations-map-popup-top: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
-  --locations-map-popup-ground-plan-height: calc(0.7 * var(--locations-map-height));
-  --locations-map-popup-infos-height: calc(0.3 * var(--locations-map-height) + 2 * var(--border-width));
+  --locations-overlays-top: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
+  --locations-ground-plan-height: var(--layout-footer-grid-template-column-1);
+  --locations-ground-plan-infos-height: calc(var(--locations-map-height) - var(--locations-ground-plan-height));
   --locations-map-marker-text-box-padding: 3px 12px;
 
   --layout-header-bar-container-height: 60px;
   --layout-header-search-container-height: 30px;
+  --layout-footer-grid-template-column-1: 25vw;
+  --layout-footer-grid-template-column-2: 1fr;
+  --layout-footer-grid-template-column-3: 25vw;
+  --layout-footer-grid-template-columns: var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3);
 
   --program-padding: 0.75rem;
+
+  --info-grid-font-size: 0.7rem;
+  --info-grid-font-weight: 500;
 }
 
 * {
