@@ -1,8 +1,9 @@
 .container {
-  position: sticky;
+  position: fixed;
   width: 100%;
   top: 0;
   height: fit-content;
+  z-index: 99;
 
   display: grid;
   grid-template-columns: 1fr;

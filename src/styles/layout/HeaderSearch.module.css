@@ -14,6 +14,7 @@
 
 .search {
   padding-left: 1rem;
+  pointer-events: none;
 }
 
 .search input[type="text"] {
