@@ -2,7 +2,6 @@ import React, { useRef, useEffect} from 'react'
 import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
-import styles from '@/styles/pages/locations/map/popup/Floors.module.css'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
 
@@ -67,9 +66,9 @@ function LocationsGroundPlanFloorAll () {
 
 function LocationsGroundPlanFloorEmpty () {
   return (
-    <div key={-2} className={styles.emptyFloorContainer}>
+    <LocationsGroundPlanFloorEmptyContainer key={-2}>
       <div></div>
-    </div>
+    </LocationsGroundPlanFloorEmptyContainer>
   )
 }
 
@@ -107,6 +106,11 @@ const LocationsGroundPlanFloorContainer = styled.div`
 
   background-color: ${(props) => (props.selected ? 'var(--color-pink)' : 'var(--color-white)')};
   color: ${(props) => (props.selected ? 'var(--color-white)' : 'var(--color-black)')};
+`
+
+const LocationsGroundPlanFloorEmptyContainer = styled.div`
+  flex-grow: 10;
+  border: calc(0.5 * var(--border-width)) solid var(--border-color);
 `
 
 function getFloors (location) {
