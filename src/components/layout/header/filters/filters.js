@@ -51,7 +51,7 @@ const FILTERS = {
   ],
 };
 
-export default function FilterOverlay({ active, hideModal }) {
+export default function HeaderFilters({ showFilters, setShowFilters }) {
   const language = useIntl();
   let filters = FILTERS.de;
   if (language.locale === "en" && "en" in FILTERS) {
@@ -59,53 +59,43 @@ export default function FilterOverlay({ active, hideModal }) {
   }
 
   return (
-    <FilterOverlayContainer active={active}>
-      <FilterOverlayClose src="/assets/svg/close.svg" onClick={hideModal} />
-      {filters.map((filter) => (
-        <CategoryContainer>
-          <FilterCategoryTitle>{filter.title}</FilterCategoryTitle>
-          <CategoryBody>
-            {filter.filters.map((filter) => (
+    <HeaderFiltersContainer showFilters={showFilters}>
+      <HeaderFiltersClose src="/assets/svg/close.svg" onClick={() => setShowFilters(false)} />
+      {filters.map((category) => (
+        <HeaderFiltersCategoryContainer>
+          <HeaderFiltersCategoryTitle>{category.title}</HeaderFiltersCategoryTitle>
+          <HeaderFiltersCategoryBody>
+            {category.filters.map((filter) => (
               <InfoGridItemLink>{filter}</InfoGridItemLink>
             ))}
-          </CategoryBody>
-        </CategoryContainer>
+          </HeaderFiltersCategoryBody>
+        </HeaderFiltersCategoryContainer>
       ))}
-    </FilterOverlayContainer>
+    </HeaderFiltersContainer>
   );
 }
-const FilterOverlayContainer = styled.div`
-  display: ${(props) => (props.active ? "block" : "none")};
-  background-color: rgba(0, 0, 0, 0.2);
-  height: 100%;
-  position: fixed;
+
+const HeaderFiltersContainer = styled.div`
+  display: ${(props) => (props.showFilters ? "block" : "none")};
+  
+  position: absolute;
   top: calc(
-    var(--layout-header-bar-container-height) +
-      var(--layout-header-search-container-height) + 4px
+          var(--layout-header-bar-container-height) +
+          var(--layout-header-search-container-height) + 1 * var(--border-width)
   );
-  left: 1px;
-  margin-right: var(--border-width);
+  
+  height: var(--locations-map-height);
+  min-height: var(--locations-map-height);
+  max-height: var(--locations-map-height);
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  
+  background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
 `;
 
-const CategoryContainer = styled.div`
-  font-size: 0.7rem;
-  font-weight: 500;
-  padding: 1rem 2rem;
-`;
-
-const FilterCategoryTitle = styled(InfoGridItem)`
-  background-color: #000;
-  color: var(--color-white);
-  display: inline-block;
-`;
-
-const CategoryBody = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const FilterOverlayClose = styled(ReactSVG)`
+const HeaderFiltersClose = styled(ReactSVG)`
   float: right;
   margin-top: 20px;
   margin-right: 20px;
@@ -115,3 +105,22 @@ const FilterOverlayClose = styled(ReactSVG)`
     fill: #fff;
   }
 `;
+
+const HeaderFiltersCategoryContainer = styled.div`
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
+`;
+
+const HeaderFiltersCategoryTitle = styled(InfoGridItem)`
+  background-color: #000;
+  color: var(--color-white);
+  display: inline-block;
+`;
+
+const HeaderFiltersCategoryBody = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+

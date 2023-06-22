@@ -1,28 +1,15 @@
 import styled from "styled-components";
 
 import { SliderProvider } from "@/providers/slider";
-import Footer from "@/components/layout/footer/footer";
 import Header from "@/components/layout/header/header";
-import { useState } from "react";
-import FilterOverlay from "@/components/layout/filter_overlay";
+import Footer from "@/components/layout/footer/footer";
 
 export default function Layout({ children }) {
-  const [FilterModal, setFilterModal] = useState(false);
-
-  function activateModal() {
-    setFilterModal(true);
-  }
-
-  function hideModal() {
-    setFilterModal(false);
-  }
-
   return (
     <Container>
       <SliderProvider>
-        <Header activateModal={activateModal} />
+        <Header/>
         <Content>
-          <FilterOverlay active={FilterModal} hideModal={hideModal} />
           {children}
         </Content>
         <Footer />
@@ -40,16 +27,9 @@ const Container = styled.div`
         var(--layout-header-search-container-height) + 2 * var(--border-width)
     )
     1fr var(--layout-header-bar-container-height);
-  padding-top: calc(
-          var(--layout-header-bar-container-height) +
-          var(--layout-header-search-container-height)
-  );
 `;
 
 const Content = styled.div`
   border-left: var(--border-width) solid var(--border-color);
   border-right: var(--border-width) solid var(--border-color);
-  position: relative;
-  top: 4px;
-  height: auto;
 `;
