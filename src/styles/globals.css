@@ -22,6 +22,8 @@
 
   --layout-header-bar-container-height: 60px;
   --layout-header-search-container-height: 30px;
+
+  --program-padding: 0.75rem;
 }
 
 * {

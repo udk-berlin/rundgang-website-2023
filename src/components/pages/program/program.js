@@ -1,21 +1,26 @@
-import styled from 'styled-components'
-import { Masonry } from '@mui/lab';
+import styled from "styled-components";
+import Masonry from "react-responsive-masonry";
 
-import ProjectCell from '@/components/pages/program/project_cell'
+import ProjectCell from "@/components/pages/program/project_cell";
 import Layout from "@/components/layout/layout";
 
-export default function Program ({ projects }) {
-    return (
-      <Layout>
-          <ProgramContainer>
-              <Masonry columns={4} spacing={3}>
-                  {projects.map(project => (<ProjectCell project={project} />))}
-              </Masonry>
-          </ProgramContainer>
-      </Layout>
-    )
+export const MASONRY_COLUMNS = 4
+export const MASONRY_GUTTER = "0.75rem"
+
+export default function Program({ projects }) {
+  return (
+    <Layout>
+      <ProgramContainer>
+        <Masonry columnsCount={MASONRY_COLUMNS} gutter={MASONRY_GUTTER}>
+          {projects.map((project) => (
+            <ProjectCell project={project} />
+          ))}
+        </Masonry>
+      </ProgramContainer>
+    </Layout>
+  );
 }
 
 const ProgramContainer = styled.div`
-  margin: 1rem 0 1rem 1rem;
-`
+  padding: var(--program-padding);
+`;

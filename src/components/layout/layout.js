@@ -1,14 +1,19 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
+import { SliderProvider } from "@/providers/slider";
 import Footer from "@/components/layout/footer/footer";
 import Header from "@/components/layout/header/header";
 
 export default function Layout({ children }) {
   return (
     <Container>
-      <Header />
-      <Content>{children}</Content>
-      <Footer />
+      <SliderProvider>
+        <Header />
+        <Content>
+          {children}
+        </Content>
+        <Footer />
+      </SliderProvider>
     </Container>
   );
 }
