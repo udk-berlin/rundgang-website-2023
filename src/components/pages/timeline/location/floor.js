@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { TIMELINE_WIDTH } from "@/components/pages/timeline/timeline";
+import { TIMELINE_WIDTH, BOX_HEIGHT } from "@/components/pages/timeline/constants";
 
-export default function TimelineLocationFloor({ scaleX, locWidth }) {
+export default function TimelineLocationFloor() {
   return (
     <FloorContainer width={TIMELINE_WIDTH}>
       <FloorTitleContainer width={0}>
@@ -28,6 +28,11 @@ const FloorContainer = styled.div`
 
   background: var(--color-white);
   color: var(--color-black);
+
+  :hover {
+    background: var(--color-pink);
+    color: var(--color-white);
+  }
 `;
 
 const FloorTitleContainer = styled.div`
@@ -39,13 +44,17 @@ const FloorTitleContainer = styled.div`
   display: flex;
   align-items: center;
 
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
   width: ${({ width }) => width}px;
-  min-height: 30px;
 `;
 
 const FloorTitle = styled.div`
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
   width: ${({ width }) => width}px;
-  min-height: 30px;
   
   padding: var(--info-grid-padding);
   
@@ -53,9 +62,4 @@ const FloorTitle = styled.div`
   font-weight: var(--info-grid-font-weight);
 
   white-space: nowrap;
-
-  :hover {
-    background: var(--color-pink);
-    color: var(--color-white);
-  }
 `;

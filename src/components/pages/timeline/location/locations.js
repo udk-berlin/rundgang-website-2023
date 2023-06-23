@@ -1,19 +1,22 @@
 import styled from "styled-components";
 
-import { TIMELINE_WIDTH } from "@/components/pages/timeline/timeline";
-import TimelineProjectsBar from "@/components/pages/timeline/projects/bar";
+import TimelineProjectsBar from "@/components/pages/timeline/project";
 import TimelineLocationFloor from "@/components/pages/timeline/location/floor";
 import TimelineLocation from "@/components/pages/timeline/location/location";
 import TimelineLocationRoom from "@/components/pages/timeline/location/room";
 
-export default function TimelineLocations({ scaleX, locWidth }) {
+import { mapTimeToX, GRID_OFFSET } from "@/components/pages/timeline/constants";
+
+export default function TimelineLocations() {
+  mapTimeToX(GRID_OFFSET)
+
   return (
     <TimelineLocationsContainer>
       <TimelineLocationsInnerContainer key={`location-${1}`}>
-        <TimelineLocation locWidth={locWidth} />
-        <TimelineLocationFloor locWidth={locWidth}/>
-        <TimelineLocationRoom room={{locWidth: locWidth, name: 'Alle Räume'}} />
-        <TimelineLocationRoom room={{locWidth: locWidth, name: 'Raum 53'}} />
+        <TimelineLocation />
+        <TimelineLocationFloor/>
+        <TimelineLocationRoom room={{name: 'Alle Räume'}} />
+        <TimelineLocationRoom room={{name: 'Raum 53'}} />
 
 
         {/*<LocationRoomContainer key={`room-${1}`} width={6000}>*/}

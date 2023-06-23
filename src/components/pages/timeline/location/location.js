@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-import { TIMELINE_WIDTH } from "@/components/pages/timeline/timeline";
-
-export default function TimelineLocation({ locWidth }) {
+import { TIMELINE_WIDTH, BOX_HEIGHT } from "@/components/pages/timeline/constants";
+export default function TimelineLocation() {
   return (
     <LocationContainer width={TIMELINE_WIDTH}>
-      <LocationTitleContainer width={locWidth}>
+      <LocationTitleContainer>
         <LocationTitle>Hardenbergstraße 33</LocationTitle>
       </LocationTitleContainer>
     </LocationContainer>
@@ -15,7 +14,9 @@ export default function TimelineLocation({ locWidth }) {
 const LocationContainer = styled.div`
   position: relative;
 
-  min-height: 30px;
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
   width: ${({ width }) => width}px;
 
   padding: 0.2rem 0.6rem;
@@ -26,15 +27,16 @@ const LocationContainer = styled.div`
 const LocationTitleContainer = styled.div`
   position: sticky;
   z-index: 50;
-  left: 0.2rem;
+  left: 0.6rem;
   top: 0;
 
   display: flex;
   align-items: center;
 
-  width: ${({ width }) => width}px;
-  min-height: 30px;
-  height: 100%;
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
+  width: 30px;
 `;
 
 const LocationTitle = styled.div`

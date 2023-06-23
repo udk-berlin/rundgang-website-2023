@@ -7,6 +7,7 @@
   --color-green-transparent: rgba(26, 63, 43, 0.45);
   --color-white: white;
   --color-dark-gray: rgb(52, 52, 52);
+  --color-light-gray: rgb(215, 215, 215);
   --color-black: black;
   --color-black-transparent: rgba(1, 1, 1, 0.8);
 
@@ -34,6 +35,12 @@
   --info-grid-font-size: 0.7rem;
   --info-grid-font-weight: 500;
   --info-grid-padding: 0.2rem 0.4rem;
+
+  --calender-box-font-size: var(--info-grid-font-size);
+  --calender-box-font-weight: var(--info-grid-font-weight);
+  --calender-box-border: var(--info-border-width) solid var(--info-border-color);
+  --calender-box-padding: var(--info-grid-padding);
+  --calender-grid-border: 1px solid var(--color-light-gray);
 }
 
 * {

@@ -1,46 +1,80 @@
 import styled from "styled-components";
 
-import { TIMELINE_WIDTH } from "@/components/pages/timeline/timeline";
-import TimelineProjectsBar from "@/components/pages/timeline/projects/bar";
+import {TIMELINE_WIDTH, mapTimeToX, BOX_WIDTH, BOX_HEIGHT} from "@/components/pages/timeline/constants";
+import TimelineProject from "@/components/pages/timeline/project";
 
-export default function TimelineLocationRoom({ scaleX, locWidth, room}) {
+const PADDING_LEFT = 40;
+
+export default function TimelineLocationRoom({ room }) {
+  const width = mapTimeToX(BOX_WIDTH) - PADDING_LEFT
+
+  const projects = [
+    {
+      name: 'Test 1',
+      start: 1689951600000,
+      end: 1689958800000,
+    },
+    {
+      name: 'Test 2',
+      start: 1689962400000,
+      end: 1689964200000,
+    }
+  ]
+
   return (
     <RoomContainer key={`room-${1}`} width={TIMELINE_WIDTH}>
-      <RoomTitleContainer width={locWidth}>
-        <RoomTitle>{room.name}</RoomTitle>
-      </RoomTitleContainer>
-      {/*<ProjectsContainer>*/}
-      {/*  <TimelineProjectsBar*/}
-      {/*    start={scaleX(1658566800) - locWidth}*/}
-      {/*    end={scaleX(1658610000) - locWidth}*/}
-      {/*  >*/}
-      {/*    Öffnungszeiten: Samstag, 23.7., 11:00–23:00 Uhr*/}
-      {/*  </TimelineProjectsBar>*/}
-      {/*</ProjectsContainer>*/}
+      <RoomInnerContainer width={TIMELINE_WIDTH}>
+        <RoomTitleContainer width={width}>
+          <RoomTitle width={width}>{room.name}</RoomTitle>
+        </RoomTitleContainer>
+
+        {projects.map((project, index) => {
+          return (
+            <TimelineProject project={project} prevProject={projects[index -1]} index={index}/>
+          )
+        })}
+      </RoomInnerContainer>
     </RoomContainer>
   );
 }
 
 const RoomContainer = styled.div`
+  margin-top: 6px;
+  width: ${({ width }) => width}px;
+`;
+
+const RoomInnerContainer = styled.div`
   position: relative;
   
   display: flex;
   align-items: flex-start;
 
-  min-height: 30px;
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
   width: ${({ width }) => width}px;
+  
+  margin-left: 40px; // todo: set correct padding (dynamic)
+  
+  //background: var(--color-transparent-pink);
+  //outline: var(--calender-box-border);
+  //border: var(--calender-box-border);
+  //border-top: var(--calender-box-border);
+  //border-bottom: var(--calender-box-border);
 `;
 
 const RoomTitleContainer = styled.div`
   position: sticky;
   z-index: 50;
-  left: 26px;
+  left: 40px;
   top: 0;
 
-  width: ${({ width }) => width}px;
-  height: 100%;
+  display: flex;
   
-  line-height: 1;
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
+  width: ${({ width }) => width}px;
 `;
 
 const RoomTitle = styled.div`
@@ -48,12 +82,16 @@ const RoomTitle = styled.div`
   align-items: center;
   justify-content: center;
   
-  min-width: 100px;
-  min-height: 30px;
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
+  width: ${({ width }) => width}px;
+  min-width: ${({ width }) => width}px;
   
   padding: var(--info-grid-padding);
 
-  outline: var(--info-border-width) solid var(--info-border-color);
+  border: var(--info-border-width) solid var(--info-border-color);
+  
   background-color: white;
   
   font-size: var(--info-grid-font-size);
@@ -63,10 +101,4 @@ const RoomTitle = styled.div`
     background: var(--color-pink);
     color: var(--color-white);
   }
-`;
-
-const ProjectsContainer = styled.div`
-  position: relative;
-  display: flex;
-  padding: 4px 0;
 `;
