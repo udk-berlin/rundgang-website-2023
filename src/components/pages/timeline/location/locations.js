@@ -15,27 +15,8 @@ export default function TimelineLocations() {
       <TimelineLocationsInnerContainer key={`location-${1}`}>
         <TimelineLocation />
         <TimelineLocationFloor/>
-        <TimelineLocationRoom room={{name: 'Alle Räume'}} />
-        <TimelineLocationRoom room={{name: 'Raum 53'}} />
-
-
-        {/*<LocationRoomContainer key={`room-${1}`} width={6000}>*/}
-        {/*  <LocationRoomTitleContainer width={locWidth}>*/}
-        {/*    <LocationRoomTitle>Raum 53</LocationRoomTitle>*/}
-        {/*  </LocationRoomTitleContainer>*/}
-
-        {/*  <ProjectsContainer>*/}
-        {/*    <TimelineProjectsBar*/}
-        {/*      top={0}*/}
-        {/*      start={scaleX(1658566800) - locWidth}*/}
-        {/*      end={scaleX(1658610000) - locWidth}*/}
-        {/*      children={true}*/}
-        {/*    >*/}
-        {/*      Rundgangeröffnung / Opening*/}
-        {/*    </TimelineProjectsBar>*/}
-        {/*  </ProjectsContainer>*/}
-
-        {/*</LocationRoomContainer>*/}
+        <TimelineLocationRoom room={{name: '1', id: 1}} roomIndex={0}/>
+        <TimelineLocationRoom room={{name: '53', id: 2}} roomIndex={1}/>
 
       </TimelineLocationsInnerContainer>
     </TimelineLocationsContainer>
@@ -53,17 +34,4 @@ const TimelineLocationsContainer = styled.div`
 
 const TimelineLocationsInnerContainer = styled.div`
   position: relative;
-`;
-
-const LocationRoomContainer = styled.div`
-  height: 100%;
-  width: ${({ width }) => width}px;
-  // border-bottom: 1px solid black;
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  
-  &::after {
-    height: 100%;
-  }
 `;

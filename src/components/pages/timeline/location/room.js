@@ -1,13 +1,10 @@
 import styled from "styled-components";
 
-import {TIMELINE_WIDTH, mapTimeToX, BOX_WIDTH, BOX_HEIGHT} from "@/components/pages/timeline/constants";
+import { FormattedMessage } from 'react-intl'
+import { TIMELINE_WIDTH, BOX_HEIGHT } from "@/components/pages/timeline/constants";
 import TimelineProject from "@/components/pages/timeline/project";
 
-const PADDING_LEFT = 40;
-
-export default function TimelineLocationRoom({ room }) {
-  const width = mapTimeToX(BOX_WIDTH) - PADDING_LEFT
-
+export default function TimelineLocationRoom({ room, roomIndex }) {
   const projects = [
     {
       name: 'Test 1',
@@ -18,87 +15,89 @@ export default function TimelineLocationRoom({ room }) {
       name: 'Test 2',
       start: 1689962400000,
       end: 1689964200000,
+    },
+    {
+      name: 'Test 3',
+      start: 1689965400000,
+      end: 1689975400000,
+    },
+    {
+      name: 'Test 4',
+      start: 1689995400000,
+      end: 1689999400000,
     }
   ]
 
   return (
-    <RoomContainer key={`room-${1}`} width={TIMELINE_WIDTH}>
-      <RoomInnerContainer width={TIMELINE_WIDTH}>
-        <RoomTitleContainer width={width}>
-          <RoomTitle width={width}>{room.name}</RoomTitle>
-        </RoomTitleContainer>
+    <>
+      <RoomContainer key={room.id} width={TIMELINE_WIDTH}>
+        <Room>
+          <FormattedMessage id={'room'}/>: {room.name}
+        </Room>
+      </RoomContainer>
 
-        {projects.map((project, index) => {
+      <ProjectsContainer key={room.id} width={TIMELINE_WIDTH}>
+        {projects.map((project, projectIndex) => {
           return (
-            <TimelineProject project={project} prevProject={projects[index -1]} index={index}/>
+            <TimelineProject project={project} previousProject={projects[projectIndex -1]} projectIndex={projectIndex} roomIndex={roomIndex}/>
           )
         })}
-      </RoomInnerContainer>
-    </RoomContainer>
+      </ProjectsContainer>
+      <ProjectsContainer key={room.id} width={TIMELINE_WIDTH}>
+        {projects.map((project, projectIndex) => {
+          return (
+            <TimelineProject project={project} previousProject={projects[projectIndex -1]} projectIndex={projectIndex} roomIndex={roomIndex}/>
+          )
+        })}
+      </ProjectsContainer>
+    </>
   );
 }
 
 const RoomContainer = styled.div`
-  margin-top: 6px;
-  width: ${({ width }) => width}px;
-`;
-
-const RoomInnerContainer = styled.div`
-  position: relative;
-  
   display: flex;
-  align-items: flex-start;
-
-  height: ${BOX_HEIGHT}px;
-  min-height: ${BOX_HEIGHT}px;
-  max-height: ${BOX_HEIGHT}px;
   width: ${({ width }) => width}px;
-  
-  margin-left: 40px; // todo: set correct padding (dynamic)
-  
-  //background: var(--color-transparent-pink);
-  //outline: var(--calender-box-border);
-  //border: var(--calender-box-border);
-  //border-top: var(--calender-box-border);
-  //border-bottom: var(--calender-box-border);
+
+  margin-top: -2px;
+  margin-bottom: -${BOX_HEIGHT}px;
 `;
 
-const RoomTitleContainer = styled.div`
+const Room = styled.div`
   position: sticky;
-  z-index: 50;
-  left: 40px;
+  z-index: 4;
+  left: calc(2 * var(--calender-floor-left));
   top: 0;
-
-  display: flex;
   
-  height: ${BOX_HEIGHT}px;
-  min-height: ${BOX_HEIGHT}px;
-  max-height: ${BOX_HEIGHT}px;
-  width: ${({ width }) => width}px;
-`;
-
-const RoomTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   height: ${BOX_HEIGHT}px;
   min-height: ${BOX_HEIGHT}px;
   max-height: ${BOX_HEIGHT}px;
-  width: ${({ width }) => width}px;
-  min-width: ${({ width }) => width}px;
   
   padding: var(--info-grid-padding);
-
   border: var(--info-border-width) solid var(--info-border-color);
   
-  background-color: white;
+  background: var(--color-white);
   
   font-size: var(--info-grid-font-size);
   font-weight: var(--info-grid-font-weight);
+  color: var(--color-black);
 
   :hover {
     background: var(--color-pink);
     color: var(--color-white);
   }
+`;
+
+const ProjectsContainer = styled.div`
+  display: flex;
+
+  height: ${BOX_HEIGHT}px;
+  min-height: ${BOX_HEIGHT}px;
+  max-height: ${BOX_HEIGHT}px;
+  width: ${({ width }) => width}px;
+
+  margin-top: -2px;
 `;

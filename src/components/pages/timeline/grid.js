@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import { HOURS, WIDTH_PER_HOUR } from "@/components/pages/timeline/constants";
-
-
+import { NUMBER_OF_QUARTER_HOURS, WIDTH_PER_QUARTER_HOUR, range } from "@/components/pages/timeline/constants";
 
 export default function TimelineGrid() {
 
 
   return (
     <>
-      {HOURS.map(hour => {
-        return (<TimelineGridLine x={(hour * WIDTH_PER_HOUR)} key={`timeline-hour-${hour}`} id={`timeline-hour-${hour}`} />)
+      {range(0, NUMBER_OF_QUARTER_HOURS).map(hour => {
+        return (<TimelineGridLine x={(hour * WIDTH_PER_QUARTER_HOUR)} key={`timeline-quarter-hour-${hour}`} id={`timeline-quarter-hour-${hour}`} />)
       })}
     </>
   );
