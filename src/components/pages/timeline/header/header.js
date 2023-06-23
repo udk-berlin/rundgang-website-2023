@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { TIMELINE_WIDTH } from "@/components/pages/timeline/timeline";
+
 const RUNDGANG_DAYS = [
   'Freitag 16.07.',
   'Samstag 17.07.',
@@ -58,21 +60,18 @@ function TimelineHeaderTimes({ index }) {
 
 const HeaderContainer = styled.div`
   overflow-x: scroll;
-  overflow-y: scroll;
   
+  width: 100%;
   min-height: var(--locations-map-height);
 `;
 
 const HeaderDaysContainer = styled.div`
   display: flex;
-  overflow-x: scroll;
-  width: 100%;
+  width: ${() => (`${TIMELINE_WIDTH}px`)};
 `;
 
 const HeaderDayContainer = styled.div`
-  width: 40%;
-  min-width: 40%;
-  max-width: 40%;
+  flex-grow: 1;
 `;
 
 const HeaderDay = styled.div`
@@ -99,6 +98,8 @@ const HeaderTimes = styled.div`
   padding: 0.4rem 0;
 
   border-bottom: 2px solid black;
+  
+  background: var(--color-white);
 `;
 
 const HeaderTimesCenterLine = styled.div`

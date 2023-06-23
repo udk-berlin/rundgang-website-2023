@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
+import { TIMELINE_WIDTH } from "@/components/pages/timeline/timeline";
 import TimelineProjectsBar from "@/components/pages/timeline/projects/bar";
 
 export default function TimelineLocations({ scaleX, locWidth }) {
   return (
-    <TimelineLocationsContainer width={6000}>
+    <TimelineLocationsContainer>
       <TimelineLocationsInnerContainer key={`location-${1}`}>
-        <LocationContainer width={6000}>
+        <LocationContainer>
           <LocationTitleContainer width={locWidth}>
             <LocationTitleInnerContainer>Hardenbergstraße 33</LocationTitleInnerContainer>
           </LocationTitleContainer>
@@ -16,7 +17,6 @@ export default function TimelineLocations({ scaleX, locWidth }) {
           <LocationRoomTitleContainer width={locWidth}>
             <LocationRoomTitle></LocationRoomTitle>
           </LocationRoomTitleContainer>
-          {/* y = 128.88821752265864px */}
           <ProjectsContainer>
             <TimelineProjectsBar
               start={scaleX(1658566800) - locWidth}
@@ -25,45 +25,44 @@ export default function TimelineLocations({ scaleX, locWidth }) {
                   Öffnungszeiten: Samstag, 23.7., 11:00–23:00 Uhr
             </TimelineProjectsBar>
           </ProjectsContainer>
-
         </LocationRoomContainer>
 
-        <LocationRoomContainer key={`room-${1}`} width={6000}>
-          <LocationRoomTitleContainer width={locWidth}>
-            <LocationRoomTitle>53</LocationRoomTitle>
-          </LocationRoomTitleContainer>
+        {/*<LocationRoomContainer key={`room-${1}`} width={6000}>*/}
+        {/*  <LocationRoomTitleContainer width={locWidth}>*/}
+        {/*    <LocationRoomTitle>53</LocationRoomTitle>*/}
+        {/*  </LocationRoomTitleContainer>*/}
 
-          <ProjectsContainer>
-            <TimelineProjectsBar
-              top={0}
-              start={scaleX(1658566800) - locWidth}
-              end={scaleX(1658610000) - locWidth}
-              children={true}
-            >
-              Rundgangeröffnung / Opening
-            </TimelineProjectsBar>
-          </ProjectsContainer>
+        {/*  <ProjectsContainer>*/}
+        {/*    <TimelineProjectsBar*/}
+        {/*      top={0}*/}
+        {/*      start={scaleX(1658566800) - locWidth}*/}
+        {/*      end={scaleX(1658610000) - locWidth}*/}
+        {/*      children={true}*/}
+        {/*    >*/}
+        {/*      Rundgangeröffnung / Opening*/}
+        {/*    </TimelineProjectsBar>*/}
+        {/*  </ProjectsContainer>*/}
 
-        </LocationRoomContainer>
+        {/*</LocationRoomContainer>*/}
 
 
-        <LocationRoomContainer key={`room-${1}`} width={6000}>
-          <LocationRoomTitleContainer width={locWidth}>
-            <LocationRoomTitle>53</LocationRoomTitle>
-          </LocationRoomTitleContainer>
+        {/*<LocationRoomContainer key={`room-${1}`} width={6000}>*/}
+        {/*  <LocationRoomTitleContainer width={locWidth}>*/}
+        {/*    <LocationRoomTitle>53</LocationRoomTitle>*/}
+        {/*  </LocationRoomTitleContainer>*/}
 
-          <ProjectsContainer>
-            <TimelineProjectsBar
-              top={0}
-              start={scaleX(1658566800) - locWidth}
-              end={scaleX(1658610000) - locWidth}
-              children={true}
-            >
-              Performance: "Reminds me of you - diary of sick person", Francis Kussatz, 2022
-            </TimelineProjectsBar>
-          </ProjectsContainer>
+        {/*  <ProjectsContainer>*/}
+        {/*    <TimelineProjectsBar*/}
+        {/*      top={0}*/}
+        {/*      start={scaleX(1658566800) - locWidth}*/}
+        {/*      end={scaleX(1658610000) - locWidth}*/}
+        {/*      children={true}*/}
+        {/*    >*/}
+        {/*      Performance: "Reminds me of you - diary of sick person", Francis Kussatz, 2022*/}
+        {/*    </TimelineProjectsBar>*/}
+        {/*  </ProjectsContainer>*/}
 
-        </LocationRoomContainer>
+        {/*</LocationRoomContainer>*/}
 
       </TimelineLocationsInnerContainer>
     </TimelineLocationsContainer>
@@ -85,7 +84,7 @@ const TimelineLocationsInnerContainer = styled.div`
 
 const Location = styled.div`
   height: 100%;
-  width: ${({ width }) => width}px;
+  width: ${TIMELINE_WIDTH}px;
   border-bottom: 1px solid black;
   position: relative;
   display: flex;
@@ -103,7 +102,7 @@ const LocationContainer = styled(Location)`
 `;
 
 const LocationTitleContainer = styled.div`
-  width: ${({ width }) => width}px;
+  width: ${TIMELINE_WIDTH}px;
   position: sticky;
   z-index: 50;
   line-height: 1;
@@ -117,18 +116,27 @@ const LocationTitle = styled.div`
   width: fit-content;
   background-color: white;
   padding-top: 4px;
-  font-size: 24px;
+  //
+  // width: ${TIMELINE_WIDTH}px;
+  //
+  // padding: 0.1rem 3rem;
+  //
+  // background-color: var(--color-dark-gray);
+  //
+  // font-size: 24px;
+  // font-weight: 500;
+  // color: var(--color-white);
 `;
 
 const LocationTitleInnerContainer = styled(LocationTitle)`
   transform: scaleX(0.7);
   transform-origin: top left;
-  font-size: 42px;
+  font-size: 24px
 `;
 
 const LocationRoomContainer = styled.div`
   height: 100%;
-  width: ${({ width }) => width}px;
+  width: ${TIMELINE_WIDTH}px;
   border-bottom: 1px solid black;
   position: relative;
   display: flex;
@@ -140,7 +148,7 @@ const LocationRoomContainer = styled.div`
 `;
 
 const LocationRoomTitleContainer = styled.div`
-  width: ${({ width }) => width}px;
+  width: ${TIMELINE_WIDTH}px;
   position: sticky;
   z-index: 50;
   line-height: 1;
