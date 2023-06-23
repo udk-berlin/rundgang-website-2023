@@ -4,7 +4,7 @@ import { scaleLinear } from "d3-scale";
 import TimelineHeader from "@/components/pages/timeline/header/header";
 import TimelineGrid from "@/components/pages/timeline/grid";
 import TimelineScale from "@/components/pages/timeline/grid";
-import TimelineLocations from "@/components/pages/timeline/locations";
+import TimelineLocations from "@/components/pages/timeline/location/locations";
 
 const FIRST_TIME = 1658564000;
 const LAST_TIME =  1658696400;

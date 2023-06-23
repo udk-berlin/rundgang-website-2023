@@ -33,6 +33,7 @@
 
   --info-grid-font-size: 0.7rem;
   --info-grid-font-weight: 500;
+  --info-grid-padding: 0.2rem 0.4rem;
 }
 
 * {
