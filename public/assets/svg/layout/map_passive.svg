@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 460 360" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(1,0,0,1,-70,-120)">
-        <path d="M120,200L200,130L400,220L480,130L480,400L400,470L200,380L120,470L120,200Z" style="fill:white;stroke:black;stroke-width:15px;"/>
-        <path d="M200,130L200,380" style="fill:none;stroke:black;stroke-width:15px;"/>
-        <path d="M400,220L400,470" style="fill:none;stroke:black;stroke-width:15px;"/>
-    </g>
-</svg>
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 500 500"><defs><style>.cls-1{fill:none;stroke:#000;stroke-width:15px;}</style></defs><polygon class="cls-1" points="359.5607 125.1447 477.065 75.1447 477.065 405.1447 359.5607 455.1447 141.5 375.1447 23.9957 425.1447 23.9957 95.1447 141.5 45.1447 359.5607 125.1447"/><line class="cls-1" x1="141.5" y1="45.1447" x2="141.5" y2="375.1447"/><line class="cls-1" x1="359.5607" y1="125.1447" x2="359.5607" y2="455.1447"/></svg>
