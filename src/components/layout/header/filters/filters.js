@@ -60,10 +60,15 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
 
   return (
     <HeaderFiltersContainer showFilters={showFilters}>
-      <HeaderFiltersClose src="/assets/svg/close.svg" onClick={() => setShowFilters(false)} />
+      <HeaderFiltersClose
+        src="/assets/svg/close.svg"
+        onClick={() => setShowFilters(false)}
+      />
       {filters.map((category) => (
         <HeaderFiltersCategoryContainer>
-          <HeaderFiltersCategoryTitle>{category.title}</HeaderFiltersCategoryTitle>
+          <HeaderFiltersCategoryTitle>
+            {category.title}
+          </HeaderFiltersCategoryTitle>
           <HeaderFiltersCategoryBody>
             {category.filters.map((filter) => (
               <InfoGridItemLink>{filter}</InfoGridItemLink>
@@ -77,20 +82,20 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
 
 const HeaderFiltersContainer = styled.div`
   display: ${(props) => (props.showFilters ? "block" : "none")};
-  
+
   position: absolute;
   top: calc(
-          var(--layout-header-bar-container-height) +
-          var(--layout-header-search-container-height) + 1 * var(--border-width)
+    var(--layout-header-bar-container-height) +
+      var(--layout-header-search-container-height) + 1 * var(--border-width)
   );
-  
-  height: var(--locations-map-height);
-  min-height: var(--locations-map-height);
-  max-height: var(--locations-map-height);
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-  
+
+  margin-right: calc(2rem + var(--border-width));
+  margin-left: 2rem;
+
+  outline: var(--border-width) solid var(--border-color);
+
+  padding-bottom: 1rem;
+
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
 `;
@@ -109,7 +114,7 @@ const HeaderFiltersClose = styled(ReactSVG)`
 const HeaderFiltersCategoryContainer = styled.div`
   font-size: 0.7rem;
   font-weight: 500;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem 0 1rem;
 `;
 
 const HeaderFiltersCategoryTitle = styled(InfoGridItem)`
@@ -122,5 +127,3 @@ const HeaderFiltersCategoryBody = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-
-
