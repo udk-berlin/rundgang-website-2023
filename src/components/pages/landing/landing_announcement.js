@@ -19,7 +19,7 @@ export default function LandingAnnouncement() {
         <ArrowLink>
           <span>&rarr;&nbsp;</span>
           <a href="https://2022.rundgang.udk-berlin.de" target="_blank">
-            &nbsp;zur Rundgang Plattform 2022
+            &nbsp;zur Rundgang-Plattform 2022
           </a>
         </ArrowLink>
       </div>
