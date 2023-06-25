@@ -1,18 +1,17 @@
 import styled from "styled-components";
 
 import { BOX_HEIGHT } from "@/components/pages/timeline/constants";
+import TimelineFloors from '@/components/pages/timeline/floors'
 
-export default function TimelineLocation() {
-
-  const location = {
-    name: 'Hardenbergstraße 33',
-    id: "0"
-  }
-
+export default function TimelineLocation({ location, projects }) {
   return (
-    <LocationContainer id={location.id}>
-      {location.name}
-    </LocationContainer>
+    <>
+      <LocationContainer id={location.id}>
+        {location.name}
+      </LocationContainer>
+
+      <TimelineFloors location={location} projects={projects} />
+    </>
   );
 }
 

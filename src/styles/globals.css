@@ -2,8 +2,10 @@
 
 :root {
   --color-pink: #d1acd0;
+  --color-pink-light: #ead6e9;
   --color-pink-transparent: rgba(209, 172, 208, 0.4);
   --color-green: #1a3f2b;
+  --color-green-light: #9ea8a1;
   --color-green-transparent: rgba(26, 63, 43, 0.4);
   --color-white: white;
   --color-dark-gray: rgb(52, 52, 52);

@@ -2,18 +2,17 @@ import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
 import { BOX_HEIGHT } from "@/components/pages/timeline/constants";
+import TimelineLocationRooms from '@/components/pages/timeline/rooms'
 
-export default function TimelineLocationFloor() {
-
-  const floor = {
-    name: "0",
-    id: '0'
-  }
-
+export default function TimelineLocationFloor({ floor, projects }) {
   return (
-    <FloorContainer key={floor.id}>
-      <FormattedMessage id={'floor'} />: {floor.name}
-    </FloorContainer>
+    <>
+      {/* <FloorContainer key={floor.id}> */}
+      {/*   <FormattedMessage id={'floor'} />: {floor.name} */}
+      {/* </FloorContainer> */}
+
+      <TimelineLocationRooms floor={floor} projects={projects} />
+    </>
   );
 }
 
