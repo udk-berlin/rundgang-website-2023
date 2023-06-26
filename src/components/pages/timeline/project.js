@@ -68,7 +68,7 @@ const EmptySpaceBox = styled.div`
   position: relative;
   z-index: -1;
 
-  left: ${({ isFirstProject }) => isFirstProject ? 'calc(2 * var(--calender-floor-left))' : 0};
+  // left: ${({ isFirstProject }) => isFirstProject ? 'calc(2 * var(--calender-floor-left))' : 0};
   width: ${({ isFirstProject, width }) => isFirstProject ? width : width}px;
 
   height: ${BOX_HEIGHT}px;

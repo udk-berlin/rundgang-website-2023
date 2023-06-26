@@ -15,7 +15,7 @@ export async function getStaticProps () {
 export default function TimelinePage ({ locations, projects }) {
   return (
     <Page>
-      <Timeline locations={Object.values(locations).slice(0,1)} projects={Object.values(projects).slice(0,1)} />
+      <Timeline locations={Object.values(locations).slice(0,1)} projects={Object.values(projects).slice(2,3)} />
     </Page>
   )
 }

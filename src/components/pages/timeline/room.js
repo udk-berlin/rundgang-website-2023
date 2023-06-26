@@ -5,6 +5,7 @@ import { TIMELINE_WIDTH, BOX_HEIGHT, FIRST_TIME, LAST_TIME } from '@/components/
 import TimelineProject from "@/components/pages/timeline/project";
 
 export default function TimelineLocationRoom({ room, roomIndex, projects }) {
+  console.log(projects)
   let groupedProjects = groupProjects(sortFlattenedProjects(flattenProjects(projects)))
 
   return (
@@ -83,13 +84,13 @@ function flattenProjects(projects) {
   const flattenedProjects = []
 
   projects.forEach(project => {
-    if('allocation' in project && 'temporal' in project.allocation) {
-      project.allocation.temporal.forEach(time => {
+    if('temporal' in project) {
+      project.temporal.forEach(time => {
         flattenedProjects.push({
           id: project.id,
           name: project.name,
-          start: time.start,
-          end: time.end,
+          start: parseInt(time.start) * 1000,
+          end: parseInt(time.end) * 1000,
         })
       })
     }

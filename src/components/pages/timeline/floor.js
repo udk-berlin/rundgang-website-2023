@@ -7,9 +7,9 @@ import TimelineLocationRooms from '@/components/pages/timeline/rooms'
 export default function TimelineLocationFloor({ floor, projects }) {
   return (
     <>
-      {/* <FloorContainer key={floor.id}> */}
-      {/*   <FormattedMessage id={'floor'} />: {floor.name} */}
-      {/* </FloorContainer> */}
+      <FloorContainer key={floor.id}>
+        <FormattedMessage id={'floor'} />: {floor.name}
+      </FloorContainer>
 
       <TimelineLocationRooms floor={floor} projects={projects} />
     </>

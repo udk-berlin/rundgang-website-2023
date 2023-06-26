@@ -1,5 +1,5 @@
-export const FIRST_TIME = 1689944400000;
-export const LAST_TIME =  1690149600000;
+export const FIRST_TIME = 1658494800000; //1689944400000;
+export const LAST_TIME = 1658700000000; // 1690149600000;
 export const BOX_HEIGHT = 34;
 export const TIMELINE_WIDTH = 6000;
 export const NUMBER_OF_HOURS = 9 + 24 + 24; // start am Freitag 15h bis Sonntag 24h
