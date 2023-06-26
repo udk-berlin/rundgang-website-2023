@@ -1,12 +1,3 @@
-.container {
-  display: grid;
-  grid-template-columns: 2fr 6fr 1fr 1fr;
-  align-items: center;
-
-  height: var(--layout-header-bar-container-height);
-  padding: 0 0.8rem;
-}
-
 .locations {
   margin-top: 5px;
 }
@@ -20,26 +11,6 @@
   color: black;
 }
 
-.timeline > a::after {
-  content: " / Zeiten";
-  display: none;
-  color: var(--color-pink);
-}
-
-.timeline > a:hover::after {
-  display: inline;
-}
-
-.cart {
-  justify-self: end;
-  margin-bottom: 7px;
-}
-
 .localization {
   justify-self: end;
 }
-
-.svg {
-  width: 50px;
-}
-

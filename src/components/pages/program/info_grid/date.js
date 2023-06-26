@@ -8,8 +8,8 @@ export default function InfoGridDate({ project }) {
   if ("temporal" in project) {
     project.temporal.forEach((date) => {
       projectTimes.push([
-        new Date((date.start - 7200) * 1000),
-        new Date((date.end - 7200) * 1000),
+        new Date(date.start),
+        new Date(date.end),
       ]);
     });
   }

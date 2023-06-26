@@ -54,6 +54,17 @@ export async function getLocationDetails (locationIds) {
         locationDetail.lat = data.allocation.physical[0].lat
       }
 
+      if ('temporal' in data.allocation) {
+        locationDetail.temporal = []
+
+        data.allocation.temporal.forEach(time => {
+          locationDetail.temporal.push({
+            start: parseInt(time.start) * 1000,
+            end: parseInt(time.end) * 1000,
+          })
+        })
+      }
+
       return locationDetail
     }
 

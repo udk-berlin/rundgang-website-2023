@@ -7,8 +7,8 @@ const ROOT_CONTEXT_ID = '!suNRlIyeorKnuZHfld:content.udk-berlin.de'
 let itemsCached = false
 const items = {}
 
-let itemDetailsCached = false
-const itemDetails = {}
+let detailsCached = false
+const details = {}
 
 export async function getListFilterTypeItems () {
   return await get(`${ROOT_ID}/list/filter/type/item`)
@@ -69,10 +69,10 @@ export async function getItems () {
       extractChildren(context)
     })
 
-    const itemDetails = await getItemDetails(Object.keys(items))
+    const details = await getDetails(Object.keys(items))
 
     Object.keys(items).forEach(id => {
-      items[id] = { ...items[id], ...itemDetails[id] }
+      items[id] = { ...items[id], ...details[id] }
     })
 
     itemsCached = true
@@ -81,12 +81,12 @@ export async function getItems () {
   return items
 }
 
-async function getItemDetails (itemIds) {
-  if (!itemDetailsCached) {
+async function getDetails (itemIds) {
+  if (!detailsCached) {
     const promises = []
 
-    const buildItemDetail = (data) => {
-      const itemDetail = {
+    const buildDetail = (data) => {
+      const detail = {
         id: data.id,
         thumbnail: data.thumbnail,
         thumbnail_full_size: data.thumbnail_full_size,
@@ -94,19 +94,28 @@ async function getItemDetails (itemIds) {
         authors: data.origin.authors
       }
 
-      if ('temporal' in data.allocation) { itemDetail.temporal = data.allocation.temporal }
+      if ('temporal' in data.allocation) {
+        detail.temporal = []
 
-      return itemDetail
+        data.allocation.temporal.forEach(time => {
+          detail.temporal.push({
+            start: (time.start - 7200) * 1000,
+            end: (time.end - 7200) * 1000,
+          })
+        })
+      }
+
+      return detail
     }
 
     itemIds.forEach(itemId => { promises.push(getId(itemId)) })
 
     await Promise
       .all(promises)
-      .then(data => { data.forEach(d => { itemDetails[d.id] = buildItemDetail(d) }) })
+      .then(data => { data.forEach(d => { details[d.id] = buildDetail(d) }) })
 
-    itemDetailsCached = true
+    detailsCached = true
   }
 
-  return itemDetails
+  return details
 }
