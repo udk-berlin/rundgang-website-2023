@@ -10,10 +10,10 @@ import {
   FaqLink,
 } from "@/components/localization/links";
 
-export default function Footer() {
+export default function Footer({ numberOfSliderStates }) {
   return (
     <FooterContainer>
-      <FooterSlider />
+      <FooterSlider numberOfSliderStates={numberOfSliderStates} />
       <Title />
       <InfoPages />
     </FooterContainer>

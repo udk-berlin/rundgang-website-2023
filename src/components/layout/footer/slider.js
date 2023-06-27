@@ -1,26 +1,30 @@
 import styled from "styled-components";
 
 import Slider from "@mui/material/Slider";
-import { useSliderDispatch } from "@/providers/slider";
+import { useSlider, useSliderDispatch } from "@/providers/slider";
 
-export default function FooterSlider() {
+export default function FooterSlider({ numberOfSliderStates }) {
   const dispatch = useSliderDispatch();
+  const state = useSlider();
 
   function handleChangeCommitted(event, value) {
     dispatch({
       type: 'update',
-      position: value
+      position: value,
+      origin: 'slider'
     })
   }
+
   return (
     <SliderContainer>
       <CustomSlider
-        defaultValue={0}
+        value={state.position}
+        defaultValue={state.position}
         valueLabelDisplay="off"
         onChangeCommitted={handleChangeCommitted}
         marks
         min={0}
-        max={6}
+        max={numberOfSliderStates - 1}
       />
     </SliderContainer>
   );

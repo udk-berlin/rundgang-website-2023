@@ -2,11 +2,14 @@
 
 :root {
   --color-pink: #d1acd0;
-  --color-transparent-pink: rgba(209, 172, 208, 0.4);
+  --color-pink-light: #ebdcea;
+  --color-pink-transparent: rgba(209, 172, 208, 0.4);
   --color-green: #1a3f2b;
-  --color-green-transparent: rgba(26, 63, 43, 0.45);
+  --color-green-light: #a2b1a9;
+  --color-green-transparent: rgba(26, 63, 43, 0.4);
   --color-white: white;
   --color-dark-gray: rgb(52, 52, 52);
+  --color-light-gray: rgb(215, 215, 215);
   --color-black: black;
   --color-black-transparent: rgba(1, 1, 1, 0.8);
 
@@ -23,7 +26,9 @@
   --locations-map-marker-text-box-padding: 3px 12px;
 
   --layout-header-bar-container-height: 60px;
-  --layout-header-search-container-height: 30px;
+  --layout-header-search-container-height: 34px;
+  --layout-header-height: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
+  --layout-footer-height: var(--layout-header-bar-container-height);
   --layout-footer-grid-template-column-1: 25vw;
   --layout-footer-grid-template-column-2: 1fr;
   --layout-footer-grid-template-column-3: 25vw;
@@ -33,6 +38,22 @@
 
   --info-grid-font-size: 0.7rem;
   --info-grid-font-weight: 500;
+  --info-grid-padding: 0.2rem 0.4rem;
+
+  --calender-days-height: 90px;
+  --calender-hours-height: 36px;
+  --calender-hours-margin-bottom: 40px;
+
+  --calender-location-height: 34px;
+  --calender-floor-room-project-height: 34px;
+
+  --calender-box-font-size: var(--info-grid-font-size);
+  --calender-box-font-weight: var(--info-grid-font-weight);
+  --calender-box-border: var(--info-border-width) solid var(--info-border-color);
+  --calender-box-padding: var(--info-grid-padding);
+  --calender-grid-border: 1px solid var(--color-light-gray);
+  --calender-floor-left: 50px;
+  --calender-floor-width: calc(100vw - var(--calender-floor-left));
 }
 
 * {
