@@ -2,11 +2,13 @@ import TimelineHeader from "@/components/pages/timeline/header/header";
 import Layout from "@/components/layout/layout";
 import TimelineContent from "@/components/pages/timeline/content";
 
-export default function Timeline({ locations }) {
+const NUMBER_OF_SLIDER_STATES = 3
+
+export default function Timeline() {
   return (
-    <Layout numberOfSliderStates={3}>
+    <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES}>
       <TimelineHeader />
-      <TimelineContent locations={locations} />
+      <TimelineContent />
     </Layout>
   );
 }

@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 import TimelineLocation from "@/components/pages/timeline/location/location";
+import { useFilter } from "@/providers/filter";
 
-export default function TimelineLocations({ locations }) {
+export default function TimelineLocations() {
+  const filter = useFilter()
+
   return (
     <LocationsContainer>
-      {locations.map(location => {
+      {Object.values(filter.filteredLocations).map(location => {
         return (
           <TimelineLocation location={location} />
         )

@@ -1,61 +1,58 @@
-import InfoGridItemLink, {
-  InfoGridItem,
-} from "@/components/pages/program/info_grid/item";
-import { useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-const FILTERS = {
-  de: [
-    {
-      title: "Fakultäten und Zentren",
-      filters: [
-        "Fakultät Bildende Kunst",
-        "Fakultät Gestaltung",
-        "Fakultät Musik",
-        "Fakultät Darstellende Kunst",
-        "Zentralinstitut für Weiterbildung (ZIW)",
-        "Jazz-Institut Berlin (JIB)",
-        "Hochschulübergreifendes Zentrum Tanz Berlin (HZT)",
-        "Berlin Career College",
-      ],
-    },
-    {
-      title: "Formate",
-      filters: [
-        "Ausstellung",
-        "Beratungsangebot",
-        "DJ-Set",
-        "Filmvorführung/Screening",
-        "Führung",
-        "Installation",
-        "(Klanginstallation)",
-        "Konzert",
-        "Gespräch",
-        "Lesung",
-        "Modenschau",
-        "Musical",
-        "offene Probe",
-        "Open Space",
-        "Oper",
-        "Performance",
-        "Podiumsgespräch",
-        "Projektpräsentation",
-        "Tanz",
-        "Theater",
-        "Vortrag",
-        "Workshop",
-        "Weitere",
-      ],
-    },
-  ],
-};
+import { useFilter, useFilterDispatch }  from "@/providers/filter";
+
+// const FILTERS = {
+//   de: [
+//     {
+//       title: "Formate",
+//       filters: [
+//         "Ausstellung",
+//         "Beratungsangebot",
+//         "DJ-Set",
+//         "Filmvorführung/Screening",
+//         "Führung",
+//         "Installation",
+//         "(Klanginstallation)",
+//         "Konzert",
+//         "Gespräch",
+//         "Lesung",
+//         "Modenschau",
+//         "Musical",
+//         "offene Probe",
+//         "Open Space",
+//         "Oper",
+//         "Performance",
+//         "Podiumsgespräch",
+//         "Projektpräsentation",
+//         "Tanz",
+//         "Theater",
+//         "Vortrag",
+//         "Workshop",
+//         "Weitere",
+//       ],
+//     },
+//   ],
+// };
 
 export default function HeaderFilters({ showFilters, setShowFilters }) {
-  const language = useIntl();
-  let filters = FILTERS.de;
-  if (language.locale === "en" && "en" in FILTERS) {
-    filters = FILTERS.en;
+  const filter = useFilter();
+  const dispatch = useFilterDispatch();
+  const filterCategories = [
+    {id: 'faculties.centres', dispatchType: 'filter-faculties-centres', filters: filter.facultiesAndCenters},
+    {id: 'formats', dispatchType: 'filter-formats', filters: filter.facultiesAndCenters}
+  ]
+
+  const getClickHandler = (id, dispatchType) => {
+    return () => {
+      dispatch(
+        {
+          type: dispatchType,
+          id: id,
+        })
+    }
   }
 
   return (
@@ -64,24 +61,24 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
         src="/assets/svg/close.svg"
         onClick={() => setShowFilters(false)}
       />
-      {filters.map((category) => (
-        <HeaderFiltersCategoryContainer>
-          <HeaderFiltersCategoryTitle>
-            {category.title}
-          </HeaderFiltersCategoryTitle>
-          <HeaderFiltersCategoryBody>
-            {category.filters.map((filter) => (
-              <InfoGridItemLink>{filter}</InfoGridItemLink>
+      {filterCategories.map((category) => (
+        <CategoryContainer>
+          <CategoryNameContainer>
+            <FormattedMessage id={category.id}/>
+          </CategoryNameContainer>
+          <FiltersContainer>
+            {Object.values(category.filters).map((f) => (
+              <FilterNameContainer key={f.id} onClick={getClickHandler(f.id, category.dispatchType)} selected={filter.facultyOrCenter === f.id}>{f.name}</FilterNameContainer>
             ))}
-          </HeaderFiltersCategoryBody>
-        </HeaderFiltersCategoryContainer>
+          </FiltersContainer>
+        </CategoryContainer>
       ))}
     </HeaderFiltersContainer>
   );
 }
 
 const HeaderFiltersContainer = styled.div`
-  display: ${(props) => (props.showFilters ? "block" : "none")};
+  display: ${({ showFilters }) => showFilters ? "block" : "none"};
 
   position: absolute;
   top: calc(
@@ -91,6 +88,10 @@ const HeaderFiltersContainer = styled.div`
 
   margin-right: calc(2rem + var(--border-width));
   margin-left: 2rem;
+  
+  width: var(--layout-header-filters-width);
+  min-width: var(--layout-header-filters-width);
+  max-width: var(--layout-header-filters-width);
 
   outline: var(--border-width) solid var(--border-color);
 
@@ -111,19 +112,43 @@ const HeaderFiltersClose = styled(ReactSVG)`
   }
 `;
 
-const HeaderFiltersCategoryContainer = styled.div`
-  font-size: 0.7rem;
-  font-weight: 500;
+const CategoryContainer = styled.div`
+  font-size: var(--info-grid-font-size);
+  font-weight: var(--info-grid-font-weight);
   padding: 1rem 1rem 0 1rem;
 `;
 
-const HeaderFiltersCategoryTitle = styled(InfoGridItem)`
-  background-color: #000;
-  color: var(--color-white);
+const CategoryNameContainer = styled.div`
   display: inline-block;
+  
+  padding: var(--info-grid-padding);
+  border: var(--info-border-width) solid var(--info-border-color);
+
+  background: var(--color-black);
+  color: var(--color-white);
+
+  cursor: default;
 `;
 
-const HeaderFiltersCategoryBody = styled.div`
+const FiltersContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+const FilterNameContainer = styled.div`
+  margin-right: calc(var(--info-border-width) * -1);
+
+  padding: var(--info-grid-padding);
+
+  border: var(--info-border-width) solid var(--info-border-color);
+  
+  background: ${({ selected }) => selected ? 'var(--color-pink)' : 'var(--color-white)'};
+  color:  ${({ selected }) => selected ? 'var(--color-white)' : 'var(--color-black)'};
+  
+  cursor: pointer;
+  
+  :hover {
+    background: var(--color-pink);
+    color: var(--color-white);
+  }
 `;

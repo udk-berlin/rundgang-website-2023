@@ -1,7 +1,26 @@
 import { getLocations } from "@/utils/api/locations";
 import { getItems } from "@/utils/api/items";
+import { getStructures } from "@/utils/api/structures";
 
-function filterLocations(locations, items) {
+export async function getTimelineLocations() {
+  const timelineLocations = {}
+  const locations = await getLocations()
+  const items = await getItems()
+
+  filter(Object.values(locations), items).forEach(location => timelineLocations[location.id] = location)
+  return timelineLocations
+}
+
+export async function getTimelineStructures() {
+  const timelineStructure = {}
+  const structures = await getStructures()
+  const items = await getItems()
+
+  filter(Object.values(structures), items).forEach(structure => timelineStructure[structure.id] = structure)
+  return timelineStructure
+}
+
+function filter(array, items) {
   const getChildren = (result, object) => {
     if (object.type === 'item' &&  items[object.id].temporal) {
       result.push(
@@ -19,12 +38,5 @@ function filterLocations(locations, items) {
     return result;
   };
 
-  return locations.reduce(getChildren, []);
-}
-
-export default async function getTimelineLocations() {
-  const locations = await getLocations()
-  const items = await getItems()
-
-  return filterLocations(Object.values(locations), items)
+  return array.reduce(getChildren, []);
 }

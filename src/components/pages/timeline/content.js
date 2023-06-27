@@ -7,7 +7,7 @@ import TimelineGrid from "@/components/pages/timeline/grid";
 import TimelineLocations from "@/components/pages/timeline/location/locations";
 import { DAYS, TIMELINE_WIDTH } from "@/components/pages/timeline/constants";
 
-export default function TimelineContent({ locations }) {
+export default function TimelineContent() {
   const language = useIntl();
   const slider = useSlider()
   const dispatch = useSliderDispatch()
@@ -52,9 +52,9 @@ export default function TimelineContent({ locations }) {
   }, [slider.position, slider.origin])
 
   return (
-    <ContentContainer ref={ref} id={'timeline'} onScroll={handleScroll} >
+    <ContentContainer id={'timeline'} ref={ref} onScroll={handleScroll} >
       <TimelineGrid />
-      <TimelineLocations locations={locations} />
+      <TimelineLocations />
     </ContentContainer>
   );
 }

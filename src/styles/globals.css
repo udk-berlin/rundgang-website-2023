@@ -28,6 +28,13 @@
   --layout-header-bar-container-height: 60px;
   --layout-header-search-container-height: 34px;
   --layout-header-height: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
+  --layout-header-filters-bar-template-column-1: 2rem;
+  --layout-header-filters-bar-template-column-2: 1fr;
+  --layout-header-filters-bar-template-column-3: 2rem;
+  --layout-header-filters-bar-template-columns: var(--layout-header-filters-bar-template-column-1) var(--layout-header-filters-bar-template-column-2) var(--layout-header-filters-bar-template-column-3);
+
+  --layout-header-filters-width: calc(100vw - var(--layout-header-filters-bar-template-column-1) - var(--layout-header-filters-bar-template-column-3) - var(--border-width));
+
   --layout-footer-height: var(--layout-header-bar-container-height);
   --layout-footer-grid-template-column-1: 25vw;
   --layout-footer-grid-template-column-2: 1fr;

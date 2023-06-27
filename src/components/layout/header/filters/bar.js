@@ -17,7 +17,7 @@ export default function HeaderFiltersBar({ showFilters, setShowFilters }) {
 
 const HeaderFiltersBarContainer = styled.div`
   display: grid;
-  grid-template-columns: 2rem 1fr 2rem;
+  grid-template-columns: var(--layout-header-filters-bar-template-columns);
   border-top: var(--border-width) solid var(--border-color);
   font-size: 0.8rem;
 
