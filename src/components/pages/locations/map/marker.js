@@ -46,13 +46,21 @@ const GroundPlanContainer = styled.div`
 `
 
 const TextBoxContainer = styled.div`
-  cursor: pointer;
+  padding: var(--map-marker-padding);
+
+  border: var(--border-width) solid var(--color-dark-gray);
   background: ${({ selected }) => selected ? 'var(--color-pink)' :  'var(--color-dark-gray)'};
+  
+  
+  font-size: var(--map-marker-font-size);
+  font-weight: var(--map-marker-font-weight);
   color: var(--color-white);
-  padding: var(--locations-map-marker-text-box-padding);
 
   :hover {
+    border: var(--border-width) solid var(--color-pink);
     background: var(--color-pink);
     color: var(--color-white);
   }
+
+  cursor: pointer;
 `
