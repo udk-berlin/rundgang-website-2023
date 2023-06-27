@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
-import { BOX_HEIGHT } from "@/components/pages/timeline/constants";
 import TimelineLocationRooms from '@/components/pages/timeline/rooms'
 
-export default function TimelineLocationFloor({ floor, projects }) {
+export default function TimelineLocationFloor({ floor }) {
+  const rooms = Object.values(floor.children).filter(child => child.template === 'location-room')
+
   return (
     <>
       <FloorContainer key={floor.id}>
         <FormattedMessage id={'floor'} />: {floor.name}
       </FloorContainer>
 
-      <TimelineLocationRooms floor={floor} projects={projects} />
+      <TimelineLocationRooms rooms={rooms} />
     </>
   );
 }
@@ -25,15 +26,16 @@ const FloorContainer = styled.div`
   display: flex;
   align-items: center;
 
-  height: ${BOX_HEIGHT}px;
-  min-height: ${BOX_HEIGHT}px;
-  max-height: ${BOX_HEIGHT}px;
+  height: var(--calender-floor-room-project-height);
+  min-height: var(--calender-floor-room-project-height);
+  max-height: var(--calender-floor-room-project-height);
   width: var(--calender-floor-width);
 
   padding: var(--info-grid-padding);
+  margin-top: -2px;
   
   border: var(--border-width) solid var(--border-color);
-  border-top: 0;
+  //border-top: 0;
 
   background: var(--color-white);
 
@@ -41,8 +43,10 @@ const FloorContainer = styled.div`
   font-weight: var(--info-grid-font-weight);
   color: var(--color-black);
 
-  :hover {
-    background: var(--color-pink);
-    color: var(--color-white);
-  }
+  //:hover {
+  //  background: var(--color-pink);
+  //  color: var(--color-white);
+  //}
+
+  cursor: default;
 `;

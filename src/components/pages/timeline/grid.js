@@ -7,7 +7,7 @@ export default function TimelineGrid() {
   return (
     <>
       {range(2, NUMBER_OF_HOURS - 1).map(hour => {
-        return (<GridLine x={hour * WIDTH_PER_HOUR} key={`hour-${hour}`}>{(hour + 15) % 24}</GridLine>)
+        return (<GridLine x={hour * WIDTH_PER_HOUR} key={`hour-${hour}`}/>)
       })}
     </>
   );

@@ -1,13 +1,9 @@
 import TimelineLocationFloor from "@/components/pages/timeline/floor";
 
-export default function TimelineFloors({ location, projects }) {
+export default function TimelineFloors({ floors }) {
   return (
     <>
-      {Object.values(location.children).slice(0, 1).map(child => {
-        if (child.template === 'location-level'){
-          return (<TimelineLocationFloor floor={child} projects={projects} />)
-        }
-      })}
+      {floors.map( floor => <TimelineLocationFloor floor={floor} />)}
     </>
   )
 }

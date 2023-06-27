@@ -2,21 +2,22 @@ import styled from "styled-components";
 
 import TimelineLocation from "@/components/pages/timeline/location";
 
-export default function TimelineLocations({ locations, projects }) {
+export default function TimelineLocations({ locations }) {
   return (
-    <>
+    <LocationsContainer>
       {locations.map(location => {
         return (
-          <TimelineLocationsContainer key={location.id}>
-            <TimelineLocation location={location} projects={projects} />
-          </TimelineLocationsContainer>
+          <TimelineLocation location={location} />
         )
       })}
-    </>
+    </LocationsContainer>
   )
 }
 
-const TimelineLocationsContainer = styled.div`
+const LocationsContainer = styled.div`
   position: relative;
-  margin-bottom: 1rem;
+  z-index: 0;
+
+  margin-bottom: 40px;
+  margin-top: calc(var(--calender-days-height) + var(--calender-floor-room-project-height) + var(--calender-hours-margin-bottom));
 `;
