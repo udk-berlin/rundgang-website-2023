@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
 import { TIMELINE_WIDTH } from '@/components/pages/timeline/constants'
-import TimelineProjectsGroups from "@/components/pages/timeline/projects_groups";
+import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 
 export default function TimelineLocationRoom({ room, index }) {
   const projects = Object.values(room.children).filter(child => child.type === 'item')

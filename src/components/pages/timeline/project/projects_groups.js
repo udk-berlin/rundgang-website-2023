@@ -1,5 +1,5 @@
 import {FIRST_TIME, LAST_TIME} from "@/components/pages/timeline/constants";
-import TimelineProjectsGroup from "@/components/pages/timeline/projects_group";
+import TimelineProjectsGroup from "@/components/pages/timeline/project/projects_group";
 
 export default function TimelineProjectsGroups({ projects, roomIndex = 0 }) {
   let projectsGroups = groupProjects(sortFlattenedProjects(flattenProjects(projects)))

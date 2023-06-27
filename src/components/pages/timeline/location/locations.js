@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import TimelineLocation from "@/components/pages/timeline/location";
+import TimelineLocation from "@/components/pages/timeline/location/location";
 
 export default function TimelineLocations({ locations }) {
   return (

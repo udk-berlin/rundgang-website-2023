@@ -10,7 +10,8 @@ export default function FooterSlider({ numberOfSliderStates }) {
   function handleChangeCommitted(event, value) {
     dispatch({
       type: 'update',
-      position: value
+      position: value,
+      origin: 'slider'
     })
   }
 

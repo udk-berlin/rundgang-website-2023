@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from "styled-components";
-import { useIntl, FormattedTime } from "react-intl";
+import { useIntl } from "react-intl";
 
 import { useSlider, useSliderDispatch } from "@/providers/slider";
 
@@ -14,39 +14,17 @@ import {
 export default function TimelineDays() {
   const language = useIntl();
   const slider = useSlider();
+  const dispatch = useSliderDispatch()
   const days = language.locale === 'en' ? DAYS.en : DAYS.de
 
-  const handleScroll = () => {
-    // const scrollLeft = window.document.getElementById('timeline').scrollLeft
-    //
-    // if (scrollLeft <= DAYS[0].scrollX) {
-    //   setSelectedDayIndex(0)
-    // } else if (scrollLeft > DAYS[0].scrollX && scrollLeft <= DAYS[1].scrollX) {
-    //   setSelectedDayIndex(1)
-    // } else {
-    //   setSelectedDayIndex(2)
-    // }
-  }
-
-  useEffect(() => {
-    window.document.getElementById('timeline').addEventListener("scroll", handleScroll);
-  }, [])
-
-  useEffect(() => {
-    window.document.getElementById('timeline').scrollTo({left: days[slider.position].scrollX - window.innerWidth / 2, behavior: 'smooth'})
-  }, [slider.position])
-
   const getClickHandler = (index) => {
-    const dispatch = useSliderDispatch()
-
-    const clickHandler = (e) => {
+   return () => {
       dispatch({
         type: 'update',
-        position: index
+        position: index,
+        origin: 'click'
       })
     }
-
-    return clickHandler
   }
 
   return (

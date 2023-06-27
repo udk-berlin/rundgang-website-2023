@@ -1,4 +1,4 @@
-import TimelineLocationFloor from "@/components/pages/timeline/floor";
+import TimelineLocationFloor from "@/components/pages/timeline/floor/floor";
 
 export default function TimelineFloors({ floors }) {
   return (

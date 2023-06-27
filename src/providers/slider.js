@@ -6,7 +6,7 @@ const SliderDispatchContext = createContext(null)
 export function SliderProvider ({ children }) {
   const [slider, dispatch] = useReducer(
     sliderReducer,
-    {position: 0}
+    {position: 0, origin: null}
   )
 
   return (
@@ -30,7 +30,8 @@ function sliderReducer (state, action) {
   switch (action.type) {
     case 'update': {
       return {
-        position: action.position
+        position: action.position,
+        origin: action.origin,
       }
     }
     default: {

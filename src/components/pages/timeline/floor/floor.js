@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
-import TimelineLocationRooms from '@/components/pages/timeline/rooms'
+import TimelineLocationRooms from '@/components/pages/timeline/room/rooms'
 
 export default function TimelineLocationFloor({ floor }) {
   const rooms = Object.values(floor.children).filter(child => child.template === 'location-room')

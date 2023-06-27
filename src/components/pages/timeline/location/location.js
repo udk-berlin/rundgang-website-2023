@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import TimelineFloors from '@/components/pages/timeline/floors'
-import TimelineProjectsGroups from "@/components/pages/timeline/projects_groups";
+import TimelineFloors from '@/components/pages/timeline/floor/floors'
+import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 import { TIMELINE_WIDTH } from "@/components/pages/timeline/constants";
 
 export default function TimelineLocation({ location }) {

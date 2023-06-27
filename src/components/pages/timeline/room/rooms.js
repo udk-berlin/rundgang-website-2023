@@ -1,4 +1,4 @@
-import TimelineLocationRoom from '@/components/pages/timeline/room'
+import TimelineLocationRoom from '@/components/pages/timeline/room/room'
 
 export default function TimelineLocationRooms({ rooms }) {
   return (
