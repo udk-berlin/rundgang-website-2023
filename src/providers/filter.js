@@ -3,10 +3,17 @@ import { createContext, useContext, useReducer } from 'react'
 const FilterContext = createContext(null)
 const FilterDispatchContext = createContext(null)
 
-export function FilterProvider ({ projects, structures, locations, facultiesAndCenters, children }) {
+export function FilterProvider ({ page, projects = {}, structures, locations, facultiesAndCenters, children }) {
   const [filter, dispatch] = useReducer(
     filterReducer,
-    {projects: projects, filteredProjects: projects, structures: structures, locations: locations, filteredLocations: locations, facultiesAndCenters: facultiesAndCenters}
+    {
+      projects: projects,
+      filteredProjects: projects,
+      structures: structures,
+      locations: locations,
+      filteredLocations: locations,
+      facultiesAndCenters: facultiesAndCenters
+    }
   )
 
   return (
@@ -28,141 +35,216 @@ export function useFilterDispatch () {
 
 function filterReducer (state, action) {
   switch (action.type) {
-    case 'select-location': {
+    case 'filter-location': {
+      let filteredLocations = filterByNodeId(state.locations, action.location.id)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        const itemNodeIds = getItemNodeIds(filteredStructures)
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      }
+
       const filteredProjects = {}
-      Object.values(state.projects).forEach(project => {
-        if (
-          ('location-building' in project && project['location-building'].id === action.location.id) ||
-          ('location-external' in project && project['location-external'].id === action.location.id)
-        ) {
-          filteredProjects[project.id] = project
-        }
-      })
+      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
 
       return {
         projects: state.projects,
-        structures: state.structures,
-        locations: state.locations,
+        filteredProjects: filteredProjects,
 
+        locations: state.locations,
+        filteredLocations: filteredLocations,
+
+        structures: state.structures,
         facultiesAndCenters: state.facultiesAndCenters,
 
-        filteredProjects: filteredProjects,
+        structure: state.structure,
         location: action.location
       }
     }
     case 'all-locations': {
       return {
         projects: state.projects,
-        structures: state.structures,
-        locations: state.locations,
+        filteredProjects: state.projects,
 
+        locations: state.locations,
+        filteredLocations: state.locations,
+
+        structures: state.structures,
         facultiesAndCenters: state.facultiesAndCenters,
 
-        filteredProjects: state.projects,
+        structure: state.structure,
       }
     }
-    case 'select-floor': {
+    case 'filter-floor': {
+      let filteredLocations = filterByNodeId(state.locations, action.floor.id)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        const itemNodeIds = getItemNodeIds(filteredStructures)
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      }
+
       const filteredProjects = {}
-      Object.values(state.projects).forEach(project => {
-        if ('location-level' in project && project['location-level'].id === action.floor.id) {
-          filteredProjects[project.id] = project
-        }
-      })
+      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
 
       return {
         projects: state.projects,
-        structures: state.structures,
-        locations: state.locations,
+        filteredProjects: filteredProjects,
 
+        locations: state.locations,
+        filteredLocations: filteredLocations,
+
+        structures: state.structures,
         facultiesAndCenters: state.facultiesAndCenters,
 
-        filteredProjects: filteredProjects,
+        structure: state.structure,
         location: state.location,
         floor: action.floor
       }
     }
     case 'all-floors': {
+      let filteredLocations = filterByNodeId(state.locations, state.location.id)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        const itemNodeIds = getItemNodeIds(filteredStructures)
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      }
+
       const filteredProjects = {}
-      Object.values(state.projects).forEach(project => {
-        if (
-          ('location-building' in project && project['location-building'].id === state.location.id) ||
-          ('location-external' in project && project['location-external'].id === state.location.id)
-        ) {
-          filteredProjects[project.id] = project
-        }
-      })
+      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+
 
       return {
         projects: state.projects,
-        structures: state.structures,
-        locations: state.locations,
+        filteredProjects: filteredProjects,
 
+        locations: state.locations,
+        filteredLocations: filteredLocations,
+
+        structures: state.structures,
         facultiesAndCenters: state.facultiesAndCenters,
 
-        filteredProjects: filteredProjects,
+        structure: state.structure,
         location: state.location
       }
     }
-    case 'select-room': {
+    case 'filter-room': {
+      let filteredLocations = filterByNodeId(state.locations, action.room.id)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        const itemNodeIds = getItemNodeIds(filteredStructures)
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      }
+
       const filteredProjects = {}
-      Object.values(state.projects).forEach(project => {
-        if ('location-room' in project && project['location-room'].id === action.room.id) {
-          filteredProjects[project.id] = project
-        }
-      })
+      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
 
       return {
         projects: state.projects,
-        structures: state.structures,
-        locations: state.locations,
+        filteredProjects: filteredProjects,
 
+        locations: state.locations,
+        filteredLocations: filteredLocations,
+
+        structures: state.structures,
         facultiesAndCenters: state.facultiesAndCenters,
 
-        filteredProjects: filteredProjects,
+        structure: state.structure,
         location: state.location,
         floor: state.floor,
         room: action.room
       }
     }
     case 'all-rooms': {
+      let filteredLocations = filterByNodeId(state.locations, state.floor.id)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        const itemNodeIds = getItemNodeIds(filteredStructures)
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      }
+
       const filteredProjects = {}
-      Object.values(state.projects).forEach(project => {
-        if ('location-level' in project && project['location-level'].id === state.floor.id) {
-          filteredProjects[project.id] = project
-        }
-      })
+      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
 
       return {
         projects: state.projects,
-        structures: state.structures,
-        locations: state.locations,
+        filteredProjects: filteredProjects,
 
+        locations: state.locations,
+        filteredLocations: filteredLocations,
+
+        structures: state.structures,
         facultiesAndCenters: state.facultiesAndCenters,
 
-        filteredProjects: filteredProjects,
+        structure: state.structure,
         location: state.location,
         floor: state.floor
       }
     }
-
-    case 'filter-faculties-centres': {
+    case 'filter-structure': {
       const filteredStructures = filterByNodeId(state.structures, action.id)
-      const itemIds = getItemIds(filteredStructures)
-      const filteredLocations = filterByNodeIds(state.locations, itemIds)
+      const itemNodeIds = getItemNodeIds(filteredStructures)
+      let filteredLocations = filterByNodeIds(state.locations, itemNodeIds)
+
+      if (state.room) {
+        filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+      } else if (state.floor) {
+        filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+      } else if (state.location) {
+        filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+      }
+
+      const filteredProjects = {}
+      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
 
       return {
         projects: state.projects,
-        structures: state.structures,
+        filteredProjects: filteredProjects,
+
         locations: state.locations,
-
-        facultiesAndCenters: state.facultiesAndCenters,
-
         filteredLocations: filteredLocations,
 
-        facultyOrCenter: action.id
+        structures: state.structures,
+        facultiesAndCenters: state.facultiesAndCenters,
+
+        structure: action.id,
+        location: state.location,
+        floor: state.floor,
+        room: action.room
       }
     }
+    case 'all-structures': {
+      let filteredLocations = state.locations
 
+      if (state.room) {
+        filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+      } else if (state.floor) {
+        filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+      } else if (state.location) {
+        filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+      }
+
+      const filteredProjects = {}
+      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+
+      return {
+        projects: state.projects,
+        filteredProjects: filteredProjects,
+
+        locations: state.locations,
+        filteredLocations: filteredLocations,
+
+        structures: state.structures,
+        facultiesAndCenters: state.facultiesAndCenters,
+
+        location: state.location,
+        floor: state.floor,
+        room: action.room
+      }
+    }
     default: {
       throw Error('Unknown action: ' + action.type)
     }
@@ -187,7 +269,7 @@ function filterByNodeId(tree, nodeId) {
   return resultTree;
 }
 
-function getItemIds(tree) {
+function getItemNodeIds(tree) {
   const itemIds = []
 
   const getChildren = (current) => {

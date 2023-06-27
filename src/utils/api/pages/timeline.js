@@ -1,5 +1,5 @@
-import { getLocations } from "@/utils/api/locations";
 import { getItems } from "@/utils/api/items";
+import { getLocations } from "@/utils/api/locations";
 import { getStructures } from "@/utils/api/structures";
 
 export async function getTimelineLocations() {
@@ -12,12 +12,12 @@ export async function getTimelineLocations() {
 }
 
 export async function getTimelineStructures() {
-  const timelineStructure = {}
+  const timelineStructures = {}
   const structures = await getStructures()
   const items = await getItems()
 
-  filter(Object.values(structures), items).forEach(structure => timelineStructure[structure.id] = structure)
-  return timelineStructure
+  filter(Object.values(structures), items).forEach(structure => timelineStructures[structure.id] = structure)
+  return timelineStructures
 }
 
 function filter(array, items) {

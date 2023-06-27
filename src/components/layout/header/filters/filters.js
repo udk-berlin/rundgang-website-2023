@@ -4,56 +4,13 @@ import styled from "styled-components";
 
 import { useFilter, useFilterDispatch }  from "@/providers/filter";
 
-// const FILTERS = {
-//   de: [
-//     {
-//       title: "Formate",
-//       filters: [
-//         "Ausstellung",
-//         "Beratungsangebot",
-//         "DJ-Set",
-//         "Filmvorführung/Screening",
-//         "Führung",
-//         "Installation",
-//         "(Klanginstallation)",
-//         "Konzert",
-//         "Gespräch",
-//         "Lesung",
-//         "Modenschau",
-//         "Musical",
-//         "offene Probe",
-//         "Open Space",
-//         "Oper",
-//         "Performance",
-//         "Podiumsgespräch",
-//         "Projektpräsentation",
-//         "Tanz",
-//         "Theater",
-//         "Vortrag",
-//         "Workshop",
-//         "Weitere",
-//       ],
-//     },
-//   ],
-// };
-
 export default function HeaderFilters({ showFilters, setShowFilters }) {
   const filter = useFilter();
   const dispatch = useFilterDispatch();
   const filterCategories = [
-    {id: 'faculties.centres', dispatchType: 'filter-faculties-centres', filters: filter.facultiesAndCenters},
-    {id: 'formats', dispatchType: 'filter-formats', filters: filter.facultiesAndCenters}
+    {nameFormattedMessageId: 'faculties.centres', filterAllFormattedMessageId: 'faculties.centres.all', filterDispatchType: 'filter-structure', filterAllDispatchType: 'all-structures', filters: filter.facultiesAndCenters},
+    // {id: 'formats', dispatchType: 'filter-formats', filters: filter.facultiesAndCenters}
   ]
-
-  const getClickHandler = (id, dispatchType) => {
-    return () => {
-      dispatch(
-        {
-          type: dispatchType,
-          id: id,
-        })
-    }
-  }
 
   return (
     <HeaderFiltersContainer showFilters={showFilters}>
@@ -64,11 +21,14 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
       {filterCategories.map((category) => (
         <CategoryContainer>
           <CategoryNameContainer>
-            <FormattedMessage id={category.id}/>
+            <FormattedMessage id={category.nameFormattedMessageId}/>
           </CategoryNameContainer>
           <FiltersContainer>
+            <FilterNameContainer key={-1} onClick={() => {dispatch({type: category.filterAllDispatchType})}} selected={!(filter.structure)}>
+              <FormattedMessage id={category.filterAllFormattedMessageId}/>
+            </FilterNameContainer>
             {Object.values(category.filters).map((f) => (
-              <FilterNameContainer key={f.id} onClick={getClickHandler(f.id, category.dispatchType)} selected={filter.facultyOrCenter === f.id}>{f.name}</FilterNameContainer>
+              <FilterNameContainer key={f.id} onClick={() => dispatch({type: category.filterDispatchType, id: f.id})} selected={filter.structure === f.id}>{f.name}</FilterNameContainer>
             ))}
           </FiltersContainer>
         </CategoryContainer>

@@ -31,13 +31,13 @@ function LocationsGroundPlanRoom ({ key, room }) {
   const handleClick = (e) => {
     dispatch(
       {
-        type: 'select-room',
+        type: 'filter-room',
         room: room
       })
   }
 
   return (
-    <LocationsGroundPlanRoomContainer key={key} selected={('room' in filter && filter.room.id === room.id)} onClick={handleClick}>
+    <LocationsGroundPlanRoomContainer key={key} selected={(filter.room && filter.room.id === room.id)} onClick={handleClick}>
       <div>
         <FormattedMessage id={'room'}/>: {room.name}
       </div>
@@ -48,7 +48,7 @@ function LocationsGroundPlanRoom ({ key, room }) {
 function LocationsGroundPlanRoomsAll () {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
-  const roomSelected = !('room' in filter)
+  const roomSelected = !(filter.room)
 
   const handleClick = (e) => {
     dispatch(

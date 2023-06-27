@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { getTimelineLocations, getTimelineStructures } from "@/utils/api/timeline";
+import { getTimelineLocations, getTimelineStructures } from "@/utils/api/pages/timeline";
 import { getFacultiesAndCenters } from "@/utils/api/structures";
+
+import { FilterProvider }  from "@/providers/filter";
 
 import Page from "@/components/pages/page";
 import Timeline from "@/components/pages/timeline/timeline";
-import { FilterProvider }  from "@/providers/filter";
 
 export async function getStaticProps () {
   const locations = await getTimelineLocations()
@@ -18,7 +19,7 @@ export async function getStaticProps () {
 export default function TimelinePage ({ locations, structures, facultiesAndCenters }) {
   return (
     <Page>
-      <FilterProvider projects={[]} structures={structures} locations={locations} facultiesAndCenters={facultiesAndCenters}>
+      <FilterProvider page={'timeline'} locations={locations} structures={structures} facultiesAndCenters={facultiesAndCenters}>
         <Timeline />
       </FilterProvider>
     </Page>

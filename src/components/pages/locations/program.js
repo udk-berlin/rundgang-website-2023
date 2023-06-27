@@ -7,7 +7,7 @@ import { useFilter } from "@/providers/filter";
 export default function LocationsProgram() {
   const filter = useFilter()
 
-  if (!('location' in filter)) {
+  if (!(filter.location)) {
     return <></>
   }
 
