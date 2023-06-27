@@ -5,10 +5,8 @@ export default function LandingAnnouncement() {
   return (
     <div className={styles.container}>
       <div>
-        Hier wird ab dem 5.07.2023 das Programm des Rundgang 2023
-        veröffentlicht.
+        Hier wird ab dem 5. Juli das Programm des Rundgang 2023 veröffentlicht.
         <ArrowLink>
-          <span>&rarr;&nbsp;</span>
           <a
             href="https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/"
             target="_blank"
@@ -17,9 +15,8 @@ export default function LandingAnnouncement() {
           </a>
         </ArrowLink>
         <ArrowLink>
-          <span>&rarr;&nbsp;</span>
           <a href="https://2022.rundgang.udk-berlin.de" target="_blank">
-            &nbsp;zur Rundgang-Plattform 2022
+            Zum Programm des Rundgang 2022
           </a>
         </ArrowLink>
       </div>
@@ -28,7 +25,12 @@ export default function LandingAnnouncement() {
 }
 
 const ArrowLink = styled.div`
-  display: flex;
+  &::before {
+    content: '→ ';
+    position: relative;
+    top: -1px;
+    margin-right: 5px;
+  }
 
   & > a:hover {
     text-decoration: underline;
