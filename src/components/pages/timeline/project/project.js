@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 
-import { WIDTH_PER_MINUTE, FIRST_TIME } from "@/components/pages/timeline/constants";
+import { WIDTH_PER_MINUTE, PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME } from "@/components/pages/timeline/constants";
 import ProjectLink from "@/components/pages/projects/link";
 
 function millisecondsToMinutes(milliseconds) {
@@ -11,34 +11,46 @@ function millisecondsToMinutes(milliseconds) {
 export default function TimelineProject({ project, previousProject, nextProjectGroup, projectsGroupsLength, projectsGroupIndex, roomIndex }) {
   const [showImage, setShowImage] = useState(false);
 
-  let projectWidth = millisecondsToMinutes((project.end - project.start)) * WIDTH_PER_MINUTE
+  let projectStart
 
-  let emptySpaceWidth
-  if (previousProject) {
-    emptySpaceWidth = millisecondsToMinutes((project.start - previousProject.end)) * WIDTH_PER_MINUTE
+  if (project.start < PROJECTS_FIRST_TIME) {
+    projectStart = PROJECTS_FIRST_TIME
   } else {
-    emptySpaceWidth = millisecondsToMinutes((project.start - FIRST_TIME)) * WIDTH_PER_MINUTE
+    projectStart = project.start
   }
 
-  if (!previousProject) {
-    emptySpaceWidth -= 100
+  let projectEnd
+
+  if (project.end > PROJECTS_LAST_TIME) {
+    projectEnd = PROJECTS_LAST_TIME
+  } else {
+    projectEnd = project.end
+  }
+
+  let projectWidth = millisecondsToMinutes((projectEnd - projectStart)) * WIDTH_PER_MINUTE
+
+  let emptyTimelineWidth
+  if (previousProject) {
+    emptyTimelineWidth = millisecondsToMinutes((project.start - previousProject.end)) * WIDTH_PER_MINUTE
+  } else {
+    emptyTimelineWidth = millisecondsToMinutes((project.start - PROJECTS_FIRST_TIME)) * WIDTH_PER_MINUTE
   }
 
   return (
     <>
-      {
-        !previousProject ?  <FirstEmptySpaceBox /> : <></>
+      {!previousProject ?  <FirstEmptyTimeline /> : <></>}
+      {projectStart === PROJECTS_FIRST_TIME ? <></> :
+        <EmptyTimeline
+          isFirstProject={!previousProject}
+          isFirstGroup={projectsGroupIndex === 0}
+          isLastGroup={projectsGroupIndex === projectsGroupsLength - 1}
+          hasNoProjectUnderneath={!nextProjectGroup || nextProjectGroup[nextProjectGroup.length - 1].end < project.start}
+          width={emptyTimelineWidth}
+          roomIndex={roomIndex}
+        >
+          <EmptyTimelineLine roomIndex={roomIndex}/>
+        </EmptyTimeline>
       }
-      <EmptySpaceBox
-        isFirstProject={!previousProject}
-        isFirstGroup={projectsGroupIndex === 0}
-        isLastGroup={projectsGroupIndex === projectsGroupsLength - 1}
-        hasNoProjectUnderneath={!nextProjectGroup || nextProjectGroup[nextProjectGroup.length - 1].end < project.start}
-        width={emptySpaceWidth}
-        roomIndex={roomIndex}
-      >
-        <EmptySpaceLine roomIndex={roomIndex}/>
-      </EmptySpaceBox>
       <ProjectContainer>
         <ProjectLink project={project}>
           <ProjectTimeline
@@ -76,12 +88,15 @@ const ProjectImage = styled.img`
   display: ${({ showImage }) => showImage ? 'inline' : 'none'};
   
   position: absolute;
-  top: 0;
+  top: calc(var(--calender-floor-room-project-height) - var(--calender-box-border-width));
   left: 0;
   z-index: 5;
 
-  width: 500px;
+  max-height: 30vh;
+  max-width: 30vw;
+  
   height: auto;
+  width: auto;
 
   border: var(--calender-box-border);
   
@@ -123,7 +138,7 @@ const ProjectTimeline = styled.div`
   cursor: pointer;
 `;
 
-const EmptySpaceBox = styled.div`
+const EmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
 
@@ -139,17 +154,17 @@ const EmptySpaceBox = styled.div`
   border-left: ${({ isFirstProject }) => isFirstProject ? 'var(--info-border-width) solid var(--info-border-color)' : 0};
 `;
 
-const EmptySpaceLine = styled.div`
+const EmptyTimelineLine = styled.div`
   padding-top: calc(var(--calender-floor-room-project-height) / 2 - var(--border-width)); // todo: set correct padding (dynamic)
   border-bottom: var(--border-width) solid ${({ roomIndex }) => ((roomIndex % 2 === 0) ? 'var(--color-pink)' : 'var(--color-green)')};
 `;
 
 
-const FirstEmptySpaceBox = styled.div`
+const FirstEmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
-
-  width: 100px;
+  
+  width: calc(2 * var(--calender-floor-left));
 
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);

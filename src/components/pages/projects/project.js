@@ -20,7 +20,7 @@ export default function Project({ project }) {
   );
 
   return (
-    <Layout>
+    <Layout disableFilter={true}>
       <Container>
         <ImageContainer>
           <ProjectInfoGrid project={project} />

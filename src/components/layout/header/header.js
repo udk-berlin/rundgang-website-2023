@@ -5,14 +5,14 @@ import HeaderFiltersBar from "@/components/layout/header/filters/bar";
 import HeaderFilters from "@/components/layout/header/filters/filters";
 import { useState } from "react";
 
-export default function Header() {
+export default function Header({ disableFilter }) {
   const [showFilters, setShowFilters] = useState(false);
 
   return (
     <HeaderContainer>
       <HeaderBar />
-      <HeaderFiltersBar showFilters={showFilters} setShowFilters={setShowFilters} />
-      <HeaderFilters showFilters={showFilters} setShowFilters={setShowFilters} />
+      <HeaderFiltersBar showFilters={showFilters} setShowFilters={setShowFilters} disableFilter={disableFilter} />
+      {disableFilter ? <></> : <HeaderFilters showFilters={showFilters} setShowFilters={setShowFilters} />}
     </HeaderContainer>
   );
 }
@@ -28,5 +28,5 @@ const HeaderContainer = styled.div`
   grid-template-columns: 1fr;
   border: var(--border-width) solid var(--border-color);
 
-  background-color: #fff;
+  background-color: var(--color-white);
 `;

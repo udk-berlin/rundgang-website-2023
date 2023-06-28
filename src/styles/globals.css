@@ -59,11 +59,32 @@
 
   --calender-box-font-size: var(--info-grid-font-size);
   --calender-box-font-weight: var(--info-grid-font-weight);
-  --calender-box-border: var(--info-border-width) solid var(--info-border-color);
+  --calender-box-border-width: var(--info-border-width);
+  --calender-box-border: var(--calender-box-border-width) solid var(--info-border-color);
   --calender-box-padding: var(--info-grid-padding);
   --calender-grid-border: 1px solid var(--color-light-gray);
   --calender-floor-left: 50px;
   --calender-floor-width: calc(100vw - var(--calender-floor-left));
+}
+
+*::-webkit-scrollbar {
+
+  height: 2px;
+  width: 2px;
+  /*background: rgba(255, 255, 255, 0);*/
+}
+
+*::-webkit-scrollbar-track {
+  /*background: var(--color-pink-transparent);*/
+  /*outline: var(--border-width) solid var(--color-black);*/
+}
+
+*::-webkit-scrollbar-thumb {
+  /*background: var(--color-pink);*/
+  background: var(--color-black);
+  /*background: var(--color-black);*/
+  /*outline: var(--border-width) solid var(--color-black);*/
+  -webkit-border-radius: 0;
 }
 
 * {

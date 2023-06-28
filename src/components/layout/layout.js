@@ -4,11 +4,11 @@ import { SliderProvider } from "@/providers/slider";
 import Header from "@/components/layout/header/header";
 import Footer from "@/components/layout/footer/footer";
 
-export default function Layout({ children, numberOfSliderStates = 7 }) {
+export default function Layout({ children, disableFilter = false, numberOfSliderStates = 7 }) {
   return (
     <Container>
       <SliderProvider>
-        <Header/>
+        <Header disableFilter={disableFilter} />
         <Content>
           {children}
         </Content>

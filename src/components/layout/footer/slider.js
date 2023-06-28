@@ -49,7 +49,8 @@ const CustomSlider = styled(Slider)`
   color: black;
 
   & > .MuiSlider-rail {
-    color: var(--color-pink) !important;
+    color: var(--color-pink-transparent) !important;
+    opacity: 1 !important;
   }
 
   & > .MuiSlider-thumb {

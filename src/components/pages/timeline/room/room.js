@@ -51,10 +51,5 @@ const Room = styled.div`
   font-weight: var(--info-grid-font-weight);
   color: var(--color-black);
 
-  //:hover {
-  //  background: var(--color-pink);
-  //  color: var(--color-white);
-  //}
-
   cursor: default;
 `;
