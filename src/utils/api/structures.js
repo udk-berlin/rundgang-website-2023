@@ -1,17 +1,15 @@
 import { getTree } from '@/utils/api/api'
 
-const ROOT_STRUCTURES_ID = '!suNRlIyeorKnuZHfld:content.udk-berlin.de'
-
 let structuresCached = false
 let structures = {}
 
-let facultiesAndCentersCached = false
-let facultiesAndCenters = {}
+let structuresFiltersCached = false
+let structuresFilters = {}
 
 export async function getStructures () {
   if (!structuresCached) {
-    const tree = await getTree(ROOT_STRUCTURES_ID)
-    filterStructures(Object.values(tree.children)).forEach( structure => {
+    const tree = await getTree(process.env.REST_API_STRUCTURES_ROOT_ID)
+    filter(Object.values(tree.children)).forEach( structure => {
       structures[structure.id] = structure
     })
 
@@ -21,7 +19,7 @@ export async function getStructures () {
   return structures
 }
 
-function filterStructures(array) {
+function filter(array) {
   const getChildren = (result, object) => {
     if (object.type === 'item') {
       result.push(object);
@@ -36,14 +34,14 @@ function filterStructures(array) {
   return array.reduce(getChildren, []);
 }
 
-export async function getFacultiesAndCenters () {
-  if (!facultiesAndCentersCached) {
-    const tree = await getTree(ROOT_STRUCTURES_ID)
+export async function getStructuresFilters () {
+  if (!structuresFiltersCached) {
+    const tree = await getTree(process.env.REST_API_STRUCTURES_ROOT_ID)
 
     const getChildren = (current) => {
       Object.values(current.children).forEach(child => {
         if (child.template === 'centre' || child.template === 'faculty') {
-          facultiesAndCenters[child.id] = {
+          structuresFilters[child.id] = {
             id: child.id,
             name: child.name,
             template: child.template
@@ -56,8 +54,8 @@ export async function getFacultiesAndCenters () {
 
     getChildren(tree)
 
-    facultiesAndCentersCached = true
+    structuresFiltersCached = true
   }
 
-  return facultiesAndCenters
+  return structuresFilters
 }

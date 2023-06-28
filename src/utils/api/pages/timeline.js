@@ -22,7 +22,7 @@ export async function getTimelineStructures() {
 
 function filter(array, items) {
   const getChildren = (result, object) => {
-    if (object.type === 'item' &&  items[object.id].temporal) {
+    if (object.type === 'item' && items[object.id].temporal) {
       result.push(
         {
           ...object,

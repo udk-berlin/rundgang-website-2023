@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 
-import { WIDTH_PER_MINUTE, PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME } from "@/components/pages/timeline/constants";
+import { WIDTH_PER_MINUTE, PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME, WIDTH_PER_HOUR } from "@/components/pages/timeline/constants";
 import ProjectLink from "@/components/pages/projects/link";
 
 function millisecondsToMinutes(milliseconds) {
@@ -29,7 +29,7 @@ export default function TimelineProject({ project, previousProject, nextProjectG
 
   let projectWidth = millisecondsToMinutes((projectEnd - projectStart)) * WIDTH_PER_MINUTE
 
-  let emptyTimelineWidth
+  let emptyTimelineWidth = 0
   if (previousProject) {
     emptyTimelineWidth = millisecondsToMinutes((project.start - previousProject.end)) * WIDTH_PER_MINUTE
   } else {
@@ -142,7 +142,7 @@ const EmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
 
-  width: ${({ isFirstProject, width }) => isFirstProject ?  `calc(${width}px - 2 * var(--calender-floor-left))`  : `${width}px`};
+  width: ${({ width }) =>width}px;
 
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);
@@ -164,7 +164,7 @@ const FirstEmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
   
-  width: calc(2 * var(--calender-floor-left));
+  width: ${WIDTH_PER_HOUR}px;
 
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);

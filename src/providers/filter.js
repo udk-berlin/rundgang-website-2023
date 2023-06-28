@@ -3,16 +3,17 @@ import { createContext, useContext, useReducer } from 'react'
 const FilterContext = createContext(null)
 const FilterDispatchContext = createContext(null)
 
-export function FilterProvider ({ page, projects = {}, structures, locations, facultiesAndCenters, children }) {
+export function FilterProvider ({ projects = {}, locations = {}, formatsFilters, structures, structuresFilters, children }) {
   const [filter, dispatch] = useReducer(
     filterReducer,
     {
       projects: projects,
       filteredProjects: projects,
-      structures: structures,
       locations: locations,
       filteredLocations: locations,
-      facultiesAndCenters: facultiesAndCenters
+      formatsFilters: formatsFilters,
+      structures: structures,
+      structuresFilters: structuresFilters
     }
   )
 
@@ -55,7 +56,7 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         structure: state.structure,
         location: action.location
@@ -70,7 +71,7 @@ function filterReducer (state, action) {
         filteredLocations: state.locations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         structure: state.structure,
       }
@@ -95,7 +96,7 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         structure: state.structure,
         location: state.location,
@@ -123,7 +124,7 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         structure: state.structure,
         location: state.location
@@ -149,7 +150,7 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         structure: state.structure,
         location: state.location,
@@ -177,7 +178,7 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         structure: state.structure,
         location: state.location,
@@ -186,19 +187,25 @@ function filterReducer (state, action) {
     }
     case 'filter-structure': {
       const filteredStructures = filterByNodeId(state.structures, action.id)
-      const itemNodeIds = getItemNodeIds(filteredStructures)
-      let filteredLocations = filterByNodeIds(state.locations, itemNodeIds)
+      let itemNodeIds = getItemNodeIds(filteredStructures)
+      let filteredLocations = state.filteredLocations
 
-      if (state.room) {
-        filteredLocations = filterByNodeId(filteredLocations, state.room.id)
-      } else if (state.floor) {
-        filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
-      } else if (state.location) {
-        filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+      if (Object.keys(state.locations).length > 0) {
+        filteredLocations = filterByNodeIds(state.locations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = getItemNodeIds(filteredLocations)
       }
 
       const filteredProjects = {}
-      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+      itemNodeIds.forEach(id => filteredProjects[id] = state.projects[id])
 
       return {
         projects: state.projects,
@@ -208,7 +215,7 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         structure: action.id,
         location: state.location,
@@ -217,18 +224,24 @@ function filterReducer (state, action) {
       }
     }
     case 'all-structures': {
-      let filteredLocations = state.locations
+      let filteredProjects = {}
+      let filteredLocations = state.filteredLocations
 
-      if (state.room) {
-        filteredLocations = filterByNodeId(filteredLocations, state.room.id)
-      } else if (state.floor) {
-        filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
-      } else if (state.location) {
-        filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+      if (Object.keys(state.locations).length > 0) {
+        filteredLocations = state.locations
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+      } else {
+        filteredProjects = state.projects
       }
-
-      const filteredProjects = {}
-      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
 
       return {
         projects: state.projects,
@@ -238,7 +251,7 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         structures: state.structures,
-        facultiesAndCenters: state.facultiesAndCenters,
+        structuresFilters: state.structuresFilters,
 
         location: state.location,
         floor: state.floor,

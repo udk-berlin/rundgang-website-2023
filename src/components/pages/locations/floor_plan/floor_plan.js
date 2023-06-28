@@ -16,19 +16,19 @@ export default function LocationsFloorPlan() {
   );
 
   const handleSelectRoom = (e) => {
-    Object.values(filter.floor.children).forEach(child => {
-      if (child.template === 'location-room') {
-        let rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
-        rooms.forEach(room => room.style.fill = '')
-      }
-    })
     const roomId = e.target.getAttribute('data-production')
-    console.log(filter.floor)
 
     if (roomId) {
       const room = filter.floor.children.filter(room => room.id === roomId)
 
       if (room.length > 0) {
+        Object.values(filter.floor.children).forEach(child => {
+          if (child.template === 'location-room') {
+            let rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
+            rooms.forEach(room => room.style.fill = '')
+          }
+        })
+
         e.target.style.fill = 'var(--color-pink)';
         dispatch(
           {

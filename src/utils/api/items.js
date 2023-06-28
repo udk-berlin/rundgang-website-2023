@@ -1,9 +1,5 @@
 import { get, getId, getTree } from '@/utils/api/api'
 
-const ROOT_ID = '!CszUweVEGwuKVEiJBg:content.udk-berlin.de'
-const ROOT_LOCATION_ID = '!QEMZncAAlhtFVagfSI:content.udk-berlin.de'
-const ROOT_CONTEXT_ID = '!suNRlIyeorKnuZHfld:content.udk-berlin.de'
-
 let itemsCached = false
 const items = {}
 
@@ -11,7 +7,7 @@ let detailsCached = false
 const details = {}
 
 export async function getListFilterTypeItems () {
-  return await get(`${ROOT_ID}/list/filter/type/item`)
+  return await get(`${process.env.REST_API_ROOT_ID}/list/filter/type/item`)
 }
 
 export async function getItemIds () {
@@ -22,8 +18,9 @@ export async function getItemIds () {
 
 export async function getItems () {
   if (!itemsCached) {
-    const locationTree = await getTree(ROOT_LOCATION_ID)
-    const contextTree = await getTree(ROOT_CONTEXT_ID)
+    const locationsTree = await getTree(process.env.REST_API_LOCATIONS_ROOT_ID)
+    const formatsTree = await getTree(process.env.REST_API_FORMATS_ROOT_ID)
+    const structuresTree = await getTree(process.env.REST_API_STRUCTURES_ROOT_ID)
 
     const buildItem = (item, data) => {
       const _item = {
@@ -61,13 +58,9 @@ export async function getItems () {
       })
     }
 
-    Object.values(locationTree.children).forEach(location => {
-      extractChildren(location)
-    })
-
-    Object.values(contextTree.children).forEach(context => {
-      extractChildren(context)
-    })
+    extractChildren(locationsTree, {})
+    extractChildren(formatsTree, {})
+    extractChildren(structuresTree, {})
 
     const details = await getDetails(Object.keys(items))
 
@@ -99,8 +92,8 @@ async function getDetails (itemIds) {
 
         data.allocation.temporal.forEach(time => {
           detail.temporal.push({
-            start: (time.start - 7200) * 1000,
-            end: (time.end - 7200) * 1000,
+            start: time.start * 1000 - 7200000,
+            end: time.end * 1000  - 7200000,
           })
         })
       }

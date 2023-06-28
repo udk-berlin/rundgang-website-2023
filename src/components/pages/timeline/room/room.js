@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
-import { TIMELINE_WIDTH } from '@/components/pages/timeline/constants'
+import { TIMELINE_WIDTH, WIDTH_PER_HOUR } from '@/components/pages/timeline/constants'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 
 export default function TimelineLocationRoom({ room, index }) {
@@ -31,7 +31,7 @@ const RoomContainer = styled.div`
 const Room = styled.div`
   position: sticky;
   z-index: 4;
-  left: calc(2 * var(--calender-floor-left));
+  left: ${WIDTH_PER_HOUR}px;
   top: 0;
   
   display: flex;

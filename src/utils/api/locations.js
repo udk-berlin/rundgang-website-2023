@@ -1,6 +1,4 @@
-import {get, getTree} from '@/utils/api/api'
-
-const ROOT_LOCATIONS_ID = '!QEMZncAAlhtFVagfSI:content.udk-berlin.de'
+import { get, getTree } from '@/utils/api/api'
 
 let locationsCached = false
 let locations = {}
@@ -10,7 +8,7 @@ const locationDetails = {}
 
 export async function getLocations () {
   if (!locationsCached) {
-    const tree = await getTree(ROOT_LOCATIONS_ID)
+    const tree = await getTree(process.env.REST_API_LOCATIONS_ROOT_ID)
     filter(Object.values(tree.children)).forEach( location => {
       locations[location.id] = location
     })

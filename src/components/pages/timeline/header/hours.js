@@ -6,7 +6,7 @@ import {
   range,
   WIDTH_PER_HOUR,
   TIMELINE_WIDTH,
-  START_HOUR, HOURS_PER_DAY, HOURS_PER_HALF_DAY
+  FIRST_DAY_START_HOUR, HOURS_PER_DAY, HOURS_PER_HALF_DAY
 } from '@/components/pages/timeline/constants'
 import React from 'react'
 
@@ -20,7 +20,7 @@ export default function TimelineHours() {
           let content;
 
           if (hour > 1 && hour < NUMBER_OF_HOURS - 1) {
-            let hourString = (hour + START_HOUR) % (language.locale === 'en' ? HOURS_PER_HALF_DAY : HOURS_PER_DAY)
+            let hourString = (hour + FIRST_DAY_START_HOUR) % (language.locale === 'en' ? HOURS_PER_HALF_DAY : HOURS_PER_DAY)
             if (hourString === 0) {
               hourString = 12
             }
@@ -28,7 +28,7 @@ export default function TimelineHours() {
             content = (
               <>
                 <HourLine transparent={hour === 2}/>
-                <Hour>{hourString}{language.locale === 'en' ? (hour + START_HOUR) % HOURS_PER_DAY  < 12 ? 'am' : 'pm' : ':00'}</Hour>
+                <Hour>{hourString}{language.locale === 'en' ? (hour + FIRST_DAY_START_HOUR) % HOURS_PER_DAY  < 12 ? 'am' : 'pm' : ':00'}</Hour>
                 <HourLine transparent={hour === NUMBER_OF_HOURS - 2}/>
               </>
             )
