@@ -433,6 +433,20 @@ function filterReducer (state, action) {
         structuresFilters: state.structuresFilters,
       }
     }
+    case 'set-saved-projects': {
+      return {
+        ...state,
+        project: filterProjectsByNodeIds(state.projects, action.savedProjectIds),
+        filteredProjects: filterProjectsByNodeIds(state.filteredProjects, action.savedProjectIds)
+      }
+    }
+    case 'remove-saved-project': {
+      return {
+        ...state,
+        project: rejectProjectsByNodeId(state.projects, action.savedProjectId),
+        filteredProjects: rejectProjectsByNodeId(state.filteredProjects, action.savedProjectId)
+      }
+    }
     default: {
       throw Error('Unknown action: ' + action.type)
     }
@@ -508,4 +522,8 @@ function filterProjectsByNodeIds(projects, nodeIds) {
   nodeIds.forEach(id => filteredProjects[id] = projects[id])
 
   return filteredProjects
+}
+
+function rejectProjectsByNodeId(projects, nodeId) {
+  return projects.filter(project => project !== nodeId)
 }

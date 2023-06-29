@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 import styles from "@/styles/layout/header/Bar.module.css";
 import {
-  LocalizedLink,
+  SavedProjectsLink,
   SwitchLocalizationLink,
-} from "@/components/localization/links";
+} from '@/components/localization/links'
 import { TimelineLink, LocationsLink } from "@/components/localization/links";
-import { FormattedMessage } from "react-intl";
+import { useSavedProjects } from '@/providers/projects/saved'
 
 export default function HeaderBar() {
-  const [timelineIsHovered, setTimlineIsHovered] = useState(false);
+  const [timelineIsHovered, setTimelineIsHovered] = useState(false);
+  const savedProjects = useSavedProjects()
+
   return (
     <HeaderBarContainer>
       <LocationsLink>
@@ -23,8 +26,8 @@ export default function HeaderBar() {
       <div className={styles.timeline}>
         <TimelineLink>
           <Timeline
-            onMouseEnter={() => setTimlineIsHovered(true)}
-            onMouseLeave={() => setTimlineIsHovered(false)}
+            onMouseEnter={() => setTimelineIsHovered(true)}
+            onMouseLeave={() => setTimelineIsHovered(false)}
             show={timelineIsHovered}
           >
             21. – 23.07.2023
@@ -35,12 +38,13 @@ export default function HeaderBar() {
           </Timeline>
         </TimelineLink>
       </div>
-      <LocalizedLink href="/">
+      <SavedProjectsLink>
+        {savedProjects && savedProjects.length}
         <SVGHover
           pathPassive="/assets/svg/layout/shop_passive.svg"
           pathActive="/assets/svg/layout/shop_hover.svg"
         />
-      </LocalizedLink>
+      </SavedProjectsLink>
       <div className={styles.localization}>
         <SwitchLocalizationLink />
       </div>
