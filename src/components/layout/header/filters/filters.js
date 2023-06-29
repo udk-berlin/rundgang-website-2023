@@ -8,8 +8,24 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
   const filter = useFilter();
   const dispatch = useFilterDispatch();
   const filterCategories = [
-    {nameFormattedMessageId: 'faculties.centres', filterAllFormattedMessageId: 'faculties.centres.all', filterDispatchType: 'filter-structure', filterAllDispatchType: 'all-structures', filters: filter.structuresFilters},
-    {nameFormattedMessageId: 'formats', filterAllFormattedMessageId: 'formats.all', filterDispatchType: 'filter-formats', filterAllDispatchType: 'all-formats', filters: filter.formatsFilters},
+    {
+      nameFormattedMessageId: 'faculties.centres',
+      filterAllFormattedMessageId: 'faculties.centres.all',
+      filterDispatchType: 'filter-structure',
+      filterAllDispatchType: 'all-structures',
+      filters: filter.structuresFilters,
+      selected: (f) => { return filter.structure === f.id },
+      nonSelected: () => { return !(filter.structure) }
+    },
+    {
+      nameFormattedMessageId: 'formats',
+      filterAllFormattedMessageId: 'formats.all',
+      filterDispatchType: 'filter-format',
+      filterAllDispatchType: 'all-formats',
+      filters: filter.formatsFilters,
+      selected: (f) => { return filter.format === f.id },
+      nonSelected: () => { return !(filter.format) }
+    },
   ]
 
   return (
@@ -24,11 +40,11 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
             <FormattedMessage id={category.nameFormattedMessageId}/>
           </CategoryNameContainer>
           <FiltersContainer>
-            <FilterNameContainer key={-1} onClick={() => {dispatch({type: category.filterAllDispatchType})}} selected={!(filter.structure)}>
+            <FilterNameContainer key={-1} onClick={() => {dispatch({type: category.filterAllDispatchType})}} selected={category.nonSelected()}>
               <FormattedMessage id={category.filterAllFormattedMessageId}/>
             </FilterNameContainer>
             {Object.values(category.filters).map((f) => (
-              <FilterNameContainer key={f.id} onClick={() => dispatch({type: category.filterDispatchType, id: f.id})} selected={filter.structure === f.id || filter.format === f.id}>{f.name}</FilterNameContainer>
+              <FilterNameContainer key={f.id} onClick={() => dispatch({type: category.filterDispatchType, id: f.id})} selected={category.selected(f)}>{f.name}</FilterNameContainer>
             ))}
           </FiltersContainer>
         </CategoryContainer>

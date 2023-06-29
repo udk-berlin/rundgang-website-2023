@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer } from 'react'
 const FilterContext = createContext(null)
 const FilterDispatchContext = createContext(null)
 
-export function FilterProvider ({ projects = {}, locations = {}, formatsFilters, structures, structuresFilters, children }) {
+export function FilterProvider ({ projects, locations = {}, formats, formatsFilters, structures, structuresFilters, children }) {
   const [filter, dispatch] = useReducer(
     filterReducer,
     {
@@ -11,6 +11,7 @@ export function FilterProvider ({ projects = {}, locations = {}, formatsFilters,
       filteredProjects: projects,
       locations: locations,
       filteredLocations: locations,
+      formats: formats,
       formatsFilters: formatsFilters,
       structures: structures,
       structuresFilters: structuresFilters
@@ -38,15 +39,20 @@ function filterReducer (state, action) {
   switch (action.type) {
     case 'filter-location': {
       let filteredLocations = filterByNodeId(state.locations, action.location.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
-        const itemNodeIds = getItemNodeIds(filteredStructures)
-        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
       }
 
-      const filteredProjects = {}
-      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
 
       return {
         projects: state.projects,
@@ -55,143 +61,347 @@ function filterReducer (state, action) {
         locations: state.locations,
         filteredLocations: filteredLocations,
 
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
+
         structures: state.structures,
+        structure: state.structure,
         structuresFilters: state.structuresFilters,
 
-        structure: state.structure,
         location: action.location
       }
     }
     case 'all-locations': {
+      let filteredLocations = state.locations
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+
       return {
         projects: state.projects,
-        filteredProjects: state.projects,
+        filteredProjects: filteredProjects,
 
         locations: state.locations,
         filteredLocations: state.locations,
 
-        structures: state.structures,
-        structuresFilters: state.structuresFilters,
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
 
+        structures: state.structures,
         structure: state.structure,
+        structuresFilters: state.structuresFilters,
       }
     }
     case 'filter-floor': {
       let filteredLocations = filterByNodeId(state.locations, action.floor.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
-        const itemNodeIds = getItemNodeIds(filteredStructures)
-        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
       }
 
-      const filteredProjects = {}
-      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
 
       return {
         projects: state.projects,
         filteredProjects: filteredProjects,
 
         locations: state.locations,
+        location: state.location,
+        floor: action.floor,
         filteredLocations: filteredLocations,
 
-        structures: state.structures,
-        structuresFilters: state.structuresFilters,
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
 
+        structures: state.structures,
         structure: state.structure,
-        location: state.location,
-        floor: action.floor
+        structuresFilters: state.structuresFilters,
       }
     }
     case 'all-floors': {
       let filteredLocations = filterByNodeId(state.locations, state.location.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
-        const itemNodeIds = getItemNodeIds(filteredStructures)
-        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
       }
 
-      const filteredProjects = {}
-      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
-
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
 
       return {
         projects: state.projects,
         filteredProjects: filteredProjects,
 
         locations: state.locations,
+        location: state.location,
         filteredLocations: filteredLocations,
 
-        structures: state.structures,
-        structuresFilters: state.structuresFilters,
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
 
+        structures: state.structures,
         structure: state.structure,
-        location: state.location
+        structuresFilters: state.structuresFilters,
       }
     }
     case 'filter-room': {
       let filteredLocations = filterByNodeId(state.locations, action.room.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
-        const itemNodeIds = getItemNodeIds(filteredStructures)
-        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
       }
 
-      const filteredProjects = {}
-      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
 
       return {
         projects: state.projects,
         filteredProjects: filteredProjects,
 
         locations: state.locations,
-        filteredLocations: filteredLocations,
-
-        structures: state.structures,
-        structuresFilters: state.structuresFilters,
-
-        structure: state.structure,
         location: state.location,
         floor: state.floor,
-        room: action.room
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structuresFilters: state.structuresFilters,
       }
     }
     case 'all-rooms': {
       let filteredLocations = filterByNodeId(state.locations, state.floor.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
-        const itemNodeIds = getItemNodeIds(filteredStructures)
-        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
       }
 
-      const filteredProjects = {}
-      getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
 
       return {
         projects: state.projects,
         filteredProjects: filteredProjects,
 
         locations: state.locations,
+        location: state.location,
+        floor: state.floor,
         filteredLocations: filteredLocations,
 
-        structures: state.structures,
-        structuresFilters: state.structuresFilters,
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
 
+        structures: state.structures,
         structure: state.structure,
-        location: state.location,
-        floor: state.floor
+        structuresFilters: state.structuresFilters,
       }
     }
     case 'filter-structure': {
+      let filteredProjects = state.projects
+
       const filteredStructures = filterByNodeId(state.structures, action.id)
       let itemNodeIds = getItemNodeIds(filteredStructures)
-      let filteredLocations = state.filteredLocations
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      let filteredLocations = state.locations
 
       if (Object.keys(state.locations).length > 0) {
-        filteredLocations = filterByNodeIds(state.locations, itemNodeIds)
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
+      }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+
+      return {
+        projects: state.projects,
+        filteredProjects: filteredProjects,
+
+        locations: state.locations,
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
+
+        structures: state.structures,
+        structure: action.id,
+        structuresFilters: state.structuresFilters,
+      }
+    }
+    case 'all-structures': {
+      let filteredProjects = state.projects
+      let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
+
+      console.log(itemNodeIds)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      let filteredLocations = state.locations
+
+      if (Object.keys(state.locations).length > 0) {
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
+      }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+
+      return {
+        projects: state.projects,
+        filteredProjects: filteredProjects,
+
+        locations: state.locations,
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatsFilters: state.formatsFilters,
+
+        structures: state.structures,
+        structuresFilters: state.structuresFilters,
+      }
+    }
+    case 'filter-format': {
+      let filteredProjects = state.projects
+
+      const filteredFormats = filterByNodeId(state.formats, action.id)
+      let itemNodeIds = getItemNodeIds(filteredFormats)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      let filteredLocations = state.locations
+
+      if (Object.keys(state.locations).length > 0) {
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
+      }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+
+      return {
+        projects: state.projects,
+        filteredProjects: filteredProjects,
+
+        locations: state.locations,
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: action.id,
+        formatsFilters: state.formatsFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structuresFilters: state.structuresFilters,
+      }
+    }
+    case 'all-formats': {
+      let filteredProjects = state.projects
+      let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = getItemNodeIds(filteredStructures)
+        filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+      }
+
+      let filteredLocations = state.locations
+
+      if (Object.keys(state.locations).length > 0) {
+        filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
 
         if (state.room) {
           filteredLocations = filterByNodeId(filteredLocations, state.room.id)
@@ -202,45 +412,7 @@ function filterReducer (state, action) {
         }
 
         itemNodeIds = getItemNodeIds(filteredLocations)
-      }
-
-      const filteredProjects = {}
-      itemNodeIds.forEach(id => filteredProjects[id] = state.projects[id])
-
-      return {
-        projects: state.projects,
-        filteredProjects: filteredProjects,
-
-        locations: state.locations,
-        filteredLocations: filteredLocations,
-
-        structures: state.structures,
-        structuresFilters: state.structuresFilters,
-
-        structure: action.id,
-        location: state.location,
-        floor: state.floor,
-        room: action.room
-      }
-    }
-    case 'all-structures': {
-      let filteredProjects = {}
-      let filteredLocations = state.filteredLocations
-
-      if (Object.keys(state.locations).length > 0) {
-        filteredLocations = state.locations
-
-        if (state.room) {
-          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
-        } else if (state.floor) {
-          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
-        } else if (state.location) {
-          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
-        }
-
-        getItemNodeIds(filteredLocations).forEach(id => filteredProjects[id] = state.projects[id])
-      } else {
-        filteredProjects = state.projects
+        filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
       }
 
       return {
@@ -248,14 +420,17 @@ function filterReducer (state, action) {
         filteredProjects: filteredProjects,
 
         locations: state.locations,
-        filteredLocations: filteredLocations,
-
-        structures: state.structures,
-        structuresFilters: state.structuresFilters,
-
         location: state.location,
         floor: state.floor,
-        room: action.room
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        formatsFilters: state.formatsFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structuresFilters: state.structuresFilters,
       }
     }
     default: {
@@ -302,6 +477,14 @@ function getItemNodeIds(tree) {
   return itemIds
 }
 
+function getProjectsItemNodeIds(projects) {
+  return Object.keys(projects)
+}
+
+function filterItemNodeIds(itemNodeIdsA, itemNodeIdsB) {
+  return itemNodeIdsA.filter(itemNodeId => itemNodeIdsB.includes(itemNodeId));
+}
+
 function filterByNodeIds(tree, nodeIds) {
   const resultTree = {}
 
@@ -318,4 +501,11 @@ function filterByNodeIds(tree, nodeIds) {
 
   Object.values(tree).reduce(getChildren, []).forEach(subTree => resultTree[subTree.id] = subTree)
   return resultTree;
+}
+
+function filterProjectsByNodeIds(projects, nodeIds) {
+  const filteredProjects = {}
+  nodeIds.forEach(id => filteredProjects[id] = projects[id])
+
+  return filteredProjects
 }

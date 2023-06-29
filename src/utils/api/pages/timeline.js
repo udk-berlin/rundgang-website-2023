@@ -1,6 +1,7 @@
 import { getItems } from "@/utils/api/items";
 import { getLocations } from "@/utils/api/locations";
 import { getStructures } from "@/utils/api/structures";
+import { getFormats } from '@/utils/api/formats'
 
 export async function getTimelineLocations() {
   const timelineLocations = {}
@@ -9,6 +10,15 @@ export async function getTimelineLocations() {
 
   filter(Object.values(locations), items).forEach(location => timelineLocations[location.id] = location)
   return timelineLocations
+}
+
+export async function getTimelineFormats() {
+  const timelineFormats = {}
+  const formats = await getFormats()
+  const items = await getItems()
+
+  filter(Object.values(formats), items).forEach(format => timelineFormats[format.id] = format)
+  return timelineFormats
 }
 
 export async function getTimelineStructures() {

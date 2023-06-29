@@ -1,20 +1,20 @@
 import { getStructures } from "@/utils/api/structures";
 import { getFormats } from '@/utils/api/formats'
 
-export async function getProgramStructures() {
-  const programStructures = {}
-  const structures = await getStructures()
-
-  filter(Object.values(structures)).forEach(structure => programStructures[structure.id] = structure)
-  return programStructures
-}
-
 export async function getProgramFormats() {
   const programFormats = {}
   const formats = await getFormats()
 
   filter(Object.values(formats)).forEach(format => programFormats[format.id] = format)
   return programFormats
+}
+
+export async function getProgramStructures() {
+  const programStructures = {}
+  const structures = await getStructures()
+
+  filter(Object.values(structures)).forEach(structure => programStructures[structure.id] = structure)
+  return programStructures
 }
 
 function filter(array) {

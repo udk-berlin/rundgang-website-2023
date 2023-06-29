@@ -9,9 +9,10 @@ let formatsFilters = {}
 export async function getFormats () {
   if (!formatsCached) {
     const tree = await getTree(process.env.REST_API_FORMATS_ROOT_ID)
-    filter(Object.values(tree.children)).forEach(location => {
-      formats[location.id] = location
+    filter(Object.values(tree.children)).forEach(format => {
+      formats[format.id] = format
     })
+
     formatsCached = true
   }
 

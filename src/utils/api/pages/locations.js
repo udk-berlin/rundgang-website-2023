@@ -1,6 +1,7 @@
 import { getItems } from "@/utils/api/items";
 import { getLocations } from "@/utils/api/locations";
 import { getStructures } from "@/utils/api/structures";
+import { getFormats } from '@/utils/api/formats'
 
 export async function getLocationsLocations() {
   const locationsLocations = {}
@@ -11,12 +12,19 @@ export async function getLocationsLocations() {
   return locationsLocations
 }
 
+export async function getLocationsFormats() {
+  const programFormats = {}
+  const formats = await getFormats()
+
+  filter(Object.values(formats)).forEach(format => programFormats[format.id] = format)
+  return programFormats
+}
+
 export async function getLocationsStructures() {
   const locationStructures = {}
   const structures = await getStructures()
-  const items = await getItems()
 
-  filter(Object.values(structures), items).forEach(structure => locationStructures[structure.id] = structure)
+  filter(Object.values(structures)).forEach(structure => locationStructures[structure.id] = structure)
   return locationStructures
 }
 
