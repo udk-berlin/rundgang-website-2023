@@ -38,13 +38,17 @@ export default function HeaderBar() {
           </Timeline>
         </TimelineLink>
       </div>
-      <SavedProjectsLink>
-        {savedProjects && savedProjects.length}
-        <SVGHover
-          pathPassive="/assets/svg/layout/shop_passive.svg"
-          pathActive="/assets/svg/layout/shop_hover.svg"
-        />
-      </SavedProjectsLink>
+      <SavedProjectsContainer>
+        <NumberOfSavedProjectsContainer>{savedProjects && savedProjects.length}</NumberOfSavedProjectsContainer>
+        <div>
+          <SavedProjectsLink>
+            <SVGHover
+              pathPassive="/assets/svg/layout/shop_passive.svg"
+              pathActive="/assets/svg/layout/shop_hover.svg"
+            />
+          </SavedProjectsLink>
+        </div>
+      </SavedProjectsContainer>
       <div className={styles.localization}>
         <SwitchLocalizationLink />
       </div>
@@ -95,4 +99,18 @@ const Timeline = styled.div`
     display: ${(props) => (props.show ? "inline" : "none")};
     color: var(--color-pink);
   }
+`;
+
+const SavedProjectsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  > div {
+    flex-grow: 1;
+  }
+`;
+
+const NumberOfSavedProjectsContainer = styled.div`
+  margin-right: -84px;
 `;

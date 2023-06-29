@@ -6,6 +6,8 @@ import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/progr
 
 import Page from "@/components/pages/page";
 import Program from "@/components/pages/program/program";
+import { FilterProvider } from '@/providers/filter'
+import { SavedProjectsProvider } from '@/providers/saved_projects'
 
 export async function getStaticProps () {
   const projects = await getItems()
@@ -22,7 +24,11 @@ export async function getStaticProps () {
 export default function ProgramPage ({ projects, formats, formatsFilters, structures, structuresFilters }) {
   return (
     <Page>
-      <Program projects={projects} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters} />
+      <SavedProjectsProvider>
+        <FilterProvider projects={projects} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}>
+          <Program />
+        </FilterProvider>
+      </SavedProjectsProvider>
     </Page>
   )
 }

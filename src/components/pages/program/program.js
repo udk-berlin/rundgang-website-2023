@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import Masonry from "react-responsive-masonry";
 
-import { useFilter, FilterProvider } from '@/providers/filter'
-import { SavedProjectsProvider } from '@/providers/saved_projects'
+import { useFilter } from '@/providers/filter'
 
 import ProjectCell from "@/components/pages/program/project_cell";
 import Layout from "@/components/layout/layout";
@@ -10,17 +9,7 @@ import Layout from "@/components/layout/layout";
 export const MASONRY_COLUMNS = 4
 export const MASONRY_GUTTER = "0.75rem"
 
-export default function Program({ projects, structures, formats, formatsFilters, structuresFilters }) {
-  return (
-    <SavedProjectsProvider>
-      <FilterProvider projects={projects} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}>
-        <ProgramContent />
-      </FilterProvider>
-    </SavedProjectsProvider>
-  );
-}
-
-function ProgramContent() {
+export default function Program() {
   const filter = useFilter()
 
   return (
