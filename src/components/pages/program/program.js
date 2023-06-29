@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Masonry from "react-responsive-masonry";
 
 import { useFilter, FilterProvider } from '@/providers/filter'
-import { SavedProjectsProvider } from '@/providers/projects/saved'
+import { SavedProjectsProvider } from '@/providers/saved_projects'
 
 import ProjectCell from "@/components/pages/program/project_cell";
 import Layout from "@/components/layout/layout";

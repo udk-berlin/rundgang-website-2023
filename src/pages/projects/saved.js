@@ -4,7 +4,7 @@ import { getStructuresFilters } from "@/utils/api/structures";
 import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/program'
 
 import { FilterProvider } from '@/providers/filter'
-import { SavedProjectsProvider } from '@/providers/projects/saved'
+import { SavedProjectsProvider } from '@/providers/saved_projects'
 
 import Page from "@/components/pages/page";
 import SavedProjects from '@/components/pages/projects/saved/saved'

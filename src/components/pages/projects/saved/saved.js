@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 
 import { useFilter } from '@/providers/filter'
-import { useSavedProjects } from '@/providers/projects/saved'
+import { useSavedProjects } from '@/providers/saved_projects'
 
 import Layout from '@/components/layout/layout'
 import ProjectCell from '@/components/pages/program/project_cell'

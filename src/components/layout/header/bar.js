@@ -9,7 +9,7 @@ import {
   SwitchLocalizationLink,
 } from '@/components/localization/links'
 import { TimelineLink, LocationsLink } from "@/components/localization/links";
-import { useSavedProjects } from '@/providers/projects/saved'
+import { useSavedProjects } from '@/providers/saved_projects'
 
 export default function HeaderBar() {
   const [timelineIsHovered, setTimelineIsHovered] = useState(false);

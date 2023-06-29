@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import { useSavedProjects, useSetSavedProjects } from '@/providers/projects/saved'
+import { useSavedProjects, useSetSavedProjects } from '@/providers/saved_projects'
 
 import ProjectLink from "@/components/pages/projects/project/link";
 import ProjectImage from "@/components/pages/projects/project/image";
