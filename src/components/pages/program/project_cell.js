@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import ProjectLink from "@/components/pages/projects/link";
-import ProjectTitle from "@/components/pages/projects/title";
-import ProjectAuthors from "@/components/pages/projects/authors";
+import ProjectLink from "@/components/pages/projects/project/link";
+import ProjectTitle from "@/components/pages/projects/project/title";
+import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
-import ProjectImage from "@/components/pages/projects/image";
+import ProjectImage from "@/components/pages/projects/project/image";
 import { ReactSVG } from "react-svg";
 import { useState } from "react";
 

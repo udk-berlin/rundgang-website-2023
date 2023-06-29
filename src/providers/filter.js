@@ -247,9 +247,10 @@ function filterReducer (state, action) {
     }
     case 'filter-structure': {
       let filteredProjects = state.projects
+      let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
 
       const filteredStructures = filterByNodeId(state.structures, action.id)
-      let itemNodeIds = getItemNodeIds(filteredStructures)
+      itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
 
       if (state.format) {
         const filteredFormats = filterByNodeId(state.formats, state.format)
@@ -297,8 +298,6 @@ function filterReducer (state, action) {
       let filteredProjects = state.projects
       let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
 
-      console.log(itemNodeIds)
-
       if (state.format) {
         const filteredFormats = filterByNodeId(state.formats, state.format)
         itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
@@ -342,9 +341,10 @@ function filterReducer (state, action) {
     }
     case 'filter-format': {
       let filteredProjects = state.projects
+      let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
 
       const filteredFormats = filterByNodeId(state.formats, action.id)
-      let itemNodeIds = getItemNodeIds(filteredFormats)
+      itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
@@ -394,8 +394,7 @@ function filterReducer (state, action) {
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
-        itemNodeIds = getItemNodeIds(filteredStructures)
-        filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
       }
 
       let filteredLocations = state.locations
@@ -411,9 +410,10 @@ function filterReducer (state, action) {
           filteredLocations = filterByNodeId(filteredLocations, state.location.id)
         }
 
-        itemNodeIds = getItemNodeIds(filteredLocations)
-        filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
       }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
 
       return {
         projects: state.projects,
