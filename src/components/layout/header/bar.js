@@ -91,6 +91,18 @@ const SVGHoverContainer = styled(ReactSVG)`
   width: 50px;
   height: 50px;
   cursor: pointer;
+  
+  > div {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    
+    > svg {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+  }
 `;
 
 const SVGHoverWrapper = styled.div`
