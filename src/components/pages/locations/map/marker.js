@@ -19,7 +19,7 @@ export default function ResponsiveMarker ({ location, scale = null, useTextBox =
   )
 }
 
-function GroundPlanMarker ({ location, scale=null }) {
+function GroundPlanMarker ({ location, scale = null }) {
   const isMobile = false
   let marker
 
@@ -38,7 +38,7 @@ function GroundPlanMarker ({ location, scale=null }) {
 
 const GroundPlanContainer = styled.div`
   cursor: pointer;
-  filter: ${(props) => props.selected ? 'drop-shadow(var(--color-green) 0px 0px 1px)' :  ''};
+  filter: ${({ selected }) => selected ? 'drop-shadow(var(--color-green) 0px 0px 1px)' :  ''};
 
   > img:hover {
     filter: drop-shadow(var(--color-green) 0px 0px 1px);
@@ -46,13 +46,21 @@ const GroundPlanContainer = styled.div`
 `
 
 const TextBoxContainer = styled.div`
-  cursor: pointer;
-  background: ${(props) => props.selected ? 'var(--color-pink)' :  'var(--color-dark-gray)'};
+  padding: var(--map-marker-padding);
+
+  border: var(--border-width) solid var(--color-dark-gray);
+  background: ${({ selected }) => selected ? 'var(--color-pink)' :  'var(--color-dark-gray)'};
+  
+  
+  font-size: var(--map-marker-font-size);
+  font-weight: var(--map-marker-font-weight);
   color: var(--color-white);
-  padding: var(--locations-map-marker-text-box-padding);
 
   :hover {
+    border: var(--border-width) solid var(--color-pink);
     background: var(--color-pink);
     color: var(--color-white);
   }
+
+  cursor: pointer;
 `

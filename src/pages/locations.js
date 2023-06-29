@@ -1,21 +1,34 @@
 import React from 'react'
 
-import { getLocations } from '@/utils/api/locations'
 import { getItems } from '@/utils/api/items'
+import { getFormatsFilters } from '@/utils/api/formats'
+import { getStructuresFilters } from "@/utils/api/structures";
+import { getLocationsLocations, getLocationsFormats, getLocationsStructures } from "@/utils/api/pages/locations";
+
+import { FilterProvider }  from "@/providers/filter";
 
 import Page from "@/components/pages/page";
 import Locations from "@/components/pages/locations/locations";
 
 export async function getStaticProps () {
   const projects = await getItems()
-  const locations = await getLocations()
-  return { props: { locations, projects } }
+  const locations = await getLocationsLocations()
+
+  const formats = await getLocationsFormats()
+  const formatsFilters = await getFormatsFilters()
+
+  const structures = await getLocationsStructures()
+  const structuresFilters = await getStructuresFilters()
+
+  return { props: { projects, formats, formatsFilters, locations, structures, structuresFilters} }
 }
 
-export default function LocationsPage ({ locations, projects }) {
+export default function LocationsPage ({ projects, locations, formats, formatsFilters, structures, structuresFilters }) {
   return (
        <Page>
-         <Locations locations={locations} projects={projects}/>
+         <FilterProvider projects={projects} locations={locations} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters}>
+           <Locations locations={locations} />
+         </FilterProvider>
        </Page>
   )
 }

@@ -123,7 +123,7 @@ export default function LocationsMap ({ locations }) {
 
           dispatch(
             {
-              type: 'select-location',
+              type: 'filter-location',
               location: locations[id]
             })
         } else {
@@ -158,7 +158,7 @@ function buildMarker (mapRef, location, cache, useTextBox) {
     markerRoot = createRoot(marker);
   }
 
-  markerRoot.render(<ResponsiveMarker location={location} useTextBox={useTextBox}/>)
+  markerRoot.render(<ResponsiveMarker location={location} useTextBox={useTextBox} />)
 
   let lng = location.id in LOCATION_ID_TO_LNG_LAT ? LOCATION_ID_TO_LNG_LAT[location.id].lng : location.lng
   let lat = location.id in LOCATION_ID_TO_LNG_LAT ? LOCATION_ID_TO_LNG_LAT[location.id].lat : location.lat

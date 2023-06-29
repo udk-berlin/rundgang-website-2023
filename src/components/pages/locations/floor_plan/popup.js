@@ -7,7 +7,7 @@ import LocationsFloorPlan from "@/components/pages/locations/floor_plan/floor_pl
 export default function LocationsFloorPlanPopup() {
   const filter = useFilter()
 
-  if (!('floor' in filter)) {
+  if (!(filter.floor)) {
     return <></>
   }
 

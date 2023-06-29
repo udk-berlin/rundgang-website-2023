@@ -48,15 +48,20 @@ const SliderContainer = styled.div`
 const CustomSlider = styled(Slider)`
   color: black;
 
-  & > .MuiSlider-rail {
-    color: var(--color-pink) !important;
+  > .MuiSlider-rail {
+    color: var(--color-pink-transparent) !important;
+    opacity: 1 !important;
   }
 
-  & > .MuiSlider-thumb {
+  > .MuiSlider-thumb {
     box-shadow: none !important;
     color: var(--color-white) !important;
     outline: var(--info-border-width) solid var(--info-border-color) !important;
     width: 15px !important;
     height: 15px !important;
+  }
+
+  > .MuiSlider-track {
+    color: var(--color-black) !important;
   }
 `;

@@ -23,11 +23,17 @@
   --locations-overlays-top: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
   --locations-ground-plan-height: var(--layout-footer-grid-template-column-1);
   --locations-ground-plan-infos-height: calc(var(--locations-map-height) - var(--locations-ground-plan-height));
-  --locations-map-marker-text-box-padding: 3px 12px;
 
   --layout-header-bar-container-height: 60px;
   --layout-header-search-container-height: 34px;
   --layout-header-height: calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width));
+  --layout-header-filters-bar-template-column-1: 2rem;
+  --layout-header-filters-bar-template-column-2: 1fr;
+  --layout-header-filters-bar-template-column-3: 2rem;
+  --layout-header-filters-bar-template-columns: var(--layout-header-filters-bar-template-column-1) var(--layout-header-filters-bar-template-column-2) var(--layout-header-filters-bar-template-column-3);
+
+  --layout-header-filters-width: calc(100vw - var(--layout-header-filters-bar-template-column-1) - var(--layout-header-filters-bar-template-column-3) - calc(3 * var(--border-width)));
+
   --layout-footer-height: var(--layout-header-bar-container-height);
   --layout-footer-grid-template-column-1: 25vw;
   --layout-footer-grid-template-column-2: 1fr;
@@ -40,6 +46,10 @@
   --info-grid-font-weight: 500;
   --info-grid-padding: 0.2rem 0.4rem;
 
+  --map-marker-font-size: 0.6rem;
+  --map-marker-font-weight: 400;
+  --map-marker-padding: 0.2rem 0.6rem;
+
   --calender-days-height: 90px;
   --calender-hours-height: 36px;
   --calender-hours-margin-bottom: 40px;
@@ -49,11 +59,32 @@
 
   --calender-box-font-size: var(--info-grid-font-size);
   --calender-box-font-weight: var(--info-grid-font-weight);
-  --calender-box-border: var(--info-border-width) solid var(--info-border-color);
+  --calender-box-border-width: var(--info-border-width);
+  --calender-box-border: var(--calender-box-border-width) solid var(--info-border-color);
   --calender-box-padding: var(--info-grid-padding);
   --calender-grid-border: 1px solid var(--color-light-gray);
   --calender-floor-left: 50px;
   --calender-floor-width: calc(100vw - var(--calender-floor-left));
+}
+
+*::-webkit-scrollbar {
+
+  height: 2px;
+  width: 2px;
+  /*background: rgba(255, 255, 255, 0);*/
+}
+
+*::-webkit-scrollbar-track {
+  /*background: var(--color-pink-transparent);*/
+  /*outline: var(--border-width) solid var(--color-black);*/
+}
+
+*::-webkit-scrollbar-thumb {
+  /*background: var(--color-pink);*/
+  background: var(--color-black);
+  /*background: var(--color-black);*/
+  /*outline: var(--border-width) solid var(--color-black);*/
+  -webkit-border-radius: 0;
 }
 
 * {

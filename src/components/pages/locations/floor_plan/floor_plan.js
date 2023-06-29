@@ -16,21 +16,26 @@ export default function LocationsFloorPlan() {
   );
 
   const handleSelectRoom = (e) => {
-    Object.values(filter.floor.children).forEach(child => {
-      if (child.template === 'location-room') {
-        let rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
-        rooms.forEach(room => room.style.fill = '')
-      }
-    })
     const roomId = e.target.getAttribute('data-production')
 
     if (roomId) {
-      e.target.style.fill = 'var(--color-pink)';
-      dispatch(
-        {
-          type: 'select-room',
-          room: filter.floor.children[roomId]
+      const room = filter.floor.children.filter(room => room.id === roomId)
+
+      if (room.length > 0) {
+        Object.values(filter.floor.children).forEach(child => {
+          if (child.template === 'location-room') {
+            let rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
+            rooms.forEach(room => room.style.fill = '')
+          }
         })
+
+        e.target.style.fill = 'var(--color-pink)';
+        dispatch(
+          {
+            type: 'filter-room',
+            room: room[0]
+          })
+      }
     }
   }
 
@@ -44,7 +49,7 @@ export default function LocationsFloorPlan() {
       }
     })
 
-    if ('room' in filter) {
+    if (filter.room) {
       const rooms = document.querySelectorAll(`[data-production="${filter.room.id}"]`);
       if (rooms) {
         rooms.forEach(room => room.style.fill = 'var(--color-pink)')

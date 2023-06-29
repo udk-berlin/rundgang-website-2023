@@ -7,7 +7,7 @@ import LocationsGroundPlanContent from "@/components/pages/locations/ground_plan
 export default function LocationsGroundPlanPopup() {
   const filter = useFilter()
 
-  if (!('location' in filter)) {
+  if (!(filter.location)) {
     return <></>
   }
 

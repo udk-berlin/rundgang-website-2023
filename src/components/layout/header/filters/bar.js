@@ -1,13 +1,13 @@
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
-export default function HeaderFiltersBar({ showFilters, setShowFilters }) {
+export default function HeaderFiltersBar({ showFilters, setShowFilters, disableFilter }) {
   return (
     <HeaderFiltersBarContainer>
       <div></div>
-      <HeaderFiltersContainer onClick={() => setShowFilters(!showFilters)}>
+      <HeaderFiltersContainer disableFilter={disableFilter} onClick={() => disableFilter ? null : setShowFilters(!showFilters)}>
         <div>
-          <FormattedMessage id={"search"} />
+          {disableFilter ? <></> :  <FormattedMessage id={"search"} />}
         </div>
       </HeaderFiltersContainer>
       <div></div>
@@ -17,7 +17,7 @@ export default function HeaderFiltersBar({ showFilters, setShowFilters }) {
 
 const HeaderFiltersBarContainer = styled.div`
   display: grid;
-  grid-template-columns: 2rem 1fr 2rem;
+  grid-template-columns: var(--layout-header-filters-bar-template-columns);
   border-top: var(--border-width) solid var(--border-color);
   font-size: 0.8rem;
 
@@ -35,7 +35,7 @@ const HeaderFiltersBarContainer = styled.div`
 const HeaderFiltersContainer = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: ${({ disableFilter }) => disableFilter ? 'default' : 'pointer'};
 
   & > * {
     margin: 0 1rem;

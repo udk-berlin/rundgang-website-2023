@@ -30,13 +30,13 @@ function LocationsGroundPlanFloor ({ key, floor }) {
   const handleClick = (e) => {
     dispatch(
       {
-        type: 'select-floor',
+        type: 'filter-floor',
         floor: floor
       })
   }
 
   return (
-    <LocationsGroundPlanFloorContainer key={key} selected={('floor' in filter && filter.floor.id === floor.id)} onClick={handleClick}>
+    <LocationsGroundPlanFloorContainer key={key} selected={(filter.floor && filter.floor.id === floor.id)} onClick={handleClick}>
       <div>
         <FormattedMessage id={'floor'}/>: {floor.name}
       </div>
@@ -56,7 +56,7 @@ function LocationsGroundPlanFloorAll () {
   }
 
   return (
-    <LocationsGroundPlanFloorContainer key={-1} selected={!('floor' in filter)} onClick={handleClick}>
+    <LocationsGroundPlanFloorContainer key={-1} selected={!(filter.floor)} onClick={handleClick}>
       <div>
         <FormattedMessage id={'floors.all'}/>
       </div>
