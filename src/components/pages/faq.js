@@ -25,7 +25,7 @@ export default function Faq () {
         faqs = FAQS.en;
 
     return (
-      <Layout>
+      <Layout disableFilter={true}>
           <StaticLayout layout={'faq'} title={'faq'}>
               <Accordion items={faqs} />
           </StaticLayout>

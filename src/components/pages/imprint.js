@@ -139,7 +139,7 @@ export default function Imprint() {
   if (language.locale === "en" && "en" in IMPRINT) imprint = IMPRINT.en;
 
   return (
-    <Layout>
+    <Layout disableFilter={true}>
       <StaticLayout title={"imprint"}>
         <div>
           {imprint.map((imprint) => (
