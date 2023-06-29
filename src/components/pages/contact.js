@@ -570,7 +570,7 @@ export default function Contact() {
   console.log(contacts);
 
   return (
-    <Layout>
+    <Layout disableFilter={true}>
       <StaticLayout title={"contact"}>
         <div>
           {contacts.map((contact) => (
