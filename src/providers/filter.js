@@ -52,7 +52,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -87,7 +87,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -120,7 +120,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -155,7 +155,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -189,7 +189,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -225,7 +225,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,

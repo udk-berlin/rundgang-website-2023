@@ -42,10 +42,7 @@ export default function HeaderBar() {
         <NumberOfSavedProjectsContainer>{savedProjects && savedProjects.length}</NumberOfSavedProjectsContainer>
         <div>
           <SavedProjectsLink>
-            <SVGHover
-              pathPassive="/assets/svg/layout/shop_passive.svg"
-              pathActive="/assets/svg/layout/shop_hover.svg"
-            />
+            <SavedProjectsSVG />
           </SavedProjectsLink>
         </div>
       </SavedProjectsContainer>
@@ -53,6 +50,18 @@ export default function HeaderBar() {
         <SwitchLocalizationLink />
       </div>
     </HeaderBarContainer>
+  );
+}
+
+export function SavedProjectsSVG() {
+  const savedProjects = useSavedProjects()
+  const numberOfSavedProjects = savedProjects <= 3 ? savedProjects : 3
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <SVGHoverWrapper onMouseEnter={() => setIsActive(true)} onMouseLeave={() => setIsActive(false)}>
+      <SVGHoverContainer src={`/assets/svg/layout/shop_state_${numberOfSavedProjects}${isActive ? '_active' : ''}.svg`}/>
+    </SVGHoverWrapper>
   );
 }
 
