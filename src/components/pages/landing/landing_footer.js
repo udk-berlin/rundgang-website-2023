@@ -7,7 +7,7 @@ export default function LandingFooter() {
     <div className={styles.container}>
       <div className={styles.contact}>
         <Link
-          href="https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/kontakt/"
+          href="https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/kernteam-udk-berlin-rundgang-2023/"
           target="_blank"
         >
           Kontakt
@@ -15,7 +15,7 @@ export default function LandingFooter() {
       </div>
       <div className={styles.imprint}>
         <Link
-          href="https://www.udk-berlin.de/schnellzugriff/impressum/"
+          href="https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/impressum/"
           target="_blank"
         >
           Impressum
