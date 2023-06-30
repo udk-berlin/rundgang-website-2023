@@ -1,8 +1,10 @@
 import {getItemIds, getItems} from "@/utils/api/items";
 import Page from "@/components/pages/page";
-import Project from "@/components/pages/projects/project";
+import Project from "@/components/pages/projects/project/project";
 
 import {LOCALES} from "@/components/localization/provider";
+import { SavedProjectsProvider } from '@/providers/saved_projects'
+import React from 'react'
 
 export async function getStaticProps ({ params }) {
   const projects = await getItems()
@@ -36,7 +38,9 @@ export async function getStaticPaths() {
 export default function ProjectPage ({ project }) {
   return (
     <Page>
-      <Project project={project} />
+      <SavedProjectsProvider>
+        <Project project={project} />
+      </SavedProjectsProvider>
     </Page>
   )
 }

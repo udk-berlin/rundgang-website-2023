@@ -51,6 +51,13 @@ export function ProgramLink ({ children }) {
   )
 }
 
+export function SavedProjectsLink ({ children }) {
+  return (
+    <LocalizedLink href="/projects/saved">
+      {children}
+    </LocalizedLink>
+  )
+}
 
 export function ContactLink ({ children }) {
   return (

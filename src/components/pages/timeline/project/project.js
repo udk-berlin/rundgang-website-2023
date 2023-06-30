@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from "styled-components";
 
 import { WIDTH_PER_MINUTE, PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME, WIDTH_PER_HOUR } from "@/components/pages/timeline/constants";
-import ProjectLink from "@/components/pages/projects/link";
+import ProjectLink from "@/components/pages/projects/project/link";
 
 function millisecondsToMinutes(milliseconds) {
   return milliseconds / (1000 * 60);

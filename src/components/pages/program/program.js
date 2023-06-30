@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Masonry from "react-responsive-masonry";
 
-
 import { useFilter } from '@/providers/filter'
 
 import ProjectCell from "@/components/pages/program/project_cell";
@@ -12,6 +11,7 @@ export const MASONRY_GUTTER = "0.75rem"
 
 export default function Program() {
   const filter = useFilter()
+
   return (
     <Layout>
       <ProgramContainer>

@@ -1,16 +1,18 @@
+import React, { useState } from "react";
+import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import ProjectLink from "@/components/pages/projects/link";
-import ProjectTitle from "@/components/pages/projects/title";
-import ProjectAuthors from "@/components/pages/projects/authors";
+import { useSavedProjects, useSetSavedProjects } from '@/providers/saved_projects'
+
+import ProjectLink from "@/components/pages/projects/project/link";
+import ProjectImage from "@/components/pages/projects/project/image";
+import ProjectTitle from "@/components/pages/projects/project/title";
+import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
-import ProjectImage from "@/components/pages/projects/image";
-import { ReactSVG } from "react-svg";
-import { useState } from "react";
 
 export default function ProjectCell({ key, project }) {
-  const [isSaved, setIsSaved] = useState(false);
   const [cellHovered, setCellHovered] = useState(false);
+
   return (
     <ProjectCellContainer
       key={key}
@@ -21,8 +23,7 @@ export default function ProjectCell({ key, project }) {
         <ProjectImage project={project} />
       </ProjectLink>
       <SVGOverlay
-        isSaved={isSaved}
-        setIsSaved={setIsSaved}
+        project={project}
         pathActive={"/assets/svg/layout/shop_active.svg"}
         pathPassive={"/assets/svg/layout/shop_passive.svg"}
         pathHover={"/assets/svg/layout/shop_hover.svg"}
@@ -36,25 +37,36 @@ export default function ProjectCell({ key, project }) {
 }
 
 export function SVGOverlay({
-  isSaved,
-  setIsSaved,
   pathActive,
   pathPassive,
   pathHover,
   cellHovered,
+  project
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const savedProjects = useSavedProjects()
+  const setSavedProjects = useSetSavedProjects()
+
+  const handleClick =  () => {
+    if (savedProjects.includes(project.id)) {
+      setSavedProjects(savedProjects.filter(savedProject => savedProject !== project.id))
+    } else {
+      setSavedProjects([...savedProjects, project.id])
+    }
+  }
+
   let svg;
-  if (cellHovered && !isHovered && !isSaved) {
+  if (cellHovered && !isHovered && !savedProjects.includes(project.id)) {
     svg = <SVGHOverlay src={pathPassive} />;
-  } else if (cellHovered && isHovered && !isSaved) {
+  } else if (cellHovered && isHovered && !savedProjects.includes(project.id)) {
     svg = <SVGHOverlay src={pathHover} />;
-  } else if (isSaved) {
+  } else if (savedProjects && savedProjects.includes(project.id)) {
     svg = <SVGHOverlay src={pathHover} />;
   }
+
   return (
     <SVGOverlayContainer
-      onClick={() => setIsSaved(!isSaved)}
+      onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 import styles from "@/styles/layout/header/Bar.module.css";
 import {
-  LocalizedLink,
+  SavedProjectsLink,
   SwitchLocalizationLink,
-} from "@/components/localization/links";
+} from '@/components/localization/links'
 import { TimelineLink, LocationsLink } from "@/components/localization/links";
-import { FormattedMessage } from "react-intl";
+import { useSavedProjects } from '@/providers/saved_projects'
 
 export default function HeaderBar() {
-  const [timelineIsHovered, setTimlineIsHovered] = useState(false);
+  const [timelineIsHovered, setTimelineIsHovered] = useState(false);
+  const savedProjects = useSavedProjects()
+
   return (
     <HeaderBarContainer>
       <LocationsLink>
@@ -23,8 +26,8 @@ export default function HeaderBar() {
       <div className={styles.timeline}>
         <TimelineLink>
           <Timeline
-            onMouseEnter={() => setTimlineIsHovered(true)}
-            onMouseLeave={() => setTimlineIsHovered(false)}
+            onMouseEnter={() => setTimelineIsHovered(true)}
+            onMouseLeave={() => setTimelineIsHovered(false)}
             show={timelineIsHovered}
           >
             21. – 23.07.2023
@@ -35,16 +38,30 @@ export default function HeaderBar() {
           </Timeline>
         </TimelineLink>
       </div>
-      <LocalizedLink href="/">
-        <SVGHover
-          pathPassive="/assets/svg/layout/shop_passive.svg"
-          pathActive="/assets/svg/layout/shop_hover.svg"
-        />
-      </LocalizedLink>
+      <SavedProjectsContainer>
+        <NumberOfSavedProjectsContainer>{savedProjects && savedProjects.length}</NumberOfSavedProjectsContainer>
+        <div>
+          <SavedProjectsLink>
+            <SavedProjectsSVG />
+          </SavedProjectsLink>
+        </div>
+      </SavedProjectsContainer>
       <div className={styles.localization}>
         <SwitchLocalizationLink />
       </div>
     </HeaderBarContainer>
+  );
+}
+
+export function SavedProjectsSVG() {
+  const savedProjects = useSavedProjects()
+  const numberOfSavedProjects = savedProjects <= 3 ? savedProjects : 3
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <SVGHoverWrapper onMouseEnter={() => setIsActive(true)} onMouseLeave={() => setIsActive(false)}>
+      <SVGHoverContainer src={`/assets/svg/layout/shop_state_${numberOfSavedProjects}${isActive ? '_active' : ''}.svg`}/>
+    </SVGHoverWrapper>
   );
 }
 
@@ -74,6 +91,18 @@ const SVGHoverContainer = styled(ReactSVG)`
   width: 50px;
   height: 50px;
   cursor: pointer;
+  
+  > div {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    
+    > svg {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+  }
 `;
 
 const SVGHoverWrapper = styled.div`
@@ -91,4 +120,18 @@ const Timeline = styled.div`
     display: ${(props) => (props.show ? "inline" : "none")};
     color: var(--color-pink);
   }
+`;
+
+const SavedProjectsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  > div {
+    flex-grow: 1;
+  }
+`;
+
+const NumberOfSavedProjectsContainer = styled.div`
+  margin-right: -84px;
 `;

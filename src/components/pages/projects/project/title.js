@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { useSlider } from "@/providers/slider";
 import { MASONRY_COLUMNS, MASONRY_GUTTER } from "@/components/pages/program/program";
-import ProjectLink from "@/components/pages/projects/link";
+import ProjectLink from "@/components/pages/projects/project/link";
 
 
 const SLIDER_INDEX = 1

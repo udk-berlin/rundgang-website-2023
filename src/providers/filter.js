@@ -52,7 +52,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -87,7 +87,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -120,7 +120,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -155,7 +155,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -189,7 +189,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -225,7 +225,7 @@ function filterReducer (state, action) {
       }
 
       filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
-      const filteredProjects = filterProjectsByNodeIds(itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(state.projects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -247,9 +247,10 @@ function filterReducer (state, action) {
     }
     case 'filter-structure': {
       let filteredProjects = state.projects
+      let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
 
       const filteredStructures = filterByNodeId(state.structures, action.id)
-      let itemNodeIds = getItemNodeIds(filteredStructures)
+      itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
 
       if (state.format) {
         const filteredFormats = filterByNodeId(state.formats, state.format)
@@ -297,8 +298,6 @@ function filterReducer (state, action) {
       let filteredProjects = state.projects
       let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
 
-      console.log(itemNodeIds)
-
       if (state.format) {
         const filteredFormats = filterByNodeId(state.formats, state.format)
         itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
@@ -342,9 +341,10 @@ function filterReducer (state, action) {
     }
     case 'filter-format': {
       let filteredProjects = state.projects
+      let itemNodeIds = getProjectsItemNodeIds(filteredProjects)
 
       const filteredFormats = filterByNodeId(state.formats, action.id)
-      let itemNodeIds = getItemNodeIds(filteredFormats)
+      itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
@@ -394,8 +394,7 @@ function filterReducer (state, action) {
 
       if (state.structure) {
         const filteredStructures = filterByNodeId(state.structures, state.structure)
-        itemNodeIds = getItemNodeIds(filteredStructures)
-        filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
       }
 
       let filteredLocations = state.locations
@@ -411,9 +410,10 @@ function filterReducer (state, action) {
           filteredLocations = filterByNodeId(filteredLocations, state.location.id)
         }
 
-        itemNodeIds = getItemNodeIds(filteredLocations)
-        filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
       }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
 
       return {
         projects: state.projects,
@@ -431,6 +431,20 @@ function filterReducer (state, action) {
         structures: state.structures,
         structure: state.structure,
         structuresFilters: state.structuresFilters,
+      }
+    }
+    case 'set-saved-projects': {
+      return {
+        ...state,
+        project: filterProjectsByNodeIds(state.projects, action.savedProjectIds),
+        filteredProjects: filterProjectsByNodeIds(state.filteredProjects, action.savedProjectIds)
+      }
+    }
+    case 'remove-saved-project': {
+      return {
+        ...state,
+        project: rejectProjectsByNodeId(state.projects, action.savedProjectId),
+        filteredProjects: rejectProjectsByNodeId(state.filteredProjects, action.savedProjectId)
       }
     }
     default: {
@@ -508,4 +522,8 @@ function filterProjectsByNodeIds(projects, nodeIds) {
   nodeIds.forEach(id => filteredProjects[id] = projects[id])
 
   return filteredProjects
+}
+
+function rejectProjectsByNodeId(projects, nodeId) {
+  return projects.filter(project => project !== nodeId)
 }

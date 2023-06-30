@@ -9,6 +9,7 @@ import { FilterProvider }  from "@/providers/filter";
 
 import Page from "@/components/pages/page";
 import Locations from "@/components/pages/locations/locations";
+import { SavedProjectsProvider } from '@/providers/saved_projects'
 
 export async function getStaticProps () {
   const projects = await getItems()
@@ -25,10 +26,12 @@ export async function getStaticProps () {
 
 export default function LocationsPage ({ projects, locations, formats, formatsFilters, structures, structuresFilters }) {
   return (
-       <Page>
-         <FilterProvider projects={projects} locations={locations} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters}>
-           <Locations locations={locations} />
-         </FilterProvider>
-       </Page>
+    <Page>
+      <SavedProjectsProvider>
+        <FilterProvider projects={projects} locations={locations} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters}>
+          <Locations locations={locations} />
+        </FilterProvider>
+      </SavedProjectsProvider>
+    </Page>
   )
 }

@@ -9,6 +9,7 @@ import { FilterProvider }  from "@/providers/filter";
 import Page from "@/components/pages/page";
 import Timeline from "@/components/pages/timeline/timeline";
 import { getItems } from '@/utils/api/items'
+import { SavedProjectsProvider } from '@/providers/saved_projects'
 
 export async function getStaticProps () {
   const projects = await getItems()
@@ -26,9 +27,11 @@ export async function getStaticProps () {
 export default function TimelinePage ({ projects, locations, formats, formatsFilters, structures, structuresFilters }) {
   return (
     <Page>
-      <FilterProvider projects={projects} locations={locations} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters}>
-        <Timeline />
-      </FilterProvider>
+      <SavedProjectsProvider>
+        <FilterProvider projects={projects} locations={locations} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters}>
+          <Timeline />
+        </FilterProvider>
+      </SavedProjectsProvider>
     </Page>
   )
 }
