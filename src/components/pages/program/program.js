@@ -26,5 +26,12 @@ export default function Program() {
 }
 
 const ProgramContainer = styled.div`
+  min-height: calc(100vh - var(--layout-header-height) - var(--layout-footer-height) + var(--border-width));
+  
+  margin-bottom: -2px;
   padding: var(--program-padding);
+  
+  border-bottom: var(--border-width) solid var(--border-color);
+  border-right: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
 `;

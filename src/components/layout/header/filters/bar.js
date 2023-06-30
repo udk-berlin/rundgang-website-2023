@@ -1,19 +1,54 @@
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import { ReactSVG } from "react-svg";
 
 export default function HeaderFiltersBar({ showFilters, setShowFilters, disableFilter }) {
   return (
     <HeaderFiltersBarContainer>
       <div></div>
       <HeaderFiltersContainer disableFilter={disableFilter} onClick={() => disableFilter ? null : setShowFilters(!showFilters)}>
-        <div>
-          {disableFilter ? <></> :  <FormattedMessage id={"search"} />}
-        </div>
+        {
+          disableFilter ?
+            <></> :
+            <HeaderFiltersTitleContainer>
+              <SVG src={`/assets/svg/layout/search_icon.svg`} />
+              <HeaderFiltersTitle><FormattedMessage id={"search"} /></HeaderFiltersTitle>
+            </HeaderFiltersTitleContainer>
+        }
       </HeaderFiltersContainer>
       <div></div>
     </HeaderFiltersBarContainer>
   );
 }
+const HeaderFiltersTitle = styled.div`
+  height: calc(0.55 * var(--layout-header-search-container-height));
+  margin-bottom: 2px;
+`
+
+const HeaderFiltersTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 2px;
+  
+  height: 100%;
+`
+
+const SVG = styled(ReactSVG)`
+  width: calc(0.55 * var(--layout-header-search-container-height));
+  height: calc(0.55 * var(--layout-header-search-container-height));
+  cursor: pointer;
+  
+  > div {
+    width: 100%;
+    height: 100%;
+    
+    > svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+`;
 
 const HeaderFiltersBarContainer = styled.div`
   display: grid;

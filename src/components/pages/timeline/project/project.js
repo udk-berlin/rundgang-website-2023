@@ -58,6 +58,7 @@ export default function TimelineProject({ project, previousProject, nextProjectG
             start={0}
             width={projectWidth}
             top={0}
+            borderRight={project.end < PROJECTS_LAST_TIME}
             onMouseEnter={() => setShowImage(true)}
             onMouseLeave={() => setShowImage(false)}
           >
@@ -117,8 +118,8 @@ const ProjectTimeline = styled.div`
   width: ${({ width }) => width}px;
   
   padding: var(--calender-box-padding);
-  //margin-left: -2px;
   border: var(--calender-box-border);
+  border-right: ${({ borderRight }) => borderRight ? 'var(--calender-box-border)' : 0};
   
   background: var(--color-white);
 

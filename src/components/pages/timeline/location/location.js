@@ -64,6 +64,7 @@ const LocationTitleContainer = styled.div`
   :hover {
     color: var(--color-white);
     background-color: var(--color-pink);
-    border: var(--calender-box-border)
+    border: var(--calender-box-border);
+    border-left: 0;
   }
 `;

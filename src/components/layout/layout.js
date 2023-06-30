@@ -30,6 +30,6 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  border-left: var(--border-width) solid var(--border-color);
-  border-right: var(--border-width) solid var(--border-color);
+  //border-left: var(--border-width) solid var(--border-color);
+  //border-right: var(--border-width) solid var(--border-color);
 `;

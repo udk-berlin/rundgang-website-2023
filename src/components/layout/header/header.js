@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import HeaderBar from "@/components/layout/header/bar";
+import HeaderBar from "@/components/layout/header/bar/bar";
 import HeaderFiltersBar from "@/components/layout/header/filters/bar";
 import HeaderFilters from "@/components/layout/header/filters/filters";
 import { useState } from "react";

@@ -64,4 +64,8 @@ const CustomSlider = styled(Slider)`
   > .MuiSlider-track {
     color: var(--color-black) !important;
   }
+  
+  > .MuiSlider-mark {
+    color: var(--color-black)
+  }
 `;

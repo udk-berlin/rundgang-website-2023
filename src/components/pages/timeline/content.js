@@ -67,11 +67,15 @@ const ContentContainer = styled.div`
   overflow-x: auto;
   overflow-y: auto;
 
+  min-height: calc(100vh - var(--layout-header-height) - var(--layout-footer-height) + var(--border-width));
+  
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;
 
-  min-height: calc(100vh - var(--layout-header-height) - var(--layout-footer-height));
-
-
+  margin-bottom: -2px;
+  
+  border-bottom: var(--border-width) solid var(--border-color);
+  border-right: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
 `;

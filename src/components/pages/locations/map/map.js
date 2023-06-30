@@ -146,6 +146,9 @@ const MapContainer = styled.div`
   min-width: 100%;
 
   overflow: hidden;
+
+  border-right: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
 `
 
 function buildMarker (mapRef, location, cache, useTextBox) {
