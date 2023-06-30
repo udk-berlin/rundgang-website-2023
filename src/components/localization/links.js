@@ -1,21 +1,45 @@
 import React from "react";
-import {FormattedMessage, useIntl} from "react-intl";
+import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import Link from 'next/link'
+import styled from 'styled-components'
 
 import styles from '@/styles/localization/Links.module.css'
-
 
 export function SwitchLocalizationLink () {
   const router = useRouter();
   const language = useIntl();
 
   return (
-    <Link href={router.asPath} locale={language.locale === 'de' ? 'en' : 'de'}>
-      <FormattedMessage id="other.language.abbreviation" />
-    </Link>
+    <>
+      <SwitchLocalizationLinkContainer selected={language.locale === 'de'}>
+        <Link href={router.asPath} locale={'de'}>
+          DE
+        </Link>
+      </SwitchLocalizationLinkContainer>
+      <SlashContainer>&nbsp;/&nbsp;</SlashContainer>
+      <SwitchLocalizationLinkContainer selected={language.locale === 'en'}>
+        <Link href={router.asPath} locale={'en'}>
+          EN
+        </Link>
+      </SwitchLocalizationLinkContainer>
+    </>
   )
 }
+
+const SlashContainer = styled.div`
+  cursor: default;
+`
+
+const SwitchLocalizationLinkContainer = styled.div`
+  > a {
+    color: ${({ selected }) => selected ? 'var(--color-pink) !important' : ''};
+  }
+
+  > a:hover {
+    color: var(--color-pink) !important;
+  }
+`
 
 export function LocalizedLink ({ href, children } ) {
   const language = useIntl();

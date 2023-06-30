@@ -1,46 +1,16 @@
-import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
-import { HoverLink } from "@/components/hover_link";
 import FooterSlider from "@/components/layout/footer/slider";
-
-import {
-  ContactLink,
-  ImprintLink,
-  FaqLink,
-} from "@/components/localization/links";
+import FooterInfoPages from '@/components/layout/footer/info_pages'
+import FooterTitle from '@/components/layout/footer/title'
 
 export default function Footer({ numberOfSliderStates }) {
   return (
     <FooterContainer>
       <FooterSlider numberOfSliderStates={numberOfSliderStates} />
-      <Title />
-      <InfoPages />
+      <FooterTitle />
+      <FooterInfoPages />
     </FooterContainer>
-  );
-}
-
-function Title() {
-  return (
-    <TitleContainer>
-      <HoverLink href="/program">UdK Berlin Rundgang</HoverLink>
-    </TitleContainer>
-  );
-}
-
-function InfoPages() {
-  return (
-    <InfoPagesContainer>
-      <ContactLink>
-        <FormattedMessage id={"contact"} />
-      </ContactLink>
-      <ImprintLink>
-        <FormattedMessage id={"imprint"} />
-      </ImprintLink>
-      <FaqLink>
-        <FormattedMessage id={"faq"} />
-      </FaqLink>
-    </InfoPagesContainer>
   );
 }
 
@@ -65,41 +35,5 @@ const FooterContainer = styled.div`
 
   > *:nth-child(3) {
     border-left: var(--border-width) solid var(--border-color);
-  }
-`;
-
-const TitleContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  > div {
-    width: 100%;
-    height: 100%;
-
-    > a {
-      width: 100% !important;
-      height: 100% !important;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-weight: 600;
-      font-size: 1.2rem;
-    }
-  }
-`;
-
-const InfoPagesContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-
-  width: 100%;
-  height: 100%;
-
-  & > *:hover {
-    text-decoration: underline;
   }
 `;

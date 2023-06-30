@@ -8,7 +8,6 @@ import {
   WIDTH_PER_HOUR,
   TIMELINE_WIDTH,
   DAYS,
-  range
 } from '@/components/pages/timeline/constants'
 
 export default function TimelineDays() {

@@ -1,1 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><svg id="Capa_4_copia" xmlns="http://www.w3.org/2000/svg" width="488.5043" height="486" viewBox="0 0 488.5043 486"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:15px;}</style></defs><polygon class="cls-1" points="353.065 135.1447 451.5693 53.1447 451.5693 377.1447 353.065 459.1447 135.0043 350.1447 30.5 432.1447 30.5 99.1447 135.0043 17.1447 353.065 135.1447"/><line class="cls-1" x1="135.0043" y1="17.1447" x2="135.0043" y2="350.1447"/><line class="cls-1" x1="353.065" y1="135.1447" x2="353.065" y2="459.1447"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_4_copia" xmlns="http://www.w3.org/2000/svg" width="488.5043" height="486" viewBox="0 0 488.5043 486">
+    <defs>
+        <style>.cls-map-passive-1{fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:15px;}</style>
+    </defs>
+    <polygon class="cls-map-passive-1" points="353.065 135.1447 451.5693 53.1447 451.5693 377.1447 353.065 459.1447 135.0043 350.1447 30.5 432.1447 30.5 99.1447 135.0043 17.1447 353.065 135.1447"/>
+    <line class="cls-map-passive-1" x1="135.0043" y1="17.1447" x2="135.0043" y2="350.1447"/>
+    <line class="cls-map-passive-1" x1="353.065" y1="135.1447" x2="353.065" y2="459.1447"/>
+</svg>

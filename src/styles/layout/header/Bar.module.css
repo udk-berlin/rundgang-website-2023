@@ -1,16 +1,3 @@
 .locations {
   margin-top: 5px;
 }
-
-.timeline {
-  font-weight: 600;
-  justify-self: center;
-}
-
-.timeline > a {
-  color: black;
-}
-
-.localization {
-  justify-self: end;
-}

@@ -55,7 +55,7 @@ export default function TimelineHeader() {
 const HeaderContainer = styled.div`
   position: fixed;
   z-index: 6;
-  left: 0;
+  left: var(--border-width);
   top: var(--layout-header-height);
 
   width: 100vw;

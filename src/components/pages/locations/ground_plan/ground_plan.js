@@ -46,7 +46,7 @@ const LocationsGroundPlanContainer = styled.div`
   min-height: var(--locations-ground-plan-height);
   max-height: var(--locations-ground-plan-height);
 
-  background:  var(--color-green-transparent);
+  background:  var(--color-dark-gray);
   border-right: var(--border-width) solid var(--border-color);
 
   > div {

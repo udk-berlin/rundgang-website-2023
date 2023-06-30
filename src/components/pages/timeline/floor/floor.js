@@ -30,24 +30,19 @@ const FloorContainer = styled.div`
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);
   max-height: var(--calender-floor-room-project-height);
-  width: var(--calender-floor-width);
+  width:  calc(100vw - ${WIDTH_PER_HOUR / 2}px);
 
   padding: var(--info-grid-padding);
   margin-top: -2px;
   
   border: var(--border-width) solid var(--border-color);
-  //border-top: 0;
+  border-right: 0;
 
   background: var(--color-white);
 
   font-size: var(--info-grid-font-size);
   font-weight: var(--info-grid-font-weight);
   color: var(--color-black);
-
-  //:hover {
-  //  background: var(--color-pink);
-  //  color: var(--color-white);
-  //}
 
   cursor: default;
 `;
