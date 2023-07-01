@@ -13,8 +13,8 @@ const MAP_CONFIGURATION = {
     latitude: { min: 52.442394, max: 52.586099 }
   },
   center: {
-    longitude: 13.369633,
-    latitude: 52.515813
+    longitude: 13.339633,
+    latitude: 52.505
   }
 }
 
