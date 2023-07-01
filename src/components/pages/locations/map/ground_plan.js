@@ -1,24 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-import {ReactSVG} from "react-svg";
 
 const GROUND_PLAN_FOLDER_PATH = '/assets/svg/map/ground_plan/'
 const SIMPLE_GROUND_PLAN_FILENAME = 'simple.svg'
 
 const ID_TO_GROUNDPLAN_FILENAME_MAPPER = {
-  '!uAswzmPHWtAVmjhIYx:content.udk-berlin.de': '001',
-  '!hjTkjNaIDkzxNWQZTR:content.udk-berlin.de': '002',
-  '!XaBVrlwEHUifKOmMPa:content.udk-berlin.de': '003',
-  '!aLyedVYnhynRwlhXUm:content.udk-berlin.de': '004',
-  '!amwvMUTwucDiRylpJQ:content.udk-berlin.de': '005',
-  '!LiVonEpyzckeIAyOIb:content.udk-berlin.de': '006',
-  '!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': '007',
-  '!FYglBKPJHZGUNIYcBt:content.udk-berlin.de': '008',
-  '!fwsuOeorRCZtTqwukc:content.udk-berlin.de': '009',
-  '!ozXLGbrpCVNrRScjQJ:content.udk-berlin.de': '010',
-  '!nOMmizEAkvzoapuqCK:content.udk-berlin.de': '011',
-  '!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': '012',
-  '!jocCvZKGntdCmvmmUG:content.udk-berlin.de': '013'
+  '!PsyURUpKAbSPistHpQ:content.udk-berlin.de': '001',
+  //'!hjTkjNaIDkzxNWQZTR:content.udk-berlin.de': '002',
+  '!RuJBwEwOQcFrQabJnn:content.udk-berlin.de': '003',
+  //'!aLyedVYnhynRwlhXUm:content.udk-berlin.de': '004',
+  '!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de': '005',
+  '!GFauydmVRlpqvDETXH:content.udk-berlin.de': '006',
+  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': '007',
+  '!eVjUBtkIgDQkQSKVxm:content.udk-berlin.de': '008',
+  //'!fwsuOeorRCZtTqwukc:content.udk-berlin.de': '009',
+  '!OkEblSLtaWAObRcCHm:content.udk-berlin.de': '010',
+  '!fPuAzLpetwUYPJZwCF:content.udk-berlin.de': '011',
+  //'!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': '012',
+  //'!jocCvZKGntdCmvmmUG:content.udk-berlin.de': '013'
 }
 
 const TYPE_TO_SIZE_MAPPER = {

@@ -1,4 +1,3 @@
-import { getItems } from "@/utils/api/items";
 import { getLocations } from "@/utils/api/locations";
 import { getStructures } from "@/utils/api/structures";
 import { getFormats } from '@/utils/api/formats'
@@ -6,9 +5,8 @@ import { getFormats } from '@/utils/api/formats'
 export async function getLocationsLocations() {
   const locationsLocations = {}
   const locations = await getLocations()
-  const items = await getItems()
 
-  filter(Object.values(locations), items).forEach(location => locationsLocations[location.id] = location)
+  filter(Object.values(locations)).forEach(location => locationsLocations[location.id] = location)
   return locationsLocations
 }
 
