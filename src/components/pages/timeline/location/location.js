@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import TimelineFloors from '@/components/pages/timeline/floor/floors'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
-import { TIMELINE_WIDTH } from "@/components/pages/timeline/constants";
 
 export default function TimelineLocation({ location }) {
   const [showContent, setShowContent] = useState(true)
@@ -26,7 +25,7 @@ export default function TimelineLocation({ location }) {
 }
 
 const LocationContentPlaceholder = styled.div`
-  width: ${TIMELINE_WIDTH}px;
+  width: var(--timeline-width);
 `;
 
 const LocationContentContainer = styled.div`

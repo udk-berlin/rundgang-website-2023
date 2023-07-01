@@ -63,6 +63,11 @@
   --calender-box-border: var(--calender-box-border-width) solid var(--info-border-color);
   --calender-box-padding: var(--info-grid-padding);
   --calender-grid-border: 1px solid var(--color-light-gray);
+
+  --timeline-width: 200vw;
+  --timeline-width-per-hour: calc(var(--timeline-width) / 64);
+  --timeline-width-per-minute: calc(var(--timeline-width) / (60 * 64));
+  --timeline-room-width: fit-content;
 }
 
 *::-webkit-scrollbar {

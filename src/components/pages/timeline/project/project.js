@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 
-import { WIDTH_PER_MINUTE, PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME, WIDTH_PER_HOUR } from "@/components/pages/timeline/constants";
+import { PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME } from "@/components/pages/timeline/constants";
 import ProjectLink from "@/components/pages/projects/project/link";
 
 function millisecondsToMinutes(milliseconds) {
@@ -27,13 +27,13 @@ export default function TimelineProject({ project, previousProject, nextProjectG
     projectEnd = project.end
   }
 
-  let projectWidth = millisecondsToMinutes((projectEnd - projectStart)) * WIDTH_PER_MINUTE
+  let projectTimespan = millisecondsToMinutes((projectEnd - projectStart))
 
-  let emptyTimelineWidth = 0
+  let emptyTimelineTimespan = 0
   if (previousProject) {
-    emptyTimelineWidth = millisecondsToMinutes((project.start - previousProject.end)) * WIDTH_PER_MINUTE
+    emptyTimelineTimespan = millisecondsToMinutes((project.start - previousProject.end))
   } else {
-    emptyTimelineWidth = millisecondsToMinutes((project.start - PROJECTS_FIRST_TIME)) * WIDTH_PER_MINUTE
+    emptyTimelineTimespan = millisecondsToMinutes((project.start - PROJECTS_FIRST_TIME))
   }
 
   return (
@@ -45,7 +45,7 @@ export default function TimelineProject({ project, previousProject, nextProjectG
           isFirstGroup={projectsGroupIndex === 0}
           isLastGroup={projectsGroupIndex === projectsGroupsLength - 1}
           hasNoProjectUnderneath={!nextProjectGroup || nextProjectGroup[nextProjectGroup.length - 1].end < project.start}
-          width={emptyTimelineWidth}
+          timespan={emptyTimelineTimespan}
           roomIndex={roomIndex}
         >
           <EmptyTimelineLine roomIndex={roomIndex}/>
@@ -56,7 +56,7 @@ export default function TimelineProject({ project, previousProject, nextProjectG
           <ProjectTimeline
             id={`${project.id}-${project.end}${project.start}`}
             start={0}
-            width={projectWidth}
+            timespan={projectTimespan}
             top={0}
             borderRight={project.end < PROJECTS_LAST_TIME}
             onMouseEnter={() => setShowImage(true)}
@@ -115,7 +115,7 @@ const ProjectTimeline = styled.div`
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);
   max-height: var(--calender-floor-room-project-height);
-  width: ${({ width }) => width}px;
+  width: calc(var(--timeline-width-per-minute) * ${({ timespan }) => timespan});
   
   padding: var(--calender-box-padding);
   border: var(--calender-box-border);
@@ -143,7 +143,7 @@ const EmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
 
-  width: ${({ width }) =>width}px;
+  width: calc(var(--timeline-width-per-minute) * ${({ timespan }) => timespan});
 
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);
@@ -165,7 +165,7 @@ const FirstEmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
   
-  width: ${WIDTH_PER_HOUR}px;
+  width: var(--timeline-width-per-hour);
 
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);

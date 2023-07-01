@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { TIMELINE_WIDTH } from '@/components/pages/timeline/constants'
 import TimelineProject from "@/components/pages/timeline/project/project";
 
 export default function TimelineProjectsGroup({ projectsGroup, projectsGroups, projectsGroupIndex, roomIndex }) {
@@ -26,7 +25,7 @@ const ProjectsGroupContainer = styled.div`
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);
   max-height: var(--calender-floor-room-project-height);
-  width: ${TIMELINE_WIDTH}px;
+  width: var(--timeline-width);
 
   margin-top: calc(var(--border-width) * -1);
 `;

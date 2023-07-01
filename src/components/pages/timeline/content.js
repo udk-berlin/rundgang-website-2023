@@ -5,31 +5,39 @@ import styled from "styled-components";
 import { useSlider, useSliderDispatch } from "@/providers/slider";
 import TimelineGrid from "@/components/pages/timeline/grid";
 import TimelineLocations from "@/components/pages/timeline/location/locations";
-import { DAYS, TIMELINE_WIDTH } from "@/components/pages/timeline/constants";
+import { DAYS, NUMBER_OF_HOURS } from "@/components/pages/timeline/constants";
+
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import useWindowSize from '@/hooks/window_size'
 
 export default function TimelineContent() {
+  const windowSize = useWindowSize()
+  const width = windowSize.width
   const language = useIntl();
   const slider = useSlider()
   const dispatch = useSliderDispatch()
   const ref = useRef(null);
   const days = language.locale === 'en' ? DAYS.en : DAYS.de
 
-  const handleScroll = (e) => {
+  const handleScroll = () => {
+    const timelineWidth = window.innerWidth * 2
+    const widthPerHour = timelineWidth / NUMBER_OF_HOURS
+
     let timeout = 0
     if (slider.origin === 'click' || slider.origin === 'slider') {
       timeout = 2000
     }
 
-    setTimeout(() => {
+    setTimeout((e) => {
       const scrollLeft = ref.current?.scrollLeft
 
-      if (scrollLeft <= days[0].scrollX && (days[1].scrollX - window.innerWidth / 2) > scrollLeft + 1) {
+      if (scrollLeft <= days[0].scrollXFactor * widthPerHour && (days[1].scrollXFactor * widthPerHour - window.innerWidth / 2) > scrollLeft + 1) {
         dispatch({
           type: 'update',
           position: 0,
           origin: 'scroll'
         })
-      } else if ((scrollLeft > days[0].scrollX || ((days[1].scrollX - window.innerWidth / 2) <= scrollLeft + 1)) && scrollLeft <= days[1].scrollX && scrollLeft < TIMELINE_WIDTH -window.innerWidth ) {
+      } else if ((scrollLeft > days[0].scrollXFactor * widthPerHour || ((days[1].scrollXFactor * widthPerHour - window.innerWidth / 2) <= scrollLeft + 1)) && scrollLeft <= days[1].scrollXFactor * widthPerHour && scrollLeft < timelineWidth - window.innerWidth ) {
         dispatch({
           type: 'update',
           position: 1,
@@ -46,10 +54,12 @@ export default function TimelineContent() {
   }
 
   useEffect(() => {
+    const widthPerHour = width * 2 / NUMBER_OF_HOURS
+
     if (slider.origin !== 'scroll') {
-      ref.current?.scrollTo({left: days[slider.position].scrollX - window.innerWidth / 2, behavior: 'smooth'})
+      ref.current?.scrollTo({left: days[slider.position].scrollXFactor * widthPerHour - window.innerWidth / 2, behavior: 'smooth'})
     }
-  }, [slider.position, slider.origin])
+  }, [slider.position, slider.origin, width])
 
   return (
     <ContentContainer id={'timeline'} ref={ref} onScroll={handleScroll} >

@@ -8,30 +8,28 @@ import {
 } from '@/components/pages/timeline/constants'
 import React from 'react'
 
-export default function TimelineHours() {
+const NUMBER_OF_HALF_DAYS = Math.round(NUMBER_OF_HOURS / 12);
+
+export default function TimelineMobileHours() {
   const language = useIntl();
-  const isMobile = true;
 
   return (
     <HoursContainer>
       <HoursInnerContainer>
-        {range(0, NUMBER_OF_HOURS).map(hour => {
+        {range(0, NUMBER_OF_HALF_DAYS).map(halfDay => {
           let content;
 
-          if (hour > 1 && hour < NUMBER_OF_HOURS - 1) {
-            let hourString = (hour + FIRST_DAY_START_HOUR) % (language.locale === 'en' ? HOURS_PER_HALF_DAY : HOURS_PER_DAY)
-            if (hourString === 0 && language.locale === 'en' && (hour + FIRST_DAY_START_HOUR) % 24 !== 0) {
-              hourString = 12
-            }
 
-            content = (
-              <>
-                <HourLine transparent={hour === 2}/>
-                <Hour>{hourString}{language.locale === 'en' ? (hour + FIRST_DAY_START_HOUR) % HOURS_PER_DAY  < 12 ? 'am' : 'pm' : ':00'}</Hour>
-                <HourLine transparent={hour === NUMBER_OF_HOURS - 2}/>
-              </>
-            )
-          }
+          let hour = ((halfDay * 12) + 10) % 24
+
+          content = (
+            <>
+              <HourLine transparent={halfDay === 0}/>
+              <Hour>{hour}{language.locale === 'en' ? hour % HOURS_PER_DAY < 12 ? 'am' : 'pm' : ':00'}</Hour>
+              <HourLine transparent={halfDay === NUMBER_OF_HALF_DAYS - 1}/>
+            </>
+          )
+
 
           return (<HourContainer>
             {content}
@@ -60,7 +58,7 @@ const HoursContainer = styled.div`
 
 const HoursInnerContainer = styled.div`
   position: relative;
-  left: calc(var(--timeline-width-per-hour) / 2 * -1);
+  left: calc(var(--timeline-width-per-hour) * 4 * -1);
 
   display: flex;
 `;
@@ -68,9 +66,9 @@ const HoursInnerContainer = styled.div`
 const HourContainer = styled.div`
   display: flex;
   
-  width: var(--timeline-width-per-hour);
-  min-width: var(--timeline-width-per-hour);
-  max-width: var(--timeline-width-per-hour);
+  width: calc(var(--timeline-width-per-hour) * 12);
+  min-width: calc(var(--timeline-width-per-hour) * 12);
+  max-width: calc(var(--timeline-width-per-hour) * 12);
   height: 100%;
   
   color: black;

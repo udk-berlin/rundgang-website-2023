@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import TimelineDays from "@/components/pages/timeline/header/days";
 import TimelineHours from "@/components/pages/timeline/header/hours";
+import TimelineMobileHours from '@/components/pages/timeline/header/hours/mobile'
 
 export default function TimelineHeader() {
   const ref = useRef(null);
@@ -47,7 +48,7 @@ export default function TimelineHeader() {
   return (
     <HeaderContainer ref={ref} id={'timeline-header'}>
       <TimelineDays/>
-      <TimelineHours/>
+      <TimelineMobileHours />
     </HeaderContainer>
   );
 }

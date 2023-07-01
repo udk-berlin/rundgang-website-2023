@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
-import { TIMELINE_WIDTH, WIDTH_PER_HOUR } from '@/components/pages/timeline/constants'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 
 export default function TimelineLocationRoom({ room, index }) {
@@ -9,7 +8,7 @@ export default function TimelineLocationRoom({ room, index }) {
 
   return (
     <>
-      <RoomContainer key={room.id} width={TIMELINE_WIDTH}>
+      <RoomContainer key={room.id}>
         <Room>
           <FormattedMessage id={'room'}/>: {room.name}
         </Room>
@@ -22,7 +21,7 @@ export default function TimelineLocationRoom({ room, index }) {
 
 const RoomContainer = styled.div`
   display: flex;
-  width: ${({ width }) => width}px;
+  width: var(--timeline-width);
 
   margin-top: calc(var(--border-width) * -1);
   margin-bottom: calc(var(--calender-floor-room-project-height) * -1);
@@ -31,7 +30,7 @@ const RoomContainer = styled.div`
 const Room = styled.div`
   position: sticky;
   z-index: 4;
-  left: ${WIDTH_PER_HOUR}px;
+  left: var(--timeline-width-per-hour);
   top: 0;
   
   display: flex;
@@ -41,6 +40,10 @@ const Room = styled.div`
   height: var(--calender-floor-room-project-height);
   min-height: var(--calender-floor-room-project-height);
   max-height: var(--calender-floor-room-project-height);
+
+  width: var(--timeline-room-width);
+  min-width: var(--timeline-room-width);
+  max-width: var(--timeline-room-width);
   
   padding: var(--info-grid-padding);
   border: var(--info-border-width) solid var(--info-border-color);

@@ -4,11 +4,9 @@ import { useIntl } from "react-intl";
 
 import { useSlider, useSliderDispatch } from "@/providers/slider";
 
-import {
-  WIDTH_PER_HOUR,
-  TIMELINE_WIDTH,
-  DAYS,
-} from '@/components/pages/timeline/constants'
+import { DAYS } from '@/components/pages/timeline/constants'
+
+
 
 export default function TimelineDays() {
   const language = useIntl();
@@ -32,7 +30,7 @@ export default function TimelineDays() {
         days.map((day, index) => {
           return (
             <Day
-              width={WIDTH_PER_HOUR * day.hours}
+              hours={day.hours}
               selected={index === slider.position}
               onClick={getClickHandler(index)}>
               {day.name}
@@ -51,9 +49,9 @@ const DaysInnerContainer = styled.div`
   height: var(--calender-days-height);
   min-height: var(--calender-days-height);
   max-height: var(--calender-days-height);
-  width: ${TIMELINE_WIDTH}px;
-  min-width: ${TIMELINE_WIDTH}px;
-  max-width: ${TIMELINE_WIDTH}px;
+  width: var(--timeline-width);
+  min-width: var(--timeline-width);
+  max-width: var(--timeline-width);
   
   font-size: var(--info-grid-font-size);
   font-weight: var(--info-grid-font-weight);
@@ -70,9 +68,9 @@ const Day = styled.div`
   justify-content: center;
   flex-grow: 1;
   
-  width: ${({ width }) => width}px;
-  min-width: ${({ width }) => width}px;
-  max-width: ${({ width }) => width}px;
+  width: calc(var(--timeline-width-per-hour) * ${({ hours }) => hours});
+  min-width: calc(var(--timeline-width-per-hour) * ${({ hours }) => hours});
+  max-width: calc(var(--timeline-width-per-hour) * ${({ hours }) => hours});
   height: 100%;
   
   background: ${({ selected }) => selected ? 'var(--color-pink)' : 'var(--color-white)' };
