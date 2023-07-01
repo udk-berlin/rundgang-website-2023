@@ -49,25 +49,6 @@
   --map-marker-font-size: 0.6rem;
   --map-marker-font-weight: 400;
   --map-marker-padding: 0.2rem 0.6rem;
-
-  --calender-days-height: 90px;
-  --calender-hours-height: 36px;
-  --calender-hours-margin-bottom: 40px;
-
-  --calender-location-height: 34px;
-  --calender-floor-room-project-height: 34px;
-
-  --calender-box-font-size: var(--info-grid-font-size);
-  --calender-box-font-weight: var(--info-grid-font-weight);
-  --calender-box-border-width: var(--info-border-width);
-  --calender-box-border: var(--calender-box-border-width) solid var(--info-border-color);
-  --calender-box-padding: var(--info-grid-padding);
-  --calender-grid-border: 1px solid var(--color-light-gray);
-
-  --timeline-width: 200vw;
-  --timeline-width-per-hour: calc(var(--timeline-width) / 64);
-  --timeline-width-per-minute: calc(var(--timeline-width) / (60 * 64));
-  --timeline-room-width: fit-content;
 }
 
 *::-webkit-scrollbar {

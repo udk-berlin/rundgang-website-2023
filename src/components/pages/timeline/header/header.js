@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import TimelineDays from "@/components/pages/timeline/header/days";
 import TimelineHours from "@/components/pages/timeline/header/hours";
-import TimelineMobileHours from '@/components/pages/timeline/header/hours/mobile'
 
 export default function TimelineHeader() {
   const ref = useRef(null);
@@ -14,7 +13,6 @@ export default function TimelineHeader() {
   })}, [])
 
   useEffect(() => {
-
     let keys = {37: 1, 38: 1, 39: 1, 40: 1};
 
     function preventDefault(e) {
@@ -28,7 +26,6 @@ export default function TimelineHeader() {
       }
     }
 
-// modern Chrome requires { passive: false } when adding event
     let supportsPassive = false;
     try {
       window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
@@ -39,16 +36,16 @@ export default function TimelineHeader() {
     let wheelOpt = supportsPassive ? { passive: false } : false;
     let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
-    ref.current.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-    ref.current.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-    ref.current.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+    ref.current.addEventListener('DOMMouseScroll', preventDefault, false);
+    ref.current.addEventListener(wheelEvent, preventDefault, wheelOpt);
+    ref.current.addEventListener('touchmove', preventDefault, wheelOpt);
     ref.current.addEventListener('keydown', preventDefaultForScrollKeys, false);
   }, [])
 
   return (
     <HeaderContainer ref={ref} id={'timeline-header'}>
       <TimelineDays/>
-      <TimelineMobileHours />
+      <TimelineHours />
     </HeaderContainer>
   );
 }
@@ -56,8 +53,8 @@ export default function TimelineHeader() {
 const HeaderContainer = styled.div`
   position: fixed;
   z-index: 6;
-  left: var(--border-width);
-  top: var(--layout-header-height);
+  left: ${({ theme }) => theme.border};
+  top: ${({ theme }) => theme.border};
 
   width: 100vw;
   min-width: 100vw;

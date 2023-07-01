@@ -21,6 +21,6 @@ const LocationsContainer = styled.div`
   position: relative;
   z-index: 0;
 
-  margin-bottom: 40px;
-  margin-top: calc(var(--calender-days-height) + var(--calender-floor-room-project-height) + var(--calender-hours-margin-bottom));
+  margin-bottom: ${({theme}) => theme.timeline.locations.marginBottom};
+  margin-top: calc(${({theme}) => theme.timeline.days.height} + ${({theme}) => theme.timeline.hours.height} + ${({theme}) => theme.timeline.locations.marginTop} - ${({theme}) => theme.borderWidth});
 `;

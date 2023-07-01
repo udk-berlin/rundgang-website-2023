@@ -20,28 +20,29 @@ export default function TimelineLocationFloor({ floor }) {
 const FloorContainer = styled.div`
   position: sticky;
   z-index: 3;
-  left: calc(var(--timeline-width-per-hour) / 2);
+  left: ${({theme}) => theme.timeline.floor.left};
   top: 0;
   
   display: flex;
   align-items: center;
 
-  height: var(--calender-floor-room-project-height);
-  min-height: var(--calender-floor-room-project-height);
-  max-height: var(--calender-floor-room-project-height);
-  width:  calc(100vw - var(--timeline-width-per-hour) / 2);
+  height: ${({theme}) => theme.box.height};
+  min-height: ${({theme}) => theme.box.height};
+  max-height: ${({theme}) => theme.box.height};
+  width: ${({theme}) => theme.timeline.floor.width};
 
-  padding: var(--info-grid-padding);
-  margin-top: -2px;
+  padding: ${({theme}) => theme.box.padding};
+  margin-top: calc(${({theme}) => theme.borderWidth} * -1);
   
-  border: var(--border-width) solid var(--border-color);
+  border: ${({theme}) => theme.border};
   border-right: 0;
+  border-left: ${({theme}) => theme.timeline.floor.borderLeft};
 
-  background: var(--color-white);
+  background: ${({theme}) => theme.colors.white};
 
-  font-size: var(--info-grid-font-size);
-  font-weight: var(--info-grid-font-weight);
-  color: var(--color-black);
+  font-size: ${({theme}) => theme.fontSizes.small};
+  font-weight: ${({theme}) => theme.fontWeights.small};
+  color: ${({theme}) => theme.colors.black};
 
   cursor: default;
 `;

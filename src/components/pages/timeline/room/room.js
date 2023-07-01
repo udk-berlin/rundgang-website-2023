@@ -21,38 +21,36 @@ export default function TimelineLocationRoom({ room, index }) {
 
 const RoomContainer = styled.div`
   display: flex;
-  width: var(--timeline-width);
+  width: ${({theme}) => theme.timeline.width};
 
-  margin-top: calc(var(--border-width) * -1);
-  margin-bottom: calc(var(--calender-floor-room-project-height) * -1);
+  margin-top: calc(${({theme}) => theme.borderWidth} * -1);
+  margin-bottom: calc(${({theme}) => theme.box.height} * -1);
 `;
 
 const Room = styled.div`
   position: sticky;
   z-index: 4;
-  left: var(--timeline-width-per-hour);
+  left: ${({theme}) => theme.timeline.widthPerHour};
   top: 0;
   
   display: flex;
   align-items: center;
   justify-content: center;
 
-  height: var(--calender-floor-room-project-height);
-  min-height: var(--calender-floor-room-project-height);
-  max-height: var(--calender-floor-room-project-height);
+  height: ${({theme}) => theme.box.height};
+  min-height: ${({theme}) => theme.box.height};
+  max-height: ${({theme}) => theme.box.height};
 
-  width: var(--timeline-room-width);
-  min-width: var(--timeline-room-width);
-  max-width: var(--timeline-room-width);
+  width: fit-content;
   
-  padding: var(--info-grid-padding);
-  border: var(--info-border-width) solid var(--info-border-color);
+  padding: ${({theme}) => theme.box.padding};
+  border: ${({theme}) => theme.border};
   
-  background: var(--color-white);
-  
-  font-size: var(--info-grid-font-size);
-  font-weight: var(--info-grid-font-weight);
-  color: var(--color-black);
+  background: ${({theme}) => theme.colors.white};
+
+  font-size: ${({theme}) => theme.fontSizes.small};
+  font-weight: ${({theme}) => theme.fontWeights.small};
+  color: ${({theme}) => theme.colors.black};
 
   cursor: default;
 `;

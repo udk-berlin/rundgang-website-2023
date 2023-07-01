@@ -5,7 +5,7 @@ import TimelineFloors from '@/components/pages/timeline/floor/floors'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 
 export default function TimelineLocation({ location }) {
-  const [showContent, setShowContent] = useState(true)
+  const [showContent, setShowContent] = useState(false)
   const floors = Object.values(location.children).filter(child => child.template === 'location-level')
   const projects = Object.values(location.children).filter(child => child.type === 'item')
 
@@ -25,7 +25,7 @@ export default function TimelineLocation({ location }) {
 }
 
 const LocationContentPlaceholder = styled.div`
-  width: var(--timeline-width);
+  width: ${({theme}) => theme.timeline.width};
 `;
 
 const LocationContentContainer = styled.div`
@@ -45,25 +45,25 @@ const LocationTitleContainer = styled.div`
   display: flex;
   align-items: center;
 
-  height: var(--calender-location-height);
-  min-height: var(--calender-location-height);
-  max-height: var(--calender-location-height);
+  height: ${({theme}) => theme.box.height};
+  min-height: ${({theme}) => theme.box.height};
+  max-height: ${({theme}) => theme.box.height};
   width: 100vw;
 
-  padding: var(--info-grid-padding);
+  padding: ${({theme}) => theme.box.padding};
 
-  font-size: var(--info-grid-font-size);
-  font-weight: var(--info-grid-font-weight);
-  color: var(--color-white);
+  font-size: ${({theme}) => theme.fontSizes.small};
+  font-weight: ${({theme}) => theme.fontWeights.small};
+  color:  ${({theme}) => theme.colors.white};
 
-  background-color: var(--color-dark-gray);
+  background-color: ${({theme}) => theme.colors.gray};
   
   cursor: pointer;
   
   :hover {
-    color: var(--color-white);
-    background-color: var(--color-pink);
-    border: var(--calender-box-border);
+    color:  ${({theme}) => theme.colors.white};
+    background-color: ${({theme}) => theme.colors.pink};
+    border: ${({theme}) => theme.border};
     border-left: 0;
   }
 `;

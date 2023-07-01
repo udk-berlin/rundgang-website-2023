@@ -5,14 +5,14 @@ import styled from "styled-components";
 import { useSlider, useSliderDispatch } from "@/providers/slider";
 import TimelineGrid from "@/components/pages/timeline/grid";
 import TimelineLocations from "@/components/pages/timeline/location/locations";
-import { DAYS, NUMBER_OF_HOURS } from "@/components/pages/timeline/constants";
+
+import { NUMBER_OF_HOURS, DAYS, timelineWidthsWithoutVW, breakpoints, defaultTheme, mobileTheme} from "@/themes/theme";
 
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import useWindowSize from '@/hooks/window_size'
 
 export default function TimelineContent() {
   const windowSize = useWindowSize()
-  const width = windowSize.width
   const language = useIntl();
   const slider = useSlider()
   const dispatch = useSliderDispatch()
@@ -20,7 +20,7 @@ export default function TimelineContent() {
   const days = language.locale === 'en' ? DAYS.en : DAYS.de
 
   const handleScroll = () => {
-    const timelineWidth = window.innerWidth * 2
+    const timelineWidth = window.innerWidth <= breakpoints.mobile ?  window.innerWidth * timelineWidthsWithoutVW.mobile : window.innerWidth * timelineWidthsWithoutVW.default
     const widthPerHour = timelineWidth / NUMBER_OF_HOURS
 
     let timeout = 0
@@ -37,7 +37,7 @@ export default function TimelineContent() {
           position: 0,
           origin: 'scroll'
         })
-      } else if ((scrollLeft > days[0].scrollXFactor * widthPerHour || ((days[1].scrollXFactor * widthPerHour - window.innerWidth / 2) <= scrollLeft + 1)) && scrollLeft <= days[1].scrollXFactor * widthPerHour && scrollLeft < timelineWidth - window.innerWidth ) {
+      } else if ((scrollLeft > days[0].scrollXFactor * widthPerHour || ((days[1].scrollXFactor * widthPerHour - window.innerWidth / 2) <= scrollLeft + 1)) && scrollLeft <= days[1].scrollXFactor * widthPerHour && scrollLeft < timelineWidth - window.innerWidth) {
         dispatch({
           type: 'update',
           position: 1,
@@ -54,12 +54,13 @@ export default function TimelineContent() {
   }
 
   useEffect(() => {
-    const widthPerHour = width * 2 / NUMBER_OF_HOURS
+    const timelineWidth = window.innerWidth <= breakpoints.mobile ?  window.innerWidth * timelineWidthsWithoutVW.mobile : window.innerWidth * timelineWidthsWithoutVW.default
+    const widthPerHour = timelineWidth / NUMBER_OF_HOURS
 
     if (slider.origin !== 'scroll') {
-      ref.current?.scrollTo({left: days[slider.position].scrollXFactor * widthPerHour - window.innerWidth / 2, behavior: 'smooth'})
+      ref.current?.scrollTo({left: days[slider.position].hoursBefore * widthPerHour - ((window.innerWidth - days[slider.position].hours * widthPerHour) / 2), behavior: 'smooth'})
     }
-  }, [slider.position, slider.origin, width])
+  }, [slider.position, slider.origin, windowSize.width])
 
   return (
     <ContentContainer id={'timeline'} ref={ref} onScroll={handleScroll} >
@@ -77,7 +78,7 @@ const ContentContainer = styled.div`
   overflow-x: auto;
   overflow-y: auto;
 
-  min-height: calc(100vh - var(--layout-header-height) - var(--layout-footer-height) + var(--border-width));
+  min-height: calc(100vh - var(--layout-header-height) - var(--layout-footer-height) + ${({theme}) => theme.borderWidth});
   
   width: 100vw;
   min-width: 100vw;
@@ -85,7 +86,7 @@ const ContentContainer = styled.div`
 
   margin-bottom: -2px;
   
-  border-bottom: var(--border-width) solid var(--border-color);
-  border-right: var(--border-width) solid var(--border-color);
-  border-left: var(--border-width) solid var(--border-color);
+  border-bottom: ${({theme}) => theme.border};
+  border-right: ${({theme}) => theme.border};
+  border-left: ${({theme}) => theme.border};
 `;

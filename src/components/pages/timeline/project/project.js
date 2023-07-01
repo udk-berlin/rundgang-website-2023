@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 
-import { PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME } from "@/components/pages/timeline/constants";
+import { PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME } from "@/themes/theme";
 import ProjectLink from "@/components/pages/projects/project/link";
 
 function millisecondsToMinutes(milliseconds) {
@@ -89,7 +89,7 @@ const ProjectImage = styled.img`
   display: ${({ showImage }) => showImage ? 'inline' : 'none'};
   
   position: absolute;
-  top: calc(var(--calender-floor-room-project-height) - var(--calender-box-border-width));
+  top: calc(${({theme}) => theme.box.height} - ${({theme}) => theme.borderWidth});
   left: 0;
   z-index: 5;
 
@@ -99,7 +99,7 @@ const ProjectImage = styled.img`
   height: auto;
   width: auto;
 
-  border: var(--calender-box-border);
+  border: ${({theme}) => theme.border};
   
   overflow: visible;
   
@@ -108,32 +108,34 @@ const ProjectImage = styled.img`
 
 const ProjectTimeline = styled.div`
   position: relative;
-
+  display: flex;
+  align-items: center;
+  
   top: ${({ top }) => top}px;
   left: ${({ start }) => start}px;
   
-  height: var(--calender-floor-room-project-height);
-  min-height: var(--calender-floor-room-project-height);
-  max-height: var(--calender-floor-room-project-height);
-  width: calc(var(--timeline-width-per-minute) * ${({ timespan }) => timespan});
+  height: ${({theme}) => theme.box.height};
+  min-height: ${({theme}) => theme.box.height};
+  max-height: ${({theme}) => theme.box.height};
+  width: calc(${({theme}) => theme.timeline.widthPerMinute} * ${({ timespan }) => timespan});
   
-  padding: var(--calender-box-padding);
-  border: var(--calender-box-border);
-  border-right: ${({ borderRight }) => borderRight ? 'var(--calender-box-border)' : 0};
+  padding: ${({theme}) => theme.box.padding};
+  border: ${({theme}) => theme.border};
+  border-right: ${({ borderRight, theme }) => borderRight ? theme.border : 0};
   
-  background: var(--color-white);
+  background:  ${({theme}) => theme.colors.white};
 
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: var(--calender-box-font-size);
-  font-weight: var(--calender-box-font-weight);
+  font-size: ${({theme}) => theme.fontSizes.small};
+  font-weight:  ${({theme}) => theme.fontWeights.small};
 
   box-sizing: border-box;
   overflow: hidden;
   
   :hover {
-    background: var(--color-pink);
-    color: var(--color-white);
+    background: ${({theme}) => theme.colors.pink};
+    color:  ${({theme}) => theme.colors.white};
   }
   
   cursor: pointer;
@@ -143,21 +145,22 @@ const EmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
 
-  width: calc(var(--timeline-width-per-minute) * ${({ timespan }) => timespan});
+  width: calc(${({theme}) => theme.timeline.widthPerMinute} * ${({ timespan }) => timespan});
 
-  height: var(--calender-floor-room-project-height);
-  min-height: var(--calender-floor-room-project-height);
-  max-height: var(--calender-floor-room-project-height);
+  height: ${({theme}) => theme.box.height};
+  min-height: ${({theme}) => theme.box.height};
+  max-height: ${({theme}) => theme.box.height};
 
-  background: ${({ roomIndex }) => ((roomIndex % 2 === 0) ? 'var(--color-pink-transparent)' : 'var(--color-green-transparent)')};
+  background: ${({ roomIndex, theme }) => ((roomIndex % 2 === 0) ? theme.colors.pinkTransparent : theme.colors.greenTransparent)};
+  
   border-bottom: ${({ isLastGroup, hasNoProjectUnderneath }) => isLastGroup || hasNoProjectUnderneath ? 'var(--info-border-width) solid var(--info-border-color)' : 0};
   border-top: ${({ isFirstGroup }) => isFirstGroup ? 'var(--info-border-width) solid var(--info-border-color)' : 0};
   border-left: ${({ isFirstProject }) => isFirstProject ? 'var(--info-border-width) solid var(--info-border-color)' : 0};
 `;
 
 const EmptyTimelineLine = styled.div`
-  padding-top: calc(var(--calender-floor-room-project-height) / 2 - var(--border-width)); // todo: set correct padding (dynamic)
-  border-bottom: var(--border-width) solid ${({ roomIndex }) => ((roomIndex % 2 === 0) ? 'var(--color-pink)' : 'var(--color-green)')};
+  padding-top: calc(${({theme}) => theme.box.height} / 2 - ${({theme}) => theme.borderWidth}); // todo: set correct padding (dynamic)
+  border-bottom: ${({theme}) => theme.borderWidth} solid ${({ roomIndex, theme }) => ((roomIndex % 2 === 0) ? theme.colors.pink : theme.colors.green)};
 `;
 
 
@@ -165,11 +168,11 @@ const FirstEmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
   
-  width: var(--timeline-width-per-hour);
+  width: ${({theme}) => theme.timeline.widthPerHour};
 
-  height: var(--calender-floor-room-project-height);
-  min-height: var(--calender-floor-room-project-height);
-  max-height: var(--calender-floor-room-project-height);
+  height: ${({theme}) => theme.box.height};
+  min-height: ${({theme}) => theme.box.height};
+  max-height: ${({theme}) => theme.box.height};
 
-  background: var(--color-white);
+  background:  ${({theme}) => theme.colors.white};
 `;

@@ -19,13 +19,13 @@ export default function TimelineProjectsGroup({ projectsGroup, projectsGroups, p
 }
 
 const ProjectsGroupContainer = styled.div`
-  left: calc(var(--border-width) * -1);
+  left: calc(${({theme}) => theme.borderWidth} * -1);
   display: flex;
 
-  height: var(--calender-floor-room-project-height);
-  min-height: var(--calender-floor-room-project-height);
-  max-height: var(--calender-floor-room-project-height);
-  width: var(--timeline-width);
+  height: ${({theme}) => theme.box.height};
+  min-height: ${({theme}) => theme.box.height};
+  max-height: ${({theme}) => theme.box.height};
+  width: ${({theme}) => theme.timeline.width};
 
-  margin-top: calc(var(--border-width) * -1);
+  margin-top: calc(${({theme}) => theme.borderWidth} * -1);
 `;

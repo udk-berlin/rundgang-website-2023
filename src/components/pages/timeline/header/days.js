@@ -3,10 +3,7 @@ import styled from "styled-components";
 import { useIntl } from "react-intl";
 
 import { useSlider, useSliderDispatch } from "@/providers/slider";
-
-import { DAYS } from '@/components/pages/timeline/constants'
-
-
+import { DAYS } from "@/themes/theme";
 
 export default function TimelineDays() {
   const language = useIntl();
@@ -45,22 +42,17 @@ const DaysInnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  height: var(--calender-days-height);
-  min-height: var(--calender-days-height);
-  max-height: var(--calender-days-height);
-  width: var(--timeline-width);
-  min-width: var(--timeline-width);
-  max-width: var(--timeline-width);
-  
-  font-size: var(--info-grid-font-size);
-  font-weight: var(--info-grid-font-weight);
 
-  background-color: var(--color-white);
+  height: ${({ theme }) => theme.timeline.days.height};
+  min-height: ${({ theme }) => theme.timeline.days.height};
+  max-height: ${({ theme }) => theme.timeline.days.height};
+  
+  width: ${({ theme }) => theme.timeline.width};
+  min-width: ${({ theme }) => theme.timeline.width};
+  max-width: ${({ theme }) => theme.timeline.width};
   
   cursor: pointer;
 `;
-
 
 const Day = styled.div`
   display: flex;
@@ -68,22 +60,22 @@ const Day = styled.div`
   justify-content: center;
   flex-grow: 1;
   
-  width: calc(var(--timeline-width-per-hour) * ${({ hours }) => hours});
-  min-width: calc(var(--timeline-width-per-hour) * ${({ hours }) => hours});
-  max-width: calc(var(--timeline-width-per-hour) * ${({ hours }) => hours});
+  width: calc(${({ hours }) => hours} * ${({ theme }) => theme.timeline.widthPerHour});
+  min-width: calc(${({ hours }) => hours} * ${({ theme }) => theme.timeline.widthPerHour});
+  max-width: calc(${({ hours }) => hours} * ${({ theme }) => theme.timeline.widthPerHour});
   height: 100%;
   
-  background: ${({ selected }) => selected ? 'var(--color-pink)' : 'var(--color-white)' };
-
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: ${({ selected }) => selected ? 'var(--color-white)' : 'var(--color-black)' };
-
-  border-bottom: 2px solid black;
-  border-right: 2px solid black;
+  background: ${({ selected, theme }) => selected ? theme.colors.pink : theme.colors.white };
+  
+  font-size: ${({ theme }) => theme.timeline.days.fontSize};
+  font-weight: ${({ theme }) => theme.timeline.days.fontWeight};
+  color: ${({ selected, theme }) => selected ? theme.colors.white : theme.colors.black };
+  
+  border-bottom: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
   
   :hover {
-    background: var(--color-pink);
-    color: var(--color-white);
+    background: ${({theme}) => theme.colors.pink};
+    color: ${({theme}) => theme.colors.white};
   }
 `
