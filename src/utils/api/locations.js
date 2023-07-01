@@ -9,7 +9,7 @@ const locationDetails = {}
 export async function getLocations () {
   if (!locationsCached) {
     const tree = await getTree(process.env.REST_API_LOCATIONS_ROOT_ID)
-    filter(Object.values(tree.children)).forEach( location => {
+    Object.values(tree.children).forEach( location => {
       locations[location.id] = location
     })
     locationsCached = true
