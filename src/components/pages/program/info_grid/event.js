@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 import InfoGridItemLink from "@/components/pages/program/info_grid/item";
-import { useSlider } from "@/providers/slider"
+import { useSlider } from "@/providers/slider";
 
-const SLIDER_INDEX = 3
+const SLIDER_INDEX = 3;
 
 const eventTypeToMarginLeftMapper = {
   Ausstellung: "73%",
@@ -28,7 +28,7 @@ const eventTypeToMarginLeftMapper = {
   Theater: "77%",
   Vortrag: "8%",
   Workshop: "32%",
-  Weitere: "42",
+  Weitere: "42%",
   default: "2px",
 };
 
@@ -52,7 +52,8 @@ export default function InfoGridEvent({ eventType, margin }) {
 
 const Container = styled.div`
   width: 100%;
-  max-height: ${(props) => (props.slider.position >= SLIDER_INDEX ? "500px" : "0px")};
+  max-height: ${(props) =>
+    props.slider.position >= SLIDER_INDEX ? "500px" : "0px"};
   overflow-y: hidden;
   transition: all 0.3s;
   padding: ${(props) =>
