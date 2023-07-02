@@ -4,7 +4,7 @@ import { SliderProvider } from "@/providers/slider";
 import Header from "@/components/layout/header/header";
 import Footer from "@/components/layout/footer/footer";
 
-export default function Layout({ children, disableFilter = false, numberOfSliderStates = 7 }) {
+export default function Layout({ children, disableFilter = false, disableSlider = false, numberOfSliderStates = 7 }) {
   return (
     <Container>
       <SliderProvider>
@@ -12,7 +12,7 @@ export default function Layout({ children, disableFilter = false, numberOfSlider
         <Content>
           {children}
         </Content>
-        <Footer numberOfSliderStates={numberOfSliderStates} />
+        <Footer numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />
       </SliderProvider>
     </Container>
   );

@@ -1,9 +1,10 @@
+import React from "react";
 import styled from "styled-components";
-
 import Slider from "@mui/material/Slider";
+
 import { useSlider, useSliderDispatch } from "@/providers/slider";
 
-export default function FooterSlider({ numberOfSliderStates }) {
+export default function FooterSlider({ numberOfSliderStates, disableSlider = false }) {
   const dispatch = useSliderDispatch();
   const state = useSlider();
 
@@ -17,15 +18,18 @@ export default function FooterSlider({ numberOfSliderStates }) {
 
   return (
     <SliderContainer>
-      <CustomSlider
-        value={state.position}
-        defaultValue={state.position}
-        valueLabelDisplay="off"
-        onChangeCommitted={handleChangeCommitted}
-        marks
-        min={0}
-        max={numberOfSliderStates - 1}
-      />
+      {
+        disableSlider ? <></> :
+          <CustomSlider
+            value={state.position}
+            defaultValue={state.position}
+            valueLabelDisplay="off"
+            onChangeCommitted={handleChangeCommitted}
+            marks
+            min={0}
+            max={numberOfSliderStates - 1}
+          />
+      }
     </SliderContainer>
   );
 }

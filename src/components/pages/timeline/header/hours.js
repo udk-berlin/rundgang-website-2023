@@ -13,7 +13,7 @@ export default function TimelineHours() {
   const [useHalfDayHours, setUseHalfDayHours] = useState(false);
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.mobile) {
+    if (windowSize.width <= breakpoints.m) {
       setUseHalfDayHours(true)
     } else {
       setUseHalfDayHours(false)
