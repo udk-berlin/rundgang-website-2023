@@ -8,7 +8,11 @@ import ProjectCell from "@/components/pages/program/project_cell";
 import Layout from "@/components/layout/layout";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/theme";
-import { programLTheme, programMTheme } from "@/themes/pages/program";
+import {
+  programLTheme,
+  programMTheme,
+  programSTheme,
+} from "@/themes/pages/program";
 
 export const MASONRY_COLUMNS = 4;
 export const MASONRY_GUTTER = "0.75rem";
@@ -20,7 +24,9 @@ export default function Program() {
   const filter = useFilter();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize.width <= breakpoints.s) {
+      setResponsiveTheme(programSTheme);
+    } else if (windowSize.width <= breakpoints.m) {
       setResponsiveTheme(programMTheme);
     } else {
       setResponsiveTheme(programLTheme);
