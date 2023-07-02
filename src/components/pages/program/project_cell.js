@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import { useSavedProjects, useSetSavedProjects } from '@/providers/saved_projects'
+import {
+  useSavedProjects,
+  useSetSavedProjects,
+} from "@/providers/saved_projects";
 
 import ProjectLink from "@/components/pages/projects/project/link";
 import ProjectImage from "@/components/pages/projects/project/image";
@@ -22,11 +25,11 @@ export default function ProjectCell({ key, project }) {
       <ProjectLink project={project}>
         <ProjectImage project={project} />
       </ProjectLink>
+
       <SVGOverlay
         project={project}
-        pathActive={"/assets/svg/layout/shop_active.svg"}
-        pathPassive={"/assets/svg/layout/shop_passive.svg"}
-        pathHover={"/assets/svg/layout/shop_hover.svg"}
+        pathActive={"/assets/svg/layout/saved_active.svg"}
+        pathPassive={"/assets/svg/layout/saved_passive.svg"}
         cellHovered={cellHovered}
       />
       <ProjectTitle project={project} fontSize={1.3} />
@@ -36,32 +39,26 @@ export default function ProjectCell({ key, project }) {
   );
 }
 
-export function SVGOverlay({
-  pathActive,
-  pathPassive,
-  pathHover,
-  cellHovered,
-  project
-}) {
+export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
   const [isHovered, setIsHovered] = useState(false);
-  const savedProjects = useSavedProjects()
-  const setSavedProjects = useSetSavedProjects()
+  const savedProjects = useSavedProjects();
+  const setSavedProjects = useSetSavedProjects();
 
-  const handleClick =  () => {
+  const handleClick = () => {
     if (savedProjects.includes(project.id)) {
-      setSavedProjects(savedProjects.filter(savedProject => savedProject !== project.id))
+      setSavedProjects(
+        savedProjects.filter((savedProject) => savedProject !== project.id)
+      );
     } else {
-      setSavedProjects([...savedProjects, project.id])
+      setSavedProjects([...savedProjects, project.id]);
     }
-  }
+  };
 
   let svg;
-  if (cellHovered && !isHovered && !savedProjects.includes(project.id)) {
+  if (cellHovered && !savedProjects.includes(project.id)) {
     svg = <SVGHOverlay src={pathPassive} />;
-  } else if (cellHovered && isHovered && !savedProjects.includes(project.id)) {
-    svg = <SVGHOverlay src={pathHover} />;
   } else if (savedProjects && savedProjects.includes(project.id)) {
-    svg = <SVGHOverlay src={pathHover} />;
+    svg = <SVGHOverlay src={pathActive} />;
   }
 
   return (
@@ -87,14 +84,11 @@ const ProjectCellContainer = styled.div`
 
 const SVGHOverlay = styled(ReactSVG)`
   position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 50px;
-  height: 50px;
+  top: 0px;
+  right: 0px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-
-  & polyline {
-  }
 `;
 
 const SVGOverlayContainer = styled.div``;
