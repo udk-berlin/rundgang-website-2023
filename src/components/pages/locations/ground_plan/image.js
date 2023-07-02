@@ -42,9 +42,9 @@ export default function LocationsGroundPlan() {
 }
 
 const LocationsGroundPlanContainer = styled.div`
-  height: ${({ theme })=> theme.locations.groundPlan.image.height};
-  min-height: ${({ theme })=> theme.locations.groundPlan.image.height};
-  max-height: ${({ theme })=> theme.locations.groundPlan.image.height};
+  height: ${({ theme })=> theme.groundPlan.image.height};
+  min-height: ${({ theme })=> theme.groundPlan.image.height};
+  max-height: ${({ theme })=> theme.groundPlan.image.height};
 
   background:  var(--color-dark-gray);
   border-right: var(--border-width) solid var(--border-color);

@@ -25,7 +25,7 @@ export default function TimelineLocation({ location }) {
 }
 
 const LocationContentPlaceholder = styled.div`
-  width: ${({theme}) => theme.timeline.width};
+  width: ${({theme}) => theme.width};
 `;
 
 const LocationContentContainer = styled.div`

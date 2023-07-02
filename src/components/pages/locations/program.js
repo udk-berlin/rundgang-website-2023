@@ -27,21 +27,21 @@ const LocationsProgramEmptyColumn = styled.div`
 `
 
 const LocationsProgramContainer = styled.div`
-  position: ${({ theme })=> theme.locations.program.position};
-  top: ${({ theme })=> theme.locations.program.top};
-  left: ${({ theme })=> theme.locations.program.left};
+  position: ${({ theme })=> theme.program.position};
+  top: ${({ theme })=> theme.program.top};
+  left: ${({ theme })=> theme.program.left};
   z-index: 3;
 
   display: grid;
-  grid-template-columns: ${({ theme })=> theme.locations.program.gridTemplateColumns};
+  grid-template-columns: ${({ theme })=> theme.program.gridTemplateColumns};
 
   width: 100%;
   min-width: 100%;
   max-width: 100%;
   
-  height: ${({ theme })=> theme.locations.program.height};
-  min-height: ${({ theme })=> theme.locations.program.height};
-  max-height: ${({ theme })=> theme.locations.program.height};
+  height: ${({ theme })=> theme.program.height};
+  min-height: ${({ theme })=> theme.program.height};
+  max-height: ${({ theme })=> theme.program.height};
 
   border-left: var(--border-width) solid var(--border-color);
   border-right: var(--border-width) solid var(--border-color);

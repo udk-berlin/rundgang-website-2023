@@ -21,6 +21,6 @@ const LocationsContainer = styled.div`
   position: relative;
   z-index: 0;
 
-  margin-bottom: ${({theme}) => theme.timeline.locations.marginBottom};
-  margin-top: calc(${({theme}) => theme.timeline.days.height} + ${({theme}) => theme.timeline.hours.height} + ${({theme}) => theme.timeline.locations.marginTop} - ${({theme}) => theme.borderWidth});
+  margin-bottom: ${({theme}) => theme.locations.marginBottom};
+  margin-top: calc(${({theme}) => theme.days.height} + ${({theme}) => theme.hours.height} + ${({theme}) => theme.locations.marginTop} - ${({theme}) => theme.borderWidth});
 `;

@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react'
 import { useIntl } from "react-intl";
 import styled from "styled-components";
 
-import { breakpoints, HOURS_PER_DAY, NUMBER_OF_HOURS, HOURS_PER_HALF_DAY, NUMBER_OF_HALF_DAYS, FIRST_DAY_START_HOUR } from "@/themes/theme";
+import { breakpoints } from "@/themes/theme";
+import { HOURS_PER_DAY, NUMBER_OF_HOURS, HOURS_PER_HALF_DAY, NUMBER_OF_HALF_DAYS, FIRST_DAY_START_HOUR } from "@/themes/pages/timeline";
+
 import useWindowSize from "@/hooks/window_size";
 import { range } from "@/utils/range";
 
@@ -98,10 +100,10 @@ function HalfDayHours() {
 const HoursContainer = styled.div`
   display: flex;
 
-  height: ${({ theme }) => theme.timeline.hours.height};
-  min-height: ${({ theme }) => theme.timeline.hours.height};
-  max-height: ${({ theme }) => theme.timeline.hours.height};
-  width: ${({ theme }) => theme.timeline.width};
+  height: ${({ theme }) => theme.hours.height};
+  min-height: ${({ theme }) => theme.hours.height};
+  max-height: ${({ theme }) => theme.hours.height};
+  width: ${({ theme }) => theme.width};
 
   background-color:  ${({theme}) => theme.colors.white};
   border-bottom: ${({ theme }) => theme.border};
@@ -111,29 +113,29 @@ const HoursContainer = styled.div`
 
 const HoursInnerContainer = styled.div`
   position: relative;
-  left: calc(${({ theme }) => theme.timeline.widthPerHour} / 2 * -1);
+  left: calc(${({ theme }) => theme.widthPerHour} / 2 * -1);
 
   display: flex;
 
-  @media ${({ theme }) => theme.breakpoints.mobile} {
-    left: calc(${({ theme }) => theme.timeline.widthPerHour} * 4 * -1);
+  @media ${({ theme }) => theme.breakpoints.m} {
+    left: calc(${({ theme }) => theme.widthPerHour} * 4 * -1);
   }
 `;
 
 const HourContainer = styled.div`
   display: flex;
   
-  width: ${({ theme }) => theme.timeline.widthPerHour};
-  min-width: ${({ theme }) => theme.timeline.widthPerHour};
-  max-width: ${({ theme }) => theme.timeline.widthPerHour};
+  width: ${({ theme }) => theme.widthPerHour};
+  min-width: ${({ theme }) => theme.widthPerHour};
+  max-width: ${({ theme }) => theme.widthPerHour};
   height: 100%;
   
   color: black;
 
-  @media ${({ theme }) => theme.breakpoints.mobile} {
-    width: calc(${({ theme }) => theme.timeline.widthPerHour} * 12);
-    min-width: calc(${({ theme }) => theme.timeline.widthPerHour} * 12);
-    max-width: calc(${({ theme }) => theme.timeline.widthPerHour} * 12);
+  @media ${({ theme }) => theme.breakpoints.m} {
+    width: calc(${({ theme }) => theme.widthPerHour} * 12);
+    min-width: calc(${({ theme }) => theme.widthPerHour} * 12);
+    max-width: calc(${({ theme }) => theme.widthPerHour} * 12);
   }
 `
 
@@ -147,13 +149,13 @@ const Hour = styled.div`
   padding-left: 0.3rem;
   padding-right: 0.3rem;
   
-  font-size: ${({ theme }) => theme.timeline.hours.fontSize};
-  font-weight: ${({ theme }) => theme.timeline.hours.fontWeight};
+  font-size: ${({ theme }) => theme.hours.fontSize};
+  font-weight: ${({ theme }) => theme.hours.fontWeight};
   color: ${({theme}) => theme.colors.black};
 `
 
 const HourLine = styled.div`
   flex-grow: 1;
-  margin-bottom: calc(calc(${({ theme }) => theme.timeline.hours.height} - 2 * ${({ theme }) => theme.borderWidth}) / 2);
+  margin-bottom: calc(calc(${({ theme }) => theme.hours.height} - 2 * ${({ theme }) => theme.borderWidth}) / 2);
   border-bottom: ${({ theme, transparent }) => transparent ? 0 : `${theme.borderWidth} solid ${theme.colors.pink}`};
 `

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { useIntl } from "react-intl";
 
 import { useSlider, useSliderDispatch } from "@/providers/slider";
-import { DAYS } from "@/themes/theme";
+import { DAYS } from "@/themes/pages/timeline";
+
 
 export default function TimelineDays() {
   const language = useIntl();
@@ -43,13 +44,13 @@ const DaysInnerContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  height: ${({ theme }) => theme.timeline.days.height};
-  min-height: ${({ theme }) => theme.timeline.days.height};
-  max-height: ${({ theme }) => theme.timeline.days.height};
+  height: ${({ theme }) => theme.days.height};
+  min-height: ${({ theme }) => theme.days.height};
+  max-height: ${({ theme }) => theme.days.height};
   
-  width: ${({ theme }) => theme.timeline.width};
-  min-width: ${({ theme }) => theme.timeline.width};
-  max-width: ${({ theme }) => theme.timeline.width};
+  width: ${({ theme }) => theme.width};
+  min-width: ${({ theme }) => theme.width};
+  max-width: ${({ theme }) => theme.width};
   
   cursor: pointer;
 `;
@@ -60,15 +61,15 @@ const Day = styled.div`
   justify-content: center;
   flex-grow: 1;
   
-  width: calc(${({ hours }) => hours} * ${({ theme }) => theme.timeline.widthPerHour});
-  min-width: calc(${({ hours }) => hours} * ${({ theme }) => theme.timeline.widthPerHour});
-  max-width: calc(${({ hours }) => hours} * ${({ theme }) => theme.timeline.widthPerHour});
+  width: calc(${({ hours }) => hours} * ${({ theme }) => theme.widthPerHour});
+  min-width: calc(${({ hours }) => hours} * ${({ theme }) => theme.widthPerHour});
+  max-width: calc(${({ hours }) => hours} * ${({ theme }) => theme.widthPerHour});
   height: 100%;
   
   background: ${({ selected, theme }) => selected ? theme.colors.pink : theme.colors.white };
   
-  font-size: ${({ theme }) => theme.timeline.days.fontSize};
-  font-weight: ${({ theme }) => theme.timeline.days.fontWeight};
+  font-size: ${({ theme }) => theme.days.fontSize};
+  font-weight: ${({ theme }) => theme.days.fontWeight};
   color: ${({ selected, theme }) => selected ? theme.colors.white : theme.colors.black };
   
   border-bottom: ${({ theme }) => theme.border};

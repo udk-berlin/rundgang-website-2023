@@ -36,11 +36,11 @@ const LocationsGroundPlanContentContainer = styled.div`
 `
 
 const LocationsGroundPlanInfoContainer = styled.div`
-  height: ${({ theme })=> theme.locations.groundPlan.content.height};
-  min-height: ${({ theme })=> theme.locations.groundPlan.content.height};
-  max-height: ${({ theme })=> theme.locations.groundPlan.content.height};
+  height: ${({ theme })=> theme.groundPlan.content.height};
+  min-height: ${({ theme })=> theme.groundPlan.content.height};
+  max-height: ${({ theme })=> theme.groundPlan.content.height};
 
-  overflow: ${({ theme })=> theme.locations.groundPlan.content.overflow};
+  overflow: ${({ theme })=> theme.groundPlan.content.overflow};
 `
 
 export function sortByName(a, b) {

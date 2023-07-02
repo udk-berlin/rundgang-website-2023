@@ -20,7 +20,7 @@ export default function TimelineLocationFloor({ floor }) {
 const FloorContainer = styled.div`
   position: sticky;
   z-index: 3;
-  left: ${({theme}) => theme.timeline.floor.left};
+  left: ${({theme}) => theme.floor.left};
   top: 0;
   
   display: flex;
@@ -29,14 +29,14 @@ const FloorContainer = styled.div`
   height: ${({theme}) => theme.box.height};
   min-height: ${({theme}) => theme.box.height};
   max-height: ${({theme}) => theme.box.height};
-  width: ${({theme}) => theme.timeline.floor.width};
+  width: ${({theme}) => theme.floor.width};
 
   padding: ${({theme}) => theme.box.padding};
   margin-top: calc(${({theme}) => theme.borderWidth} * -1);
   
   border: ${({theme}) => theme.border};
   border-right: 0;
-  border-left: ${({theme}) => theme.timeline.floor.borderLeft};
+  border-left: ${({theme}) => theme.floor.borderLeft};
 
   background: ${({theme}) => theme.colors.white};
 

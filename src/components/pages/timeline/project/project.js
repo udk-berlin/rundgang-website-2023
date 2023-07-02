@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 
-import { PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME } from "@/themes/theme";
+import { PROJECTS_FIRST_TIME, PROJECTS_LAST_TIME } from "@/themes/pages/timeline";
 import ProjectLink from "@/components/pages/projects/project/link";
 
 function millisecondsToMinutes(milliseconds) {
@@ -117,7 +117,7 @@ const ProjectTimeline = styled.div`
   height: ${({theme}) => theme.box.height};
   min-height: ${({theme}) => theme.box.height};
   max-height: ${({theme}) => theme.box.height};
-  width: calc(${({theme}) => theme.timeline.widthPerMinute} * ${({ timespan }) => timespan});
+  width: calc(${({theme}) => theme.widthPerMinute} * ${({ timespan }) => timespan});
   
   padding: ${({theme}) => theme.box.padding};
   border: ${({theme}) => theme.border};
@@ -145,7 +145,7 @@ const EmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
 
-  width: calc(${({theme}) => theme.timeline.widthPerMinute} * ${({ timespan }) => timespan});
+  width: calc(${({theme}) => theme.widthPerMinute} * ${({ timespan }) => timespan});
 
   height: ${({theme}) => theme.box.height};
   min-height: ${({theme}) => theme.box.height};
@@ -168,7 +168,7 @@ const FirstEmptyTimeline = styled.div`
   position: relative;
   z-index: -1;
   
-  width: ${({theme}) => theme.timeline.widthPerHour};
+  width: ${({theme}) => theme.widthPerHour};
 
   height: ${({theme}) => theme.box.height};
   min-height: ${({theme}) => theme.box.height};

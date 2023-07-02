@@ -6,9 +6,9 @@ import { useSlider, useSliderDispatch } from "@/providers/slider";
 import TimelineGrid from "@/components/pages/timeline/grid";
 import TimelineLocations from "@/components/pages/timeline/location/locations";
 
-import { NUMBER_OF_HOURS, DAYS, timelineWidthsWithoutVW, breakpoints, defaultTheme, mobileTheme} from "@/themes/theme";
+import { breakpoints } from "@/themes/theme";
+import { NUMBER_OF_HOURS, DAYS, timelineWidthsWithoutVW } from "@/themes/pages/timeline";
 
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import useWindowSize from '@/hooks/window_size'
 
 export default function TimelineContent() {
@@ -20,7 +20,7 @@ export default function TimelineContent() {
   const days = language.locale === 'en' ? DAYS.en : DAYS.de
 
   const handleScroll = () => {
-    const timelineWidth = window.innerWidth <= breakpoints.mobile ?  window.innerWidth * timelineWidthsWithoutVW.mobile : window.innerWidth * timelineWidthsWithoutVW.default
+    const timelineWidth = window.innerWidth <= breakpoints.m ?  window.innerWidth * timelineWidthsWithoutVW.m : window.innerWidth * timelineWidthsWithoutVW.l
     const widthPerHour = timelineWidth / NUMBER_OF_HOURS
 
     let timeout = 0
@@ -54,7 +54,7 @@ export default function TimelineContent() {
   }
 
   useEffect(() => {
-    const timelineWidth = window.innerWidth <= breakpoints.mobile ?  window.innerWidth * timelineWidthsWithoutVW.mobile : window.innerWidth * timelineWidthsWithoutVW.default
+    const timelineWidth = window.innerWidth <= breakpoints.m ?  window.innerWidth * timelineWidthsWithoutVW.m : window.innerWidth * timelineWidthsWithoutVW.l
     const widthPerHour = timelineWidth / NUMBER_OF_HOURS
 
     if (slider.origin !== 'scroll') {

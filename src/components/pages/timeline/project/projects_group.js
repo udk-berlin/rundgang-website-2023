@@ -25,7 +25,7 @@ const ProjectsGroupContainer = styled.div`
   height: ${({theme}) => theme.box.height};
   min-height: ${({theme}) => theme.box.height};
   max-height: ${({theme}) => theme.box.height};
-  width: ${({theme}) => theme.timeline.width};
+  width: ${({theme}) => theme.width};
 
   margin-top: calc(${({theme}) => theme.borderWidth} * -1);
 `;

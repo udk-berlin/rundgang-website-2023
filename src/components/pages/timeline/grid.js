@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { NUMBER_OF_HOURS } from "@/themes/theme";
+import { NUMBER_OF_HOURS } from "@/themes/pages/timeline";
 import { range } from "@/utils/range";
 
 export default function TimelineGrid() {
@@ -18,9 +18,9 @@ const GridLine = styled.div`
   position: absolute;
   z-index: -1;
   bottom: 0;
-  left: calc(${({theme}) => theme.timeline.widthPerHour} * ${({hour}) => hour});
+  left: calc(${({theme}) => theme.widthPerHour} * ${({hour}) => hour});
 
   height: 100%;
 
-  border-left: ${({theme}) => theme.timeline.grid.border};
+  border-left: ${({theme}) => theme.grid.border};
 `;

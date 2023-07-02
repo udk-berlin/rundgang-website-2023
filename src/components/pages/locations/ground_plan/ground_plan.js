@@ -27,20 +27,20 @@ const EmptyColumn = styled.div`
 `
 
 const GroundPlanContainer = styled.div`
-  position: ${({ theme })=> theme.locations.groundPlan.position};
-  top: ${({ theme })=> theme.locations.groundPlan.top};
+  position: ${({ theme })=> theme.groundPlan.position};
+  top: ${({ theme })=> theme.groundPlan.top};
   z-index: 3;
 
   display: grid;
-  grid-template-columns: ${({ theme })=> theme.locations.groundPlan.gridTemplateColumns};
+  grid-template-columns: ${({ theme })=> theme.groundPlan.gridTemplateColumns};
 
   width: 100%;
   min-width: 100%;
   max-width: 100%;
   
-  height: ${({ theme })=> theme.locations.groundPlan.height};
-  min-height: ${({ theme })=> theme.locations.groundPlan.height};
-  max-height: ${({ theme })=> theme.locations.groundPlan.height};
+  height: ${({ theme })=> theme.groundPlan.height};
+  min-height: ${({ theme })=> theme.groundPlan.height};
+  max-height: ${({ theme })=> theme.groundPlan.height};
 
   cursor: default;
   pointer-events: none;

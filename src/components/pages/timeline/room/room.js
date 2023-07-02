@@ -21,7 +21,7 @@ export default function TimelineLocationRoom({ room, index }) {
 
 const RoomContainer = styled.div`
   display: flex;
-  width: ${({theme}) => theme.timeline.width};
+  width: ${({theme}) => theme.width};
 
   margin-top: calc(${({theme}) => theme.borderWidth} * -1);
   margin-bottom: calc(${({theme}) => theme.box.height} * -1);
@@ -30,7 +30,7 @@ const RoomContainer = styled.div`
 const Room = styled.div`
   position: sticky;
   z-index: 4;
-  left: ${({theme}) => theme.timeline.widthPerHour};
+  left: ${({theme}) => theme.widthPerHour};
   top: 0;
   
   display: flex;
