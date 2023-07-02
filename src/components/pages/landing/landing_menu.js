@@ -1,66 +1,102 @@
-import { FormattedMessage } from "react-intl";
+import { useState } from "react";
+import { useIntl } from "react-intl";
+import styled from "styled-components";
+import { ReactSVG } from "react-svg";
 
-import styles from '@/styles/pages/landing/LandingMenu.module.css'
 import { LocalizedLink } from "@/components/localization/links";
 
 const hrefMapper = {
-  'program': '/program',
-  'locations': '/locations',
-  'timeline': '/timeline',
+  program: "/program",
+  locations: "/locations",
+  timeline: "/timeline",
+  info: "/",
+};
+
+const svgMapper = {
+  de: {
+    program: "programm",
+    timeline: "zeiten",
+    locations: "orte",
+    info: "info",
+  },
+  en: {
+    program: "program",
+    timeline: "timeline",
+    locations: "locations",
+    info: "info",
+  },
+};
+
+export default function LandingMenu() {
+  return (
+    <LandingMenuContainer>
+      <Column>
+        <div>
+          <LandingMenuItem id={"program"} />
+          <Row>
+            <LandingMenuItem id={"locations"} />
+            <LandingMenuItem id={"timeline"} />
+          </Row>
+        </div>
+        <LandingMenuItem id={"info"} rotate={true} />
+      </Column>
+    </LandingMenuContainer>
+  );
 }
 
-const classNameMapper = {
-  'program': {
-    svg: styles.svgTop,
-    text: styles.svgTextL,
-  },
-  'locations': {
-    svg: styles.svgBottom,
-    text: styles.svgTextM,
-  },
-  'timeline': {
-    svg: styles.svgBottom,
-    text: styles.svgTextM,
-  },
-}
+const LandingMenuContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-export default function LandingMenu () {
+  overflow: hidden;
+`;
+
+const Column = styled.div`
+  display: grid;
+  grid-template-columns: 8fr 1fr;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+
+  & > * {
+    flex: auto;
+  }
+`;
+
+const LandingMenuItemContainer = styled.div`
+  transform: ${(props) => (props.rotate ? "rotate(-90deg)" : "none")};
+  width: 100%;
+  & path {
+    fill: ${(props) => (props.hover ? "#fff" : "none")};
+    stroke: #fff;
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
+  }
+`;
+
+export function LandingMenuItem({ id, rotate = false }) {
+  const [isHovered, setIsHovered] = useState(null);
+  const language = useIntl();
+
+  let svg = svgMapper.de;
+  if (language.locale === "en" && "en" in svgMapper) svg = svgMapper.en;
+
+  console.log(svg[id]);
 
   return (
-    <div className={styles.container}>
-      <div className={[styles.row].join(' ')}>
-        <SvgLink id={'program'} />
-      </div>
-
-      <div className={[styles.row, styles.bottomRow].join(' ')}>
-        <SvgLink id={'locations'} />
-        <SvgLink id={'timeline'} />
-      </div>
-    </div>
-  )
-}
-
-function SvgLink ({ id }) {
-  return (
-    <Svg id={id}>
-      <LocalizedLink href={hrefMapper[id]}>
-        <text className={[styles.svgText, classNameMapper[id].text].join(' ')} x="0%" y="75%">
-          <FormattedMessage id={id}/>
-        </text>
-      </LocalizedLink>
-    </Svg>
-  )
-}
-
-function Svg ({ children, id }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className={classNameMapper[id].svg}
-      preserveAspectRatio="200w"
-      viewBox="0 0 548 80"
+    <LandingMenuItemContainer
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      hover={isHovered}
+      rotate={rotate}
     >
-      {children}
-    </svg>
-  )
+      <LocalizedLink href={hrefMapper[id]}>
+        <ReactSVG src={"assets/svg/layout/" + svg[id] + ".svg"} />
+      </LocalizedLink>
+    </LandingMenuItemContainer>
+  );
 }
