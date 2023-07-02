@@ -179,7 +179,6 @@ function buildMarker (mapRef, location, cache, useTextBox) {
 export function sortById(a, b) {
   const orderA = a.id in LOCATION_ID_TO_ORDER_MAPPER ? LOCATION_ID_TO_ORDER_MAPPER[a.id] : 0
   const orderB = b.id in LOCATION_ID_TO_ORDER_MAPPER ? LOCATION_ID_TO_ORDER_MAPPER[b.id] : 0
-  console.log()
 
   if (orderA < orderB) {
     return -1;

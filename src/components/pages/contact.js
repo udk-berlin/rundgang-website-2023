@@ -567,7 +567,6 @@ export default function Contact() {
 
   let contacts = CONTACTS.de;
   if (language.locale === "en" && "en" in CONTACTS) contacts = CONTACTS.en;
-  console.log(contacts);
 
   return (
     <Layout disableFilter={true}>
