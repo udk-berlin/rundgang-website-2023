@@ -1,19 +1,20 @@
+import styled from "styled-components";
+
 import {
   InfoGridContext,
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
 import InfoGridDate from "@/components/pages/program/info_grid/date";
-import InfoGridEvent from "@/components/pages/program/info_grid/event";
+import InfoGridFormat from "@/components/pages/program/info_grid/format";
 import { InfoGridContainer } from "@/components/pages/program/info_grid/info_grid";
-import styled from "styled-components";
 
 export default function ProjectInfoGrid({ project }) {
   return (
     <ProjectInfoGridContainer>
-      <ProjectInfoGridEventDateContainer>
-        <InfoGridEvent eventType="Tanz" />
+      <FormatDateContainer>
+        <InfoGridFormat project={project} />
         <InfoGridDate project={project} />
-      </ProjectInfoGridEventDateContainer>
+      </FormatDateContainer>
       <InfoGridLocation project={project} />
       <InfoGridContext project={project} />
     </ProjectInfoGridContainer>
@@ -44,7 +45,7 @@ const ProjectInfoGridContainer = styled(InfoGridContainer)`
   }
 `;
 
-const ProjectInfoGridEventDateContainer = styled.div`
+const FormatDateContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

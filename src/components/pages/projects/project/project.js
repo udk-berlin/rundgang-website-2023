@@ -19,6 +19,8 @@ export default function Project({ project }) {
     fetcher
   );
 
+  console.log(project)
+
   return (
     <Layout disableFilter={true}>
       <Container>

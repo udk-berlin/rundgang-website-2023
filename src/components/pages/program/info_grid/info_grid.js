@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-import InfoGridEvent from "@/components/pages/program/info_grid/event";
+import InfoGridFormat from "@/components/pages/program/info_grid/format";
 import InfoGridCarousel from "@/components/pages/program/info_grid/carousel";
 
 export default function InfoGrid({ project }) {
   return (
     <InfoGridContainer>
-      <InfoGridEvent eventType="Installation" />
+      <InfoGridFormat project={project} />
       <InfoGridCarousel project={project} />
     </InfoGridContainer>
   );
