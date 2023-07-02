@@ -1,4 +1,4 @@
-import {FIRST_TIME, LAST_TIME} from "@/components/pages/timeline/constants";
+import { FIRST_TIME, LAST_TIME } from "@/themes/pages/timeline";
 import TimelineProjectsGroup from "@/components/pages/timeline/project/projects_group";
 
 export default function TimelineProjectsGroups({ projects, roomIndex = 0 }) {
