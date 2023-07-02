@@ -1,9 +1,13 @@
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
-import { ContactLink, ImprintLink, FaqLink } from "@/components/localization/links";
+import {
+  ContactLink,
+  ImprintLink,
+  FaqLink,
+} from "@/components/localization/links";
 
-export default function FooterInfoPages () {
+export default function FooterInfoPages() {
   return (
     <InfoPagesContainer>
       <ContactLink>
@@ -27,6 +31,8 @@ const InfoPagesContainer = styled.div`
 
   width: 100%;
   height: 100%;
+
+  font-size: 0.85rem;
 
   & > *:hover {
     text-decoration: underline;

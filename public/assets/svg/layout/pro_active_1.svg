@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Capa_6_copia" xmlns="http://www.w3.org/2000/svg" width="488.5043" height="486" viewBox="0 0 488.5043 486">
     <defs>
-        <style>.cls-pro-1-active-1{fill:#d1acd0;}</style>
+        <style>.cls-pro-1-active-1{fill:#d1acd0;stroke-width:20px;}</style>
     </defs>
     <rect class="cls-pro-1-active-1" x="271.0043" y="7.5" width="210" height="264"/>
     <path d="m473.5043,15v249h-195V15h195m15-15h-225v279h225V0h0Z"/>

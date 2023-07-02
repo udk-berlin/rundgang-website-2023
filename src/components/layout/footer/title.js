@@ -27,7 +27,7 @@ const TitleContainer = styled.div`
       justify-content: center;
 
       font-weight: 600;
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
 `;

@@ -15,6 +15,4 @@ export default function InfoGrid({ project }) {
 export const InfoGridContainer = styled.div`
   display: grid;
   justify-items: start;
-  font-size: var(--info-grid-font-size);
-  font-weight: var(--info-grid-font-weight);
 `;
