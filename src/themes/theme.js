@@ -27,12 +27,12 @@ export const breakpoints = {
 
 const timelineWidths = {
   default: '200vw',
-  mobile: '200vw',
+  mobile: '300vw',
 }
 
 export const timelineWidthsWithoutVW = {
   default: 2,
-  mobile: 2,
+  mobile: 3,
 }
 
 const borderWidths = {
@@ -118,6 +118,34 @@ export const defaultTheme = {
       width: `calc(100vw - calc(${timelineWidths.mobile} / ${NUMBER_OF_HOURS}) / 2)`,
       borderLeft: '2px solid black',
     }
+  },
+  locations: {
+    map: {
+      height: 'calc(100vh - 2 * var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 * var(--border-width))'
+    },
+    groundPlan: {
+      height: 'var(--layout-footer-grid-template-column-1)',
+      position: 'absolute',
+      top: 'calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width))',
+      gridTemplateColumns: 'var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3)',
+      infos: {
+        height: 'calc(var(--locations-map-height) - var(--locations-ground-plan-height))',
+      },
+      content: {
+        height: '100%',
+        overflow: 'hidden',
+      },
+      image: {
+        height: 'var(--layout-footer-grid-template-column-1)',
+      }
+    },
+    program: {
+      height: 'var(--layout-footer-grid-template-column-1)',
+      position: 'absolute',
+      top: 'calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width))',
+      left: 0,
+      gridTemplateColumns: 'var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3)',
+    }
   }
 };
 
@@ -173,5 +201,33 @@ export const mobileTheme = {
       width: '100vw',
       borderLeft: '0',
     },
+  },
+  locations: {
+    map: {
+      height: 'calc(100vh - 2 * var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 * var(--border-width))'
+    },
+    groundPlan: {
+      height: 'fit-content',
+      position: '',
+      top: '',
+      gridTemplateColumns: '',
+      infos: {
+        height: 'calc(var(--locations-map-height) - var(--locations-ground-plan-height))',
+      },
+      content: {
+        height: 'fit-content',
+        overflow: 'scroll',
+      },
+      image: {
+        height: '30vh',
+      }
+    },
+    program: {
+      height: 'fit-content',
+      position: '',
+      top: '',
+      left: '',
+      gridTemplateColumns: '',
+    }
   }
 };

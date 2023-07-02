@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from 'styled-components'
 
-import LocationsGroundPlan from "@/components/pages/locations/ground_plan/ground_plan";
+import LocationsGroundPlan from "@/components/pages/locations/ground_plan/image";
 import LocationsGroundPlanFloors from '@/components/pages/locations/ground_plan/floors'
 import LocationsGroundPlanRooms from '@/components/pages/locations/ground_plan/rooms'
 
@@ -32,15 +32,15 @@ const LocationsGroundPlanContentContainer = styled.div`
 
   cursor: default;
   
-  font-size: 16px;
+  font-size: ${({ theme })=> theme.fontSizes.small};
 `
 
 const LocationsGroundPlanInfoContainer = styled.div`
-  height: var(--locations-ground-plan-infos-height);
-  min-height: var(--locations-ground-plan-infos-height);
-  max-height: var(--locations-ground-plan-infos-height);
+  height: ${({ theme })=> theme.locations.groundPlan.content.height};
+  min-height: ${({ theme })=> theme.locations.groundPlan.content.height};
+  max-height: ${({ theme })=> theme.locations.groundPlan.content.height};
 
-  overflow: hidden;
+  overflow: ${({ theme })=> theme.locations.groundPlan.content.overflow};
 `
 
 export function sortByName(a, b) {

@@ -60,7 +60,6 @@ const LOCATION_ID_TO_ORDER_MAPPER = {
   '!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de': -1,
 }
 
-
 export default function LocationsMap ({ locations }) {
   const mapContainerRef = useRef(null)
   const mapRef = useRef(null)
@@ -140,8 +139,8 @@ export default function LocationsMap ({ locations }) {
 }
 
 const MapContainer = styled.div`
-  height: var(--locations-map-height);
-  min-height: var(--locations-map-height);
+  height: 50vh;//var(--locations-map-height);
+  min-height: 50vh;//var(--locations-map-height);
   width: 100%;
   min-width: 100%;
 
