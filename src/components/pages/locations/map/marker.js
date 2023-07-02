@@ -51,7 +51,6 @@ const TextBoxContainer = styled.div`
   border: var(--border-width) solid var(--color-dark-gray);
   background: ${({ selected }) => selected ? 'var(--color-pink)' :  'var(--color-dark-gray)'};
   
-  
   font-size: var(--map-marker-font-size);
   font-weight: var(--map-marker-font-weight);
   color: var(--color-white);

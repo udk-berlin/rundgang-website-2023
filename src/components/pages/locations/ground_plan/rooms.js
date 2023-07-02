@@ -113,7 +113,6 @@ function getRooms (floor) {
 
   Object.values(floor.children).forEach(child => {
     if (child.template === 'location-room') {
-      console.log(child.children)
       rooms[child.id] = child
     }
   })
