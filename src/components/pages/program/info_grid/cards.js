@@ -1,6 +1,5 @@
-import InfoGridItemLink, {
-  InfoGridItem,
-} from "@/components/pages/program/info_grid/item";
+import { InfoGridCardItem } from "@/components/pages/program/info_grid/item";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 export function InfoGridLocation({ project }) {
@@ -11,33 +10,38 @@ export function InfoGridLocation({ project }) {
 
   if ("location-building" in project)
     location = (
-      <InfoGridItem margin="170px">
+      <InfoGridCardItem margin="170px">
         {project["location-building"].name}
-      </InfoGridItem>
+      </InfoGridCardItem>
     );
   else if ("external-location" in project)
     location = (
-      <InfoGridItem margin="170px">
+      <InfoGridCardItem margin="170px">
         {project["external-location"].name}
-      </InfoGridItem>
+      </InfoGridCardItem>
     );
 
   if ("location-level" in project)
     level = (
-      <InfoGridItem margin="10px">
-        Etage: {project["location-level"].name}
-      </InfoGridItem>
+      <InfoGridCardItem margin="10px">
+        <FormattedMessage id="floor" />
+        :&nbsp;
+        {project["location-level"].name}
+      </InfoGridCardItem>
     );
 
   if ("location-room" in project)
     room = (
-      <InfoGridItem margin="50px">
-        Raum: {project["location-room"].name}
-      </InfoGridItem>
+      <InfoGridCardItem margin="50px">
+        <FormattedMessage id="room" />
+        :&nbsp;{project["location-room"].name}
+      </InfoGridCardItem>
     );
 
   if ("centre" in project)
-    centre = <InfoGridItem margin="50px">{project.centre.name}</InfoGridItem>;
+    centre = (
+      <InfoGridCardItem margin="50px">{project.centre.name}</InfoGridCardItem>
+    );
 
   return (
     <Container>
@@ -57,27 +61,35 @@ export function InfoGridContext({ project }) {
   let clazz = <></>;
 
   if ("faculty" in project) {
-    faculty = <InfoGridItem margin="50px">{project.faculty.name}</InfoGridItem>;
+    faculty = (
+      <InfoGridCardItem margin="50px">{project.faculty.name}</InfoGridCardItem>
+    );
   }
 
   if ("institute" in project) {
     institute = (
-      <InfoGridItem margin="150px">{project.institute.name}</InfoGridItem>
+      <InfoGridCardItem margin="150px">
+        {project.institute.name}
+      </InfoGridCardItem>
     );
   }
 
   if ("subject" in project) {
     subject = (
-      <InfoGridItem margin="100px">{project.subject.name}</InfoGridItem>
+      <InfoGridCardItem margin="100px">{project.subject.name}</InfoGridCardItem>
     );
   }
 
   if ("course" in project) {
-    course = <InfoGridItem margin="50px">{project.course.name}</InfoGridItem>;
+    course = (
+      <InfoGridCardItem margin="50px">{project.course.name}</InfoGridCardItem>
+    );
   }
 
   if ("class" in project) {
-    clazz = <InfoGridItem margin="200px">{project.class.name}</InfoGridItem>;
+    clazz = (
+      <InfoGridCardItem margin="200px">{project.class.name}</InfoGridCardItem>
+    );
   }
 
   return (

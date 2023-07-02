@@ -3,7 +3,10 @@ import styled from "styled-components";
 
 export default function InfoGridTime({ start, end }) {
   return (
-    <InfoGridTimeContainer pos={timeToMarginWidth(start, end)}>
+    <InfoGridTimeContainer
+      pos={timeToMarginWidth(start, end)}
+      margin={timeToMarginWidth(start, end)[0]}
+    >
       <TimeContainer date={start} />
       <Line />
       <TimeContainer date={end} />
@@ -12,8 +15,7 @@ export default function InfoGridTime({ start, end }) {
 }
 
 const InfoGridTimeContainer = styled(InfoGridItem)`
-  margin-left: ${(prop) => prop.pos[0]}%;
-  min-width: 105px;
+  min-width: 110px;
   width: ${(prop) => prop.pos[1]}%;
 
   display: flex;
@@ -42,7 +44,7 @@ const Line = styled.div`
 
 function timeToMarginWidth(start, end) {
   let startOfDay = 10;
-  let endOfDay = 23;
+  let endOfDay = 24;
   let lengthOfDay = endOfDay - startOfDay;
 
   let margin =
@@ -55,6 +57,6 @@ function timeToMarginWidth(start, end) {
   return [margin, width];
 }
 
-function scale(number, inMin, inMax, outMin, outMax) {
+export function scale(number, inMin, inMax, outMin, outMax) {
   return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 }
