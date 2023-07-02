@@ -1,6 +1,6 @@
 export const breakpoints = {
-  m: 1660,
-  s: 800,
+  m: 900,
+  s: 400,
 };
 
 export const fontSizes = {

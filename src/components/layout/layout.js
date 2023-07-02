@@ -1,20 +1,51 @@
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import { SliderProvider } from "@/providers/slider";
 import Header from "@/components/layout/header/header";
 import Footer from "@/components/layout/footer/footer";
+import FooterMobile from "@/components/layout/footer/footer_mobile";
+import { useEffect, useState } from "react";
+import useWindowSize from "@/hooks/window_size";
+import {
+  layoutBreakpoints,
+  layoutLTheme,
+  layoutMTheme,
+  layoutSTheme,
+} from "@/themes/layout";
+import { breakpoints } from "@/themes/theme";
 
-export default function Layout({ children, disableFilter = false, numberOfSliderStates = 7 }) {
+export default function Layout({
+  children,
+  disableFilter = false,
+  numberOfSliderStates = 7,
+}) {
+  const [responsiveTheme, setResponsiveTheme] = useState(layoutLTheme);
+  const [mobile, setMobile] = useState(false);
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize.width <= breakpoints.m) {
+      setResponsiveTheme(layoutMTheme);
+      setMobile(true);
+    } else {
+      setResponsiveTheme(layoutLTheme);
+      setMobile(false);
+    }
+  }, [windowSize.width]);
   return (
-    <Container>
-      <SliderProvider>
-        <Header disableFilter={disableFilter} />
-        <Content>
-          {children}
-        </Content>
-        <Footer numberOfSliderStates={numberOfSliderStates} />
-      </SliderProvider>
-    </Container>
+    <ThemeProvider theme={responsiveTheme}>
+      <Container>
+        <SliderProvider>
+          <Header disableFilter={disableFilter} />
+          <Content>{children}</Content>
+          {mobile ? (
+            <FooterMobile numberOfSliderStates={numberOfSliderStates} />
+          ) : (
+            <Footer numberOfSliderStates={numberOfSliderStates} />
+          )}
+        </SliderProvider>
+      </Container>
+    </ThemeProvider>
   );
 }
 

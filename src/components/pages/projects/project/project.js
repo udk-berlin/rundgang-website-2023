@@ -40,7 +40,6 @@ export default function Project({ project }) {
       setResponsiveTheme(projectLTheme);
       setInfoGridPos(true);
     }
-    console.log(responsiveTheme);
   }, [windowSize.width]);
 
   return (

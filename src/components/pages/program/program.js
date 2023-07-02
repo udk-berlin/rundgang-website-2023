@@ -14,9 +14,6 @@ import {
   programSTheme,
 } from "@/themes/pages/program";
 
-export const MASONRY_COLUMNS = 4;
-export const MASONRY_GUTTER = "0.75rem";
-
 export default function Program() {
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
