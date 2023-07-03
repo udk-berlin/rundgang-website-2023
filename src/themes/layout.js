@@ -10,8 +10,11 @@ export const layoutLTheme = {
   localization: {
     fontSize: '1rem',
   },
-  footerInfoPages: {
-    gridTemplateColumns: "1fr 1fr 1fr",
+  footer: {
+    height: '2.2rem',
+    infoPages: {
+      gridTemplateColumns: "1fr 1fr 1fr",
+    }
   },
 };
 
@@ -20,7 +23,10 @@ export const layoutMTheme = {
   localization: {
     fontSize: '1rem',
   },
-  footerInfoPages: {
-    gridTemplateColumns: "1fr",
-  },
+  footer: {
+    height: '2.2rem',
+    infoPages: {
+      gridTemplateColumns: "1fr",
+    }
+  }
 };

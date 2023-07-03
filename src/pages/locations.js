@@ -25,6 +25,8 @@ export async function getStaticProps () {
 }
 
 export default function LocationsPage ({ projects, locations, formats, formatsFilters, structures, structuresFilters }) {
+
+  // console.log(locations)
   return (
     <Page>
       <SavedProjectsProvider>

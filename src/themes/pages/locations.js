@@ -1,9 +1,10 @@
-import { baseLTheme, baseMTheme } from "@/themes/theme";
+import {baseLTheme, baseMTheme, fontSizes} from "@/themes/theme";
+import {layoutLTheme, layoutMTheme} from "@/themes/layout";
 
 export const locationsLTheme = {
   ...baseLTheme,
   map: {
-    height: 'calc(100vh - 2 * var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 * var(--border-width))'
+    height: `calc(100vh - ${layoutLTheme.footer.height} + var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 ${baseLTheme.borderWidth})`
   },
   groundPlan: {
     height: 'var(--layout-footer-grid-template-column-1)',
@@ -27,7 +28,10 @@ export const locationsLTheme = {
     top: 'calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width))',
     left: 0,
     gridTemplateColumns: 'var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3)',
-  }
+  },
+  title: {
+    fontSize: fontSizes.l.medium,
+  },
 };
 
 export const locationsMTheme = {
@@ -57,5 +61,8 @@ export const locationsMTheme = {
     top: '',
     left: '',
     gridTemplateColumns: '',
-  }
+  },
+  title: {
+    fontSize: fontSizes.l.medium,
+  },
 };
