@@ -13,6 +13,17 @@ export const staticLTheme = {
   staticTitle: {
     fontSize: "1rem",
   },
+  accordion: {
+    itemWrapper: {
+      flexDirection: "row",
+    },
+    itemContentWrapper: {
+      gridTemplateColumns: "min-content 1fr",
+    },
+    itemContentLine: {
+      margin: "0.7rem 0.5rem",
+    },
+  },
 };
 
 export const staticMTheme = {
@@ -22,5 +33,16 @@ export const staticMTheme = {
   },
   staticTitle: {
     fontSize: "1.2rem",
+  },
+  accordion: {
+    itemWrapper: {
+      flexDirection: "column",
+    },
+    itemContentWrapper: {
+      gridTemplateColumns: "1fr",
+    },
+    itemContentLine: {
+      margin: "1rem 0",
+    },
   },
 };
