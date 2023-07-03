@@ -36,7 +36,10 @@ const IMPRINT = {
           text: "Entwicklung: udk/spaces",
         },
         {
-          text: "Gestaltung: Marisa Nest, Juan Pablo Gaviria Bedoya, Lukas Esser",
+          text: "Gestaltung: Sophie Pischel und Ira Göller",
+        },
+        {
+          text: "Websitegestaltung: Marisa Nest, Juan Pablo Gaviria Bedoya, Lukas Esser",
         },
         {
           text: "Redaktion: Stabsstelle Überfakultäre Veranstaltungen",
