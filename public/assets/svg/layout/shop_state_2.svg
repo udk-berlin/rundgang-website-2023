@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Capa_8_copia_2" xmlns="http://www.w3.org/2000/svg" width="488.5043" height="486.7128" viewBox="0 0 488.5043 486.7128">
     <defs>
-        <style>.cls-2-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:20px;}.cls-2-2{fill:#fff;}</style>
+        <style>.cls-2-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:15px;}.cls-2-2{fill:#fff;}</style>
     </defs>
     <polygon class="cls-2-2" points="17.099 352.8135 307.3588 224.7583 473.5951 349.4346 183.3353 477.4902 17.099 352.8135"/>
     <path d="m306.3696,233.3917l152.4727,114.3545-274.5185,121.1111L31.851,354.5028l274.5185-121.1111m1.9771-17.2672L2.3466,351.1245l180,135,306-135-180-135h0Z"/>
