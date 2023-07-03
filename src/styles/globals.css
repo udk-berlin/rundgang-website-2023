@@ -71,6 +71,16 @@
   --map-marker-padding: 0.2rem 0.6rem;
 }
 
+*::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: var(--color-pink);
+}
+
+*::selection {
+  color: white;
+  background: var(--color-pink);
+}
+
 *::-webkit-scrollbar {
 
   height: 2px;
