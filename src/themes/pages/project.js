@@ -39,7 +39,7 @@ export const projectMTheme = {
     flexDirection: "row",
   },
   imageContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     height:
       "calc(100vh - var(--layout-header-search-container-height) -calc(var(--layout-header-bar-container-height) * 2));",
   },
