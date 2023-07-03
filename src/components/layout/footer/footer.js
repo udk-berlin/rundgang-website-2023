@@ -1,42 +1,39 @@
-import { FormattedMessage } from "react-intl";
-import styles from '@/styles/layout/Footer.module.css'
+import styled from "styled-components";
 
-import Slider from '@/components/layout/footer/slider'
-import { HoverLink } from '@/components/hover_link'
+import FooterSlider from "@/components/layout/footer/slider";
+import FooterInfoPages from "@/components/layout/footer/info_pages";
+import FooterTitle from "@/components/layout/footer/title";
 
-import { ProgramLink, ContactLink, ImprintLink, FaqLink } from "@/components/localization/links";
-
-export default function Footer () {
+export default function Footer({ numberOfSliderStates, disableSlider = false }) {
   return (
-    <div className={styles.container}>
-      <div>
-        <Slider />
-      </div>
-      <Title />
-      <InfoPages />
-    </div>
-  )
+    <FooterContainer>
+      <FooterSlider numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />
+      <FooterTitle />
+      <FooterInfoPages />
+    </FooterContainer>
+  );
 }
 
-function Title () {
-  return (
-    <div className={styles.title}>
-      <HoverLink>
-        <ProgramLink>
-          <div> UdK Berlin Rundgang</div>
-        </ProgramLink>
-      </HoverLink>
-    </div>
+const FooterContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
 
-  )
-}
+  width: 100%;
+  height: 45px; //var(--layout-header-bar-container-height);
 
-function InfoPages () {
-  return (
-    <div className={styles.infoPages}>
-      <ContactLink><FormattedMessage id={'contact'}/></ContactLink>
-      <ImprintLink><FormattedMessage id={'imprint'}/></ImprintLink>
-      <FaqLink><FormattedMessage id={'faq'}/></FaqLink>
-    </div>
-  )
-}
+  display: grid;
+  grid-template-columns: var(--layout-footer-grid-template-columns);
+  align-items: center;
+
+  border: var(--border-width) solid var(--border-color);
+  background: var(--color-white);
+
+  > *:nth-child(1) {
+    border-right: var(--border-width) solid var(--border-color);
+  }
+
+  > *:nth-child(3) {
+    border-left: var(--border-width) solid var(--border-color);
+  }
+`;

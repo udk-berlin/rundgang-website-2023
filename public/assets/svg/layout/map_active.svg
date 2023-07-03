@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="100%" height="100%" viewBox="0 0 460 360" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(1,0,0,1,-70,-120)">
-        <path d="M100,200L200,150L400,200L500,150L500,400L400,450L200,400L100,450L100,200Z" style="fill:rgb(255,198,253);"/>
-        <path d="M400,200L400,450L201.496,397.642L161.293,415.418L100,200L200,150L400,200Z" style="fill:rgb(209,172,208);"/>
-        <path d="M100,200L200,150L400,200L500,150L500,400L400,450L200,400L100,450L100,200Z" style="fill:none;stroke:black;stroke-width:15px;"/>
-        <path d="M200,150L200,400" style="fill:none;stroke:black;stroke-width:15px;"/>
-        <path d="M400,200L400,450" style="fill:none;stroke:black;stroke-width:15px;"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_4" xmlns="http://www.w3.org/2000/svg" width="504" height="504" viewBox="0 0 504 504">
+    <defs>
+        <style>.cls-map-active-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:20px;}.cls-map-active-2{fill:#d1acd0;}.cls-map-active-3{fill:#e2c0dd;}</style>
+    </defs
+    ><polygon class="cls-map-active-3" points="359.5607 115.1447 487.065 85.1447 487.065 415.1447 359.5607 445.1447 141.5 385.1447 13.9957 415.1447 13.9957 85.1447 141.5 55.1447 359.5607 115.1447"/>
+    <polyline class="cls-map-active-2" points="359.5607 445.1447 141.5 385.1447 90 396 90 72 141.5 55.1447 359.5607 115.1447"/>
+    <polygon class="cls-map-active-1" points="359.5607 115.1447 487.065 85.1447 487.065 415.1447 359.5607 445.1447 141.5 385.1447 13.9957 415.1447 13.9957 85.1447 141.5 55.1447 359.5607 115.1447"/>
+    <line class="cls-map-active-1" x1="141.5" y1="55.1447" x2="141.5" y2="385.1447"/>
+    <line class="cls-map-active-1" x1="359.5607" y1="115.1447" x2="359.5607" y2="445.1447"/>
 </svg>

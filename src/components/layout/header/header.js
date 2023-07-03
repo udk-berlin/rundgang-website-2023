@@ -1,13 +1,57 @@
-import styles from '@/styles/layout/header/Header.module.css'
+import styled from "styled-components";
 
-import HeaderBar from './bar'
-import HeaderSearch from './search'
+import HeaderBar from "@/components/layout/header/bar/bar";
+import HeaderFiltersBar from "@/components/layout/header/filters/bar";
+import HeaderFilters from "@/components/layout/header/filters/filters";
+import { useEffect, useState } from "react";
+import HeaderBarMobile from "@/components/layout/header/bar/bar_mobile";
+import useWindowSize from "@/hooks/window_size";
+import { layoutBreakpoints } from "@/themes/layout";
 
-export default function Header () {
+export default function Header({ disableFilter }) {
+  const [showFilters, setShowFilters] = useState(false);
+
+  const [mobile, setMobile] = useState(false);
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize.width <= layoutBreakpoints.m) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }, [windowSize.width]);
+
   return (
-    <div className={styles.container}>
-      <HeaderBar />
-      <HeaderSearch />
-    </div>
-  )
+    <HeaderContainer>
+      {mobile ? <HeaderBarMobile /> : <HeaderBar />}
+      <HeaderFiltersBar
+        showFilters={showFilters}
+        setShowFilters={setShowFilters}
+        disableFilter={disableFilter}
+      />
+      {disableFilter ? (
+        <></>
+      ) : (
+        <HeaderFilters
+          showFilters={showFilters}
+          setShowFilters={setShowFilters}
+        />
+      )}
+    </HeaderContainer>
+  );
 }
+
+const HeaderContainer = styled.div`
+  position: sticky;
+  width: 100%;
+  top: 0;
+  height: fit-content;
+  z-index: 99;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  border: var(--border-width) solid var(--border-color);
+
+  background-color: var(--color-white);
+`;

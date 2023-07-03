@@ -1,34 +1,26 @@
 import { get, getId, getTree } from '@/utils/api/api'
 
-const ROOT_ID ='!CszUweVEGwuKVEiJBg:content.udk-berlin.de'
-const ROOT_LOCATION_ID = '!QEMZncAAlhtFVagfSI:content.udk-berlin.de'
-const ROOT_CONTEXT_ID = '!suNRlIyeorKnuZHfld:content.udk-berlin.de'
+let itemsCached = false
+const items = {}
 
-let itemsCached = false;
-const items = {};
-
-let itemDetailsCached = false;
-const itemDetails = {};
+let detailsCached = false
+const details = {}
 
 export async function getListFilterTypeItems () {
-  return await get(`${ROOT_ID}/list/filter/type/item`)
+  return await get(`${process.env.REST_API_ROOT_ID}/list/filter/type/item`)
 }
 
-export async function getItemIds() {
-  const items = await getListFilterTypeItems();
-  let ids = items.map(item => item.id)
-  return [...new Set(ids)];
-}
-
-export async function getItem (id) {
-  const items = await getItems();
-  return items[id]
+export async function getItemIds () {
+  const items = await getListFilterTypeItems()
+  const ids = items.map(item => item.id)
+  return [...new Set(ids)]
 }
 
 export async function getItems () {
   if (!itemsCached) {
-    const locationTree = await getTree(ROOT_LOCATION_ID)
-    const contextTree = await getTree(ROOT_CONTEXT_ID)
+    const locationsTree = await getTree(process.env.REST_API_LOCATIONS_ROOT_ID)
+    const formatsTree = await getTree(process.env.REST_API_FORMATS_ROOT_ID)
+    const structuresTree = await getTree(process.env.REST_API_STRUCTURES_ROOT_ID)
 
     const buildItem = (item, data) => {
       const _item = {
@@ -66,32 +58,28 @@ export async function getItems () {
       })
     }
 
-    Object.values(locationTree.children).forEach(location => {
-      extractChildren(location)
-    })
+    extractChildren(locationsTree, {})
+    extractChildren(formatsTree, {})
+    extractChildren(structuresTree, {})
 
-    Object.values(contextTree.children).forEach(context => {
-      extractChildren(context)
-    })
-
-    const itemDetails = await getItemDetails(Object.keys(items))
+    const details = await getDetails(Object.keys(items))
 
     Object.keys(items).forEach(id => {
-      items[id] = { ...items[id], ...itemDetails[id] }
+      items[id] = { ...items[id], ...details[id] }
     })
 
-    itemsCached = true;
+    itemsCached = true
   }
 
-  return items;
+  return items
 }
 
-async function getItemDetails (itemIds) {
-  if (!itemDetailsCached) {
+async function getDetails (itemIds) {
+  if (!detailsCached) {
     const promises = []
 
-    const buildItemDetail = (data) => {
-      const itemDetail = {
+    const buildDetail = (data) => {
+      const detail = {
         id: data.id,
         thumbnail: data.thumbnail,
         thumbnail_full_size: data.thumbnail_full_size,
@@ -99,19 +87,28 @@ async function getItemDetails (itemIds) {
         authors: data.origin.authors
       }
 
-      if ('temporal' in data.allocation) { itemDetail.temporal = data.allocation.temporal }
+      if ('temporal' in data.allocation) {
+        detail.temporal = []
 
-      return itemDetail
+        data.allocation.temporal.forEach(time => {
+          detail.temporal.push({
+            start: time.start * 1000 - 7200000,
+            end: time.end * 1000  - 7200000,
+          })
+        })
+      }
+
+      return detail
     }
 
     itemIds.forEach(itemId => { promises.push(getId(itemId)) })
 
     await Promise
       .all(promises)
-      .then(data => { data.forEach(d => { itemDetails[d.id] = buildItemDetail(d) }) })
+      .then(data => { data.forEach(d => { details[d.id] = buildDetail(d) }) })
 
-    itemDetailsCached= true;
+    detailsCached = true
   }
 
-  return itemDetails;
+  return details
 }

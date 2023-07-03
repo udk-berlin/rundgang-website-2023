@@ -1,11 +1,14 @@
-import {getItemIds, getItem} from "@/utils/api/items";
+import {getItemIds, getItems} from "@/utils/api/items";
 import Page from "@/components/pages/page";
-import Project from "@/components/pages/project/project";
+import Project from "@/components/pages/projects/project/project";
 
 import {LOCALES} from "@/components/localization/provider";
+import { SavedProjectsProvider } from '@/providers/saved_projects'
+import React from 'react'
 
 export async function getStaticProps ({ params }) {
-  const project = await getItem(params.id)
+  const projects = await getItems()
+  const project = projects[params.id]
   return { props: { project } }
 }
 
@@ -35,7 +38,9 @@ export async function getStaticPaths() {
 export default function ProjectPage ({ project }) {
   return (
     <Page>
-      <Project project={project} />
+      <SavedProjectsProvider>
+        <Project project={project} />
+      </SavedProjectsProvider>
     </Page>
   )
 }

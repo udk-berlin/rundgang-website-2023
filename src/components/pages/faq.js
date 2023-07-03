@@ -1,4 +1,4 @@
-import { useIntl } from "reac t-intl";
+import { useIntl } from "react-intl";
 
 import Layout from "@/components/layout/layout";
 import StaticLayout from '@/components/layout/static_layout'
@@ -21,11 +21,11 @@ export default function Faq () {
     const language = useIntl();
 
     let faqs = FAQS.de
-    if (language.locale === 'en' && 'en' in FAQ)
+    if (language.locale === 'en' && 'en' in FAQS)
         faqs = FAQS.en;
 
     return (
-      <Layout>
+      <Layout disableFilter={true} disableSlider={true}>
           <StaticLayout layout={'faq'} title={'faq'}>
               <Accordion items={faqs} />
           </StaticLayout>

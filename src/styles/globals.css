@@ -2,10 +2,16 @@
 
 :root {
   --color-pink: #d1acd0;
-  --color-transparent-pink: rgba(209, 172, 208, 0.4);
+  --color-pink-light: rgb(235, 220, 234);
+  --color-pink-transparent: rgba(209, 172, 208, 0.4);
   --color-green: #1a3f2b;
+  --color-green-light: #a2b1a9;
+  --color-green-transparent: rgba(26, 63, 43, 0.4);
   --color-white: white;
-  --color-transparent-black: rgba(1, 1, 1, 0.8);
+  --color-dark-gray: rgb(52, 52, 52);
+  --color-light-gray: rgb(215, 215, 215);
+  --color-black: black;
+  --color-black-transparent: rgba(1, 1, 1, 0.8);
 
   --border-width: 2px;
   --border-color: #000;
@@ -13,11 +19,86 @@
   --info-border-width: 2px;
   --info-border-color: #000;
 
-  --map-marker-text-box-padding: 3px 12px;
-  --map-popup-container-width: 200px;
+  --locations-map-height: calc(
+    100vh - 2 * var(--layout-header-bar-container-height) -
+      var(--layout-header-search-container-height) - 2 * var(--border-width)
+  );
+  --locations-overlays-top: calc(
+    var(--layout-header-bar-container-height) +
+      var(--layout-header-search-container-height) + 2 * var(--border-width)
+  );
+  --locations-ground-plan-height: var(--layout-footer-grid-template-column-1);
+  --locations-ground-plan-infos-height: calc(
+    var(--locations-map-height) - var(--locations-ground-plan-height)
+  );
 
-  --layout-header-bar-container-height: 70px;
-  --layout-header-search-container-height: 40px;
+  --layout-header-bar-container-height: 60px;
+  --layout-header-search-container-height: 34px;
+  --layout-header-height: calc(
+    var(--layout-header-bar-container-height) +
+      var(--layout-header-search-container-height) + 2 * var(--border-width)
+  );
+  --layout-header-filters-bar-template-column-1: 3vw;
+  --layout-header-filters-bar-template-column-2: auto;
+  --layout-header-filters-bar-template-column-3: 3vw;
+  --layout-header-filters-bar-template-columns: var(
+      --layout-header-filters-bar-template-column-1
+    )
+    var(--layout-header-filters-bar-template-column-2)
+    var(--layout-header-filters-bar-template-column-3);
+
+  --layout-header-filters-width: calc(
+    100vw - var(--layout-header-filters-bar-template-column-1) -
+      var(--layout-header-filters-bar-template-column-3) -
+      calc(3 * var(--border-width))
+  );
+
+  --layout-footer-height: var(--layout-header-bar-container-height);
+  --layout-footer-grid-template-column-1: 25vw;
+  --layout-footer-grid-template-column-2: 1fr;
+  --layout-footer-grid-template-column-3: 25vw;
+  --layout-footer-grid-template-columns: var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3);
+  --layout-footer-mobile-grid-template-column: 8fr 1fr;
+
+  --program-padding: 0.75rem;
+
+  --info-grid-font-size: 0.7rem;
+  --info-grid-font-weight: 500;
+  --info-grid-padding: 0.2rem 0.4rem;
+
+  --map-marker-font-size: 0.6rem;
+  --map-marker-font-weight: 400;
+  --map-marker-padding: 0.2rem 0.6rem;
+}
+
+*::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: var(--color-pink);
+}
+
+*::selection {
+  color: white;
+  background: var(--color-pink);
+}
+
+*::-webkit-scrollbar {
+
+  height: 2px;
+  width: 2px;
+  /*background: rgba(255, 255, 255, 0);*/
+}
+
+*::-webkit-scrollbar-track {
+  /*background: var(--color-pink-transparent);*/
+  /*outline: var(--border-width) solid var(--color-black);*/
+}
+
+*::-webkit-scrollbar-thumb {
+  /*background: var(--color-pink);*/
+  background: var(--color-black);
+  /*background: var(--color-black);*/
+  /*outline: var(--border-width) solid var(--color-black);*/
+  -webkit-border-radius: 0;
 }
 
 * {

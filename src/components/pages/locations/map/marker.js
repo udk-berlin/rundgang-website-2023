@@ -1,84 +1,65 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import styles from '@/styles/pages/locations/map/Marker.module.css'
+import GroundPlan from '@/components/pages/locations/map/ground_plan'
 
-const MARKER_IMAGE_FOLDER_PATH = '/assets/svg/map/marker/'
-const SIMPLE_MARKER_IMAGE_SRC = `${MARKER_IMAGE_FOLDER_PATH}/simple.svg`
-
-const StyledMarkerImage = styled.img`
-  width: ${({ size }) => `${size}px`};
-  height: ${({ size }) => `${size}px`};
-`
-
-const idToOutlineMarkerImageIdMapper = {
-  '!uAswzmPHWtAVmjhIYx:content.udk-berlin.de': '001',
-  '!hjTkjNaIDkzxNWQZTR:content.udk-berlin.de': '002',
-  '!XaBVrlwEHUifKOmMPa:content.udk-berlin.de': '003',
-  '!aLyedVYnhynRwlhXUm:content.udk-berlin.de': '004',
-  '!amwvMUTwucDiRylpJQ:content.udk-berlin.de': '005',
-  '!LiVonEpyzckeIAyOIb:content.udk-berlin.de': '006',
-  '!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': '007',
-  '!FYglBKPJHZGUNIYcBt:content.udk-berlin.de': '008',
-  '!fwsuOeorRCZtTqwukc:content.udk-berlin.de': '009',
-  '!ozXLGbrpCVNrRScjQJ:content.udk-berlin.de': '010',
-  '!nOMmizEAkvzoapuqCK:content.udk-berlin.de': '011',
-  '!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': '012',
-  '!jocCvZKGntdCmvmmUG:content.udk-berlin.de': '013'
-}
-
-const idToOutlineMarkerImageSrcMapper = (id) => {
-  if (id in idToOutlineMarkerImageIdMapper) {
-    return `${MARKER_IMAGE_FOLDER_PATH}/${idToOutlineMarkerImageIdMapper[id]}.svg`
-  } else {
-    return SIMPLE_MARKER_IMAGE_SRC
-  }
-}
-
-const markerTypeToMarkerImageSizeMapper = {
-  simple: 30,
-  outline: 100
-}
-
-export default function ResponsiveMarker ({ location }) {
-  const isMobile = false
-  const useTextBox = true
-
-  let marker =  <OutlineMarker location={location} />
+export default function ResponsiveMarker ({ location, scale = null, useTextBox = false}) {
+  let marker
 
   if (useTextBox) {
-    marker = <TextBoxMarker location={location} />
-  } else if (isMobile || !(location.id in idToOutlineMarkerImageIdMapper)) {
-    marker = <SimpleMarker location={location} />
+    marker = <TextBoxContainer id={`marker-${location.id}`} selected={false}>{location.name}</TextBoxContainer>
+  } else {
+    marker = <GroundPlanMarker location={location} type='marker' scale={scale} />
   }
 
   return (
-    <div className={styles.container}>
+    <>
       {marker}
-    </div>
+    </>
   )
 }
 
-function OutlineMarker ({ location }) {
-  return <Marker location={location} size={markerTypeToMarkerImageSizeMapper.outline} asOutline={true} />
-}
+function GroundPlanMarker ({ location, scale = null }) {
+  const isMobile = false
+  let marker
 
-function SimpleMarker ({ location }) {
-  return <Marker location={location} size={markerTypeToMarkerImageSizeMapper.simple} />
-}
+  if (isMobile) {
+    marker = <GroundPlan id={location.id} type='marker' alt={location.name} useSimpleGroundPlan={true} />
+  } else {
+    marker = <GroundPlan id={location.id} type='marker' alt={location.name} scale={scale}/>
+  }
 
-function TextBoxMarker ({ location }) {
-  return <div id={`marker-${location.id}`} className={styles.textBoxContainer}>{location.name}</div>
-}
-
-function Marker ({ location, size, asOutline = false }) {
   return (
-    <StyledMarkerImage
-      id={`marker-${location.id}`}
-      alt={location.name}
-      src={asOutline ? idToOutlineMarkerImageSrcMapper(location.id) : SIMPLE_MARKER_IMAGE_SRC}
-      size={size}
-      loading="lazy"
-    />
+    <GroundPlanContainer id={`marker-${location.id}`} selected={false}>
+      {marker}
+    </GroundPlanContainer>
   )
 }
+
+const GroundPlanContainer = styled.div`
+  cursor: pointer;
+  filter: ${({ selected }) => selected ? 'drop-shadow(var(--color-green) 0px 0px 1px)' :  ''};
+
+  > img:hover {
+    filter: drop-shadow(var(--color-green) 0px 0px 1px);
+  }
+`
+
+const TextBoxContainer = styled.div`
+  padding: var(--map-marker-padding);
+
+  border: var(--border-width) solid var(--color-dark-gray);
+  background: ${({ selected }) => selected ? 'var(--color-pink)' :  'var(--color-dark-gray)'};
+  
+  font-size: var(--map-marker-font-size);
+  font-weight: var(--map-marker-font-weight);
+  color: var(--color-white);
+
+  :hover {
+    border: var(--border-width) solid var(--color-pink);
+    background: var(--color-pink);
+    color: var(--color-white);
+  }
+
+  cursor: pointer;
+`
