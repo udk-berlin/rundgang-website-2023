@@ -1,9 +1,10 @@
 import { getTree } from '@/utils/api/api'
+import {REST_API_STRUCTURES_ROOT_ID} from "@/utils/api/items";
 
 export async function getStructures () {
   const structures = {}
 
-  const data = await getTree(process.env.REST_API_STRUCTURES_ROOT_ID)
+  const data = await getTree(REST_API_STRUCTURES_ROOT_ID)
   if ('statusCode' in data && data.statusCode === 404) {}
   else {
     Object.values(data.children).forEach(structure => {
@@ -31,7 +32,7 @@ export async function getStructuresFilters () {
     })
   };
 
-  const data = await getTree(process.env.REST_API_STRUCTURES_ROOT_ID)
+  const data = await getTree(REST_API_STRUCTURES_ROOT_ID)
   if ('statusCode' in data && data.statusCode === 404) {}
   else {
     getChildren(data)
