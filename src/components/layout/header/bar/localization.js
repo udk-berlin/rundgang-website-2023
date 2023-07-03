@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { SwitchLocalizationLink } from '@/components/localization/links'
+import { SwitchLocalizationLink } from "@/components/localization/links";
 
-export default function HeaderBarLocalization() {
+export default function HeaderBarLocalization({ classname }) {
   return (
-    <LocalizationContainer>
+    <LocalizationContainer className={classname}>
       <SwitchLocalizationLink />
     </LocalizationContainer>
   );

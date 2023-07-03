@@ -5,32 +5,37 @@ import FooterInfoPages from "@/components/layout/footer/info_pages";
 import FooterTitle from "@/components/layout/footer/title";
 import { ReactSVG } from "react-svg";
 import { useState } from "react";
+import MobileMenu from "@/components/layout/footer/mobile_menu";
 
 export default function FooterMobile({ numberOfSliderStates }) {
   const [isActive, setIsActive] = useState(false);
   return (
-    <FooterContainer>
-      <FooterSlider numberOfSliderStates={numberOfSliderStates} />
-      <div
-        onMouseEnter={() => setIsActive(true)}
-        onMouseLeave={() => setIsActive(false)}
-      >
-        <SVG src={`/assets/svg/layout/${isActive ? "up" : "left"}.svg`} />
-      </div>
-    </FooterContainer>
+    <FooterWrapper>
+      {isActive && <MobileMenu />}
+      <FooterContainer>
+        <FooterSlider numberOfSliderStates={numberOfSliderStates} />
+        <div onClick={() => setIsActive(!isActive)}>
+          <SVG
+            src={`/assets/svg/layout/arrow_${isActive ? "up" : "left"}.svg`}
+          />
+        </div>
+      </FooterContainer>
+    </FooterWrapper>
   );
 }
 
-const FooterContainer = styled.div`
+const FooterWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-
   width: 100%;
-  height: var(--layout-header-bar-container-height);
+`;
+
+const FooterContainer = styled.div`
+  /* height: var(--layout-header-bar-container-height); */
 
   display: grid;
-  grid-template-columns: 8fr 1fr;
+  grid-template-columns: 8fr min-content;
 
   border: var(--border-width) solid var(--border-color);
   background: var(--color-white);
@@ -48,6 +53,7 @@ const SVG = styled(ReactSVG)`
   width: calc(0.75 * var(--layout-header-bar-container-height));
   height: calc(0.75 * var(--layout-header-bar-container-height));
   cursor: pointer;
+  padding: 0.4rem;
 
   > div {
     width: 100%;
