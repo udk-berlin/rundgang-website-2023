@@ -1,9 +1,8 @@
-import styles from '@/styles/pages/landing/BackgroundVideo.module.css'
+import styled from "styled-components";
 
 export default function LandingBackground () {
   return (
-    <video
-      className={styles.container}
+    <BackgroundVideo
       autoPlay
       muted
       loop
@@ -14,6 +13,18 @@ export default function LandingBackground () {
         src={'/assets/media/videos/background_video1.webm'}
         type="video/webm"
       />
-    </video>
+    </BackgroundVideo>
   )
 }
+
+const BackgroundVideo = styled.video`
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  object-fit: cover;
+`
