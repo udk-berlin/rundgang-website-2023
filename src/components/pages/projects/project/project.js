@@ -14,11 +14,11 @@ import { ProjectText } from "@/components/pages/projects/project/text";
 import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
 import useWindowSize from "@/hooks/window_size";
 import {
+  projectBreakpoints,
   projectLTheme,
   projectMTheme,
   projectSTheme,
 } from "@/themes/pages/project";
-import { breakpoints } from "@/themes/theme";
 
 export default function Project({ project }) {
   const { data, error, isLoading } = useSWR(
@@ -30,10 +30,10 @@ export default function Project({ project }) {
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.s) {
+    if (windowSize.width <= projectBreakpoints.s) {
       setResponsiveTheme(projectSTheme);
       setInfoGridPos(false);
-    } else if (windowSize.width <= breakpoints.m) {
+    } else if (windowSize.width <= projectBreakpoints.m) {
       setResponsiveTheme(projectMTheme);
       setInfoGridPos(false);
     } else {
@@ -43,7 +43,7 @@ export default function Project({ project }) {
   }, [windowSize.width]);
 
   return (
-    <Layout disableFilter={true}>
+    <Layout disableFilter={true} numberOfSliderStates={4}>
       <ThemeProvider theme={responsiveTheme}>
         <Container>
           <ImageContainer>

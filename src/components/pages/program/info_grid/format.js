@@ -3,8 +3,6 @@ import styled from "styled-components";
 import InfoGridItemLink from "@/components/pages/program/info_grid/item";
 import { useSlider } from "@/providers/slider";
 
-const SLIDER_INDEX = 3;
-
 const formatToMarginLeftMapper = {
   Ausstellung: "73%",
   Beratungsangebot: "62%",
@@ -59,11 +57,13 @@ export default function InfoGridFormat({ project, margin }) {
 const Container = styled.div`
   width: 100%;
   max-height: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? "500px" : "0px"};
+    props.slider.position >= props.theme.format.sliderIndex ? "500px" : "0px"};
   overflow-y: hidden;
   transition: all 0.3s;
   padding: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? "0.40rem 0 0.2rem 0" : "0"};
+    props.slider.position >= props.theme.format.sliderIndex
+      ? "0.40rem 0 0.2rem 0"
+      : "0"};
 
   & > * {
     width: max-content;

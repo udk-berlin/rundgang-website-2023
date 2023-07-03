@@ -69,7 +69,7 @@ export function InfoGridCardItem({ className, children, margin }) {
   );
 }
 
-function convertRemToPixels(rem) {
+export function convertRemToPixels(rem) {
   return Math.round(
     rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
   );

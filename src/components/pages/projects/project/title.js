@@ -8,9 +8,6 @@ import {
 } from "@/components/pages/program/program";
 import ProjectLink from "@/components/pages/projects/project/link";
 
-
-const SLIDER_INDEX = 1;
-
 export default function ProjectTitle({ project, fontSize = 2 }) {
   const measureContainerRef = useRef(null);
   const slider = useSlider();
@@ -67,15 +64,17 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
 const ProjectTitleContainer = styled.div`
   display: inline-block;
 
-  max-height: ${(props) =>
-    props.slider.position >= SLIDER_INDEX
-      ? `calc(${props.height}px + ${MASONRY_GUTTER}) `
+  max-height: ${({ slider, theme, height }) =>
+    slider.position >= theme.title.sliderIndex
+      ? `calc(${height}px + ${MASONRY_GUTTER}) `
       : "0px"};
   overflow-y: hidden;
   padding-top: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? MASONRY_GUTTER : "0"};
+    props.slider.position >= props.theme.title.sliderIndex
+      ? MASONRY_GUTTER
+      : "0"};
   padding-bottom: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? "2px" : "0"};
+    props.slider.position >= props.theme.title.sliderIndex ? "2px" : "0"};
 
   font-weight: 600;
   font-size: ${({ theme }) => theme.title.fontSize};
