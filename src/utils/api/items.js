@@ -1,4 +1,4 @@
-import { get, getId, getTree } from '@/utils/api/api'
+import { get, getId, getTree } from "@/utils/api/api";
 
 export async function getListFilterTypeItems () {
   return await get(`${process.env.REST_API_ROOT_ID}/list/filter/type/item`)
@@ -127,5 +127,5 @@ async function getDetails (itemIds) {
       })
     })
 
-  return details
+  return details;
 }

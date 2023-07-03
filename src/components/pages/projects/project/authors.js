@@ -24,12 +24,14 @@ const ProjectAuthorsContainer = styled.div`
   /* margin: ${(props) =>
     props.slider.position >= SLIDER_INDEX ? "0.5rem 0 1rem 0" : "0px"} */
   height: ${(props) =>
-    props.slider.position >= SLIDER_INDEX && props.hasAuthors ? "30px" : "0px"};
+    props.slider.position >= props.theme.author.sliderIndex && props.hasAuthors
+      ? "30px"
+      : "0px"};
   overflow-y: hidden;
   transition: all 0.4s;
 
   padding-top: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? "0.25rem" : "0"};
+    props.slider.position >= props.theme.author.sliderIndex ? "0.25rem" : "0"};
 
   display: flex;
   flex-wrap: nowrap;

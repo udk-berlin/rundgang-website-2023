@@ -1,6 +1,9 @@
 import { baseLTheme, baseMTheme, fontSizes } from "@/themes/theme";
 
-
+export const projectBreakpoints = {
+  m: 1400,
+  s: 800,
+};
 
 export const projectLTheme = {
   ...baseLTheme,
@@ -17,6 +20,16 @@ export const projectLTheme = {
   },
   title: {
     fontSize: fontSizes.l.large,
+    sliderIndex: 0,
+  },
+  author: {
+    sliderIndex: 0,
+  },
+  format: {
+    sliderIndex: 1,
+  },
+  carousel: {
+    sliderOffset: 2,
   },
 };
 
@@ -26,7 +39,7 @@ export const projectMTheme = {
     flexDirection: "row",
   },
   imageContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     height:
       "calc(100vh - var(--layout-header-search-container-height) -calc(var(--layout-header-bar-container-height) * 2));",
   },
@@ -35,6 +48,16 @@ export const projectMTheme = {
   },
   title: {
     fontSize: fontSizes.l.medium,
+    sliderIndex: 0,
+  },
+  author: {
+    sliderIndex: 0,
+  },
+  format: {
+    sliderIndex: 1,
+  },
+  carousel: {
+    sliderOffset: 2,
   },
 };
 
@@ -51,5 +74,15 @@ export const projectSTheme = {
   },
   title: {
     fontSize: fontSizes.l.medium,
+    sliderIndex: 0,
+  },
+  author: {
+    sliderIndex: 0,
+  },
+  format: {
+    sliderIndex: 1,
+  },
+  carousel: {
+    sliderOffset: 2,
   },
 };

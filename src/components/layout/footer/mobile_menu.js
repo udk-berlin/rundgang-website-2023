@@ -5,6 +5,7 @@ import {
   ImprintLink,
   LocationsLink,
   ProgramLink,
+  TimelineLink,
 } from "@/components/localization/links";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -20,6 +21,10 @@ export default function MobileMenu() {
         <span>&rarr;&nbsp;</span>
         <FormattedMessage id="locations" />
       </LocationsLink>
+      <TimelineLink>
+        <span>&rarr;&nbsp;</span>
+        <FormattedMessage id="timeline" />
+      </TimelineLink>
       <ContactLink>
         <span>&rarr;&nbsp;</span>
         <FormattedMessage id="contact" />
