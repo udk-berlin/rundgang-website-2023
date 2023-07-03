@@ -21,7 +21,6 @@ export default function LandingHeader () {
   )
 }
 
-
 const HeaderContainer = styled.div`
   display: grid;
   grid-template-columns: ${({ theme }) => theme.header.gridTemplateColumns};
