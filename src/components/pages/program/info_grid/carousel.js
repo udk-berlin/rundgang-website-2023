@@ -5,7 +5,7 @@ import {
   InfoGridContext,
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
-import { useSlider } from "@/providers/slider"
+import { useSlider } from "@/providers/slider";
 
 export default function InfoGridCarousel({ project }) {
   return (
@@ -67,6 +67,8 @@ function Carousel({ children }) {
 const ScrollableDiv = styled.div`
   display: flex;
   overflow-x: hidden;
+
+  padding-top: 0.3rem;
 
   &::-webkit-scrollbar {
     display: none;

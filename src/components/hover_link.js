@@ -19,7 +19,7 @@ export const HoverLinkContainer = styled.div`
   }
 
   & > a > div {
-    padding: 0.2rem 0.4rem;
+    padding: 0.15rem 0.35rem;
   }
 `;
 

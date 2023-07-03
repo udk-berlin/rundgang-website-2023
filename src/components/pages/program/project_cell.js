@@ -32,8 +32,8 @@ export default function ProjectCell({ key, project }) {
         pathPassive={"/assets/svg/layout/saved_passive.svg"}
         cellHovered={cellHovered}
       />
-      <ProjectTitle project={project} fontSize={1.3} />
-      <ProjectAuthors project={project} fontSize={0.8} />
+      <ProjectTitle project={project} fontSize={1} />
+      <ProjectAuthors project={project} fontSize={0.7} />
       <InfoGrid project={project} />
     </ProjectCellContainer>
   );

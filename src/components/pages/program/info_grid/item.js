@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const InfoGridItemLinkContainer = styled.div`
+  font-size: 0.7rem;
+  font-weight: 500;
   background-color: var(--color-white);
   color: #000;
 
@@ -46,8 +48,14 @@ export function InfoGridCardItem({ className, children, margin }) {
   useEffect(() => {
     borderRef.current.style.marginLeft =
       scale(hashCode(inlineRef.current.textContent), 0, 99, 0, 70) + "%";
-    borderRef.current.style.width = inlineRef.current.offsetWidth + 20 + "px";
+    borderRef.current.style.width =
+      inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+    borderRef.current.style.minWidth =
+      inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+    borderRef.current.style.maxWidth =
+      inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
   }, []);
+
   return (
     <InfoGridItemContainer
       ref={borderRef}
@@ -62,7 +70,9 @@ export function InfoGridCardItem({ className, children, margin }) {
 }
 
 function convertRemToPixels(rem) {
-  return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+  return Math.round(
+    rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
+  );
 }
 
 function clamp(num, min, max) {

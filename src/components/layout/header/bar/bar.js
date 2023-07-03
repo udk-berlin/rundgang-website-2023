@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import HeaderBarSavedProjects from '@/components/layout/header/bar/saved_projects'
-import HeaderBarTimeline from '@/components/layout/header/bar/timeline'
-import HeaderBarLocalization from '@/components/layout/header/bar/localization'
-import HeaderBarLocations from '@/components/layout/header/bar/locations'
-import HeaderBarProgram from '@/components/layout/header/bar/program'
+import HeaderBarSavedProjects from "@/components/layout/header/bar/saved_projects";
+import HeaderBarTimeline from "@/components/layout/header/bar/timeline";
+import HeaderBarLocalization from "@/components/layout/header/bar/localization";
+import HeaderBarLocations from "@/components/layout/header/bar/locations";
+import HeaderBarProgram from "@/components/layout/header/bar/program";
 
 export default function HeaderBar() {
   return (
@@ -29,16 +29,17 @@ const HeaderBarContainer = styled.div`
   align-items: center;
 
   height: var(--layout-header-bar-container-height);
-  padding: 0 0.8rem;
+  padding: 0 0.75rem;
 `;
 
 const HeaderBarLeftContainer = styled.div`
+  //padding-left: 0.5rem;
   display: flex;
-  gap: 20px;
+  gap: 1.5rem;
 `;
 
 const HeaderBarRightContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 1.5rem;
   justify-content: end;
 `;

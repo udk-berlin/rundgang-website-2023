@@ -33,14 +33,16 @@ const TimelineContainer = styled.div`
   > a {
     color: var(--color-black);
   }
-`
+`;
 
 const Timeline = styled.div`
+  font-size: 1rem;
   font-weight: 600;
   justify-self: center;
 
   > span {
-    display: ${({ isHovered }) => isHovered ? "inline" : "none"};
+    font-weight: 500;
+    display: ${({ isHovered }) => (isHovered ? "inline" : "none")};
     color: var(--color-pink);
   }
 `;
