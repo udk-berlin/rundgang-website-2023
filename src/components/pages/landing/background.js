@@ -1,6 +1,6 @@
 import styles from '@/styles/pages/landing/BackgroundVideo.module.css'
 
-export default function BackgroundVideo () {
+export default function LandingBackground () {
   return (
     <video
       className={styles.container}

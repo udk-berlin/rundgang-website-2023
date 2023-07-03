@@ -28,6 +28,7 @@ export function SwitchLocalizationLink() {
 }
 
 const SwitchLocalizationWrapper = styled.div`
+  font-size: ${({ theme }) => theme.localization.fontSize}; // layout: 0.85rem
   display: flex;
   flex-direction: row;
 `;
@@ -37,8 +38,6 @@ const SlashContainer = styled.div`
 `;
 
 const SwitchLocalizationLinkContainer = styled.div`
-  font-size: 0.85rem;
-
   > a {
     color: ${({ selected }) =>
       selected ? "var(--color-pink) !important" : "white"};

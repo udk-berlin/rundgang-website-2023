@@ -37,7 +37,7 @@ const InfoContainer = styled.div`
   left: 0;
 
   display: flex;
-  align-items: center;
+  align-items: ${({ theme }) => theme.info.alignItems};
 
   height: 100vh;
   min-height: 100vh;
@@ -48,6 +48,8 @@ const InfoContainer = styled.div`
   max-width: 100vw;
   
   backdrop-filter: blur(8px);
+  
+  cursor: pointer;
 `
 
 const TextsContainer = styled.div`
@@ -57,10 +59,10 @@ const TextsContainer = styled.div`
   flex-direction: column;
   
   color: white;
-  font-weight: 300;
-  font-size: 1.2rem;
+  font-weight: ${({ theme }) => theme.fontWeights.s};
+  font-size: ${({ theme }) => theme.info.fontSize};
   
-  overflow: hidden;
+  overflow: scroll;
   
   > div {
     margin-top: 1rem;

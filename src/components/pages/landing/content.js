@@ -1,21 +1,26 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useState } from "react";
 
 import FooterLanding from './footer'
-import HeaderLanding from './landing_header'
-import LandingMenu from "@/components/pages/landing/landing_menu";
+import HeaderLanding from './header'
 import LandingInfo from "@/components/pages/landing/info";
+import LandingMenuL from "@/components/pages/landing/menu/l";
+import LandingMenuM from "@/components/pages/landing/menu/m";
 
-export default function LandingLayout () {
+export default function LandingContent () {
+  const theme = useTheme()
   const [infoIsActive, setInfoIsActive] = useState(false)
 
   return (
     <>
       <LandingInfo infoIsActive={infoIsActive} setInfoIsActive={setInfoIsActive} />
-
       <LandingContainer>
         <HeaderLanding />
-        <LandingMenu setInfoIsActive={setInfoIsActive} />
+        {
+          theme.id === 'l' ?
+            <LandingMenuL setInfoIsActive={setInfoIsActive} /> :
+            <LandingMenuM setInfoIsActive={setInfoIsActive} />
+        }
         <FooterLanding />
       </LandingContainer>
     </>
