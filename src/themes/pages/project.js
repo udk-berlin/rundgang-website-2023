@@ -1,7 +1,7 @@
 import { baseLTheme, baseMTheme, fontSizes } from "@/themes/theme";
 
 export const projectBreakpoints = {
-  m: 1200,
+  m: 1400,
   s: 800,
 };
 

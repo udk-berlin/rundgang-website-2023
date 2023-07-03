@@ -12,54 +12,31 @@ import { useEffect, useRef } from "react";
 import { convertRemToPixels } from "@/components/pages/program/info_grid/item";
 
 export default function ProjectInfoGrid({ project }) {
-  const slider = useSlider();
-  const containerRef = useRef();
-  const flexRef = useRef();
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const flex = flexRef.current;
-
-    flex.style.width =
-      (container.clientWidth - convertRemToPixels(2)) / 3 + "px";
-
-    let width = (100 / 3) * slider.position;
-
-    container.style.maxWidth = `${width}%`;
-  }, [slider.position]);
-
   return (
-    <ProjectInfoGridWrapper ref={containerRef}>
-      <ProjectInfoGridContainer ref={flexRef}>
-        <FormatDateContainer>
-          <InfoGridFormat project={project} />
-          <InfoGridDate project={project} />
-        </FormatDateContainer>
-        <InfoGridLocation project={project} />
-        <InfoGridContext project={project} />
-      </ProjectInfoGridContainer>
-    </ProjectInfoGridWrapper>
+    <ProjectInfoGridContainer>
+      <FormatDateContainer>
+        <InfoGridFormat project={project} />
+        <InfoGridDate project={project} />
+      </FormatDateContainer>
+      <InfoGridLocation project={project} />
+      <InfoGridContext project={project} />
+    </ProjectInfoGridContainer>
   );
 }
 
-const ProjectInfoGridWrapper = styled.div`
+const ProjectInfoGridContainer = styled(InfoGridContainer)`
+  display: flex;
+  align-items: start;
   padding: 1.5rem 1rem;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  overflow: hidden;
-`;
-
-const ProjectInfoGridContainer = styled(InfoGridContainer)`
-  display: flex;
-  align-items: start;
-  transition: max-width 0.5s;
 
   cursor: default;
 
   & > * {
-    flex: 0 0 100%;
+    flex: 0 0 33%;
   }
 
   & a {

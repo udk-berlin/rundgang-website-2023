@@ -43,14 +43,17 @@ export default function Project({ project }) {
   }, [windowSize.width]);
 
   return (
-    <Layout disableFilter={true} numberOfSliderStates={4}>
+    <Layout
+      disableFilter={true}
+      disableSlider={infoGridPos ? true : false}
+      numberOfSliderStates={4}
+    >
       <ThemeProvider theme={responsiveTheme}>
         <Container>
           <ImageContainer>
             {infoGridPos ? <ProjectInfoGrid project={project} /> : <></>}
             <ProjectImage project={project} fullSize={true} />
             <ProjectAdditionalMedia project={project} data={data} />
-            <img src="https://placehold.co/6000x4000" />
           </ImageContainer>
           <InfoContainer>
             <ProjectTitle project={project} />
