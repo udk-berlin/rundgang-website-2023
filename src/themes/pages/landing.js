@@ -15,16 +15,16 @@ export const landingLTheme = {
   },
   header: {
     gridTemplateColumns: '1fr 1fr 1fr',
-    gridTemplateRows: '0',
+    gridTemplateRows: 'none',
     padding: '0',
     fontSize: '1rem',
     timeline: {
-      justifySelf: 'end',
+      justifySelf: 'center',
     }
   },
   footer: {
     gridTemplateColumns: '1fr 1fr 1fr',
-    gridTemplateRows: '0',
+    gridTemplateRows: 'none',
     padding: '0',
     fontSize: '1rem',
     imprint: {
