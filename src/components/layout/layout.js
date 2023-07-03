@@ -18,6 +18,7 @@ export default function Layout({
   children,
   disableFilter = false,
   numberOfSliderStates = 7,
+  disableSlider = false,
 }) {
   const [responsiveTheme, setResponsiveTheme] = useState(layoutLTheme);
   const [mobile, setMobile] = useState(false);
@@ -40,9 +41,15 @@ export default function Layout({
           <Header disableFilter={disableFilter} />
           <Content>{children}</Content>
           {mobile ? (
-            <FooterMobile numberOfSliderStates={numberOfSliderStates} />
+            <FooterMobile
+              numberOfSliderStates={numberOfSliderStates}
+              disableSlider={disableSlider}
+            />
           ) : (
-            <Footer numberOfSliderStates={numberOfSliderStates} />
+            <Footer
+              numberOfSliderStates={numberOfSliderStates}
+              disableSlider={disableSlider}
+            />
           )}
         </SliderProvider>
       </Container>
