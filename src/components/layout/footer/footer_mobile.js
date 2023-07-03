@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 import FooterSlider from "@/components/layout/footer/slider";
-import FooterInfoPages from "@/components/layout/footer/info_pages";
-import FooterTitle from "@/components/layout/footer/title";
 import { ReactSVG } from "react-svg";
 import { useState } from "react";
 import MobileMenu from "@/components/layout/footer/mobile_menu";

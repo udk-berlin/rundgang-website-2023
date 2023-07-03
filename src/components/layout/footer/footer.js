@@ -20,7 +20,7 @@ const FooterContainer = styled.div`
   left: 0;
 
   width: 100%;
-  height: 45px; //var(--layout-header-bar-container-height);
+  height: ${({ theme }) => theme.footer.height};
 
   display: grid;
   grid-template-columns: var(--layout-footer-grid-template-columns);
