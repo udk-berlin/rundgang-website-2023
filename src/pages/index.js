@@ -1,12 +1,12 @@
 import React from 'react'
 
 import Page from "@/components/pages/page";
-import Index from "@/components/pages/index";
+import Landing from "@/components/pages/landing/landing";
 
 export default function IndexPage () {
   return (
     <Page>
-      <Index />
+      <Landing />
     </Page>
   )
 }

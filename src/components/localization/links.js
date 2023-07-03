@@ -11,7 +11,7 @@ export function SwitchLocalizationLink() {
   const language = useIntl();
 
   return (
-    <>
+    <SwitchLocalizationWrapper>
       <SwitchLocalizationLinkContainer selected={language.locale === "de"}>
         <Link href={router.asPath} locale={"de"}>
           DE
@@ -23,20 +23,24 @@ export function SwitchLocalizationLink() {
           EN
         </Link>
       </SwitchLocalizationLinkContainer>
-    </>
+    </SwitchLocalizationWrapper>
   );
 }
+
+const SwitchLocalizationWrapper = styled.div`
+  font-size: ${({ theme }) => theme.localization.fontSize}; // layout: 0.85rem
+  display: flex;
+  flex-direction: row;
+`;
 
 const SlashContainer = styled.div`
   cursor: default;
 `;
 
 const SwitchLocalizationLinkContainer = styled.div`
-  font-size: 0.85rem;
-
   > a {
     color: ${({ selected }) =>
-      selected ? "var(--color-pink) !important" : ""};
+      selected ? "var(--color-pink) !important" : "white"};
   }
 
   > a:hover {

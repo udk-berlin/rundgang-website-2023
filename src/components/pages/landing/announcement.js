@@ -1,8 +1,8 @@
-import styles from '@/styles/pages/landing/Announcement.module.css'
+import styled from "styled-components";
 
-export default function Announcement () {
+export default function LandingAnnouncement () {
   return (
-    <div className={styles.container}>
+    <AnnouncementContainer>
       <div>
         Hier wird ab dem 5.07.2023 das Programm des Rundgang 2023 veröffentlicht.<br></br>
         &rarr;
@@ -11,6 +11,15 @@ export default function Announcement () {
         &rarr;
         <a href="https://2022.rundgang.udk-berlin.de" target="_blank" rel="noreferrer">&nbsp;zur Rundgang Plattform 2022</a>
       </div>
-    </div>
+    </AnnouncementContainer>
   )
 }
+
+const AnnouncementContainer = styled.div`
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
