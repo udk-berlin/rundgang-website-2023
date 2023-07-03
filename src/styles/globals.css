@@ -69,22 +69,16 @@
   --map-marker-font-size: 0.6rem;
   --map-marker-font-weight: 400;
   --map-marker-padding: 0.2rem 0.6rem;
+}
 
-  --landing-menu-info-padding-en: 1.9vw 0 0.70vw 0;
-  --landing-menu-info-margin-left-en: -110px;
-  --landing-menu-gap-en: 3rem;
-  --landing-menu-locations-margin-top-en: 0.2rem;
-  --landing-main-menu-height-en: 6vw;
-  --landing-main-program-height-en: 10vw;
-  --landing-info-height-en: calc(var(--landing-main-menu-height-en) + var(--landing-main-program-height-en));
+*::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: var(--color-pink);
+}
 
-  --landing-menu-info-padding-de: 2.5vw 0 0.5vw 0;
-  --landing-menu-info-margin-left-de: -90px;
-  --landing-menu-gap-de: 3rem;
-  --landing-menu-locations-margin-top-de: 0;
-  --landing-main-menu-height-de: 8vw;
-  --landing-main-program-height-de: 10vw;
-  --landing-info-height-de: calc(var(--landing-main-menu-height-de) + var(--landing-main-program-height-de));
+*::selection {
+  color: white;
+  background: var(--color-pink);
 }
 
 *::-webkit-scrollbar {
@@ -140,60 +134,4 @@ p {
 
 img {
   width: 100%;
-}
-
-@media (max-width: 2340px) {
-  :root {
-    --landing-menu-info-padding-en: 1.9vw 0 0.9vw 0;
-    --landing-menu-info-margin-left-en: -110px;
-
-    --landing-menu-info-padding-de: 2.5vw 0 0.5vw 0;
-    --landing-menu-info-margin-left-de: -90px;
-  }
-}
-
-@media (max-width: 2080px) {
-  :root {
-    --landing-menu-info-padding-en: 1.9vw 0 1vw 0;
-    --landing-menu-info-margin-left-en: -120px;
-
-    --landing-menu-info-padding-de: 1.9vw 0 0.5vw 0;
-    --landing-menu-info-margin-left-de: -110px;
-  }
-}
-
-@media (max-width: 1850px) {
-  :root {
-    --landing-menu-info-padding-en: 1.9vw 0 1.1vw 0;
-    --landing-menu-info-margin-left-en: -120px;
-  }
-}
-
-@media (max-width: 1490px) {
-  :root {
-    --landing-menu-info-padding-en: 1.9vw 0 1.3vw 0;
-    --landing-menu-info-margin-left-en: -130px;
-  }
-}
-
-@media (max-width: 1250px) {
-  :root {
-    --landing-menu-info-padding-en: 2.2vw 0 1.4vw 0;
-    --landing-menu-info-margin-left-en: -140px;
-  }
-}
-
-@media (max-width: 1140px) {
-  :root {
-    --landing-menu-info-padding-en: 2.4vw 0 1.7vw 0;
-    --landing-menu-info-margin-left-en: -140px;
-  }
-}
-
-
-@media (max-width: 950px) {
-  :root {
-    --landing-menu-info-padding-en: 2.4vw 0 1.9vw 0;
-    --landing-menu-info-margin-left-en: -145px;
-  }
 }

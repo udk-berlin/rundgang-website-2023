@@ -1,14 +1,40 @@
 import React from "react";
-import styles from '@/styles/pages/landing/LandingHeader.module.css'
-import { SwitchLocalizationLink } from "@/components/localization/links";
+import styled from "styled-components";
 
+import { SwitchLocalizationLink } from "@/components/localization/links";
 
 export default function LandingHeader () {
   return (
-    <div className={styles.container}>
-      <div className={styles.rundgang}>UdK Berlin Rundgang </div>
-      <div className={styles.date}>21. – 23.07.2023 </div>
-      <div className={styles.localization}><SwitchLocalizationLink /></div>
-    </div>
+    <HeaderContainer>
+      <RundgangContainer>UdK Berlin Rundgang </RundgangContainer>
+      <TimelineContainer>21. – 23.07.2023 </TimelineContainer>
+      <LocalizationContainer>
+        <SwitchLocalizationLink />
+      </LocalizationContainer>
+    </HeaderContainer>
   )
 }
+
+
+const HeaderContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
+
+const RundgangContainer = styled.div`
+  justify-self: start;
+  
+  font-weight: 600;
+`;
+
+const TimelineContainer = styled.div`
+  justify-self: center;
+`;
+
+const LocalizationContainer = styled.div`
+  justify-self: end;
+
+  > a {
+    color: white;
+  }
+`;
