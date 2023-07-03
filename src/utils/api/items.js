@@ -90,7 +90,7 @@ async function getDetails (itemIds) {
   const promises = []
 
   const buildDetail = (data) => {
-    console.log(data)
+    // console.log(data)
 
     const detail = {
       id: data.id,
@@ -119,12 +119,12 @@ async function getDetails (itemIds) {
   await Promise
     .all(promises)
     .then(data => {
-      if ('statusCode' in data && data.statusCode === 404) {}
-      else {
-        data.forEach(d => {
+      data.forEach(d => {
+        if ('statusCode' in d) {}
+        else {
           details[d.id] = buildDetail(d)
-        })
-      }
+        }
+      })
     })
 
   return details

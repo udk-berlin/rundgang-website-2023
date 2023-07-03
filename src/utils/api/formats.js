@@ -20,7 +20,7 @@ export async function getFormatsFilters () {
   const getChildren = (current) => {
     Object.values(current.children).forEach(child => {
       if (child.template === 'format-element') {
-        formatsFilters[child.id] = {
+        filters[child.id] = {
           id: child.id,
           name: child.name,
           template: child.template

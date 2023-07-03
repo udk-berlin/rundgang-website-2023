@@ -56,12 +56,12 @@ export async function getLocationDetails ( locationIds ){
   await Promise
     .all(promises)
     .then(data => {
-      if ('statusCode' in data && data.statusCode === 404) {}
-      else {
-        data.forEach(d => {
+      data.forEach(d => {
+        if ('statusCode' in data) {}
+        else {
           details[d.id] = buildLocationDetail(d)
-        })
-      }
+        }
+      })
     })
 
   return details
