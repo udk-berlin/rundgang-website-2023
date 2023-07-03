@@ -6,18 +6,17 @@ import HeaderBarTimeline from "@/components/layout/header/bar/timeline";
 import HeaderBarLocalization from "@/components/layout/header/bar/localization";
 import HeaderBarLocations from "@/components/layout/header/bar/locations";
 import HeaderBarProgram from "@/components/layout/header/bar/program";
+import HeaderBarR from "@/components/layout/header/bar/r";
 
-export default function HeaderBar() {
+export default function HeaderBarMobile() {
   return (
     <HeaderBarContainer>
       <HeaderBarLeftContainer>
-        <HeaderBarLocations />
-        <HeaderBarProgram />
+        <HeaderBarR />
       </HeaderBarLeftContainer>
       <HeaderBarTimeline />
       <HeaderBarRightContainer>
         <HeaderBarSavedProjects />
-        <HeaderBarLocalization />
       </HeaderBarRightContainer>
     </HeaderBarContainer>
   );
@@ -29,17 +28,16 @@ const HeaderBarContainer = styled.div`
   align-items: center;
 
   height: var(--layout-header-bar-container-height);
-  padding: 0 0.75rem;
+  padding: 0 0.8rem;
 `;
 
 const HeaderBarLeftContainer = styled.div`
-  //padding-left: 0.5rem;
   display: flex;
-  gap: 1.5rem;
+  gap: 20px;
 `;
 
 const HeaderBarRightContainer = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 20px;
   justify-content: end;
 `;

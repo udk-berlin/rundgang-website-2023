@@ -15,7 +15,7 @@ export default function HeaderBarTimeline() {
           onMouseLeave={() => setIsHovered(false)}
           isHovered={isHovered}
         >
-          21. – 23.07.2023
+          21. <Dash>–</Dash> 23.07.2023
           <span>
             &nbsp;/&nbsp;
             <FormattedMessage id="timeline" />
@@ -33,14 +33,21 @@ const TimelineContainer = styled.div`
   > a {
     color: var(--color-black);
   }
-`
+`;
+
+const Dash = styled.div`
+  color: var(--color-pink);
+  display: inline;
+`;
 
 const Timeline = styled.div`
+  font-size: 1rem;
   font-weight: 600;
   justify-self: center;
 
   > span {
-    display: ${({ isHovered }) => isHovered ? "inline" : "none"};
+    font-weight: 500;
+    display: ${({ isHovered }) => (isHovered ? "inline" : "none")};
     color: var(--color-pink);
   }
 `;
