@@ -5,6 +5,7 @@ export const REST_API_LOCATIONS_ROOT_ID = '!ZEZxbNWFYYsDgpkhCL:content.udk-berli
 export const REST_API_FORMATS_ROOT_ID = '!fAUMSBXRVvkiNdaXQe:content.udk-berlin.de'
 export const REST_API_STRUCTURES_ROOT_ID = '!qfrjabHDUXieMVAzFt:content.udk-berlin.de'
 
+
 export async function getListFilterTypeItems () {
   return await get(`${REST_API_ROOT_ID}/list/filter/type/item`)
 }
@@ -95,6 +96,7 @@ async function getDetails (itemIds) {
   const promises = []
 
   const buildDetail = (data) => {
+
     const detail = {
       id: data.id,
       thumbnail: data.thumbnail,
