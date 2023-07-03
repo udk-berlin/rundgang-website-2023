@@ -3,52 +3,28 @@ import { useIntl } from "react-intl";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
-import { LocalizedLink } from "@/components/localization/links";
+import { LocalizedLink, ProgramLink, LocationsLink, TimelineLink } from "@/components/localization/links";
 
 export default function LandingMenu() {
   return (
     <LandingMenuContainer>
-      <MainMenu>
+      <MainMenuContainer>
         <Program />
-        <Row>
+        <MainMenuInnerContainer>
           <Locations />
           <Timeline />
-        </Row>
-      </MainMenu>
-      <InfoMenu>
+        </MainMenuInnerContainer>
+      </MainMenuContainer>
+      <InfoMenuContainer>
         <Info />
-      </InfoMenu>
+      </InfoMenuContainer>
     </LandingMenuContainer>
   );
 }
 
-const MainMenu = styled.div`
-  height: 16vw;
-  min-height: 16vw;
-  max-height: 16vw;
-  
-  //display: flex;
-
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  //width: calc(82vw + 3rem);
-  //min-width: calc(82vw + 3rem);
-  //max-width: calc(82vw + 3rem);
-`;
-
-const InfoMenu = styled.div`
-  height: 16vw;
-  min-height: 16vw;
-  max-height: 16vw;
-  //width: calc(100vw - 2 * 1rem - 82vw - 3rem);
-  //min-width: calc(100vw - 2 * 1rem - 82vw - 3rem);
-  //max-width: calc(100vw - 2 * 1rem - 82vw - 3rem);
-`;
-
 const LandingMenuContainer = styled.div`
   display: flex;
   align-items: center;
-  //grid-template-columns: 8fr 1fr;
   
   width: 100%;
   min-width: 100%;
@@ -59,16 +35,31 @@ const LandingMenuContainer = styled.div`
   max-height: 100%;
 `;
 
-const Row = styled.div`
+const MainMenuContainer = styled.div`
+  height: 16vw;
+  min-height: 16vw;
+  max-height: 16vw;
+  
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+`;
+
+const MainMenuInnerContainer = styled.div`
   height: 8vw;
   min-height: 8vw;
   max-height: 8vw;
   
   display: flex;
   flex-direction: row;
-  gap: 3rem;
+  gap:  var(--landing-menu-gap-de);
   
   margin-top: -10px;
+`;
+
+const InfoMenuContainer = styled.div`
+  height: 16vw;
+  min-height: 16vw;
+  max-height: 16vw;
 `;
 
 export function Program() {
@@ -80,36 +71,36 @@ export function Program() {
 
   return (
     <ProgramContainer isHovered={isHovered}>
-      <LocalizedLink href={'/program'}>
+      <ProgramLink>
         <ReactSVG
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           src={`assets/svg/layout/${filename}.svg`} />
-      </LocalizedLink>
+      </ProgramLink>
     </ProgramContainer>
   );
 }
 
 const ProgramContainer = styled.div`
-  height: 10vw;
-  min-height: 10vw;
-  max-height: 10vw;
+  height: var(--landing-main-program-height-de);
+  min-height: var(--landing-main-program-height-de);
+  max-height: var(--landing-main-program-height-de);
   
   > a {
     > div {
-      height: 10vw;
-      min-height: 10vw;
-      max-height: 10vw;
+      height: var(--landing-main-program-height-de);
+      min-height: var(--landing-main-program-height-de);
+      max-height: var(--landing-main-program-height-de);
 
       > div {
-        height: 10vw;
-        min-height: 10vw;
-        max-height: 10vw;
+        height: var(--landing-main-program-height-de);
+        min-height: var(--landing-main-program-height-de);
+        max-height: var(--landing-main-program-height-de);
 
         > svg {
-          height: 10vw;
-          min-height: 10vw;
-          max-height: 10vw;
+          height: var(--landing-main-program-height-de);
+          min-height: var(--landing-main-program-height-de);
+          max-height: var(--landing-main-program-height-de);
         }
       }
     }
@@ -132,36 +123,38 @@ export function Locations() {
 
   return (
     <LocationsContainer isHovered={isHovered}>
-      <LocalizedLink href={'/locations'}>
+      <LocationsLink>
         <ReactSVG
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           src={`assets/svg/layout/${filename}.svg`} />
-      </LocalizedLink>
+      </LocationsLink>
     </LocationsContainer>
   );
 }
 
 const LocationsContainer = styled.div`
-  height: 6vw;
-  min-height: 6vw;
-  max-height: 6vw;
+  height: var(--landing-main-menu-height-de);
+  min-height: var(--landing-main-menu-height-de);
+  max-height: var(--landing-main-menu-height-de);
+  
+  margin-top: var(--landing-menu-locations-margin-top-de);
   
   > a {
     > div {
-      height: 6vw;
-      min-height: 6vw;
-      max-height: 6vw;
+      height: var(--landing-main-menu-height-de);
+      min-height: var(--landing-main-menu-height-de);
+      max-height: var(--landing-main-menu-height-de);
 
       > div {
-        height: 6vw;
-        min-height: 6vw;
-        max-height: 6vw;
-
+        height: var(--landing-main-menu-height-de);
+        min-height: var(--landing-main-menu-height-de);
+        max-height: var(--landing-main-menu-height-de);
+        
         > svg {
-          height: 6vw;
-          min-height: 6vw;
-          max-height: 6vw;
+          height: var(--landing-main-menu-height-de);
+          min-height: var(--landing-main-menu-height-de);
+          max-height: var(--landing-main-menu-height-de);
         }
       }
     } 
@@ -184,36 +177,36 @@ export function Timeline() {
 
   return (
     <TimelineContainer isHovered={isHovered}>
-      <LocalizedLink href={'/timeline'}>
+      <TimelineLink>
         <ReactSVG
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           src={`assets/svg/layout/${filename}.svg`} />
-      </LocalizedLink>
+      </TimelineLink>
     </TimelineContainer>
   );
 }
 
 const TimelineContainer = styled.div`
-  height: 6vw;
-  min-height: 6vw;
-  max-height: 6vw;
+  height: var(--landing-main-menu-height-de);
+  min-height: var(--landing-main-menu-height-de);
+  max-height: var(--landing-main-menu-height-de);
   
   > a {
     > div {
-      height: 6vw;
-      min-height: 6vw;
-      max-height: 6vw;
+      height: var(--landing-main-menu-height-de);
+      min-height: var(--landing-main-menu-height-de);
+      max-height: var(--landing-main-menu-height-de);
 
       > div {
-        height: 6vw;
-        min-height: 6vw;
-        max-height: 6vw;
+        height: var(--landing-main-menu-height-de);
+        min-height: var(--landing-main-menu-height-de);
+        max-height: var(--landing-main-menu-height-de);
 
         > svg {
-          height: 6vw;
-          min-height: 6vw;
-          max-height: 6vw;
+          height: var(--landing-main-menu-height-de);
+          min-height: var(--landing-main-menu-height-de);
+          max-height: var(--landing-main-menu-height-de);
         }
       }
     }
@@ -243,34 +236,30 @@ export function Info() {
 }
 
 const InfoContainer = styled.div`
-  //margin-top: 10px;
-  //margin-right: -10px;
-  padding: 1.9vw 0 0.8vw 0;
-  
-  height: 16vw;
-  min-height: 16vw;
-  max-height: 16vw;
+  height: var(--landing-info-height-de);
+  min-height: var(--landing-info-height-de);
+  max-height: var(--landing-info-height-de);
   
   overflow: visible;
   
   > a {
     > div {
-      height: 100%;
-      min-height: 100%;
-      max-height: 100%;
+      height: var(--landing-info-height-de);
+      min-height: var(--landing-info-height-de);
+      max-height: var(--landing-info-height-de);
 
       > div {
-        height: 100%;
-        min-height: 100%;
-        max-height: 100%;
+        height: var(--landing-info-height-de);
+        min-height: var(--landing-info-height-de);
+        max-height: var(--landing-info-height-de);
 
         > svg {
-          height: 100%;
-          min-height: 100%;
-          max-height: 100%;
+          height: var(--landing-info-height-de);
+          min-height: var(--landing-info-height-de);
+          max-height: var(--landing-info-height-de);
 
-          margin-left: -110px;
-          //width: 8vw;
+          margin-left: var(--landing-menu-info-margin-left-de);
+          padding: var(--landing-menu-info-padding-de);
 
           vector-effect: non-scaling-stroke;
 
