@@ -1,7 +1,13 @@
 import { get, getId, getTree } from "@/utils/api/api";
 
+const REST_API_ROOT_ID = '!BTcywpcJQUsfkBptcB:content.udk-berlin.de'
+export const REST_API_LOCATIONS_ROOT_ID = '!ZEZxbNWFYYsDgpkhCL:content.udk-berlin.de'
+export const REST_API_FORMATS_ROOT_ID = '!fAUMSBXRVvkiNdaXQe:content.udk-berlin.de'
+export const REST_API_STRUCTURES_ROOT_ID = '!qfrjabHDUXieMVAzFt:content.udk-berlin.de'
+
+
 export async function getListFilterTypeItems () {
-  return await get(`${process.env.REST_API_ROOT_ID}/list/filter/type/item`)
+  return await get(`${REST_API_ROOT_ID}/list/filter/type/item`)
 }
 
 export async function getItemIds () {
@@ -55,21 +61,21 @@ export async function getItems () {
     })
   }
 
-  const locationsData = await getTree(process.env.REST_API_LOCATIONS_ROOT_ID)
+  const locationsData = await getTree(REST_API_LOCATIONS_ROOT_ID)
 
   if ('statusCode' in locationsData && locationsData.statusCode === 404) {}
   else {
     extractChildren(locationsData, {})
   }
 
-  const formatsData = await getTree(process.env.REST_API_FORMATS_ROOT_ID)
+  const formatsData = await getTree(REST_API_FORMATS_ROOT_ID)
 
   if ('statusCode' in formatsData && formatsData.statusCode === 404) {}
   else {
     extractChildren(formatsData, {})
   }
 
-  const structuresData = await getTree(process.env.REST_API_STRUCTURES_ROOT_ID)
+  const structuresData = await getTree(REST_API_STRUCTURES_ROOT_ID)
 
   if ('statusCode' in structuresData && structuresData.statusCode === 404) {}
   else {
@@ -90,7 +96,6 @@ async function getDetails (itemIds) {
   const promises = []
 
   const buildDetail = (data) => {
-    // console.log(data)
 
     const detail = {
       id: data.id,
