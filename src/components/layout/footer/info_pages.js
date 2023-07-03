@@ -25,7 +25,8 @@ export default function FooterInfoPages() {
 
 const InfoPagesContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: ${({ theme }) =>
+    theme.footerInfoPages.gridTemplateColumns};
   align-items: center;
   justify-items: center;
 

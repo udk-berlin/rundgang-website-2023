@@ -8,6 +8,7 @@ import {
 } from "@/components/pages/program/program";
 import ProjectLink from "@/components/pages/projects/project/link";
 
+
 const SLIDER_INDEX = 1;
 
 export default function ProjectTitle({ project, fontSize = 2 }) {
@@ -59,9 +60,8 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
     `calc(100vw / ${MASONRY_COLUMNS} - ((${MASONRY_COLUMNS} - 1) * ${MASONRY_GUTTER}) - 2 * var(--program-padding) )`};
 
   font-weight: 600;
-  font-size: ${(props) => props.fontSize}rem;
+  font-size: ${({ theme }) => theme.title.fontSize};
   line-height: 1;
-  //text-transform: uppercase;
 `;
 
 const ProjectTitleContainer = styled.div`
@@ -78,7 +78,7 @@ const ProjectTitleContainer = styled.div`
     props.slider.position >= SLIDER_INDEX ? "2px" : "0"};
 
   font-weight: 600;
-  font-size: ${(props) => props.fontSize}rem;
+  font-size: ${({ theme }) => theme.title.fontSize};
   line-height: 1;
   text-transform: uppercase;
 
@@ -94,7 +94,7 @@ const DropCap = styled.span`
   float: left;
 
   font-family: Gabriella;
-  font-size: ${(props) => props.fontSize * 1.1}rem;
+  font-size: calc(${({ theme }) => theme.title.fontSize} * 1.1);
   color: var(--color-pink);
   line-height: 1;
 

@@ -36,7 +36,7 @@ export function ProjectAdditionalMedia({ project, data }) {
     }
   }, [data]);
 
-  if (data  && 'languages' in data) {
+  if (data && "languages" in data) {
     let additionalContent = getLocalizedData(data.languages).content;
 
     for (const key in additionalContent) {

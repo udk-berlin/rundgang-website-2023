@@ -57,11 +57,8 @@
   --layout-footer-grid-template-column-1: 25vw;
   --layout-footer-grid-template-column-2: 1fr;
   --layout-footer-grid-template-column-3: 25vw;
-  --layout-footer-grid-template-columns: var(
-      --layout-footer-grid-template-column-1
-    )
-    var(--layout-footer-grid-template-column-2)
-    var(--layout-footer-grid-template-column-3);
+  --layout-footer-grid-template-columns: var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3);
+  --layout-footer-mobile-grid-template-column: 8fr 1fr;
 
   --program-padding: 0.75rem;
 
@@ -75,6 +72,7 @@
 }
 
 *::-webkit-scrollbar {
+
   height: 2px;
   width: 2px;
   /*background: rgba(255, 255, 255, 0);*/
