@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Capa_4" xmlns="http://www.w3.org/2000/svg" width="504" height="504" viewBox="0 0 504 504">
     <defs>
-        <style>.cls-map-active-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:15px;}.cls-map-active-2{fill:#d1acd0;}.cls-map-active-3{fill:#e2c0dd;}</style>
+        <style>.cls-map-active-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:20px;}.cls-map-active-2{fill:#d1acd0;}.cls-map-active-3{fill:#e2c0dd;}</style>
     </defs
     ><polygon class="cls-map-active-3" points="359.5607 115.1447 487.065 85.1447 487.065 415.1447 359.5607 445.1447 141.5 385.1447 13.9957 415.1447 13.9957 85.1447 141.5 55.1447 359.5607 115.1447"/>
     <polyline class="cls-map-active-2" points="359.5607 445.1447 141.5 385.1447 90 396 90 72 141.5 55.1447 359.5607 115.1447"/>

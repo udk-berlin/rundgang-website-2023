@@ -8,9 +8,10 @@ import {
 } from "@/components/pages/program/program";
 import ProjectLink from "@/components/pages/projects/project/link";
 
+
 const SLIDER_INDEX = 1;
 
-export default function ProjectTitle({ project, fontSize = 2.5 }) {
+export default function ProjectTitle({ project, fontSize = 2 }) {
   const measureContainerRef = useRef(null);
   const slider = useSlider();
 
@@ -61,7 +62,6 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
   font-weight: 600;
   font-size: ${({ theme }) => theme.title.fontSize};
   line-height: 1;
-  text-transform: uppercase;
 `;
 
 const ProjectTitleContainer = styled.div`

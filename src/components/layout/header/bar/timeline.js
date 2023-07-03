@@ -41,10 +41,12 @@ const Dash = styled.div`
 `;
 
 const Timeline = styled.div`
+  font-size: 1rem;
   font-weight: 600;
   justify-self: center;
 
   > span {
+    font-weight: 500;
     display: ${({ isHovered }) => (isHovered ? "inline" : "none")};
     color: var(--color-pink);
   }

@@ -32,6 +32,7 @@ export default function Layout({
       setMobile(false);
     }
   }, [windowSize.width]);
+
   return (
     <ThemeProvider theme={responsiveTheme}>
       <Container>

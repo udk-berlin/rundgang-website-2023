@@ -38,9 +38,9 @@
     var(--layout-header-bar-container-height) +
       var(--layout-header-search-container-height) + 2 * var(--border-width)
   );
-  --layout-header-filters-bar-template-column-1: 2rem;
-  --layout-header-filters-bar-template-column-2: 1fr;
-  --layout-header-filters-bar-template-column-3: 2rem;
+  --layout-header-filters-bar-template-column-1: 3vw;
+  --layout-header-filters-bar-template-column-2: auto;
+  --layout-header-filters-bar-template-column-3: 3vw;
   --layout-header-filters-bar-template-columns: var(
       --layout-header-filters-bar-template-column-1
     )
@@ -57,11 +57,7 @@
   --layout-footer-grid-template-column-1: 25vw;
   --layout-footer-grid-template-column-2: 1fr;
   --layout-footer-grid-template-column-3: 25vw;
-  --layout-footer-grid-template-columns: var(
-      --layout-footer-grid-template-column-1
-    )
-    var(--layout-footer-grid-template-column-2)
-    var(--layout-footer-grid-template-column-3);
+  --layout-footer-grid-template-columns: var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3);
   --layout-footer-mobile-grid-template-column: 8fr 1fr;
 
   --program-padding: 0.75rem;
@@ -76,6 +72,7 @@
 }
 
 *::-webkit-scrollbar {
+
   height: 2px;
   width: 2px;
   /*background: rgba(255, 255, 255, 0);*/

@@ -569,7 +569,7 @@ export default function Contact() {
   if (language.locale === "en" && "en" in CONTACTS) contacts = CONTACTS.en;
 
   return (
-    <Layout disableFilter={true}>
+    <Layout disableFilter={true} disableSlider={true}>
       <StaticLayout title={"contact"}>
         <div>
           {contacts.map((contact) => (
