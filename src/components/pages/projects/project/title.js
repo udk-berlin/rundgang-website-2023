@@ -2,14 +2,7 @@ import { useRef } from "react";
 import styled from "styled-components";
 
 import { useSlider } from "@/providers/slider";
-import {
-  MASONRY_COLUMNS,
-  MASONRY_GUTTER,
-} from "@/components/pages/program/program";
 import ProjectLink from "@/components/pages/projects/project/link";
-
-
-const SLIDER_INDEX = 1;
 
 export default function ProjectTitle({ project, fontSize = 2 }) {
   const measureContainerRef = useRef(null);
@@ -53,11 +46,11 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
   display: inline-block;
 
   overflow-y: hidden;
-  padding-top: ${() => MASONRY_GUTTER};
+  padding-top: ${(props) => props.theme.MASONRY_GUTTER};
   padding-bottom: 2px;
 
-  max-width: ${() =>
-    `calc(100vw / ${MASONRY_COLUMNS} - ((${MASONRY_COLUMNS} - 1) * ${MASONRY_GUTTER}) - 2 * var(--program-padding) )`};
+  max-width: ${(props) =>
+    `calc(100vw / ${props.theme.MASONRY_COLUMNS} - ((${props.theme.MASONRY_COLUMNS} - 1) * ${props.theme.MASONRY_GUTTER}) - 2 * var(--program-padding) )`};
 
   font-weight: 600;
   font-size: ${({ theme }) => theme.title.fontSize};
@@ -67,15 +60,17 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
 const ProjectTitleContainer = styled.div`
   display: inline-block;
 
-  max-height: ${(props) =>
-    props.slider.position >= SLIDER_INDEX
-      ? `calc(${props.height}px + ${MASONRY_GUTTER}) `
+  max-height: ${({ slider, theme, height }) =>
+    slider.position >= theme.title.sliderIndex
+      ? `calc(${height}px + ${theme.MASONRY_GUTTER}) `
       : "0px"};
   overflow-y: hidden;
   padding-top: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? MASONRY_GUTTER : "0"};
+    props.slider.position >= props.theme.title.sliderIndex
+      ? props.theme.MASONRY_GUTTER
+      : "0"};
   padding-bottom: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? "2px" : "0"};
+    props.slider.position >= props.theme.title.sliderIndex ? "2px" : "0"};
 
   font-weight: 600;
   font-size: ${({ theme }) => theme.title.fontSize};

@@ -6,6 +6,16 @@ export const programLTheme = {
   MASONRY_GUTTER: "0.75rem",
   title: {
     fontSize: fontSizes.m.large,
+    sliderIndex: 1,
+  },
+  author: {
+    sliderIndex: 2,
+  },
+  format: {
+    sliderIndex: 3,
+  },
+  carousel: {
+    sliderOffset: 4,
   },
 };
 
@@ -15,6 +25,16 @@ export const programMTheme = {
   MASONRY_GUTTER: "0.75rem",
   title: {
     fontSize: fontSizes.m.large,
+    sliderIndex: 1,
+  },
+  author: {
+    sliderIndex: 2,
+  },
+  format: {
+    sliderIndex: 3,
+  },
+  carousel: {
+    sliderOffset: 4,
   },
 };
 
@@ -24,5 +44,15 @@ export const programSTheme = {
   MASONRY_GUTTER: "0.75rem",
   title: {
     fontSize: fontSizes.l.medium,
+    sliderIndex: 1,
+  },
+  author: {
+    sliderIndex: 2,
+  },
+  format: {
+    sliderIndex: 3,
+  },
+  carousel: {
+    sliderOffset: 4,
   },
 };
