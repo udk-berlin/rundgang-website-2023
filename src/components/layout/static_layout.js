@@ -17,12 +17,12 @@ export default function StaticLayout({
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= staticBreakpoints.m) {
+    if (windowSize?.width <= staticBreakpoints.m) {
       setResponsiveTheme(staticMTheme);
     } else {
       setResponsiveTheme(staticLTheme);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <ThemeProvider theme={responsiveTheme}>
