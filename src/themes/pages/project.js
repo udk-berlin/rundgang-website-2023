@@ -1,4 +1,5 @@
 import { baseLTheme, baseMTheme, fontSizes } from "@/themes/theme";
+import { layoutLTheme, layoutMTheme } from "@/themes/layout";
 
 export const projectBreakpoints = {
   m: 1400,
@@ -9,11 +10,6 @@ export const projectLTheme = {
   ...baseLTheme,
   container: {
     flexDirection: "row",
-  },
-  imageContainer: {
-    flexDirection: "column",
-    height:
-      "calc(100vh - var(--layout-header-search-container-height) - calc(var(--layout-header-bar-container-height) * 2))",
   },
   infoContainer: {
     padding: "1rem",
@@ -31,11 +27,22 @@ export const projectLTheme = {
   carousel: {
     sliderOffset: 2,
   },
-  additionalMedia: {
-    container: {
-      flexDirection: "column",
-      paddingTop: "0.5rem",
+  media: {
+    height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
+    width: '50vw',
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+    flexDirection: "row",
+    image: {
+      height: 'auto',
+      width: '50vw'
     },
+    audio: {
+      width: '50vw'
+    },
+    video: {
+      ratio: 1.777777777,
+    }
   },
   additionalText: {
     heading: fontSizes.l.medium,
@@ -46,11 +53,6 @@ export const projectMTheme = {
   ...baseMTheme,
   container: {
     flexDirection: "row",
-  },
-  imageContainer: {
-    flexDirection: "column",
-    height:
-      "calc(100vh - var(--layout-header-search-container-height) - calc(var(--layout-header-bar-container-height) * 2))",
   },
   infoContainer: {
     padding: "0.75rem",
@@ -68,11 +70,23 @@ export const projectMTheme = {
   carousel: {
     sliderOffset: 2,
   },
-  additionalMedia: {
-    container: {
-      flexDirection: "column",
-      paddingTop: "0.5rem",
+
+  media: {
+    height: '',
+    width: '100vw',
+    overflowX: 'scroll',
+    overflowY: 'hidden',
+    flexDirection: "row",
+    image: {
+      height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
+      width: ''
     },
+    audio: {
+      width: ''
+    },
+    video: {
+      ratio: 1.777777777,
+    }
   },
   additionalText: {
     heading: fontSizes.l.medium,
@@ -82,10 +96,6 @@ export const projectMTheme = {
 export const projectSTheme = {
   container: {
     flexDirection: "column",
-  },
-  imageContainer: {
-    flexDirection: "row",
-    height: "100vw",
   },
   infoContainer: {
     padding: "1rem",
@@ -103,11 +113,22 @@ export const projectSTheme = {
   carousel: {
     sliderOffset: 2,
   },
-  additionalMedia: {
-    container: {
-      flexDirection: "row",
-      paddingTop: "0",
+  media: {
+    height: '',
+    width: '100vw',
+    overflowX: 'scroll',
+    overflowY: 'hidden',
+    flexDirection: "row",
+    image: {
+      height: "100vw",
+      width: ''
     },
+    audio: {
+      width: ''
+    },
+    video: {
+      ratio: 1.777777777,
+    }
   },
   additionalText: {
     heading: fontSizes.l.medium,

@@ -5,10 +5,9 @@ import styled, { ThemeProvider } from "styled-components";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import Layout from "@/components/layout/layout";
-import ProjectImage, {
-  ProjectAdditionalMedia,
-} from "@/components/pages/projects/project/image";
-import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
+
+import ProjectMedia from "@/components/pages/projects/project/media/media";
+
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
 import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
@@ -46,56 +45,30 @@ export default function Project({ project }) {
   return (
     <Layout
       disableFilter={true}
-      disableSlider={infoGridPos ? true : false}
+      disableSlider={infoGridPos}
       numberOfSliderStates={4}
     >
       <ThemeProvider theme={responsiveTheme}>
-        <Container>
-          <ImageContainer>
-            {infoGridPos ? <ProjectInfoGrid project={project} /> : <></>}
-            <ProjectImage project={project} fullSize={true} />
-            <ProjectAdditionalMedia project={project} data={data} />
-          </ImageContainer>
+        <ProjectContainer>
+          <ProjectMedia project={project} infoGridPos={infoGridPos} data={data}/>
           <InfoContainer>
             <ProjectTitle project={project} link={false} />
             <ProjectAuthors project={project} fontSize={1} />
             {infoGridPos ? <></> : <InfoGrid project={project} />}
             <ProjectText project={project} data={data} />
           </InfoContainer>
-        </Container>
+        </ProjectContainer>
       </ThemeProvider>
     </Layout>
   );
 }
 
-const Container = styled.div`
+const ProjectContainer = styled.div`
   display: flex;
   flex-direction: ${({ theme }) => theme.container.flexDirection};
 `;
 
-const ImageContainer = styled.div`
-  flex: 6;
 
-  height: ${({ theme }) => theme.imageContainer.height};
-  min-height: ${({ theme }) => theme.imageContainer.height};
-  max-height: ${({ theme }) => theme.imageContainer.height};
-
-  width: auto;
-
-  width: 100vw;
-  min-width: 100vw;
-  max-width: 100vw;
-
-  color: white;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: ${({ theme }) => theme.imageContainer.flexDirection};
-  > * {
-    flex: 1;
-  }
-`;
 
 const InfoContainer = styled.div`
   padding: ${({ theme }) => theme.infoContainer.padding};
