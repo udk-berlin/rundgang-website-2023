@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useSlider } from "@/providers/slider";
 import ProjectLink from "@/components/pages/projects/project/link";
 
-export default function ProjectTitle({ project, fontSize = 2 }) {
+export default function ProjectTitle({ project, fontSize = 2, link }) {
   const measureContainerRef = useRef(null);
   const slider = useSlider();
 
@@ -26,7 +26,7 @@ export default function ProjectTitle({ project, fontSize = 2 }) {
             : 0
         }
       >
-        <ProjectLink project={project}>
+        <ProjectLink project={project} link={link}>
           <DropCap fontSize={fontSize}>{project.name.substring(0, 1)}</DropCap>
           {project.name.substring(1)}
         </ProjectLink>

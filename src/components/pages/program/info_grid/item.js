@@ -88,8 +88,8 @@ function hashCode(str) {
     hash = Math.abs(hash);
   }
 
-  let sub = String(hash).substring(0, 2);
-  hash = Number(sub);
+  let sub = String(hash);
+  hash = Number(sub.substring(sub.length - 2));
   return hash;
 }
 

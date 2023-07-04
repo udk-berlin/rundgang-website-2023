@@ -26,8 +26,6 @@ export default function Project({ project }) {
     fetcher
   );
 
-  console.log(data)
-
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
@@ -59,7 +57,7 @@ export default function Project({ project }) {
             <ProjectAdditionalMedia project={project} data={data} />
           </ImageContainer>
           <InfoContainer>
-            <ProjectTitle project={project} />
+            <ProjectTitle project={project} link={false} />
             <ProjectAuthors project={project} fontSize={1} />
             {infoGridPos ? <></> : <InfoGrid project={project} />}
             <ProjectText project={project} data={data} />
@@ -83,6 +81,9 @@ const ImageContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: ${({ theme }) => theme.imageContainer.flexDirection};
+  > * {
+    flex: 1;
+  }
 `;
 
 const InfoContainer = styled.div`
