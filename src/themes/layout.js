@@ -31,7 +31,8 @@ const header = {
 export const layoutLTheme = {
   ...baseLTheme,
   localization: {
-    fontSize: '1rem',
+    fontSize: '0.85rem',
+    color: 'black',
   },
   header: {
     height: `${header.l.bar.height} + ${header.l.filter.bar.height}`,
@@ -58,7 +59,8 @@ export const layoutLTheme = {
 export const layoutMTheme = {
   ...baseMTheme,
   localization: {
-    fontSize: '1rem',
+    fontSize: '0.85rem',
+    color: 'black',
   },
   header: {
     height: `${header.l.bar.height} + ${header.l.filter.bar.height}`,

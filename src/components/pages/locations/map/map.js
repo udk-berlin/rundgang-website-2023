@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import maplibregl from "maplibre-gl";
 import styled from "styled-components";
 
-import { useFilterDispatch } from "@/providers/filter";
+import { useFilter, useFilterDispatch } from "@/providers/filter";
 import ResponsiveMarker from "@/components/pages/locations/map/marker";
 
 const MAP_CONFIGURATION = {
@@ -77,6 +77,7 @@ export default function LocationsMap({ locations }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const dispatch = useFilterDispatch();
+  const filter = useFilter();
   const markersCache = { groundPlan: {}, text: {} };
 
   useEffect(() => {
@@ -178,14 +179,17 @@ export default function LocationsMap({ locations }) {
     });
   });
 
-  return <MapContainer ref={mapContainerRef} />;
+  return <MapContainer ref={mapContainerRef} locationSelected={!!filter.location} />;
 }
 
 const MapContainer = styled.div`
-  height: ${({ theme }) => theme.map.height};
-  min-height: ${({ theme }) => theme.map.height};
+  height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1' })`};
+  min-height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1'})`};
+  max-height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1'})`};
+  
   width: 100%;
   min-width: 100%;
+  max-width: 100%;
 
   overflow: hidden;
 

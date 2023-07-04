@@ -12,6 +12,7 @@ export const landingLTheme = {
   },
   localization: {
     fontSize: '1rem',
+    color: 'white',
   },
   header: {
     gridTemplateColumns: '1fr 1fr 1fr',
@@ -50,6 +51,7 @@ export const landingMTheme = {
   },
   localization: {
     fontSize: '1rem',
+    color: 'white',
   },
   header: {
     gridTemplateColumns: '1fr',

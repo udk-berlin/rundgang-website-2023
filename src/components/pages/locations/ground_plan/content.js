@@ -40,6 +40,10 @@ const LocationsGroundPlanInfoContainer = styled.div`
   min-height: ${({ theme })=> theme.groundPlan.info.height};
   max-height: ${({ theme })=> theme.groundPlan.info.height};
 
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+
   overflow: ${({ theme })=> theme.groundPlan.content.overflow};
 `
 

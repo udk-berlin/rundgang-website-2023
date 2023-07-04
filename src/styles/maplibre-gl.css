@@ -133,5 +133,10 @@
 .mapboxgl-ctrl-attrib.mapboxgl-compact-show .mapboxgl-ctrl-attrib-button,
 .maplibregl-ctrl-attrib.maplibregl-compact-show,
 .maplibregl-ctrl-attrib-button {
-  background-color: rgb(0 0 0/5%);
+  background: rgba(255, 255, 255, 0);
+}
+
+.maplibregl-ctrl-attrib-inner,
+.mapboxgl-ctrl-attrib-inner > a {
+  display: none;
 }

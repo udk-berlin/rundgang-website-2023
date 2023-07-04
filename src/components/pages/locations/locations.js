@@ -8,7 +8,7 @@ import LocationsGroundPlan from "@/components/pages/locations/ground_plan/ground
 import LocationsFloorPlanPopup from "@/components/pages/locations/floor_plan/popup";
 import { locationsLTheme, locationsMTheme } from "@/themes/pages/locations";
 import useWindowSize from "@/hooks/window_size";
-import { breakpoints } from "@/themes/theme";
+import { breakpoints } from "@/themes/pages/locations";
 
 export default function Locations({ locations }) {
   const [responsiveTheme, setResponsiveTheme] = useState(locationsLTheme);
@@ -28,7 +28,11 @@ export default function Locations({ locations }) {
         <LocationsContainer>
           <LocationsMap locations={locations} />
           <LocationsGroundPlan />
-          <LocationsFloorPlanPopup />
+          {
+            responsiveTheme.id === 'l' ?
+              <LocationsFloorPlanPopup /> :
+              <></>
+          }
           <LocationsProgram />
         </LocationsContainer>
       </ThemeProvider>
@@ -41,5 +45,5 @@ const LocationsContainer = styled.div`
   min-height: ${({ theme }) => theme.height};
   max-height: ${({ theme }) => theme.height};
   
-  overflow: hidden;
+  overflow: scroll;
 `;

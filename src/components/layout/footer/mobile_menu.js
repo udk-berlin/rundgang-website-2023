@@ -37,7 +37,9 @@ export default function MobileMenu() {
         <span>&rarr;&nbsp;</span>
         <FormattedMessage id="faq" />
       </FaqLink>
-      <MobileLocalization />
+      <MobileLocalizationContainer>
+        <HeaderBarLocalization/>
+      </MobileLocalizationContainer>
     </MobileMenuContainer>
   );
 }
@@ -48,20 +50,29 @@ const MobileMenuContainer = styled.div`
   justify-content: flex-end;
   align-items: flex-end;
   background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(8px);
   padding: 0.5rem;
+  
   > a {
     color: white;
   }
   width: min-content;
   margin-left: auto;
   margin-right: 0;
-  outline: var(--border-width) solid var(--border-color);
+  border: var(--border-width) solid var(--border-color);
+  
   font-weight: 500;
 `;
 
-const MobileLocalization = styled(HeaderBarLocalization)`
-  > Link {
-    color: white;
+const MobileLocalizationContainer = styled.div`
+  > div {
+    > div {
+      color: white;
+      > div {
+        > a {
+          color: white;
+        } 
+      } 
+    }
   }
 `;

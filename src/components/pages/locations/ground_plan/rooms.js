@@ -48,7 +48,6 @@ function LocationsGroundPlanRoom ({ key, room }) {
 function LocationsGroundPlanRoomsAll () {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
-  const roomSelected = !(filter.room)
 
   const handleClick = (e) => {
     dispatch(
@@ -68,7 +67,7 @@ function LocationsGroundPlanRoomsAll () {
 
 const LocationsGroundPlanRoomsContainer = styled.div`
   max-height: ${({ theme, locationsGroundPlanFloorsContainerHeight }) => `calc(${theme.map.height} - var(--locations-ground-plan-height) - ${locationsGroundPlanFloorsContainerHeight + 'px'} + var(--border-width))`};
-  overflow: scroll;
+  overflow: ${({ theme })=> theme.groundPlan.rooms.overflow};
   background: var(--color-white);
 
   font-size: var(--info-grid-font-size);
