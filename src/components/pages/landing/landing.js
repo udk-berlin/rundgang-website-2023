@@ -13,12 +13,12 @@ export default function Landing () {
   const windowSize = useWindowSize()
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(landingMTheme)
     } else {
       setResponsiveTheme(landingLTheme)
     }
-  }, [windowSize.width])
+  }, [windowSize?.width])
 
   return (
     <ThemeProvider theme={responsiveTheme}>

@@ -15,12 +15,12 @@ export default function Locations({ locations }) {
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(locationsMTheme);
     } else {
       setResponsiveTheme(locationsLTheme);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <Layout>

@@ -31,17 +31,17 @@ export default function Project({ project }) {
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= projectBreakpoints.s) {
+    if (windowSize?.width <= projectBreakpoints.s) {
       setResponsiveTheme(projectSTheme);
       setInfoGridPos(false);
-    } else if (windowSize.width <= projectBreakpoints.m) {
+    } else if (windowSize?.width <= projectBreakpoints.m) {
       setResponsiveTheme(projectMTheme);
       setInfoGridPos(false);
     } else {
       setResponsiveTheme(projectLTheme);
       setInfoGridPos(true);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <Layout
