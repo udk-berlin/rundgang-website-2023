@@ -7,6 +7,8 @@ export function ProjectText({ project, data }) {
   let description = getLocalizedData(project.description);
   let texts = [];
 
+  console.log(data);
+
   if (data && "languages" in data) {
     let content = getLocalizedData(data.languages).content;
     Object.values(content).forEach((item) => {

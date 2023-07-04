@@ -9,8 +9,7 @@ export default function ProjectImage({ project, fullSize = false }) {
 
   if ("thumbnail" in project && project.thumbnail) {
     image = (
-      <img
-        className={styles.image}
+      <ProjectImageContainer
         src={fullSize ? project.thumbnail_full_size : project.thumbnail}
         alt={project.name}
         loading="lazy"
@@ -44,25 +43,19 @@ export function ProjectAdditionalMedia({ project, data }) {
 
       switch (item.template) {
         case "video":
-          media.push(<div style={{ color: "#000" }}>video...</div>);
+          //media.push(<div style={{ color: "#000" }}>video...</div>);
           break;
         case "image":
           media.push(
-            <div>
-              <img
-                className={styles.image}
-                src={item.content}
-                alt={project.name}
-              />
-            </div>
+            <ProjectImageContainer src={item.content} alt={project.name} />
           );
           break;
         case "audio":
-          media.push(
-            <ProjectAdditionalMediaAudio controls>
-              <source src={item.content} />
-            </ProjectAdditionalMediaAudio>
-          );
+          // media.push(
+          //   <ProjectAdditionalMediaAudio controls>
+          //     <source src={item.content} />
+          //   </ProjectAdditionalMediaAudio>
+          // );
           break;
         default:
       }
@@ -77,9 +70,20 @@ export function ProjectAdditionalMedia({ project, data }) {
 }
 
 const ProjectPlaceholderImage = styled.div`
-  width: 100%;
+  height: ${({ theme }) => theme.imageContainer.height};
+  min-height: ${({ theme }) => theme.imageContainer.height};
+  max-height: ${({ theme }) => theme.imageContainer.height};
+  width: auto;
   padding-bottom: 100%;
   background: var(--color-pink);
+`;
+
+const ProjectImageContainer = styled.img`
+  height: ${({ theme }) => theme.imageContainer.height};
+  min-height: ${({ theme }) => theme.imageContainer.height};
+  max-height: ${({ theme }) => theme.imageContainer.height};
+
+  width: auto;
 `;
 
 const ProjectAdditionalMediaContainer = styled.div`

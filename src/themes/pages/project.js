@@ -85,7 +85,7 @@ export const projectSTheme = {
   },
   imageContainer: {
     flexDirection: "row",
-    height: "",
+    height: "100vw",
   },
   infoContainer: {
     padding: "1rem",

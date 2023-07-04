@@ -75,9 +75,20 @@ const Container = styled.div`
 
 const ImageContainer = styled.div`
   flex: 6;
+
   height: ${({ theme }) => theme.imageContainer.height};
+  min-height: ${({ theme }) => theme.imageContainer.height};
+  max-height: ${({ theme }) => theme.imageContainer.height};
+
+  width: auto;
+
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+
   color: white;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   position: relative;
   display: flex;
   flex-direction: ${({ theme }) => theme.imageContainer.flexDirection};
