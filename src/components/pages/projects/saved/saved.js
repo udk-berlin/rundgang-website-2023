@@ -43,7 +43,10 @@ export default function SavedProjects() {
     <Layout>
       <ThemeProvider theme={responsiveTheme}>
         <SavedProjectsContainer>
-          <Masonry columnsCount={MASONRY_COLUMNS} gutter={MASONRY_GUTTER}>
+          <Masonry
+            columnsCount={responsiveTheme.MASONRY_COLUMNS}
+            gutter={responsiveTheme.MASONRY_GUTTER}
+          >
             {Object.values(projects).map((project) => (
               <ProjectCell project={project} />
             ))}
