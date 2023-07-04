@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import Layout from "@/components/layout/layout";
 import LocationsMap from "@/components/pages/locations/map/map";
@@ -25,11 +25,21 @@ export default function Locations({ locations }) {
   return (
     <Layout>
       <ThemeProvider theme={responsiveTheme}>
-        <LocationsMap locations={locations} />
-        <LocationsGroundPlan />
-        <LocationsFloorPlanPopup />
-        <LocationsProgram />
+        <LocationsContainer>
+          <LocationsMap locations={locations} />
+          <LocationsGroundPlan />
+          <LocationsFloorPlanPopup />
+          <LocationsProgram />
+        </LocationsContainer>
       </ThemeProvider>
     </Layout>
   );
 }
+
+const LocationsContainer = styled.div`
+  height: ${({ theme }) => theme.height};
+  min-height: ${({ theme }) => theme.height};
+  max-height: ${({ theme }) => theme.height};
+  
+  overflow: hidden;
+`;

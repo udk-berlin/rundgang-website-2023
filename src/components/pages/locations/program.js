@@ -45,13 +45,13 @@ const LocationsProgramContainer = styled.div`
   min-height: ${({ theme }) => theme.program.height};
   max-height: ${({ theme }) => theme.program.height};
 
-  border-left: var(--border-width) solid var(--border-color);
-  border-right: var(--border-width) solid var(--border-color);
+  border-left: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
 
   cursor: default;
   pointer-events: none;
 
-  overflow: scroll;
+  overflow: hidden;
 
   font-size: 16px;
 `;
@@ -59,11 +59,11 @@ const LocationsProgramContainer = styled.div`
 const LocationsProgramContentColumn = styled.div`
   pointer-events: all;
   overflow: scroll;
-  background: var(--color-white);
-  padding: var(--program-padding);
-  border-left: var(--border-width) solid var(--border-color);
+  background: white;
+  padding: ${({ theme }) => theme.program.padding};
+  border-left: ${({ theme }) => theme.border};
 
   display: flex;
   flex-direction: column;
-  gap: var(--program-padding);
+  gap: ${({ theme }) => theme.program.padding};
 `;

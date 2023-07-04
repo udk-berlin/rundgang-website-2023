@@ -72,7 +72,6 @@ export function StaticLayoutParagraph({ content }) {
       {content.titles.map((title) => (
         <StaticParagraphTitle>{title}</StaticParagraphTitle>
       ))}
-      {/* {console.log(content.texts)} */}
       {content.texts?.map((text) => (
         <div>
           {text.link ? (

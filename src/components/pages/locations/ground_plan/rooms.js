@@ -67,7 +67,7 @@ function LocationsGroundPlanRoomsAll () {
 }
 
 const LocationsGroundPlanRoomsContainer = styled.div`
-  max-height: ${(props) => `calc(var(--locations-map-height) - var(--locations-ground-plan-height) - ${props.locationsGroundPlanFloorsContainerHeight + 'px'} + var(--border-width))`};
+  max-height: ${({ theme, locationsGroundPlanFloorsContainerHeight }) => `calc(${theme.map.height} - var(--locations-ground-plan-height) - ${locationsGroundPlanFloorsContainerHeight + 'px'} + var(--border-width))`};
   overflow: scroll;
   background: var(--color-white);
 

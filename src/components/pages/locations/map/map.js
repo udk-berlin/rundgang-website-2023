@@ -182,15 +182,15 @@ export default function LocationsMap({ locations }) {
 }
 
 const MapContainer = styled.div`
-  height: var(--locations-map-height);
-  min-height: var(--locations-map-height);
+  height: ${({ theme }) => theme.map.height};
+  min-height: ${({ theme }) => theme.map.height};
   width: 100%;
   min-width: 100%;
 
   overflow: hidden;
 
-  border-right: var(--border-width) solid var(--border-color);
-  border-left: var(--border-width) solid var(--border-color);
+  border-right: ${({ theme }) => theme.border};
+  border-left: ${({ theme }) => theme.border};
 `;
 
 function buildMarker(mapRef, location, cache, useTextBox) {

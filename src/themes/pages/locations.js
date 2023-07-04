@@ -1,51 +1,74 @@
 import {baseLTheme, baseMTheme, fontSizes} from "@/themes/theme";
 import {layoutLTheme, layoutMTheme} from "@/themes/layout";
 
+const height =  {
+  l: `calc(100vh - ${layoutLTheme.footer.height} - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - 2 * ${baseLTheme.borderWidth})`,
+  m: `calc(100vh - ${layoutMTheme.footer.height} - ${layoutMTheme.header.bar.height} - ${layoutMTheme.header.filter.bar.height} - 2 * ${layoutMTheme.borderWidth})`,
+}
+
+const top = {
+  l: `calc(${layoutLTheme.header.bar.height} + ${layoutLTheme.header.filter.bar.height} + 2 * ${baseLTheme.borderWidth})`,
+  m: `calc(${layoutMTheme.header.bar.height} + ${layoutMTheme.header.filter.bar.height} + 2 * ${baseMTheme.borderWidth})`
+}
+
 export const locationsLTheme = {
   ...baseLTheme,
+  height: height.l,
   map: {
-    height: `calc(100vh - ${layoutLTheme.footer.height} + var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 ${baseLTheme.borderWidth})`
+    height: height.l
   },
   groundPlan: {
-    height: 'var(--layout-footer-grid-template-column-1)',
+    height: layoutLTheme.footer.gridTemplateColumn1,
     position: 'absolute',
-    top: 'calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width))',
-    gridTemplateColumns: 'var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3)',
-    infos: {
-      height: 'calc(var(--locations-map-height) - var(--locations-ground-plan-height))',
+    top: top.l,
+    gridTemplateColumns: `${layoutLTheme.footer.gridTemplateColumn1} ${layoutLTheme.footer.gridTemplateColumn2} ${layoutLTheme.footer.gridTemplateColumn3}`,
+    info: {
+      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1})`,
     },
     content: {
       height: '100%',
       overflow: 'hidden',
     },
     image: {
-      height: 'var(--layout-footer-grid-template-column-1)',
+      height: layoutLTheme.footer.gridTemplateColumn1,
     }
   },
   program: {
-    height: 'var(--layout-footer-grid-template-column-1)',
+    height: height.l,
     position: 'absolute',
-    top: 'calc(var(--layout-header-bar-container-height) + var(--layout-header-search-container-height) + 2 * var(--border-width))',
+    top: top.l,
     left: 0,
-    gridTemplateColumns: 'var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3)',
+    padding: '0.75rem',
+    gridTemplateColumns: `${layoutLTheme.footer.gridTemplateColumn1} ${layoutLTheme.footer.gridTemplateColumn2} ${layoutLTheme.footer.gridTemplateColumn3}`,
   },
   title: {
     fontSize: fontSizes.l.medium,
+    sliderIndex: 1,
+  },
+  author: {
+    sliderIndex: 2,
+  },
+  format: {
+    sliderIndex: 3,
+  },
+  carousel: {
+    sliderOffset: 4,
   },
 };
 
 export const locationsMTheme = {
   ...baseMTheme,
+  height: height.l,
   map: {
-    height: 'calc(100vh - 2 * var(--layout-header-bar-container-height) - var(--layout-header-search-container-height) - 2 * var(--border-width))'
+    height: height.m
   },
   groundPlan: {
     height: 'fit-content',
     position: '',
     top: '',
     gridTemplateColumns: '',
-    infos: {
-      height: 'calc(var(--locations-map-height) - var(--locations-ground-plan-height))',
+    info: {
+      height: `calc(${height.m} - ${layoutMTheme.footer.gridTemplateColumn1})`,
     },
     content: {
       height: 'fit-content',
@@ -53,7 +76,7 @@ export const locationsMTheme = {
     },
     image: {
       height: '30vh',
-    }
+    },
   },
   program: {
     height: 'fit-content',
@@ -64,5 +87,15 @@ export const locationsMTheme = {
   },
   title: {
     fontSize: fontSizes.l.medium,
+    sliderIndex: 1,
+  },
+  author: {
+    sliderIndex: 2,
+  },
+  format: {
+    sliderIndex: 3,
+  },
+  carousel: {
+    sliderOffset: 4,
   },
 };

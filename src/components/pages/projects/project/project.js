@@ -26,8 +26,6 @@ export default function Project({ project }) {
     fetcher
   );
 
-  console.log(data)
-
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();

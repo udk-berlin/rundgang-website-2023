@@ -49,8 +49,8 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
   padding-top: ${(props) => props.theme.MASONRY_GUTTER};
   padding-bottom: 2px;
 
-  max-width: ${(props) =>
-    `calc(100vw / ${props.theme.MASONRY_COLUMNS} - ((${props.theme.MASONRY_COLUMNS} - 1) * ${props.theme.MASONRY_GUTTER}) - 2 * var(--program-padding) )`};
+  max-width: ${({ theme }) =>
+    `calc(100vw / ${theme.MASONRY_COLUMNS} - ((${theme.MASONRY_COLUMNS} - 1) * ${theme.MASONRY_GUTTER}) - 2 * var(--program-padding) )`};
 
   font-weight: 600;
   font-size: ${({ theme }) => theme.title.fontSize};

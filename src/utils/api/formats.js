@@ -1,6 +1,6 @@
 import { getTree } from '@/utils/api/api'
 
-import {REST_API_FORMATS_ROOT_ID} from "@/utils/api/items";
+import { REST_API_FORMATS_ROOT_ID } from "@/utils/api/items";
 
 export async function getFormats () {
   let formats = {}
@@ -34,10 +34,6 @@ export async function getFormatsFilters () {
   };
 
   const data = await getTree(REST_API_FORMATS_ROOT_ID)
-  if ('statusCode' in data && data.statusCode === 404) {}
-  else {
-    getChildren(data)
-  const data = await getTree(process.env.REST_API_FORMATS_ROOT_ID)
   if ('statusCode' in data && data.statusCode === 404) {}
   else {
     getChildren(data)

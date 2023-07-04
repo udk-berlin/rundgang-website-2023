@@ -21,6 +21,8 @@ export async function getLocations () {
           ...locations[id],
           ...locationDetails[id]
         }
+      } else {
+        delete locations[id];
       }
     })
   }

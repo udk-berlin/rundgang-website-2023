@@ -28,12 +28,11 @@ const HeaderBarContainer = styled.div`
   grid-template-columns: 2fr 6fr 2fr;
   align-items: center;
 
-  height: var(--layout-header-bar-container-height);
+  height: ${({ theme }) => theme.header.bar.height };
   padding: 0 0.75rem;
 `;
 
 const HeaderBarLeftContainer = styled.div`
-  //padding-left: 0.5rem;
   display: flex;
   gap: 1.5rem;
 `;

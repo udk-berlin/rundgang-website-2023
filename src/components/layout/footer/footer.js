@@ -23,17 +23,17 @@ const FooterContainer = styled.div`
   height: ${({ theme }) => theme.footer.height};
 
   display: grid;
-  grid-template-columns: var(--layout-footer-grid-template-columns);
+  grid-template-columns: ${({ theme }) => theme.footer.gridTemplateColumn1} ${({ theme }) => theme.footer.gridTemplateColumn2} ${({ theme }) => theme.footer.gridTemplateColumn3};
   align-items: center;
 
-  border: var(--border-width) solid var(--border-color);
-  background: var(--color-white);
+  border: ${({ theme }) => theme.border};
+  background: white;
 
   > *:nth-child(1) {
-    border-right: var(--border-width) solid var(--border-color);
+    border-right: ${({ theme }) => theme.border};
   }
 
   > *:nth-child(3) {
-    border-left: var(--border-width) solid var(--border-color);
+    border-left: ${({ theme }) => theme.border};
   }
 `;
