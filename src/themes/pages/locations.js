@@ -74,6 +74,16 @@ export const locationsLTheme = {
   carousel: {
     sliderOffset: 4,
   },
+  media: {
+    image: {
+      height: 'auto',
+      width: '100%'
+    },
+
+    placeholder: {
+      height: "100%",
+    },
+  },
 };
 
 export const locationsMTheme = {
@@ -128,5 +138,15 @@ export const locationsMTheme = {
   },
   carousel: {
     sliderOffset: 4,
+  },
+  media: {
+    image: {
+      height: 'auto',
+      width: '100%'
+    },
+
+    placeholder: {
+      height: "100%",
+    },
   },
 };

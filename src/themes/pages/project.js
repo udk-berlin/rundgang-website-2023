@@ -38,6 +38,9 @@ export const projectLTheme = {
       height: 'auto',
       width: '50vw'
     },
+    placeholder: {
+      height: "100vw",
+    },
     audio: {
       width: '50vw'
     },
@@ -128,6 +131,9 @@ export const projectSTheme = {
     image: {
       height: "100vw",
       width: 'auto'
+    },
+    placeholder: {
+      height: "100vw",
     },
     audio: {
       width: '100vw'

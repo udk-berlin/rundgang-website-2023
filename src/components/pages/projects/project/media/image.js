@@ -79,15 +79,15 @@ const AdditionalMediaContainer = styled.div`
 `;
 
 const PlaceholderImage = styled.div`
-  height: ${({ theme }) => theme.media.image.height};
-  min-height: ${({ theme }) => theme.media.image.height};
-  max-height: ${({ theme }) => theme.media.image.height};
+  height: ${({ theme }) => theme.media.placeholder.height};
+  min-height: ${({ theme }) => theme.media.placeholder.height};
+  max-height: ${({ theme }) => theme.media.placeholder.height};
 
-  width: ${({ theme }) => theme.media.image.width};
-  min-width: ${({ theme }) => theme.media.image.width};
-  max-width: ${({ theme }) => theme.media.image.width};
+  width: auto;
+
+  padding-bottom: 100%;
   
-  background: ${({ theme }) => theme.color.pink};
+  background: ${({ theme }) => theme.colors.pink};
 `;
 
 const ImageMedia = styled.img`
