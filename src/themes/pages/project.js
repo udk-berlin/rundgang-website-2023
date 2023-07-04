@@ -8,10 +8,10 @@ export const projectBreakpoints = {
 
 export const projectLTheme = {
   ...baseLTheme,
-  container: {
-    flexDirection: "row",
-  },
-  infoContainer: {
+  id: 'l',
+  flexDirection: "row",
+  marginBottom: 0,
+  info: {
     padding: "1rem",
   },
   title: {
@@ -28,11 +28,12 @@ export const projectLTheme = {
     sliderOffset: 2,
   },
   media: {
+    display: '',
+    flexDirection: "",
     height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
     width: '50vw',
     overflowX: 'hidden',
     overflowY: 'scroll',
-    flexDirection: "row",
     image: {
       height: 'auto',
       width: '50vw'
@@ -41,63 +42,67 @@ export const projectLTheme = {
       width: '50vw'
     },
     video: {
+      height: "",
+      width: '50vw',
       ratio: 1.777777777,
     }
   },
-  additionalText: {
+  text: {
     heading: fontSizes.l.medium,
   },
 };
 
-export const projectMTheme = {
-  ...baseMTheme,
-  container: {
-    flexDirection: "row",
-  },
-  infoContainer: {
-    padding: "0.75rem",
-  },
-  title: {
-    fontSize: fontSizes.l.medium,
-    sliderIndex: 0,
-  },
-  author: {
-    sliderIndex: 0,
-  },
-  format: {
-    sliderIndex: 1,
-  },
-  carousel: {
-    sliderOffset: 2,
-  },
-
-  media: {
-    height: '',
-    width: '100vw',
-    overflowX: 'scroll',
-    overflowY: 'hidden',
-    flexDirection: "row",
-    image: {
-      height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
-      width: ''
-    },
-    audio: {
-      width: ''
-    },
-    video: {
-      ratio: 1.777777777,
-    }
-  },
-  additionalText: {
-    heading: fontSizes.l.medium,
-  },
-};
+// export const projectMTheme = {
+//   ...baseMTheme,
+//   container: {
+//     flexDirection: "row",
+//   },
+//   infoContainer: {
+//     padding: "0.75rem",
+//   },
+//   title: {
+//     fontSize: fontSizes.l.medium,
+//     sliderIndex: 0,
+//   },
+//   author: {
+//     sliderIndex: 0,
+//   },
+//   format: {
+//     sliderIndex: 1,
+//   },
+//   carousel: {
+//     sliderOffset: 2,
+//   },
+//
+//   media: {
+//     display: 'flex',
+//     flexDirection: "row",
+//     height: '',
+//     width: '100vw',
+//     overflowX: 'scroll',
+//     overflowY: 'hidden',
+//     image: {
+//       height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
+//       width: ''
+//     },
+//     audio: {
+//       width: ''
+//     },
+//     video: {
+//       ratio: 1.777777777,
+//     }
+//   },
+//   additionalText: {
+//     heading: fontSizes.l.medium,
+//   },
+// };
 
 export const projectSTheme = {
-  container: {
-    flexDirection: "column",
-  },
-  infoContainer: {
+  ...baseMTheme,
+  id: 'l',
+  flexDirection: "column",
+  marginBottom: `calc(${layoutMTheme.footer.height} + 1vh)`,
+  info: {
     padding: "1rem",
   },
   title: {
@@ -114,23 +119,26 @@ export const projectSTheme = {
     sliderOffset: 2,
   },
   media: {
-    height: '',
+    display: 'flex',
+    flexDirection: "row",
+    height: 'auto',
     width: '100vw',
     overflowX: 'scroll',
     overflowY: 'hidden',
-    flexDirection: "row",
     image: {
       height: "100vw",
-      width: ''
+      width: 'auto'
     },
     audio: {
-      width: ''
+      width: '100vw'
     },
     video: {
+      height: "100vw",
+      width: `calc(${1.777777777} * 50vh)`,
       ratio: 1.777777777,
     }
   },
-  additionalText: {
+  text: {
     heading: fontSizes.l.medium,
   },
 };

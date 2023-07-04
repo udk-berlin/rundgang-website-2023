@@ -21,11 +21,11 @@ export function ProjectAdditionalMedia({ project, data }) {
   let mediaItems = [];
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.style.height =
-        Math.round(
-          parseInt(getComputedStyle(videoRef.current).width) / theme.media.video.ratio
-        ) + "px";
+    if (videoRef.current && theme.id === 'l') {
+      const height = Math.round(parseInt(getComputedStyle(videoRef.current).width) / theme.media.video.ratio)
+      videoRef.current.style.height = height + "px";
+      videoRef.current.style.minHeight = height + "px";
+      videoRef.current.style.maxHeight = height + "px";
     }
   }, [data]);
 
@@ -65,17 +65,27 @@ export function ProjectAdditionalMedia({ project, data }) {
 
   return (
     <>
-      {mediaItems}
+      <AdditionalMediaContainer>
+        {mediaItems}
+      </AdditionalMediaContainer>
     </>
+
   );
 }
+
+const AdditionalMediaContainer = styled.div`
+  display: ${({ theme }) => theme.media.display};
+  flex-direction: ${({ theme }) => theme.media.flexDirection};
+`;
 
 const PlaceholderImage = styled.div`
   height: ${({ theme }) => theme.media.image.height};
   min-height: ${({ theme }) => theme.media.image.height};
   max-height: ${({ theme }) => theme.media.image.height};
-  
-  width: auto;
+
+  width: ${({ theme }) => theme.media.image.width};
+  min-width: ${({ theme }) => theme.media.image.width};
+  max-width: ${({ theme }) => theme.media.image.width};
   
   background: ${({ theme }) => theme.color.pink};
 `;
@@ -85,9 +95,9 @@ const ImageMedia = styled.img`
   min-height: ${({ theme }) => theme.media.image.height};
   max-height: ${({ theme }) => theme.media.image.height};
 
-  width: ${({ theme }) => theme.media.image.weight};
-  min-width: ${({ theme }) => theme.media.image.weight};
-  max-width: ${({ theme }) => theme.media.image.weight};
+  width: ${({ theme }) => theme.media.image.width};
+  min-width: ${({ theme }) => theme.media.image.width};
+  max-width: ${({ theme }) => theme.media.image.width};
 `;
 
 const AudioMediaContainer = styled.audio`
@@ -97,9 +107,13 @@ const AudioMediaContainer = styled.audio`
 `;
 
 const VideoMediaContainer = styled.iframe`
-  width: ${({ theme }) => theme.media.audio.width};
-  min-width: ${({ theme }) => theme.media.audio.width};
-  max-width: ${({ theme }) => theme.media.audio.width};
+  height: ${({ theme }) => theme.media.video.height};
+  min-height: ${({ theme }) => theme.media.video.height};
+  max-height: ${({ theme }) => theme.media.video.height};
+  
+  width: ${({ theme }) => theme.media.video.width};
+  min-width: ${({ theme }) => theme.media.video.width};
+  max-width: ${({ theme }) => theme.media.video.width};
 `;
 
 function getEmbeddedLink(input) {

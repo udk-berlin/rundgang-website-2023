@@ -15,7 +15,7 @@ import useWindowSize from "@/hooks/window_size";
 import {
   projectBreakpoints,
   projectLTheme,
-  projectMTheme,
+  // projectMTheme,
   projectSTheme,
 } from "@/themes/pages/project";
 
@@ -33,9 +33,9 @@ export default function Project({ project }) {
     if (windowSize.width <= projectBreakpoints.s) {
       setResponsiveTheme(projectSTheme);
       setInfoGridPos(false);
-    } else if (windowSize.width <= projectBreakpoints.m) {
-      setResponsiveTheme(projectMTheme);
-      setInfoGridPos(false);
+    // } else if (windowSize.width <= projectBreakpoints.m) {
+    //   setResponsiveTheme(projectMTheme);
+    //   setInfoGridPos(false);
     } else {
       setResponsiveTheme(projectLTheme);
       setInfoGridPos(true);
@@ -65,13 +65,12 @@ export default function Project({ project }) {
 
 const ProjectContainer = styled.div`
   display: flex;
-  flex-direction: ${({ theme }) => theme.container.flexDirection};
+  flex-direction: ${({ theme }) => theme.flexDirection};
+  margin-bottom: ${({ theme }) => theme.marginBottom};
 `;
 
-
-
 const InfoContainer = styled.div`
-  padding: ${({ theme }) => theme.infoContainer.padding};
+  padding: ${({ theme }) => theme.info.padding};
   flex: 4;
   height: calc(
     100vh - var(--layout-header-search-container-height) -
