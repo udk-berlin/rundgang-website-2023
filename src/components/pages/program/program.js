@@ -55,7 +55,7 @@ const ProgramContainer = styled.div`
   );
 
   margin-bottom: -2px;
-  padding: ${({ theme }) => theme.padding};
+  padding: ${({ theme }) => theme.MASONRY_GUTTER};
 
   border-bottom: var(--border-width) solid var(--border-color);
   border-right: var(--border-width) solid var(--border-color);
