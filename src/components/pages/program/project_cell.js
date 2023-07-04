@@ -13,12 +13,11 @@ import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 
-export default function ProjectCell({ key, project }) {
+export default function ProjectCell({ project }) {
   const [cellHovered, setCellHovered] = useState(false);
 
   return (
     <ProjectCellContainer
-      key={key}
       onMouseEnter={() => setCellHovered(true)}
       onMouseLeave={() => setCellHovered(false)}
     >
@@ -26,33 +25,33 @@ export default function ProjectCell({ key, project }) {
         <ProjectImage project={project} />
       </ProjectLink>
 
-      <SVGOverlay
+      {/* <SVGOverlay
         project={project}
         pathActive={"/assets/svg/layout/saved_active.svg"}
         pathPassive={"/assets/svg/layout/saved_passive.svg"}
         cellHovered={cellHovered}
-      />
+      /> */}
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
-      <InfoGrid project={project} />
+      {/* <InfoGrid project={project} /> */}
     </ProjectCellContainer>
   );
 }
 
 export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
   const [isHovered, setIsHovered] = useState(false);
-  const savedProjects = useSavedProjects();
-  const setSavedProjects = useSetSavedProjects();
+  // const savedProjects = useSavedProjects();
+  // const setSavedProjects = useSetSavedProjects();
 
-  const handleClick = () => {
-    if (savedProjects.includes(project.id)) {
-      setSavedProjects(
-        savedProjects.filter((savedProject) => savedProject !== project.id)
-      );
-    } else {
-      setSavedProjects([...savedProjects, project.id]);
-    }
-  };
+  // const handleClick = () => {
+  //   if (savedProjects.includes(project.id)) {
+  //     setSavedProjects(
+  //       savedProjects.filter((savedProject) => savedProject !== project.id)
+  //     );
+  //   } else {
+  //     setSavedProjects([...savedProjects, project.id]);
+  //   }
+  // };
 
   let svg;
   if (cellHovered && !savedProjects.includes(project.id)) {

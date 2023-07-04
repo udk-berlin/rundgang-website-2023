@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Masonry from "react-responsive-masonry";
+import { useQuery, gql } from "@apollo/client";
 
 import { useFilter } from "@/providers/filter";
 
@@ -14,11 +15,36 @@ import {
   programSTheme,
 } from "@/themes/pages/program";
 
+const FILMS_QUERY = gql`
+  {
+    items {
+      name
+      id
+      origin {
+        authors {
+          id
+          name
+        }
+      }
+      parents {
+        id
+      }
+      thumbnail
+      thumbnail_full_size
+    }
+  }
+`;
+
 export default function Program() {
+  const { data, loading, error } = useQuery(FILMS_QUERY);
+
+  //if (loading) return "Loading...";
+  //if (error) return <pre>{error.message}</pre>;
+
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
 
-  const filter = useFilter();
+  // const filter = useFilter();
 
   useEffect(() => {
     if (windowSize.width <= breakpoints.s) {
@@ -30,18 +56,23 @@ export default function Program() {
     }
   }, [windowSize.width]);
 
+  console.log(data);
   return (
     <Layout>
       <ThemeProvider theme={responsiveTheme}>
         <ProgramContainer>
-          <Masonry
-            columnsCount={responsiveTheme.MASONRY_COLUMNS}
-            gutter={responsiveTheme.MASONRY_GUTTER}
-          >
-            {Object.values(filter.filteredProjects).map((project) => (
-              <ProjectCell project={project} />
-            ))}
-          </Masonry>
+          {loading || error ? (
+            <div>Loading...</div>
+          ) : (
+            <Masonry
+              columnsCount={responsiveTheme.MASONRY_COLUMNS}
+              gutter={responsiveTheme.MASONRY_GUTTER}
+            >
+              {data.items.map((project) => (
+                <ProjectCell project={project} />
+              ))}
+            </Masonry>
+          )}
         </ProgramContainer>
       </ThemeProvider>
     </Layout>

@@ -5,14 +5,14 @@ const SLIDER_INDEX = 2;
 
 export default function ProjectAuthors({ project, fontSize = 1 }) {
   const slider = useSlider();
-  const authors = project.authors ? project.authors : [];
+  const authors = project.origin.authors ? project.origin.authors : [];
   return (
     <ProjectAuthorsContainer
       fontSize={fontSize}
       slider={slider}
       hasAuthors={authors.length > 0}
     >
-      {authors.map((author) => (
+      {project.origin.authors.map((author) => (
         <span>{author.name}</span>
       ))}
     </ProjectAuthorsContainer>
