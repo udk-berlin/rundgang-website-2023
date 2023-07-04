@@ -15,12 +15,12 @@ export default function Header({ disableFilter }) {
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setMobile(true);
     } else {
       setMobile(false);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <HeaderContainer>

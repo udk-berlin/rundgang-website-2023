@@ -44,7 +44,7 @@ function Carousel({ children }) {
     } else {
       setCarouselHeight("0px");
     }
-  }, [slider.position, windowSize.width]);
+  }, [slider.position, windowSize?.width]);
 
   return (
     <>
