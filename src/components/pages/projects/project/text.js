@@ -53,7 +53,7 @@ const ProjectTextContainer = styled.div`
 const ProjectTextText = styled.div``;
 
 const ProjectTextHeading = styled.div`
-  font-size: ${({ theme }) => theme.additionalText.heading};
+  font-size: ${({ theme }) => theme.text.heading};
   font-weight: 500;
 `;
 
