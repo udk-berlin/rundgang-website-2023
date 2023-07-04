@@ -1,18 +1,23 @@
 import { useSlider } from "@/providers/slider";
 import styled from "styled-components";
+import React from "react";
 
 const SLIDER_INDEX = 2;
 
 export default function ProjectAuthors({ project, fontSize = 1 }) {
+  if (project.error) return <></>
+  if (project.isLoading) return <div>loading...</div>
+  project = project.data
+
   const slider = useSlider();
-  const authors = project.origin.authors ? project.origin.authors : [];
+  const authors = project?.origin?.authors ? project.origin.authors : [];
   return (
     <ProjectAuthorsContainer
       fontSize={fontSize}
       slider={slider}
       hasAuthors={authors.length > 0}
     >
-      {project.origin.authors.map((author) => (
+      {authors.map((author) => (
         <span>{author.name}</span>
       ))}
     </ProjectAuthorsContainer>

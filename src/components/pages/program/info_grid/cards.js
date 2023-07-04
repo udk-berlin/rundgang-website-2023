@@ -8,20 +8,20 @@ export function InfoGridLocation({ project }) {
   let room = <></>;
   let centre = <></>;
 
-  if ("location-building" in project)
+  if (project && project["location-building"])
     location = (
       <InfoGridCardItem margin="170px">
         {project["location-building"].name}
       </InfoGridCardItem>
     );
-  else if ("external-location" in project)
+  else if (project && project["external-location"] in project)
     location = (
       <InfoGridCardItem margin="170px">
         {project["external-location"].name}
       </InfoGridCardItem>
     );
 
-  if ("location-level" in project)
+  if (project && project["location-level"] in project)
     level = (
       <InfoGridCardItem margin="10px">
         <FormattedMessage id="floor" />
@@ -30,7 +30,7 @@ export function InfoGridLocation({ project }) {
       </InfoGridCardItem>
     );
 
-  if ("location-room" in project)
+  if (project && project["location-room"] in project)
     room = (
       <InfoGridCardItem margin="50px">
         <FormattedMessage id="room" />
@@ -38,7 +38,7 @@ export function InfoGridLocation({ project }) {
       </InfoGridCardItem>
     );
 
-  if ("centre" in project)
+  if (project && project["centre"] in project)
     centre = (
       <InfoGridCardItem margin="50px">{project.centre.name}</InfoGridCardItem>
     );
@@ -60,13 +60,13 @@ export function InfoGridContext({ project }) {
   let course = <></>;
   let clazz = <></>;
 
-  if ("faculty" in project) {
+  if (project && project["faculty"] in project) {
     faculty = (
       <InfoGridCardItem margin="50px">{project.faculty.name}</InfoGridCardItem>
     );
   }
 
-  if ("institute" in project) {
+  if (project && project["institute"] in project) {
     institute = (
       <InfoGridCardItem margin="150px">
         {project.institute.name}
@@ -74,19 +74,19 @@ export function InfoGridContext({ project }) {
     );
   }
 
-  if ("subject" in project) {
+  if (project && project["subject"] in project) {
     subject = (
       <InfoGridCardItem margin="100px">{project.subject.name}</InfoGridCardItem>
     );
   }
 
-  if ("course" in project) {
+  if (project && project["course"] in project) {
     course = (
       <InfoGridCardItem margin="50px">{project.course.name}</InfoGridCardItem>
     );
   }
 
-  if ("class" in project) {
+  if (project && project["class"] in project) {
     clazz = (
       <InfoGridCardItem margin="200px">{project.class.name}</InfoGridCardItem>
     );

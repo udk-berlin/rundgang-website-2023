@@ -4,7 +4,7 @@ export default function ProjectLink({ project, children, link = 1 }) {
   return (
     <>
       {link ? (
-        <LocalizedLink href={`/projects/${project.id}`}>
+        <LocalizedLink href={`/projects/${project?.id}`}>
           {children}
         </LocalizedLink>
       ) : (

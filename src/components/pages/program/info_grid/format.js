@@ -34,22 +34,18 @@ export default function InfoGridFormat({ project, margin }) {
 
   return (
     <>
-      {project["format-element"] ? (
-        <Container slider={slider}>
-          <InfoGridItemLink
-            margin={
-              project["format-element"].name in formatToMarginLeftMapper &&
-              !margin
-                ? formatToMarginLeftMapper[project["format-element"].name]
-                : formatToMarginLeftMapper.default
-            }
-          >
-            {project["format-element"].name}
-          </InfoGridItemLink>
-        </Container>
-      ) : (
-        <></>
-      )}
+      <Container slider={slider}>
+        <InfoGridItemLink
+          margin={
+            project && project["format-element"] && project["format-element"].name in formatToMarginLeftMapper &&
+            !margin
+              ? formatToMarginLeftMapper[project["format-element"].name]
+              : formatToMarginLeftMapper.default
+          }
+        >
+          {project && project["format-element"] ? project["format-element"].name: ''}
+        </InfoGridItemLink>
+      </Container>
     </>
   );
 }

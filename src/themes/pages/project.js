@@ -140,7 +140,7 @@ export const projectSTheme = {
     },
     video: {
       height: "100vw",
-      width: `calc(${1.777777777} * 50vh)`,
+      width: `calc(${1.777777777} * 100vw)`,
       ratio: 1.777777777,
     }
   },

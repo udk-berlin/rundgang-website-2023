@@ -15,7 +15,7 @@ import {
   programSTheme,
 } from "@/themes/pages/program";
 
-const FILMS_QUERY = gql`
+const QUERY = gql`
   {
     items {
       name
@@ -36,8 +36,7 @@ const FILMS_QUERY = gql`
 `;
 
 export default function Program() {
-  const { data, loading, error } = useQuery(FILMS_QUERY);
-
+  const { data, loading, error } = useQuery(QUERY);
   //if (loading) return "Loading...";
   //if (error) return <pre>{error.message}</pre>;
 
@@ -56,7 +55,6 @@ export default function Program() {
     }
   }, [windowSize?.width]);
 
-  console.log(data);
   return (
     <Layout>
       <ThemeProvider theme={responsiveTheme}>

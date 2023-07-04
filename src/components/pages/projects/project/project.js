@@ -10,7 +10,7 @@ import ProjectMedia from "@/components/pages/projects/project/media/media";
 
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
-import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
+import {getRenderJsonUrl, fetcher, getUrl} from "@/utils/api/api";
 import useWindowSize from "@/hooks/window_size";
 import {
   projectBreakpoints,
@@ -19,15 +19,20 @@ import {
   projectSTheme,
 } from "@/themes/pages/project";
 
-export default function Project({ project }) {
-  const { data, error, isLoading } = useSWR(
-    getRenderJsonUrl(project.id),
-    fetcher
-  );
-
+export default function Project({ id }) {
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
+
+  const project = useSWR(
+    getUrl(id),
+    fetcher
+  );
+
+  const media = useSWR(
+    getRenderJsonUrl(id),
+    fetcher
+  );
 
   useEffect(() => {
     if (windowSize?.width <= projectBreakpoints.s) {
@@ -50,12 +55,12 @@ export default function Project({ project }) {
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>
-          <ProjectMedia project={project} infoGridPos={infoGridPos} data={data}/>
+          <ProjectMedia project={project} media={media} infoGridPos={infoGridPos} />
           <InfoContainer>
             <ProjectTitle project={project} link={false} />
             <ProjectAuthors project={project} fontSize={1} />
             {infoGridPos ? <></> : <InfoGrid project={project} />}
-            <ProjectText project={project} data={data} />
+            <ProjectText project={project} media={media} />
           </InfoContainer>
         </ProjectContainer>
       </ThemeProvider>

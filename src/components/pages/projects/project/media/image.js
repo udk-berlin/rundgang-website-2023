@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import getLocalizedData from "@/components/localization/data";
 
 export default function ProjectImageMedia({ project, fullSize = false }) {
-  if (!("thumbnail" in project) || !(project.thumbnail)) return <PlaceholderImage />;
+  if (!(project) || !(project.thumbnail)) return <PlaceholderImage />;
 
   return (
     <ImageMedia
@@ -15,7 +15,9 @@ export default function ProjectImageMedia({ project, fullSize = false }) {
   );
 }
 
-export function ProjectAdditionalMedia({ project, data }) {
+export function ProjectAdditionalMedia({ project, media }) {
+  console.log(media)
+
   const theme = useTheme();
   const videoRef = useRef(null);
   let mediaItems = [];
@@ -27,12 +29,12 @@ export function ProjectAdditionalMedia({ project, data }) {
       videoRef.current.style.minHeight = height + "px";
       videoRef.current.style.maxHeight = height + "px";
     }
-  }, [data]);
+  }, [media]);
 
-  if (data && "languages" in data) {
-    let media = getLocalizedData(data.languages).content;
+  if (media && media["languages"]) {
+    let mediaContent = getLocalizedData(media.languages).content;
 
-    Object.values(media).forEach(mediaItem => {
+    Object.values(mediaContent).forEach(mediaItem => {
       switch (mediaItem.template) {
         case "video":
           mediaItems.push(
