@@ -21,14 +21,14 @@ export default function Program() {
   const filter = useFilter();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.s) {
+    if (windowSize?.width <= breakpoints.s) {
       setResponsiveTheme(programSTheme);
-    } else if (windowSize.width <= breakpoints.m) {
+    } else if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(programMTheme);
     } else {
       setResponsiveTheme(programLTheme);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <Layout>

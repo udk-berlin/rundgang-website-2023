@@ -23,14 +23,14 @@ export default function Layout({
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(layoutMTheme);
       setMobile(true);
     } else {
       setResponsiveTheme(layoutLTheme);
       setMobile(false);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <ThemeProvider theme={responsiveTheme}>
