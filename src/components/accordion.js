@@ -13,12 +13,12 @@ export default function Accordion({ items }) {
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= staticBreakpoints.m) {
+    if (windowSize?.width <= staticBreakpoints.m) {
       setResponsiveTheme(staticMTheme);
     } else {
       setResponsiveTheme(staticLTheme);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <ThemeProvider theme={responsiveTheme}>

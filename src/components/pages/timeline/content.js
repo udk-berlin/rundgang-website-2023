@@ -60,7 +60,7 @@ export default function TimelineContent() {
     if (slider.origin !== 'scroll') {
       ref.current?.scrollTo({left: days[slider.position].hoursBefore * widthPerHour - ((window.innerWidth - days[slider.position].hours * widthPerHour) / 2), behavior: 'smooth'})
     }
-  }, [slider.position, slider.origin, windowSize.width])
+  }, [slider.position, slider.origin, windowSize?.width])
 
   return (
     <ContentContainer id={'timeline'} ref={ref} onScroll={handleScroll} >
