@@ -13,7 +13,7 @@ export const projectLTheme = {
   imageContainer: {
     flexDirection: "column",
     height:
-      "calc(100vh - var(--layout-header-search-container-height) -calc(var(--layout-header-bar-container-height) * 2));",
+      "calc(100vh - var(--layout-header-search-container-height) - calc(var(--layout-header-bar-container-height) * 2))",
   },
   infoContainer: {
     padding: "1rem",
@@ -31,6 +31,15 @@ export const projectLTheme = {
   carousel: {
     sliderOffset: 2,
   },
+  additionalMedia: {
+    container: {
+      flexDirection: "column",
+      paddingTop: "0.5rem",
+    },
+  },
+  additionalText: {
+    heading: fontSizes.l.medium,
+  },
 };
 
 export const projectMTheme = {
@@ -41,7 +50,7 @@ export const projectMTheme = {
   imageContainer: {
     flexDirection: "column",
     height:
-      "calc(100vh - var(--layout-header-search-container-height) -calc(var(--layout-header-bar-container-height) * 2));",
+      "calc(100vh - var(--layout-header-search-container-height) - calc(var(--layout-header-bar-container-height) * 2))",
   },
   infoContainer: {
     padding: "0.75rem",
@@ -58,6 +67,15 @@ export const projectMTheme = {
   },
   carousel: {
     sliderOffset: 2,
+  },
+  additionalMedia: {
+    container: {
+      flexDirection: "column",
+      paddingTop: "0.5rem",
+    },
+  },
+  additionalText: {
+    heading: fontSizes.l.medium,
   },
 };
 
@@ -84,5 +102,14 @@ export const projectSTheme = {
   },
   carousel: {
     sliderOffset: 2,
+  },
+  additionalMedia: {
+    container: {
+      flexDirection: "row",
+      paddingTop: "0",
+    },
+  },
+  additionalText: {
+    heading: fontSizes.l.medium,
   },
 };

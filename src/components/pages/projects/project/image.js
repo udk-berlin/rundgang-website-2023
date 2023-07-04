@@ -24,17 +24,17 @@ export default function ProjectImage({ project, fullSize = false }) {
 }
 
 export function ProjectAdditionalMedia({ project, data }) {
-  const iFrameRef = useRef(null);
+  // const iFrameRef = useRef(null);
   let media = [];
 
-  useEffect(() => {
-    if (iFrameRef.current) {
-      iFrameRef.current.style.height =
-        Math.round(
-          parseInt(getComputedStyle(iFrameRef.current).width) / 1.777777777
-        ) + "px";
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (iFrameRef.current) {
+  //     iFrameRef.current.style.height =
+  //       Math.round(
+  //         parseInt(getComputedStyle(iFrameRef.current).width) / 1.777777777
+  //       ) + "px";
+  //   }
+  // }, [data]);
 
   if (data && "languages" in data) {
     let additionalContent = getLocalizedData(data.languages).content;
@@ -42,24 +42,26 @@ export function ProjectAdditionalMedia({ project, data }) {
     for (const key in additionalContent) {
       let item = additionalContent[key];
 
-      switch (item.type) {
+      switch (item.template) {
         case "video":
-          media.push(
-            <iframe
-              className={styles.video}
-              ref={iFrameRef}
-              src={getEmbeddedLink(item.content)}
-              frameBorder="0"
-            />
-          );
+          media.push(<div style={{ color: "#000" }}>video...</div>);
           break;
         case "image":
           media.push(
-            <img
-              className={styles.image}
-              src={item.content}
-              alt={project.name}
-            />
+            <div>
+              <img
+                className={styles.image}
+                src={item.content}
+                alt={project.name}
+              />
+            </div>
+          );
+          break;
+        case "audio":
+          media.push(
+            <ProjectAdditionalMediaAudio controls>
+              <source src={item.content} />
+            </ProjectAdditionalMediaAudio>
           );
           break;
         default:
@@ -82,10 +84,17 @@ const ProjectPlaceholderImage = styled.div`
 
 const ProjectAdditionalMediaContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ theme }) =>
+    theme.additionalMedia.container.flexDirection};
   gap: 0.5rem;
+  align-items: center;
 
-  padding-top: 0.5rem;
+  padding-top: ${({ theme }) => theme.additionalMedia.container.paddingTop};
+`;
+
+const ProjectAdditionalMediaAudio = styled.audio`
+  width: 100%;
+  min-width: 200px;
 `;
 
 function getEmbeddedLink(input) {

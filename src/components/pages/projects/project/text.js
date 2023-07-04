@@ -10,8 +10,24 @@ export function ProjectText({ project, data }) {
   if (data && "languages" in data) {
     let content = getLocalizedData(data.languages).content;
     Object.values(content).forEach((item) => {
-      if (item.type === "text") {
-        texts.push(item.formatted_content);
+      switch (item.template) {
+        case "text":
+          texts.push(
+            <ProjectTextText>{item.formatted_content}</ProjectTextText>
+          );
+          break;
+        case "heading":
+          texts.push(
+            <ProjectTextHeading>{item.content.substring(4)}</ProjectTextHeading>
+          );
+          break;
+        case "ul":
+          texts.push(
+            <ProjectTextList
+              dangerouslySetInnerHTML={{ __html: item.formatted_content }}
+            />
+          );
+          break;
       }
     });
   }
@@ -19,9 +35,7 @@ export function ProjectText({ project, data }) {
   return (
     <ProjectTextContainer>
       {description}
-      {texts.map((text) => (
-        <div dangerouslySetInnerHTML={{ __html: text }}></div>
-      ))}
+      {texts.map((text) => text)}
     </ProjectTextContainer>
   );
 }
@@ -32,4 +46,18 @@ const ProjectTextContainer = styled.div`
   gap: 0.5rem;
 
   padding-top: 0.75rem;
+`;
+
+const ProjectTextText = styled.div``;
+
+const ProjectTextHeading = styled.div`
+  font-size: ${({ theme }) => theme.additionalText.heading};
+  font-weight: 500;
+`;
+
+const ProjectTextList = styled.div`
+  ul {
+    list-style-image: url("/assets/svg/layout/arrow_right.svg");
+    padding: 0 1rem;
+  }
 `;
