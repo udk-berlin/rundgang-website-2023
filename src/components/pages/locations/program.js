@@ -37,21 +37,21 @@ const LocationsProgramContainer = styled.div`
   display: grid;
   grid-template-columns: ${({ theme }) => theme.program.gridTemplateColumns};
 
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 
   height: ${({ theme }) => theme.program.height};
   min-height: ${({ theme }) => theme.program.height};
   max-height: ${({ theme }) => theme.program.height};
 
-  border-left: var(--border-width) solid var(--border-color);
-  border-right: var(--border-width) solid var(--border-color);
+  border-left: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
 
   cursor: default;
   pointer-events: none;
 
-  overflow: scroll;
+  overflow: hidden;
 
   font-size: 16px;
 `;
@@ -59,11 +59,15 @@ const LocationsProgramContainer = styled.div`
 const LocationsProgramContentColumn = styled.div`
   pointer-events: all;
   overflow: scroll;
-  background: var(--color-white);
-  padding: var(--program-padding);
-  border-left: var(--border-width) solid var(--border-color);
+  background: white;
+  padding: ${({ theme }) => theme.program.padding};
+  border-left: ${({ theme }) => theme.program.borderLeft};
+
+  width: ${({ theme }) => theme.program.width};
+  min-width: ${({ theme }) => theme.program.width};
+  max-width: ${({ theme }) => theme.program.width};
 
   display: flex;
   flex-direction: column;
-  gap: var(--program-padding);
+  gap: ${({ theme }) => theme.program.padding};
 `;

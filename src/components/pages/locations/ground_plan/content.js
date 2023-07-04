@@ -26,9 +26,9 @@ const LocationsGroundPlanContentContainer = styled.div`
   min-width: 100%;
   max-width: 100%;
 
-  height: 100%;
-  min-height: 100%;
-  max-height: 100%;
+  height: ${({ theme })=> theme.groundPlan.content.height};
+  min-height: ${({ theme })=> theme.groundPlan.content.height};
+  max-height: ${({ theme })=> theme.groundPlan.content.height};
 
   cursor: default;
   
@@ -36,9 +36,13 @@ const LocationsGroundPlanContentContainer = styled.div`
 `
 
 const LocationsGroundPlanInfoContainer = styled.div`
-  height: ${({ theme })=> theme.groundPlan.content.height};
-  min-height: ${({ theme })=> theme.groundPlan.content.height};
-  max-height: ${({ theme })=> theme.groundPlan.content.height};
+  height: ${({ theme })=> theme.groundPlan.info.height};
+  min-height: ${({ theme })=> theme.groundPlan.info.height};
+  max-height: ${({ theme })=> theme.groundPlan.info.height};
+
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
 
   overflow: ${({ theme })=> theme.groundPlan.content.overflow};
 `

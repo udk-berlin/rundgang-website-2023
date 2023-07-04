@@ -31,7 +31,7 @@ export default function HeaderFiltersBar({
 }
 const HeaderFiltersTitle = styled.div`
   height: calc(0.55 * var(--layout-header-search-container-height));
-  margin-bottom: 2px;
+  margin-bottom: 0.5vh;
 `;
 
 const HeaderFiltersTitleContainer = styled.div`
@@ -48,6 +48,8 @@ const SVG = styled(ReactSVG)`
   height: 0.8rem;
 
   cursor: pointer;
+
+  margin-bottom: 0.3vh;
 
   > div {
     width: 100%;
@@ -66,7 +68,7 @@ const HeaderFiltersBarContainer = styled.div`
   border-top: var(--border-width) solid var(--border-color);
   font-size: 0.85rem;
 
-  height: var(--layout-header-search-container-height);
+  height: ${({ theme }) => theme.header.filter.bar.height };
 
   > * {
     border-right: var(--border-width) solid var(--border-color);

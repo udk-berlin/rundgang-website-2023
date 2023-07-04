@@ -55,7 +55,7 @@ const ProgramContainer = styled.div`
   );
 
   margin-bottom: -2px;
-  padding: var(--program-padding);
+  padding: ${({ theme }) => theme.padding};
 
   border-bottom: var(--border-width) solid var(--border-color);
   border-right: var(--border-width) solid var(--border-color);

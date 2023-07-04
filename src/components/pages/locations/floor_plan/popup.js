@@ -32,7 +32,7 @@ const LocationsFloorPlanPopupContainer = styled.div`
   z-index: 4;
 
   display: grid;
-  grid-template-columns: var(--layout-footer-grid-template-columns);
+  grid-template-columns: ${({ theme }) => theme.footer.gridTemplateColumn1} ${({ theme }) => theme.footer.gridTemplateColumn2} ${({ theme }) => theme.footer.gridTemplateColumn3};
 
   width: 100%;
   min-width: 100%;

@@ -28,9 +28,11 @@ export function SwitchLocalizationLink() {
 }
 
 const SwitchLocalizationWrapper = styled.div`
-  font-size: ${({ theme }) => theme.localization.fontSize}; // layout: 0.85rem
   display: flex;
   flex-direction: row;
+  
+  font-size: ${({ theme }) => theme.localization.fontSize};
+  color: ${({ theme }) => theme.localization.color};
 `;
 
 const SlashContainer = styled.div`
@@ -39,8 +41,8 @@ const SlashContainer = styled.div`
 
 const SwitchLocalizationLinkContainer = styled.div`
   > a {
-    color: ${({ selected }) =>
-      selected ? "var(--color-pink) !important" : "white"};
+    color: ${({ theme, selected }) =>
+      selected ? "var(--color-pink) !important" : theme.localization.color};
   }
 
   > a:hover {

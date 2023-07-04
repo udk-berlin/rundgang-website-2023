@@ -47,7 +47,11 @@ const LocationsGroundPlanContainer = styled.div`
   max-height: ${({ theme })=> theme.groundPlan.image.height};
 
   background:  var(--color-dark-gray);
-  border-right: var(--border-width) solid var(--border-color);
+  border: ${({ theme }) => theme.groundPlan.image.border};
+  border-right: ${({ theme }) => theme.border};
+  border-bottom: 0;
+  
+  padding: 1.2rem 0;
 
   > div {
     width: 100%;
