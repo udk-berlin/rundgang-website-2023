@@ -1,14 +1,14 @@
 import Page from "@/components/pages/page";
 import Contact from "@/components/pages/contact";
-import { SavedProjectsProvider } from '@/providers/saved_projects'
-import React from 'react'
+import { SavedProjectsProvider } from "@/providers/saved_projects";
+import React from "react";
 
-export default function ContactPage () {
+export default function ContactPage() {
   return (
-    <Page>
+    <Page title="contact">
       <SavedProjectsProvider>
         <Contact />
       </SavedProjectsProvider>
     </Page>
-  )
+  );
 }
