@@ -24,7 +24,6 @@ export default function LandingBackground() {
         : "/assets/media/bg_video" + Math.floor(Math.random() * 2)
     );
     videoRef.current.load();
-    console.log(path + "_fallback" + ".webp");
   }, [isMobile]);
 
   return (
