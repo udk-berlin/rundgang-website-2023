@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Masonry from "react-responsive-masonry";
 import { useQuery, gql } from "@apollo/client";
@@ -15,7 +15,7 @@ import {
   programSTheme,
 } from "@/themes/pages/program";
 
-const QUERY = gql`
+const PROJECTS_QUERY = gql`
   {
     items {
       name
@@ -35,10 +35,35 @@ const QUERY = gql`
   }
 `;
 
+const CONTEXTS_QUERY = gql`
+{
+  contexts {
+    id,
+    name,
+    template,
+    parents {
+      id
+    }
+  }
+}
+`;
+
+function buildObjects(res) {
+  const obj = {}
+
+  if (res && res.data && res.data.contexts) {
+    res.data.contexts.forEach(context => {
+      obj[context.id] = context
+    })
+  }
+
+  return obj
+}
+
 export default function Program() {
-  const { data, loading, error } = useQuery(QUERY);
-  //if (loading) return "Loading...";
-  //if (error) return <pre>{error.message}</pre>;
+  const projects = useQuery(PROJECTS_QUERY);
+  let contextsResponse = useQuery(CONTEXTS_QUERY);
+  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
@@ -59,15 +84,15 @@ export default function Program() {
     <Layout>
       <ThemeProvider theme={responsiveTheme}>
         <ProgramContainer>
-          {loading || error ? (
+          {projects.loading || projects.error ? (
             <div>Loading...</div>
           ) : (
             <Masonry
               columnsCount={responsiveTheme.MASONRY_COLUMNS}
               gutter={responsiveTheme.MASONRY_GUTTER}
             >
-              {data.items.map((project) => (
-                <ProjectCell project={project} />
+              {projects.data.items.map((project) => (
+                <ProjectCell project={project} contexts={contexts} />
               ))}
             </Masonry>
           )}

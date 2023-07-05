@@ -5,10 +5,6 @@ import { useSlider } from "@/providers/slider";
 import ProjectLink from "@/components/pages/projects/project/link";
 
 export default function ProjectTitle({ project, fontSize = 2, link }) {
-  if (project.error) return <></>
-  if (project.isLoading) return <div>loading...</div>
-  project = project.data
-
   const measureContainerRef = useRef(null);
   const slider = useSlider();
 

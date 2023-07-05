@@ -4,13 +4,12 @@ import styled from "styled-components";
 import getLocalizedData from "@/components/localization/data";
 
 export function ProjectText({ project, media }) {
-  if (project.error || media.error) return <></>
-  if (project.isLoading || media.isLoading) return <div>loading...</div>
-  project = project.data
-  media = media.data
-
-  let description = getLocalizedData(project.description);
+  let description = ''
   let texts = [];
+
+  if (project) {
+    description = getLocalizedData(project.description);
+  }
 
   if (media && "languages" in media) {
     let mediaItems = getLocalizedData(media.languages).content;

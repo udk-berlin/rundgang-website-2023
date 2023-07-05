@@ -3,11 +3,11 @@ import styled from "styled-components";
 import InfoGridFormat from "@/components/pages/program/info_grid/format";
 import InfoGridCarousel from "@/components/pages/program/info_grid/carousel";
 
-export default function InfoGrid({ project }) {
+export default function InfoGrid({ project, contexts }) {
   return (
     <InfoGridContainer>
-      <InfoGridFormat project={project} />
-      <InfoGridCarousel project={project} />
+      <InfoGridFormat project={project} contexts={contexts} />
+      <InfoGridCarousel project={project} contexts={contexts} />
     </InfoGridContainer>
   );
 }

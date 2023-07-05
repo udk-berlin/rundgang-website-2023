@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import useSWR from "swr";
 import styled, { ThemeProvider } from "styled-components";
 
@@ -18,11 +18,40 @@ import {
   // projectMTheme,
   projectSTheme,
 } from "@/themes/pages/project";
+import {gql, useQuery} from "@apollo/client";
+
+function buildObjects(res) {
+  const obj = {}
+
+  if (res && res.data && res.data.contexts) {
+    res.data.contexts.forEach(context => {
+      obj[context.id] = context
+    })
+  }
+
+  return obj
+}
+
+const CONTEXTS_QUERY = gql`
+{
+  contexts {
+    id,
+    name,
+    template,
+    parents {
+      id
+    }
+  }
+}
+`;
 
 export default function Project({ id }) {
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
+
+  let contextsResponse = useQuery(CONTEXTS_QUERY);
+  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 
   const project = useSWR(
     getUrl(id),
@@ -55,12 +84,12 @@ export default function Project({ id }) {
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>
-          <ProjectMedia project={project} media={media} infoGridPos={infoGridPos} />
+          <ProjectMedia project={project?.data} media={media?.data} contexts={contexts} infoGridPos={infoGridPos} />
           <InfoContainer>
-            <ProjectTitle project={project} link={false} />
-            <ProjectAuthors project={project} fontSize={1} />
-            {infoGridPos ? <></> : <InfoGrid project={project} />}
-            <ProjectText project={project} media={media} />
+            <ProjectTitle project={project?.data} link={false} />
+            <ProjectAuthors project={project?.data} fontSize={1} />
+            {infoGridPos ? <></> : <InfoGrid project={project?.data} />}
+            <ProjectText project={project?.data} media={media?.data} />
           </InfoContainer>
         </ProjectContainer>
       </ThemeProvider>

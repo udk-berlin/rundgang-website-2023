@@ -13,7 +13,7 @@ import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 
-export default function ProjectCell({ project }) {
+export default function ProjectCell({ project, contexts }) {
   const [cellHovered, setCellHovered] = useState(false);
 
   return (
@@ -33,7 +33,7 @@ export default function ProjectCell({ project }) {
       /> */}
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
-      {/* <InfoGrid project={project} /> */}
+      <InfoGrid project={project} contexts={contexts} />
     </ProjectCellContainer>
   );
 }

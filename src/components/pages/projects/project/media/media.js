@@ -5,12 +5,12 @@ import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
 import ProjectImageMedia from "@/components/pages/projects/project/media/image";
 import { ProjectAdditionalMedia } from "@/components/pages/projects/project/media/image";
 
-export default function ProjectMedia({ project, media, fullSize = true, infoGridPos }) {
+export default function ProjectMedia({ project, media, contexts, fullSize = true, infoGridPos }) {
   return (
     <MediaContainer>
-      {infoGridPos ? <ProjectInfoGrid project={project.data} /> : <></>}
-      <ProjectImageMedia project={project.data} fullSize={fullSize} />
-      <ProjectAdditionalMedia project={project.data} media={media.data} />
+      {infoGridPos ? <ProjectInfoGrid project={project} contexts={contexts} /> : <></>}
+      <ProjectImageMedia project={project} fullSize={fullSize} />
+      <ProjectAdditionalMedia project={project} media={media} />
     </MediaContainer>
   )
 }
