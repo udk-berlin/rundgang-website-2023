@@ -1,32 +1,30 @@
-import {getItemIds, getItems} from "@/utils/api/items";
+import { getItemIds, getItems } from "@/utils/api/items";
 import Page from "@/components/pages/page";
 import Project from "@/components/pages/projects/project/project";
 
-import {LOCALES} from "@/components/localization/provider";
-import { SavedProjectsProvider } from '@/providers/saved_projects'
-import React from 'react'
+import { LOCALES } from "@/components/localization/provider";
+import { SavedProjectsProvider } from "@/providers/saved_projects";
+import React from "react";
 
-export async function getStaticProps ({ params }) {
-  const projects = await getItems()
-  const project = projects[params.id]
-  return { props: { project } }
+export async function getStaticProps({ params }) {
+  const projects = await getItems();
+  const project = projects[params.id];
+  return { props: { project } };
 }
 
 export async function getStaticPaths() {
   const ids = await getItemIds();
-  const paths = []
+  const paths = [];
 
-  ids.forEach(id => {
-    LOCALES.forEach(locale => {
-      paths.push(
-        {
-          params: {
-            id: id,
-          },
-          locale
-        }
-      )
-    })
+  ids.forEach((id) => {
+    LOCALES.forEach((locale) => {
+      paths.push({
+        params: {
+          id: id,
+        },
+        locale,
+      });
+    });
   });
 
   return {
@@ -35,12 +33,13 @@ export async function getStaticPaths() {
   };
 }
 
-export default function ProjectPage ({ project }) {
+export default function ProjectPage({ project }) {
+  console.log(project);
   return (
-    <Page>
+    <Page title={project.name}>
       <SavedProjectsProvider>
         <Project project={project} />
       </SavedProjectsProvider>
     </Page>
-  )
+  );
 }
