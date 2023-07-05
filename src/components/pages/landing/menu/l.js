@@ -485,6 +485,10 @@ export const StyledSVG = styled.svg`
   height: 33vw;
   min-height: 33vw;
   max-height: 33vw;
+  
+  g {
+    pointer-events: all;
+  }
 `;
 
 export const StyledPath = styled.path`
