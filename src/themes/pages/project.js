@@ -8,7 +8,7 @@ export const projectBreakpoints = {
 
 export const projectLTheme = {
   ...baseLTheme,
-  id: 'l',
+  id: "l",
   flexDirection: "row",
   marginBottom: 0,
   info: {
@@ -28,81 +28,85 @@ export const projectLTheme = {
     sliderOffset: 2,
   },
   media: {
-    display: '',
+    display: "",
     flexDirection: "",
     height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
-    width: '50vw',
-    overflowX: 'hidden',
-    overflowY: 'scroll',
+    width: "50vw",
+    overflowX: "hidden",
+    overflowY: "scroll",
     image: {
-      height: 'auto',
-      width: '50vw'
+      height: "auto",
+      width: "50vw",
     },
     placeholder: {
       height: "100vw",
     },
     audio: {
-      width: '50vw'
+      width: "50vw",
     },
     video: {
       height: "",
-      width: '50vw',
+      width: "50vw",
       ratio: 1.777777777,
-    }
+    },
   },
   text: {
     heading: fontSizes.l.medium,
   },
 };
 
-// export const projectMTheme = {
-//   ...baseMTheme,
-//   container: {
-//     flexDirection: "row",
-//   },
-//   infoContainer: {
-//     padding: "0.75rem",
-//   },
-//   title: {
-//     fontSize: fontSizes.l.medium,
-//     sliderIndex: 0,
-//   },
-//   author: {
-//     sliderIndex: 0,
-//   },
-//   format: {
-//     sliderIndex: 1,
-//   },
-//   carousel: {
-//     sliderOffset: 2,
-//   },
-//
-//   media: {
-//     display: 'flex',
-//     flexDirection: "row",
-//     height: '',
-//     width: '100vw',
-//     overflowX: 'scroll',
-//     overflowY: 'hidden',
-//     image: {
-//       height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
-//       width: ''
-//     },
-//     audio: {
-//       width: ''
-//     },
-//     video: {
-//       ratio: 1.777777777,
-//     }
-//   },
-//   additionalText: {
-//     heading: fontSizes.l.medium,
-//   },
-// };
+export const projectMTheme = {
+  ...baseMTheme,
+  container: {
+    flexDirection: "row",
+  },
+  info: {
+    padding: "0.75rem",
+  },
+  title: {
+    fontSize: fontSizes.l.medium,
+    sliderIndex: 0,
+  },
+  author: {
+    sliderIndex: 0,
+  },
+  format: {
+    sliderIndex: 1,
+  },
+  carousel: {
+    sliderOffset: 2,
+  },
+  media: {
+    display: "",
+    flexDirection: "",
+    height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
+    width: "50vw",
+    overflowX: "hidden",
+    overflowY: "scroll",
+    image: {
+      height: "auto",
+      width: "50vw",
+    },
+    placeholder: {
+      height: "100vw",
+    },
+    audio: {
+      width: "50vw",
+    },
+    video: {
+      height: "",
+      width: "50vw",
+      ratio: 1.777777777,
+    },
+  },
+  additionalText: {
+    heading: fontSizes.l.medium,
+  },
+};
 
 export const projectSTheme = {
   ...baseMTheme,
-  id: 'l',
+  id: "l",
   flexDirection: "column",
   marginBottom: `calc(${layoutMTheme.footer.height} + 1vh)`,
   info: {
@@ -122,27 +126,27 @@ export const projectSTheme = {
     sliderOffset: 2,
   },
   media: {
-    display: 'flex',
+    display: "flex",
     flexDirection: "row",
-    height: 'auto',
-    width: '100vw',
-    overflowX: 'scroll',
-    overflowY: 'hidden',
+    height: "auto",
+    width: "100vw",
+    overflowX: "scroll",
+    overflowY: "hidden",
     image: {
       height: "100vw",
-      width: 'auto'
+      width: "auto",
     },
     placeholder: {
       height: "100vw",
     },
     audio: {
-      width: '100vw'
+      width: "100vw",
     },
     video: {
       height: "100vw",
       width: `calc(${1.777777777} * 100vw)`,
       ratio: 1.777777777,
-    }
+    },
   },
   text: {
     heading: fontSizes.l.medium,

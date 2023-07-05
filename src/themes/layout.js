@@ -59,7 +59,7 @@ export const layoutLTheme = {
 export const layoutMTheme = {
   ...baseMTheme,
   localization: {
-    fontSize: "0.85rem",
+    fontSize: "1.5rem",
     color: "black",
   },
   header: {
