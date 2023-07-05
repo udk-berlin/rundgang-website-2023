@@ -6,7 +6,7 @@ import { useSavedProjects } from "@/providers/saved_projects";
 
 import Layout from "@/components/layout/layout";
 import ProjectCell from "@/components/pages/program/project_cell";
-import { useEffect, useState } from "react";
+import {useEffect, useMemo, useState} from "react";
 import {
   programLTheme,
   programMTheme,
@@ -14,17 +14,45 @@ import {
 } from "@/themes/pages/program";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/theme";
+import {gql, useQuery} from "@apollo/client";
 
-export const MASONRY_COLUMNS = 4;
-export const MASONRY_GUTTER = "0.75rem";
+const CONTEXTS_QUERY = gql`
+{
+  contexts {
+    id,
+    name,
+    template,
+    parents {
+      id
+    }
+  }
+}
+`;
+
+
+function buildObjects(res) {
+  const obj = {}
+
+  if (res && res.data && res.data.contexts) {
+    res.data.contexts.forEach(context => {
+      obj[context.id] = context
+    })
+  }
+
+  return obj
+}
 
 export default function SavedProjects() {
   const filter = useFilter();
   const savedProjects = useSavedProjects();
   const projects = getSavedAndFilteredProjects(
     savedProjects,
-    filter.filteredProjects
+    filter.filteredProjects,
+    true
   );
+
+  let contextsResponse = useQuery(CONTEXTS_QUERY);
+  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
@@ -47,8 +75,8 @@ export default function SavedProjects() {
             columnsCount={responsiveTheme.MASONRY_COLUMNS}
             gutter={responsiveTheme.MASONRY_GUTTER}
           >
-            {Object.values(projects).map((project) => (
-              <ProjectCell project={project} />
+            {projects.map((project) => (
+              <ProjectCell project={project} contexts={contexts}/>
             ))}
           </Masonry>
         </SavedProjectsContainer>
@@ -61,16 +89,30 @@ const SavedProjectsContainer = styled.div`
   padding: var(--program-padding);
 `;
 
-function getSavedAndFilteredProjects(savedProjects, filteredProjects) {
-  const projects = {};
+function getSavedAndFilteredProjects(savedProjects, filteredProjects, useFast = false) {
+  if (useFast) {
+    const projects = [];
 
-  if (savedProjects) {
-    savedProjects.forEach((id) => {
-      if (Object.keys(filteredProjects).includes(id)) {
-        projects[id] = filteredProjects[id];
-      }
-    });
+    if (savedProjects) {
+      filteredProjects.forEach(project => {
+        if (savedProjects.includes(project.id)) {
+          projects.push(project)
+        }
+      })
+    }
+
+    return projects;
+  } else {
+    const projects = {};
+
+    if (savedProjects) {
+      savedProjects.forEach(id => {
+        if (Object.keys(filteredProjects).includes(id)) {
+          projects[id] = filteredProjects[id];
+        }
+      });
+    }
+
+    return projects;
   }
-
-  return projects;
 }

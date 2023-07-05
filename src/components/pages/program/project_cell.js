@@ -15,12 +15,11 @@ import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/theme";
 
-export default function ProjectCell({ key, project }) {
+export default function ProjectCell({ project, contexts }) {
   const [cellHovered, setCellHovered] = useState(false);
 
   return (
     <ProjectCellContainer
-      key={key}
       onMouseEnter={() => setCellHovered(true)}
       onMouseLeave={() => setCellHovered(false)}
     >
@@ -36,9 +35,9 @@ export default function ProjectCell({ key, project }) {
       />
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
-      <InfoGrid project={project} />
+      <InfoGrid project={project} contexts={contexts} />
     </ProjectCellContainer>
-  );
+  )
 }
 
 export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {

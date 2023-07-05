@@ -5,8 +5,8 @@ import styled from "styled-components";
 export default function InfoGridDate({ project }) {
   let projectTimes = [];
 
-  if ("temporal" in project) {
-    project.temporal.forEach((date) => {
+  if (project && project.allocation && project.allocation.temporal) {
+    project.allocation.temporal.forEach((date) => {
       projectTimes.push([
         new Date(date.start),
         new Date(date.end),
@@ -14,15 +14,19 @@ export default function InfoGridDate({ project }) {
     });
   }
 
-  let Items = projectTimes.map((projectTime) => (
-    <InfoGridDateElement>
-      <InfoGridDay projectTime={projectTime} />
-      <InfoGridTime start={projectTime[0]} end={projectTime[1]} />
-    </InfoGridDateElement>
-  ));
-
   return (
-    <InfoGridDateContainer>{Items.map((Item) => Item)}</InfoGridDateContainer>
+    <InfoGridDateContainer>
+      {
+        projectTimes.map((projectTime) => {
+          return (
+            <InfoGridDateElement>
+              <InfoGridDay projectTime={projectTime} />
+              <InfoGridTime start={projectTime[0]} end={projectTime[1]} />
+            </InfoGridDateElement>
+          )
+        })
+      }
+    </InfoGridDateContainer>
   );
 }
 

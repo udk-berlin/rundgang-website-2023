@@ -1,45 +1,22 @@
-import { getItemIds, getItems } from "@/utils/api/items";
+import React from 'react'
+import { useRouter } from 'next/router'
+
 import Page from "@/components/pages/page";
 import Project from "@/components/pages/projects/project/project";
+import { SavedProjectsProvider } from '@/providers/saved_projects'
 
-import { LOCALES } from "@/components/localization/provider";
-import { SavedProjectsProvider } from "@/providers/saved_projects";
-import React from "react";
+export default function ProjectPage () {
+  const router = useRouter()
 
-export async function getStaticProps({ params }) {
-  const projects = await getItems();
-  const project = projects[params.id];
-  return { props: { project } };
-}
-
-export async function getStaticPaths() {
-  const ids = await getItemIds();
-  const paths = [];
-
-  ids.forEach((id) => {
-    LOCALES.forEach((locale) => {
-      paths.push({
-        params: {
-          id: id,
-        },
-        locale,
-      });
-    });
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export default function ProjectPage({ project }) {
-  console.log(project);
   return (
-    <Page title={project.name}>
+    <Page title={'project'}>
       <SavedProjectsProvider>
-        <Project project={project} />
+        {
+          router?.query?.id ?
+            <Project id={router.query.id}/> :
+            'Loading...'
+        }
       </SavedProjectsProvider>
     </Page>
-  );
+  )
 }

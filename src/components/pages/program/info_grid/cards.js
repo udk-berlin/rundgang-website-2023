@@ -2,103 +2,269 @@ import { InfoGridCardItem } from "@/components/pages/program/info_grid/item";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
-export function InfoGridLocation({ project }) {
-  let location = <></>;
-  let level = <></>;
-  let room = <></>;
-  let centre = <></>;
+export function InfoGridLocation({ project, contexts }) {
+  const locations = []
 
-  if ("location-building" in project)
-    location = (
-      <InfoGridCardItem margin="170px">
-        {project["location-building"].name}
-      </InfoGridCardItem>
-    );
-  else if ("external-location" in project)
-    location = (
-      <InfoGridCardItem margin="170px">
-        {project["external-location"].name}
-      </InfoGridCardItem>
-    );
+  project.parents.forEach(parent => {
+    if (parent) {
+      let context = contexts[parent.id]
+      if (context) {
+        if (context.template === 'location-room') {
+          let room = context
+          let floor
+          let building
 
-  if ("location-level" in project)
-    level = (
-      <InfoGridCardItem margin="10px">
-        <FormattedMessage id="floor" />
-        :&nbsp;
-        {project["location-level"].name}
-      </InfoGridCardItem>
-    );
+          context = contexts[room.parents[0].id]
 
-  if ("location-room" in project)
-    room = (
-      <InfoGridCardItem margin="50px">
-        <FormattedMessage id="room" />
-        :&nbsp;{project["location-room"].name}
-      </InfoGridCardItem>
-    );
+          if (context && context.template === 'location-level') {
+            floor = context
+            context = contexts[floor.parents[0].id]
 
-  if ("centre" in project)
-    centre = (
-      <InfoGridCardItem margin="50px">{project.centre.name}</InfoGridCardItem>
-    );
+            if (context && context.template === 'location-building') {
+              building = context
+            }
+          } else if (context.template === 'location-building') {
+            building = context
+          }
+
+          locations.push(
+            {
+              room: room?.name,
+              floor: floor?.name,
+              building: building?.name,
+            }
+          )
+        }
+      }
+    }
+  })
 
   return (
     <Container>
-      {location}
-      {centre}
-      {level}
-      {room}
+      {
+        locations.map(location => {
+          return (
+            <>
+              <InfoGridCardItem margin="170px">
+                {location.building}
+              </InfoGridCardItem>
+              <InfoGridCardItem margin="10px">
+                <FormattedMessage id="floor" />
+                :&nbsp;
+                {location.floor}
+              </InfoGridCardItem>
+              <InfoGridCardItem margin="50px">
+                <FormattedMessage id="room" />
+                :&nbsp;
+                {location.room}
+              </InfoGridCardItem>
+            </>
+          )
+        })
+      }
     </Container>
   );
 }
 
-export function InfoGridContext({ project }) {
-  let faculty = <></>;
-  let institute = <></>;
-  let subject = <></>;
-  let course = <></>;
-  let clazz = <></>;
+export function InfoGridContext({ project, contexts }) {
+  const structures = []
 
-  if ("faculty" in project) {
-    faculty = (
-      <InfoGridCardItem margin="50px">{project.faculty.name}</InfoGridCardItem>
-    );
-  }
+  project.parents.forEach(parent => {
+    if (parent) {
+      let context = contexts[parent.id]
+      if (context && context.template === 'class') {
+        let clazz = context
+        let course
+        let subject
+        let institute
+        let faculty
+        //
+        // context = contexts[clazz.parents[0].id]
+        //
+        // if (context && context.template === 'course') {
+        //   course = context
+        //   context = contexts[course.parents[0].id]
+        //
+        //   if (context && context.template === 'institute') {
+        //     institute = context
+        //   } else if (context && context.template === 'faculty') {
+        //     faculty = context
+        //   }
+        // } else if (context.template === 'subject') {
+        //   subject = context
+        //   context = contexts[subject.parents[0].id]
+        //
+        //   if (context && context.template === 'institute') {
+        //     institute = context
+        //   } else if (context && context.template === 'faculty') {
+        //     faculty = context
+        //   }
+        // } else if (context && context.template === 'institute') {
+        //   institute = context
+        // } else if (context && context.template === 'faculty') {
+        //   faculty = context
+        // }
 
-  if ("institute" in project) {
-    institute = (
-      <InfoGridCardItem margin="150px">
-        {project.institute.name}
-      </InfoGridCardItem>
-    );
-  }
+        structures.push(
+          {
+            clazz: clazz?.name,
+            course: course?.name,
+            subject: subject?.name,
+            institute: institute?.name,
+            faculty: faculty?.name,
+          }
+        )
+      }
+      else if (context && context.template === 'course') {
+        let clazz
+        let course = context
+        let subject
+        let institute
+        let faculty
 
-  if ("subject" in project) {
-    subject = (
-      <InfoGridCardItem margin="100px">{project.subject.name}</InfoGridCardItem>
-    );
-  }
+        // context = contexts[course.parents[0].id]
+        //
+        // if (context && context.template === 'class') {
+        //   clazz = context
+        //   context = contexts[clazz.parents[0].id]
+        //
+        //   if (context && context.template === 'institute') {
+        //     institute = context
+        //   } else if (context && context.template === 'faculty') {
+        //     faculty = context
+        //   }
+        // } else if (context.template === 'subject') {
+        //   subject = context
+        //   context = contexts[subject.parents[0].id]
+        //
+        //   if (context && context.template === 'institute') {
+        //     institute = context
+        //   } else if (context && context.template === 'faculty') {
+        //     faculty = context
+        //   }
+        // } else if (context && context.template === 'institute') {
+        //   institute = context
+        // } else if (context && context.template === 'faculty') {
+        //   faculty = context
+        // }
 
-  if ("course" in project) {
-    course = (
-      <InfoGridCardItem margin="50px">{project.course.name}</InfoGridCardItem>
-    );
-  }
+        structures.push(
+          {
+            clazz: clazz?.name,
+            course: course?.name,
+            subject: subject?.name,
+            institute: institute?.name,
+            faculty: faculty?.name,
+          }
+        )
+      }
+      else if (context && context.template === 'subject') {
+        let clazz
+        let course
+        let subject = context
+        let institute
+        let faculty
 
-  if ("class" in project) {
-    clazz = (
-      <InfoGridCardItem margin="200px">{project.class.name}</InfoGridCardItem>
-    );
-  }
+        context = contexts[subject.parents[0].id]
+
+        // if (context && context.template === 'class') {
+        //   clazz = context
+        //   context = contexts[clazz.parents[0].id]
+        //
+        //   if (context && context.template === 'institute') {
+        //     institute = context
+        //   } else if (context && context.template === 'faculty') {
+        //     faculty = context
+        //   }
+        // } else if (context.template === 'course') {
+        //   course = context
+        //   context = contexts[course.parents[0].id]
+        //
+        //   if (context && context.template === 'institute') {
+        //     institute = context
+        //   } else if (context && context.template === 'faculty') {
+        //     faculty = context
+        //   }
+        // } else if (context && context.template === 'institute') {
+        //   institute = context
+        // } else if (context && context.template === 'faculty') {
+        //   faculty = context
+        // }
+        //
+        // structures.push(
+        //   {
+        //     clazz: clazz?.name,
+        //     course: course?.name,
+        //     subject: subject?.name,
+        //     institute: institute?.name,
+        //     faculty: faculty?.name,
+        //   }
+        // )
+      }
+      else if (context && context.template === 'institute') {
+        let clazz
+        let course
+        let subject
+        let institute = context
+        let faculty
+
+        // context = contexts[institute.parents[0].id]
+        //
+        // if (context && context.template === 'faculty') {
+        //   faculty = context
+        // }
+
+        structures.push(
+          {
+            clazz: clazz?.name,
+            course: course?.name,
+            subject: subject?.name,
+            institute: institute?.name,
+            faculty: faculty?.name,
+          }
+        )
+      }
+      else if (context && context.template === 'faculty') {
+        let clazz
+        let course
+        let subject
+        let institute
+        let faculty = context
+
+        // context = contexts[faculty.parents[0].id]
+        //
+        // if (context && context.template === 'institute') {
+        //   institute = context
+        // }
+
+        structures.push(
+          {
+            clazz: clazz?.name,
+            course: course?.name,
+            subject: subject?.name,
+            institute: institute?.name,
+            faculty: faculty?.name,
+          }
+        )
+      }
+    }
+  })
 
   return (
     <Container>
-      {faculty}
-      {institute}
-      {subject}
-      {course}
-      {clazz}
+      {
+        structures.map(structure => {
+          return (
+            <>
+              <InfoGridCardItem margin="50px">{structure.faculty}</InfoGridCardItem>
+              <InfoGridCardItem margin="150px">{structure.institute}</InfoGridCardItem>
+              <InfoGridCardItem margin="100px">{structure.subject}</InfoGridCardItem>
+              <InfoGridCardItem margin="50px">{structure.course}</InfoGridCardItem>
+              <InfoGridCardItem margin="200px">{structure.class}</InfoGridCardItem>
+            </>
+          )
+        })
+      }
     </Container>
   );
 }

@@ -3,30 +3,32 @@ import styled from "styled-components";
 
 import getLocalizedData from "@/components/localization/data";
 
-export function ProjectText({ project, data }) {
-  let description = getLocalizedData(project.description);
+export function ProjectText({ project, projectForDescription, media }) {
+  let description = ''
   let texts = [];
 
-  console.log(data);
+  if (projectForDescription && projectForDescription.data) {
+    description = getLocalizedData(projectForDescription.data.description);
+  }
 
-  if (data && "languages" in data) {
-    let content = getLocalizedData(data.languages).content;
-    Object.values(content).forEach((item) => {
-      switch (item.template) {
+  if (media && "languages" in media) {
+    let mediaItems = getLocalizedData(media.languages).content;
+    Object.values(mediaItems).forEach(mediaItem => {
+      switch (mediaItem.template) {
         case "text":
           texts.push(
-            <ProjectTextText>{item.formatted_content}</ProjectTextText>
+            <ProjectTextText dangerouslySetInnerHTML={{ __html: mediaItem.formatted_content }}/>
           );
           break;
         case "heading":
           texts.push(
-            <ProjectTextHeading>{item.content.substring(4)}</ProjectTextHeading>
+            <ProjectTextHeading>{mediaItem.content.substring(4)}</ProjectTextHeading>
           );
           break;
         case "ul":
           texts.push(
             <ProjectTextList
-              dangerouslySetInnerHTML={{ __html: item.formatted_content }}
+              dangerouslySetInnerHTML={{ __html: mediaItem.formatted_content }}
             />
           );
           break;
@@ -51,6 +53,7 @@ const ProjectTextContainer = styled.div`
 `;
 
 const ProjectTextText = styled.div``;
+
 
 const ProjectTextHeading = styled.div`
   font-size: ${({ theme }) => theme.text.heading};

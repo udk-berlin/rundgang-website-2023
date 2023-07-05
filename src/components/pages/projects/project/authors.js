@@ -1,11 +1,12 @@
 import { useSlider } from "@/providers/slider";
 import styled from "styled-components";
+import React from "react";
 
 const SLIDER_INDEX = 2;
 
 export default function ProjectAuthors({ project, fontSize = 1 }) {
   const slider = useSlider();
-  const authors = project.authors ? project.authors : [];
+  const authors = project?.origin?.authors ? project.origin.authors : [];
   return (
     <ProjectAuthorsContainer
       fontSize={fontSize}

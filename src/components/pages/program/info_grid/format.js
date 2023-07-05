@@ -29,27 +29,34 @@ const formatToMarginLeftMapper = {
   default: "2",
 };
 
-export default function InfoGridFormat({ project, margin }) {
+export default function InfoGridFormat({ project, contexts, margin }) {
   const slider = useSlider();
+  const formats = []
+
+  project.parents.forEach(parent => {
+    if (parent) {
+      const context = contexts[parent.id]
+      if (context) {
+        if (context.template === 'format-element') {
+          formats.push(context.name)
+        }
+      }
+    }
+  })
 
   return (
     <>
-      {project["format-element"] ? (
-        <Container slider={slider}>
-          <InfoGridItemLink
-            margin={
-              project["format-element"].name in formatToMarginLeftMapper &&
-              !margin
-                ? formatToMarginLeftMapper[project["format-element"].name]
-                : formatToMarginLeftMapper.default
-            }
-          >
-            {project["format-element"].name}
-          </InfoGridItemLink>
-        </Container>
-      ) : (
-        <></>
-      )}
+      <Container slider={slider}>
+        {
+          formats.map(format => {
+            return (
+              <InfoGridItemLink margin={format in formatToMarginLeftMapper && !margin ? formatToMarginLeftMapper[format] : formatToMarginLeftMapper.default}>
+                {format}
+              </InfoGridItemLink>
+            )
+          })
+        }
+      </Container>
     </>
   );
 }

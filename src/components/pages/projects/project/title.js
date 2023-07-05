@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 import { useSlider } from "@/providers/slider";
@@ -12,8 +12,8 @@ export default function ProjectTitle({ project, fontSize = 2, link }) {
     <>
       <ProjectTitleMeasureContainer ref={measureContainerRef}>
         <ProjectTitleHeightMeasureContainerForMeasuring fontSize={fontSize}>
-          <DropCap fontSize={fontSize}>{project.name.substring(0, 1)}</DropCap>
-          {project.name.substring(1)}
+          <DropCap fontSize={fontSize}>{project?.name.substring(0, 1)}</DropCap>
+          {project?.name.substring(1)}
         </ProjectTitleHeightMeasureContainerForMeasuring>
       </ProjectTitleMeasureContainer>
 
@@ -27,8 +27,8 @@ export default function ProjectTitle({ project, fontSize = 2, link }) {
         }
       >
         <ProjectLink project={project} link={link}>
-          <DropCap fontSize={fontSize}>{project.name.substring(0, 1)}</DropCap>
-          {project.name.substring(1)}
+          <DropCap fontSize={fontSize}>{project?.name.substring(0, 1)}</DropCap>
+          {project?.name.substring(1)}
         </ProjectLink>
       </ProjectTitleContainer>
     </>

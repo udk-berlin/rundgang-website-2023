@@ -11,15 +11,15 @@ import { useSlider } from "@/providers/slider";
 import { useEffect, useRef } from "react";
 import { convertRemToPixels } from "@/components/pages/program/info_grid/item";
 
-export default function ProjectInfoGrid({ project }) {
+export default function ProjectInfoGrid({ project, contexts }) {
   return (
     <ProjectInfoGridContainer>
       <FormatDateContainer>
-        <InfoGridFormat project={project} />
+        <InfoGridFormat project={project} contexts={contexts} />
         <InfoGridDate project={project} />
       </FormatDateContainer>
-      <InfoGridLocation project={project} />
-      <InfoGridContext project={project} />
+      <InfoGridLocation project={project} contexts={contexts} />
+      <InfoGridContext project={project} contexts={contexts} />
     </ProjectInfoGridContainer>
   );
 }

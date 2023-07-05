@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Masonry from "react-responsive-masonry";
+import { useQuery, gql } from "@apollo/client";
 
 import { useFilter } from "@/providers/filter";
 
@@ -14,7 +15,35 @@ import {
   programSTheme,
 } from "@/themes/pages/program";
 
+const CONTEXTS_QUERY = gql`
+{
+  contexts {
+    id,
+    name,
+    template,
+    parents {
+      id
+    }
+  }
+}
+`;
+
+function buildObjects(res) {
+  const obj = {}
+
+  if (res && res.data && res.data.contexts) {
+    res.data.contexts.forEach(context => {
+      obj[context.id] = context
+    })
+  }
+
+  return obj
+}
+
 export default function Program() {
+  let contextsResponse = useQuery(CONTEXTS_QUERY);
+  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
+
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
 
@@ -36,10 +65,9 @@ export default function Program() {
         <ProgramContainer>
           <Masonry
             columnsCount={responsiveTheme.MASONRY_COLUMNS}
-            gutter={responsiveTheme.MASONRY_GUTTER}
-          >
-            {Object.values(filter.filteredProjects).map((project) => (
-              <ProjectCell project={project} />
+            gutter={responsiveTheme.MASONRY_GUTTER}>
+            {filter.filteredProjects.map((project) => (
+              <ProjectCell project={project} contexts={contexts} />
             ))}
           </Masonry>
         </ProgramContainer>

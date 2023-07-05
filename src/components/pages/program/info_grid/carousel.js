@@ -8,12 +8,12 @@ import {
 import { useSlider } from "@/providers/slider";
 import useWindowSize from "@/hooks/window_size";
 
-export default function InfoGridCarousel({ project }) {
+export default function InfoGridCarousel({ project, contexts}) {
   return (
     <Carousel>
       <InfoGridDate project={project} />
-      <InfoGridLocation project={project} />
-      <InfoGridContext project={project} />
+      <InfoGridLocation project={project} contexts={contexts} />
+      <InfoGridContext project={project} contexts={contexts} />
     </Carousel>
   );
 }

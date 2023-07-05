@@ -73,6 +73,7 @@ export const timelineWidthsWithoutVW = {
 
 export const timelineLTheme = {
   ...baseLTheme,
+  id: 'l',
   width: timelineWidths.l,
   widthPerMinute: `calc(${timelineWidths.l} / ${NUMBER_OF_HOURS * 60})`,
   widthPerHour: `calc(${timelineWidths.l} / ${NUMBER_OF_HOURS})`,
@@ -103,6 +104,7 @@ export const timelineLTheme = {
 
 export const timelineMTheme = {
   ...baseMTheme,
+  id: 'm',
   width: timelineWidths.m,
   widthPerMinute: `calc(${timelineWidths.m} / ${NUMBER_OF_HOURS * 60})`,
   widthPerHour: `calc(${timelineWidths.m} / ${NUMBER_OF_HOURS})`,
