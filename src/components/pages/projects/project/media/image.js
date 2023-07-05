@@ -16,8 +16,6 @@ export default function ProjectImageMedia({ project, fullSize = false }) {
 }
 
 export function ProjectAdditionalMedia({ project, media }) {
-  console.log(media)
-
   const theme = useTheme();
   const videoRef = useRef(null);
   let mediaItems = [];

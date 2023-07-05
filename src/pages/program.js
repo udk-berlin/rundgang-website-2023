@@ -11,7 +11,6 @@ import Page from "@/components/pages/page";
 import Program from "@/components/pages/program/program";
 import { FilterProvider } from "@/providers/filter";
 import { SavedProjectsProvider } from "@/providers/saved_projects";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 // export async function getStaticProps () {
 //   const projects = await getItems()
@@ -32,16 +31,9 @@ export default function ProgramPage({
   structures,
   structuresFilters,
 }) {
-  const client = new ApolloClient({
-    uri: "https://2023.api.rundgang.udk-berlin.de/graphql",
-    cache: new InMemoryCache(),
-  });
-
   return (
     <Page>
-      <ApolloProvider client={client}>
-        <Program />
-      </ApolloProvider>
+      <Program />
       {/* <SavedProjectsProvider>
         <FilterProvider projects={projects} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}>
           <Program />

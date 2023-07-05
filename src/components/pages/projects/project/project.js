@@ -32,6 +32,26 @@ function buildObjects(res) {
   return obj
 }
 
+const PROJECT_QUERY = gql`
+  {
+    item(id: "!NkmohVQCmZEmeakBHt:content.udk-berlin.de") {
+      name
+      id
+      origin {
+        authors {
+          id
+          name
+        }
+      }
+      parents {
+        id
+      }
+      thumbnail
+      thumbnail_full_size
+    }
+  }
+`;
+
 const CONTEXTS_QUERY = gql`
 {
   contexts {
@@ -50,10 +70,11 @@ export default function Project({ id }) {
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
 
+  const project = useQuery(PROJECT_QUERY);
   let contextsResponse = useQuery(CONTEXTS_QUERY);
   const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 
-  const project = useSWR(
+  const projectForDescription = useSWR(
     getUrl(id),
     fetcher
   );
@@ -84,13 +105,21 @@ export default function Project({ id }) {
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>
-          <ProjectMedia project={project?.data} media={media?.data} contexts={contexts} infoGridPos={infoGridPos} />
-          <InfoContainer>
-            <ProjectTitle project={project?.data} link={false} />
-            <ProjectAuthors project={project?.data} fontSize={1} />
-            {infoGridPos ? <></> : <InfoGrid project={project?.data} />}
-            <ProjectText project={project?.data} media={media?.data} />
-          </InfoContainer>
+          {
+            project.loading || project.error ?
+              (<div>Loading...</div>) :
+              (
+                <>
+                  <ProjectMedia project={project.data.item} media={media?.data} contexts={contexts} infoGridPos={infoGridPos} />
+                  <InfoContainer>
+                    <ProjectTitle project={project.data.item} link={false} />
+                    <ProjectAuthors project={project.data.item} fontSize={1} />
+                    {infoGridPos ? <></> : <InfoGrid project={project.data.item} contexts={contexts} />}
+                    <ProjectText project={project.data.item} projectForDescription={projectForDescription} media={media?.data} />
+                  </InfoContainer>
+                </>
+              )
+          }
         </ProjectContainer>
       </ThemeProvider>
     </Layout>
