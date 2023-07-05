@@ -45,7 +45,7 @@ export default function MobileMenu() {
 }
 
 const MobileMenuContainer = styled.div`
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
