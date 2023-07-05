@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import styled, { ThemeProvider } from "styled-components";
 
@@ -10,39 +10,39 @@ import ProjectMedia from "@/components/pages/projects/project/media/media";
 
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
-import {getRenderJsonUrl, fetcher, getUrl} from "@/utils/api/api";
+import { getRenderJsonUrl, fetcher, getUrl } from "@/utils/api/api";
 import useWindowSize from "@/hooks/window_size";
 import {
   projectBreakpoints,
   projectLTheme,
-  // projectMTheme,
+  projectMTheme,
   projectSTheme,
 } from "@/themes/pages/project";
-import {gql, useQuery} from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 function buildObjects(res) {
-  const obj = {}
+  const obj = {};
 
   if (res && res.data && res.data.contexts) {
-    res.data.contexts.forEach(context => {
-      obj[context.id] = context
-    })
+    res.data.contexts.forEach((context) => {
+      obj[context.id] = context;
+    });
   }
 
-  return obj
+  return obj;
 }
 
 const CONTEXTS_QUERY = gql`
-{
-  contexts {
-    id,
-    name,
-    template,
-    parents {
+  {
+    contexts {
       id
+      name
+      template
+      parents {
+        id
+      }
     }
   }
-}
 `;
 
 export default function Project({ id }) {
@@ -72,14 +72,15 @@ export default function Project({ id }) {
 
   const project = useQuery(projectQuery);
   let contextsResponse = useQuery(CONTEXTS_QUERY);
-  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
+  const contexts = useMemo(
+    () => buildObjects(contextsResponse),
+    [contextsResponse]
+  );
 
   const projectForDescription = useSWR(
     getUrl(id),
     fetcher
   );
-
-  console.log(getRenderJsonUrl(id))
 
   const media = useSWR(
     getRenderJsonUrl(id),
@@ -90,9 +91,9 @@ export default function Project({ id }) {
     if (windowSize?.width <= projectBreakpoints.s) {
       setResponsiveTheme(projectSTheme);
       setInfoGridPos(false);
-    // } else if (windowSize?.width <= projectBreakpoints.m) {
-    //   setResponsiveTheme(projectMTheme);
-    //   setInfoGridPos(false);
+    } else if (windowSize?.width <= projectBreakpoints.m) {
+      setResponsiveTheme(projectMTheme);
+      setInfoGridPos(false);
     } else {
       setResponsiveTheme(projectLTheme);
       setInfoGridPos(true);
@@ -107,21 +108,32 @@ export default function Project({ id }) {
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>
-          {
-            project.loading || project.error ?
-              (<div>Loading...</div>) :
-              (
-                <>
-                  <ProjectMedia project={project.data.item} media={media?.data} contexts={contexts} infoGridPos={infoGridPos} />
-                  <InfoContainer>
-                    <ProjectTitle project={project.data.item} link={false} />
-                    <ProjectAuthors project={project.data.item} fontSize={1} />
-                    {infoGridPos ? <></> : <InfoGrid project={project.data.item} contexts={contexts} />}
-                    <ProjectText project={project.data.item} projectForDescription={projectForDescription} media={media?.data} />
-                  </InfoContainer>
-                </>
-              )
-          }
+          {project.loading || project.error ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              <ProjectMedia
+                project={project.data.item}
+                media={media?.data}
+                contexts={contexts}
+                infoGridPos={infoGridPos}
+              />
+              <InfoContainer>
+                <ProjectTitle project={project.data.item} link={false} />
+                <ProjectAuthors project={project.data.item} fontSize={1} />
+                {infoGridPos ? (
+                  <></>
+                ) : (
+                  <InfoGrid project={project.data.item} contexts={contexts} />
+                )}
+                <ProjectText
+                  project={project.data.item}
+                  projectForDescription={projectForDescription}
+                  media={media?.data}
+                />
+              </InfoContainer>
+            </>
+          )}
         </ProjectContainer>
       </ThemeProvider>
     </Layout>
