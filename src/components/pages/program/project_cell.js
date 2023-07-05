@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
@@ -12,6 +12,8 @@ import ProjectImage from "@/components/pages/projects/project/media/image";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
+import useWindowSize from "@/hooks/window_size";
+import { breakpoints } from "@/themes/theme";
 
 export default function ProjectCell({ project, contexts }) {
   const [cellHovered, setCellHovered] = useState(false);
@@ -40,24 +42,42 @@ export default function ProjectCell({ project, contexts }) {
 
 export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
   const [isHovered, setIsHovered] = useState(false);
-  // const savedProjects = useSavedProjects();
-  // const setSavedProjects = useSetSavedProjects();
+  const [mobile, setMobile] = useState(false);
+  const savedProjects = useSavedProjects();
+  const setSavedProjects = useSetSavedProjects();
+  const windowSize = useWindowSize();
 
-  // const handleClick = () => {
-  //   if (savedProjects.includes(project.id)) {
-  //     setSavedProjects(
-  //       savedProjects.filter((savedProject) => savedProject !== project.id)
-  //     );
-  //   } else {
-  //     setSavedProjects([...savedProjects, project.id]);
-  //   }
-  // };
+  useEffect(() => {
+    if (windowSize?.width <= breakpoints.m) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }, [windowSize?.width]);
+
+  const handleClick = () => {
+    if (savedProjects.includes(project.id)) {
+      setSavedProjects(
+        savedProjects.filter((savedProject) => savedProject !== project.id)
+      );
+    } else {
+      setSavedProjects([...savedProjects, project.id]);
+    }
+  };
 
   let svg;
-  if (cellHovered && !savedProjects.includes(project.id)) {
-    svg = <SVGHOverlay src={pathPassive} />;
-  } else if (savedProjects && savedProjects.includes(project.id)) {
-    svg = <SVGHOverlay src={pathActive} />;
+  if (mobile) {
+    if (!savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathPassive} />;
+    } else if (savedProjects && savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathActive} />;
+    }
+  } else {
+    if (cellHovered && !savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathPassive} />;
+    } else if (savedProjects && savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathActive} />;
+    }
   }
 
   return (

@@ -1,16 +1,13 @@
 import { getItems } from "@/utils/api/items";
 
-import { getFormatsFilters } from "@/utils/api/formats";
+import { getFormatsFilters } from '@/utils/api/formats'
 import { getStructuresFilters } from "@/utils/api/structures";
-import {
-  getProgramFormats,
-  getProgramStructures,
-} from "@/utils/api/pages/program";
+import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/program'
 
 import Page from "@/components/pages/page";
 import Program from "@/components/pages/program/program";
-import { FilterProvider } from "@/providers/filter";
-import { SavedProjectsProvider } from "@/providers/saved_projects";
+import { FilterProvider } from '@/providers/filter'
+import { SavedProjectsProvider } from '@/providers/saved_projects'
 
 // export async function getStaticProps () {
 //   const projects = await getItems()
@@ -24,21 +21,14 @@ import { SavedProjectsProvider } from "@/providers/saved_projects";
 //   return { props: { projects, formats, formatsFilters, structures, structuresFilters} }
 // }
 
-export default function ProgramPage({
-  projects,
-  formats,
-  formatsFilters,
-  structures,
-  structuresFilters,
-}) {
+export default function ProgramPage ({ projects, formats, formatsFilters, structures, structuresFilters }) {
   return (
-    <Page>
-      <Program />
-      {/* <SavedProjectsProvider>
-        <FilterProvider projects={projects} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}>
+    <Page title="program">
+      {/*<SavedProjectsProvider>*/}
+      {/*  <FilterProvider projects={projects} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}>*/}
           <Program />
-        </FilterProvider>
-      </SavedProjectsProvider> */}
+      {/*  </FilterProvider>*/}
+      {/*</SavedProjectsProvider>*/}
     </Page>
-  );
+  )
 }

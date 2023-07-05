@@ -1,14 +1,14 @@
 import Page from "@/components/pages/page";
 import Faq from "@/components/pages/faq";
-import { SavedProjectsProvider } from '@/providers/saved_projects'
-import React from 'react'
+import { SavedProjectsProvider } from "@/providers/saved_projects";
+import React from "react";
 
-export default function FaqPage () {
+export default function FaqPage() {
   return (
-    <Page>
+    <Page title="faq">
       <SavedProjectsProvider>
         <Faq />
       </SavedProjectsProvider>
     </Page>
-  )
+  );
 }

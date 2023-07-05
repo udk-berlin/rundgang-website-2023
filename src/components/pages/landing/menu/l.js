@@ -458,7 +458,7 @@ const StyledRect = styled.rect`
   cursor: pointer;
 `;
 
-const MenuContainer = styled.div`
+export const MenuContainer = styled.div`
   display: flex;
   align-items: center;
 
@@ -471,13 +471,13 @@ const MenuContainer = styled.div`
   max-height: 100%;
 `;
 
-const SVGContainer = styled.div`
+export const SVGContainer = styled.div`
   height: 33vw;
   min-height: 33vw;
   max-height: 33vw;
 `;
 
-const StyledSVG = styled.svg`
+export const StyledSVG = styled.svg`
   width: 100%;
   min-width: 100%;
   max-width: 100%;
@@ -485,9 +485,13 @@ const StyledSVG = styled.svg`
   height: 33vw;
   min-height: 33vw;
   max-height: 33vw;
+  
+  g {
+    pointer-events: all;
+  }
 `;
 
-const StyledPath = styled.path`
+export const StyledPath = styled.path`
   fill: ${({ isHovered }) => (isHovered ? "#fff" : "none")};
   stroke: #fff;
   stroke-width: 1px;

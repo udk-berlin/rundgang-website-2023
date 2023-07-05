@@ -101,7 +101,7 @@ export default function Project({ id }) {
     <Layout
       disableFilter={true}
       disableSlider={infoGridPos}
-      numberOfSliderStates={4}
+      numberOfSliderStates={5}
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>
