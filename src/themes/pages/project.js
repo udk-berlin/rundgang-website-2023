@@ -30,16 +30,21 @@ export const projectLTheme = {
   media: {
     display: "",
     flexDirection: "",
-    height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
+    height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
     width: "50vw",
     overflowX: "hidden",
     overflowY: "scroll",
+    thumbnail: {
+      height: "auto",
+      width: "50vw",
+    },
     image: {
       height: "auto",
       width: "50vw",
     },
     placeholder: {
-      height: "100vw",
+      height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
+      width: "50vw",
     },
     audio: {
       width: "50vw",
@@ -79,16 +84,21 @@ export const projectMTheme = {
   media: {
     display: "",
     flexDirection: "",
-    height: `calc(100vh - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - ${layoutLTheme.footer.height})`,
+    height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
     width: "50vw",
     overflowX: "hidden",
     overflowY: "scroll",
+    thumbnail: {
+      height: "auto",
+      width: "50vw",
+    },
     image: {
       height: "auto",
       width: "50vw",
     },
     placeholder: {
-      height: "100vw",
+      height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
+      width: "auto",
     },
     audio: {
       width: "50vw",
@@ -132,12 +142,13 @@ export const projectSTheme = {
     width: "100vw",
     overflowX: "scroll",
     overflowY: "hidden",
-    image: {
-      height: "100vw",
-      width: "auto",
+    thumbnail: {
+      height: "auto",
+      width: "100vw",
     },
     placeholder: {
-      height: "100vw",
+      height: "50vh",
+      width: "100vw",
     },
     audio: {
       width: "100vw",

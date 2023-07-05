@@ -6,10 +6,11 @@ export default function InfoGridDate({ project }) {
   let projectTimes = [];
 
   if (project && project.allocation && project.allocation.temporal) {
+    console.log(project.allocation.temporal)
     project.allocation.temporal.forEach((date) => {
       projectTimes.push([
-        new Date(date.start),
-        new Date(date.end),
+        new Date(date.start * 1000 - 7200000),
+        new Date(date.end * 1000 - 7200000),
       ]);
     });
   }

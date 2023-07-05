@@ -2,24 +2,35 @@ import React, {useEffect, useRef} from "react";
 import styled, {useTheme} from "styled-components";
 
 import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
-// import ProjectImageMedia, { ProjectAdditionalMedia } from "@/components/pages/projects/project/media/image";
 import getLocalizedData from "@/components/localization/data";
 
 export default function ProjectMedia({ project, media, contexts, fullSize = true, infoGridPos }) {
   return (
     <MediaContainer>
       {infoGridPos ? <ProjectInfoGrid project={project} contexts={contexts} /> : <></>}
-      <ImageMedia project={project} fullSize={fullSize} />
-      {/*<ProjectAdditionalMedia project={project} media={media} />*/}
+      <ThumbnailMedia project={project} fullSize={fullSize} />
+      <ProjectAdditionalMedia project={project} media={media} />
     </MediaContainer>
   )
+}
+
+function ThumbnailMedia({ project, fullSize = false }) {
+  if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
+
+  return (
+    <ThumbnailMediaContainer
+      src={fullSize ? project.thumbnail_full_size : project.thumbnail}
+      alt={project.name}
+      loading="lazy"
+    />
+  );
 }
 
 function ImageMedia({ project, fullSize = false }) {
   if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
 
   return (
-    <ImageMedia
+    <ImageMediaContainer
       src={fullSize ? project.thumbnail_full_size : project.thumbnail}
       alt={project.name}
       loading="lazy"
@@ -31,6 +42,8 @@ export function ProjectAdditionalMedia({ project, media }) {
   const theme = useTheme();
   const videoRef = useRef(null);
   let mediaItems = [];
+
+  console.log(media)
 
   useEffect(() => {
     if (videoRef.current && theme.id === 'l') {
@@ -111,11 +124,23 @@ const PlaceholderImageContainer = styled.div`
   min-height: ${({ theme }) => theme.media.placeholder.height};
   max-height: ${({ theme }) => theme.media.placeholder.height};
 
-  width: auto;
+  width: ${({ theme }) => theme.media.placeholder.width};
+  min-width: ${({ theme }) => theme.media.placeholder.width};
+  max-width: ${({ theme }) => theme.media.placeholder.width};
 
   padding-bottom: 100%;
   
   background: ${({ theme }) => theme.colors.pink};
+`;
+
+const ThumbnailMediaContainer = styled.img`
+  height: ${({ theme }) => theme.media.thumbnail.height};
+  min-height: ${({ theme }) => theme.media.thumbnail.height};
+  max-height: ${({ theme }) => theme.media.thumbnail.height};
+
+  width: ${({ theme }) => theme.media.thumbnail.width};
+  min-width: ${({ theme }) => theme.media.thumbnail.width};
+  max-width: ${({ theme }) => theme.media.thumbnail.width};
 `;
 
 const ImageMediaContainer = styled.img`

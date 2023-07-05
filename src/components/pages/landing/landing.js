@@ -11,7 +11,7 @@ import Layout from "@/components/layout/layout";
 import {LoadingContainer} from "@/components/loading";
 
 export default function Landing () {
-  const [menuLinkClicked, setMenuLinkClicked] = useState(false)
+  const [linkClicked, setLinkClicked] = useState(false)
   const [responsiveTheme, setResponsiveTheme] = useState(landingLTheme)
   const windowSize = useWindowSize()
 
@@ -26,7 +26,7 @@ export default function Landing () {
   return (
     <>
       {
-        menuLinkClicked ?
+        linkClicked ?
         (
           <Layout disableFilter={true} disableSlider={true}>
             <LoadingContainer>Loading...</LoadingContainer>
@@ -34,7 +34,7 @@ export default function Landing () {
         ) :
           <ThemeProvider theme={responsiveTheme}>
             <LandingBackground />
-            <LandingContent setMenuLinkClicked={setMenuLinkClicked} />
+            <LandingContent setLinkClicked={setLinkClicked} />
           </ThemeProvider>
       }
     </>
