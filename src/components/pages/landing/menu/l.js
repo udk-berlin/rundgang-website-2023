@@ -3,22 +3,22 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 
-export default function LandingMenuL({ setInfoIsActive }) {
+export default function LandingMenuL({ setInfoIsActive, setMenuLinkClicked }) {
   const language = useIntl();
   return (
     <MenuContainer>
       <SVGContainer>
         {language.locale === "en" ? (
-          <EnSVG setInfoIsActive={setInfoIsActive} />
+          <EnSVG setInfoIsActive={setInfoIsActive} setMenuLinkClicked={setMenuLinkClicked}/>
         ) : (
-          <DeSVG setInfoIsActive={setInfoIsActive} />
+          <DeSVG setInfoIsActive={setInfoIsActive} setMenuLinkClicked={setMenuLinkClicked}/>
         )}
       </SVGContainer>
     </MenuContainer>
   );
 }
 
-function DeSVG({ setInfoIsActive }) {
+function DeSVG({ setInfoIsActive, setMenuLinkClicked }) {
   const [isProgramHovered, setProgramIsHovered] = useState(false);
   const [isInfoHovered, setInfoIsHovered] = useState(false);
   const [isLocationsHovered, setLocationsIsHovered] = useState(false);
@@ -36,12 +36,18 @@ function DeSVG({ setInfoIsActive }) {
       setInfoIsActive(true);
     });
     programRef.current.addEventListener("click", () => {
+      setMenuLinkClicked(true)
+      setMenuLinkClicked(true)
       router.push("/program");
     });
     locationsRef.current.addEventListener("click", () => {
+      setMenuLinkClicked(true)
+      setMenuLinkClicked(true)
       router.push("/locations");
     });
     timelineRef.current.addEventListener("click", () => {
+      setMenuLinkClicked(true)
+      setMenuLinkClicked(true)
       router.push("/timeline");
     });
   }, []);
@@ -213,7 +219,7 @@ function DeSVG({ setInfoIsActive }) {
   );
 }
 
-function EnSVG({ setInfoIsActive }) {
+function EnSVG({ setInfoIsActive, setMenuLinkClicked }) {
   const [isProgramHovered, setProgramIsHovered] = useState(false);
   const [isInfoHovered, setInfoIsHovered] = useState(false);
   const [isLocationsHovered, setLocationsIsHovered] = useState(false);
@@ -231,12 +237,15 @@ function EnSVG({ setInfoIsActive }) {
       setInfoIsActive(true);
     });
     programRef.current.addEventListener("click", () => {
+      setMenuLinkClicked(true)
       router.push("/en/program");
     });
     locationsRef.current.addEventListener("click", () => {
+      setMenuLinkClicked(true)
       router.push("/en/locations");
     });
     timelineRef.current.addEventListener("click", () => {
+      setMenuLinkClicked(true)
       router.push("/en/timeline");
     });
   }, []);
@@ -493,6 +502,7 @@ export const StyledSVG = styled.svg`
 
 export const StyledPath = styled.path`
   fill: ${({ isHovered }) => (isHovered ? "#fff" : "none")};
+  fill: ${({ isClicked }) => (isClicked ? "#fff" : "none")};
   stroke: #fff;
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;

@@ -14,6 +14,7 @@ import {
   programMTheme,
   programSTheme,
 } from "@/themes/pages/program";
+import LoadingLayout from "@/components/layout/loading";
 
 const CONTEXTS_QUERY = gql`
 {
@@ -60,19 +61,27 @@ export default function Program() {
   }, [windowSize?.width]);
 
   return (
-    <Layout>
-      <ThemeProvider theme={responsiveTheme}>
-        <ProgramContainer>
-          <Masonry
-            columnsCount={responsiveTheme.MASONRY_COLUMNS}
-            gutter={responsiveTheme.MASONRY_GUTTER}>
-            {filter.filteredProjects.map((project) => (
-              <ProjectCell project={project} contexts={contexts} />
-            ))}
-          </Masonry>
-        </ProgramContainer>
-      </ThemeProvider>
-    </Layout>
+    <>
+      {
+        windowSize?.width ?
+          (
+            <Layout>
+              <ThemeProvider theme={responsiveTheme}>
+                <ProgramContainer>
+                  <Masonry
+                    columnsCount={responsiveTheme.MASONRY_COLUMNS}
+                    gutter={responsiveTheme.MASONRY_GUTTER}>
+                    {filter.filteredProjects.map((project) => (
+                      <ProjectCell project={project} contexts={contexts} />
+                    ))}
+                  </Masonry>
+                </ProgramContainer>
+              </ThemeProvider>
+            </Layout>
+          ) : <LoadingLayout />
+
+      }
+    </>
   );
 }
 

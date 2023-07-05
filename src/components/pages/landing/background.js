@@ -4,27 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 export default function LandingBackground() {
-  const [isMobile, setMobile] = useState(false);
   const [path, setPath] = useState(null);
   const windowSize = useWindowSize();
   const videoRef = useRef();
 
   useEffect(() => {
     if (windowSize?.width <= breakpoints.m) {
-      setMobile(true);
+      setPath("/assets/media/bg_video" + Math.floor(Math.random() * 5) + "_mobile");
     } else {
-      setMobile(false);
+      setPath("/assets/media/bg_video" + Math.floor(Math.random() * 2));
     }
+    videoRef.current?.load();
   }, [windowSize?.width]);
-
-  useEffect(() => {
-    setPath(
-      isMobile
-        ? "/assets/media/bg_video" + Math.floor(Math.random() * 5) + "_mobile"
-        : "/assets/media/bg_video" + Math.floor(Math.random() * 2)
-    );
-    videoRef.current.load();
-  }, [isMobile]);
 
   return (
     <BackgroundVideo

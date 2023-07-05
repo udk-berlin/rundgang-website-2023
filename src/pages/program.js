@@ -2,7 +2,6 @@ import { getFormatsFilters } from '@/utils/api/formats'
 import { getStructuresFilters } from "@/utils/api/structures";
 import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/program'
 
-import Layout from "@/components/layout/layout";
 import Page from "@/components/pages/page";
 import Program from "@/components/pages/program/program";
 
@@ -11,7 +10,7 @@ import { FilterProvider } from "@/providers/filter";
 
 import { SavedProjectsProvider } from '@/providers/saved_projects'
 import {gql, useQuery} from "@apollo/client";
-import { LoadingContainer } from "@/components/loading";
+import LoadingLayout from "@/components/layout/loading";
 
 const PROJECTS_QUERY = gql`
   {
@@ -61,9 +60,7 @@ function ProgramPageContainer ({ formats, formatsFilters, structures, structures
       {
         projects.loading || projects.error ?
           (
-            <Layout disableFilter={true}>
-              <LoadingContainer>Loading...</LoadingContainer>
-            </Layout>
+            <LoadingLayout />
           ) :
           (
             <FilterProvider projects={projects.data.items} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters} useFast={true}>
