@@ -38,21 +38,22 @@ export default function MobileMenu() {
         <FormattedMessage id="faq" />
       </FaqLink>
       <MobileLocalizationContainer>
-        <HeaderBarLocalization/>
+        <HeaderBarLocalization />
       </MobileLocalizationContainer>
     </MobileMenuContainer>
   );
 }
 
 const MobileMenuContainer = styled.div`
+  font-size: 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
   padding: 0.5rem;
-  
+
   > a {
     color: white;
   }
@@ -60,7 +61,7 @@ const MobileMenuContainer = styled.div`
   margin-left: auto;
   margin-right: 0;
   border: var(--border-width) solid var(--border-color);
-  
+
   font-weight: 500;
 `;
 
@@ -71,8 +72,8 @@ const MobileLocalizationContainer = styled.div`
       > div {
         > a {
           color: white;
-        } 
-      } 
+        }
+      }
     }
   }
 `;
