@@ -24,7 +24,7 @@ export default function LandingBackground() {
         : "/assets/media/bg_video" + Math.floor(Math.random() * 2)
     );
     videoRef.current.load();
-  }, [isMobile]);
+  }, [isMobile]);z
 
   return (
     <BackgroundVideo

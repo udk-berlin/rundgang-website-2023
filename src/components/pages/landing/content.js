@@ -28,8 +28,8 @@ export default function LandingContent () {
 }
 
 const LandingContainer = styled.div`
+  position: fixed;
   display: grid;
-  
   grid-template-rows: auto 1fr auto;
   
   height: 100vh;

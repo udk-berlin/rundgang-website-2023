@@ -34,6 +34,10 @@ export const projectLTheme = {
     width: '50vw',
     overflowX: 'hidden',
     overflowY: 'scroll',
+    thumbnail: {
+      height: 'auto',
+      width: '50vw'
+    },
     image: {
       height: 'auto',
       width: '50vw'
@@ -128,9 +132,13 @@ export const projectSTheme = {
     width: '100vw',
     overflowX: 'scroll',
     overflowY: 'hidden',
+    thumbnail: {
+      height: "auto",
+      width: '100vw'
+    },
     image: {
-      height: "100vw",
-      width: 'auto'
+      height: "auto",
+      width: '100vw'
     },
     placeholder: {
       height: "100vw",

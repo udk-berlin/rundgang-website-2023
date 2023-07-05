@@ -32,26 +32,6 @@ function buildObjects(res) {
   return obj
 }
 
-const PROJECT_QUERY = gql`
-  {
-    item(id: "!NkmohVQCmZEmeakBHt:content.udk-berlin.de") {
-      name
-      id
-      origin {
-        authors {
-          id
-          name
-        }
-      }
-      parents {
-        id
-      }
-      thumbnail
-      thumbnail_full_size
-    }
-  }
-`;
-
 const CONTEXTS_QUERY = gql`
 {
   contexts {
@@ -86,8 +66,6 @@ export default function Project({ id }) {
   }
 `;
 
-
-
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
@@ -100,6 +78,8 @@ export default function Project({ id }) {
     getUrl(id),
     fetcher
   );
+
+  console.log(getRenderJsonUrl(id))
 
   const media = useSWR(
     getRenderJsonUrl(id),
