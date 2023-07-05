@@ -63,7 +63,4 @@ const LayoutContainer = styled.div`
 `;
 
 const Content = styled.div`
-  // height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
-  // min-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
-  // max-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
 `;

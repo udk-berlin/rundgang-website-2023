@@ -32,26 +32,6 @@ function buildObjects(res) {
   return obj;
 }
 
-const PROJECT_QUERY = gql`
-  {
-    item(id: "!NkmohVQCmZEmeakBHt:content.udk-berlin.de") {
-      name
-      id
-      origin {
-        authors {
-          id
-          name
-        }
-      }
-      parents {
-        id
-      }
-      thumbnail
-      thumbnail_full_size
-    }
-  }
-`;
-
 const CONTEXTS_QUERY = gql`
   {
     contexts {
@@ -97,9 +77,15 @@ export default function Project({ id }) {
     [contextsResponse]
   );
 
-  const projectForDescription = useSWR(getUrl(id), fetcher);
+  const projectForDescription = useSWR(
+    getUrl(id),
+    fetcher
+  );
 
-  const media = useSWR(getRenderJsonUrl(id), fetcher);
+  const media = useSWR(
+    getRenderJsonUrl(id),
+    fetcher
+  );
 
   useEffect(() => {
     if (windowSize?.width <= projectBreakpoints.s) {
