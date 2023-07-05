@@ -161,7 +161,7 @@ const ProjectContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
-  padding: ${({ theme }) => theme.infoContainer.padding};
+  padding: ${({ theme }) => theme.info.padding};
   flex: 4;
   height: calc(
     100vh - var(--layout-header-search-container-height) -

@@ -11,7 +11,7 @@ export const projectLTheme = {
   id: "l",
   flexDirection: "row",
   marginBottom: 0,
-  infoContainer: {
+  info: {
     padding: "1rem",
   },
   title: {
@@ -60,7 +60,7 @@ export const projectMTheme = {
   container: {
     flexDirection: "row",
   },
-  infoContainer: {
+  info: {
     padding: "0.75rem",
   },
   title: {
@@ -109,7 +109,7 @@ export const projectSTheme = {
   id: "l",
   flexDirection: "column",
   marginBottom: `calc(${layoutMTheme.footer.height} + 1vh)`,
-  infoContainer: {
+  info: {
     padding: "1rem",
   },
   title: {
