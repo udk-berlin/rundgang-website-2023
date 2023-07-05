@@ -54,9 +54,6 @@ export const layoutLTheme = {
       gridTemplateColumns: "1fr 1fr 1fr",
     },
   },
-  localization: {
-    fontSize: "1.75rem",
-  },
 };
 
 export const layoutMTheme = {
@@ -84,8 +81,5 @@ export const layoutMTheme = {
     infoPages: {
       gridTemplateColumns: "1fr",
     },
-  },
-  localization: {
-    fontSize: "1.75rem",
   },
 };
