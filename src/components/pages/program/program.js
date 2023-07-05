@@ -15,26 +15,6 @@ import {
   programSTheme,
 } from "@/themes/pages/program";
 
-const PROJECTS_QUERY = gql`
-  {
-    items {
-      name
-      id
-      origin {
-        authors {
-          id
-          name
-        }
-      }
-      parents {
-        id
-      }
-      thumbnail
-      thumbnail_full_size
-    }
-  }
-`;
-
 const CONTEXTS_QUERY = gql`
 {
   contexts {
@@ -61,14 +41,13 @@ function buildObjects(res) {
 }
 
 export default function Program() {
-  const projects = useQuery(PROJECTS_QUERY);
   let contextsResponse = useQuery(CONTEXTS_QUERY);
   const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
 
-  // const filter = useFilter();
+  const filter = useFilter();
 
   useEffect(() => {
     if (windowSize?.width <= breakpoints.s) {
@@ -84,18 +63,13 @@ export default function Program() {
     <Layout>
       <ThemeProvider theme={responsiveTheme}>
         <ProgramContainer>
-          {projects.loading || projects.error ? (
-            <div>Loading...</div>
-          ) : (
-            <Masonry
-              columnsCount={responsiveTheme.MASONRY_COLUMNS}
-              gutter={responsiveTheme.MASONRY_GUTTER}
-            >
-              {projects.data.items.map((project) => (
-                <ProjectCell project={project} contexts={contexts} />
-              ))}
-            </Masonry>
-          )}
+          <Masonry
+            columnsCount={responsiveTheme.MASONRY_COLUMNS}
+            gutter={responsiveTheme.MASONRY_GUTTER}>
+            {filter.filteredProjects.map((project) => (
+              <ProjectCell project={project} contexts={contexts} />
+            ))}
+          </Masonry>
         </ProgramContainer>
       </ThemeProvider>
     </Layout>

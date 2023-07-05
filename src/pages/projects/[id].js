@@ -5,11 +5,11 @@ import Page from "@/components/pages/page";
 import Project from "@/components/pages/projects/project/project";
 import { SavedProjectsProvider } from '@/providers/saved_projects'
 
-export default function ProjectPage ({ project }) {
+export default function ProjectPage () {
   const router = useRouter()
 
   return (
-    <Page title={project.name}>
+    <Page title={'project'}>
       <SavedProjectsProvider>
         {
           router?.query?.id ?

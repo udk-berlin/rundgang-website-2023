@@ -27,17 +27,17 @@ export default function ProjectCell({ project, contexts }) {
         <ProjectImage project={project} />
       </ProjectLink>
 
-      {/* <SVGOverlay
+      <SVGOverlay
         project={project}
         pathActive={"/assets/svg/layout/saved_active.svg"}
         pathPassive={"/assets/svg/layout/saved_passive.svg"}
         cellHovered={cellHovered}
-      /> */}
+      />
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
       <InfoGrid project={project} contexts={contexts} />
     </ProjectCellContainer>
-  );
+  )
 }
 
 export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {

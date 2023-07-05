@@ -25,7 +25,7 @@ export default function Header({ disableFilter }) {
   return (
     <HeaderContainer>
       {mobile ? <HeaderBarMobile /> : <HeaderBar />}
-      {/* <HeaderFiltersBar
+      <HeaderFiltersBar
         showFilters={showFilters}
         setShowFilters={setShowFilters}
         disableFilter={disableFilter}
@@ -37,7 +37,7 @@ export default function Header({ disableFilter }) {
           showFilters={showFilters}
           setShowFilters={setShowFilters}
         />
-      )} */}
+      )}
     </HeaderContainer>
   );
 }

@@ -10,6 +10,7 @@ import {
 
 import { FilterProvider } from "@/providers/filter";
 
+import { Suspense } from "react";
 import Page from "@/components/pages/page";
 import Timeline from "@/components/pages/timeline/timeline";
 import { getItems } from "@/utils/api/items";
@@ -54,8 +55,7 @@ export default function TimelinePage({
           formats={formats}
           formatsFilters={formatsFilters}
           structures={structures}
-          structuresFilters={structuresFilters}
-        >
+          structuresFilters={structuresFilters}>
           <Timeline />
         </FilterProvider>
       </SavedProjectsProvider>

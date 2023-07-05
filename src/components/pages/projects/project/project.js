@@ -66,11 +66,33 @@ const CONTEXTS_QUERY = gql`
 `;
 
 export default function Project({ id }) {
+  const projectQuery = gql`
+  {
+    item(id: "${id}") {
+      name
+      id
+      origin {
+        authors {
+          id
+          name
+        }
+      }
+      parents {
+        id
+      }
+      thumbnail
+      thumbnail_full_size
+    }
+  }
+`;
+
+
+
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
 
-  const project = useQuery(PROJECT_QUERY);
+  const project = useQuery(projectQuery);
   let contextsResponse = useQuery(CONTEXTS_QUERY);
   const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 

@@ -18,8 +18,8 @@ export default function ProjectInfoGrid({ project, contexts }) {
         <InfoGridFormat project={project} contexts={contexts} />
         <InfoGridDate project={project} />
       </FormatDateContainer>
-      <InfoGridLocation project={project} />
-      <InfoGridContext project={project} />
+      <InfoGridLocation project={project} contexts={contexts} />
+      <InfoGridContext project={project} contexts={contexts} />
     </ProjectInfoGridContainer>
   );
 }

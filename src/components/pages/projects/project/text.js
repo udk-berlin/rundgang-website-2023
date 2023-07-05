@@ -7,8 +7,6 @@ export function ProjectText({ project, projectForDescription, media }) {
   let description = ''
   let texts = [];
 
-  console.log(projectForDescription)
-
   if (projectForDescription && projectForDescription.data) {
     description = getLocalizedData(projectForDescription.data.description);
   }
@@ -19,7 +17,7 @@ export function ProjectText({ project, projectForDescription, media }) {
       switch (mediaItem.template) {
         case "text":
           texts.push(
-            <ProjectTextText>{mediaItem.formatted_content}</ProjectTextText>
+            <ProjectTextText dangerouslySetInnerHTML={{ __html: mediaItem.formatted_content }}/>
           );
           break;
         case "heading":
@@ -55,6 +53,7 @@ const ProjectTextContainer = styled.div`
 `;
 
 const ProjectTextText = styled.div``;
+
 
 const ProjectTextHeading = styled.div`
   font-size: ${({ theme }) => theme.text.heading};
