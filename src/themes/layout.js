@@ -35,7 +35,7 @@ export const layoutLTheme = {
     color: "black",
   },
   header: {
-    height: `${header.l.bar.height} + ${header.l.filter.bar.height}`,
+    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height})`,
     bar: {
       height: header.l.bar.height,
     },
