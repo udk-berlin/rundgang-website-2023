@@ -5,18 +5,20 @@ export default function getLocalizedData(data) {
   let localizedData;
 
   if (localization.locale === 'en') {
-    if ('EN' in data) {
+    if (data.EN) {
       localizedData = data.EN
-    } else if ('default' in data) {
+    } else if (data.default) {
       localizedData = data.default
-    } else if ('DE' in data) {
-      localizedData = data.DE
+    } else if (data.DEFAULT) {
+      localizedData = data.DEFAULT
     }
-  } else if ('DE' in data) {
-    localizedData = data.DE
-  } else if ('default' in data) {
+  } else if (data.DE) {
+      localizedData = data.DE
+  } else if (data.default) {
     localizedData = data.default
-  } else if ('EN' in data) {
+  } else if (data.DEFAULT) {
+    localizedData = data.DEFAULT
+  } else if (data.EN) {
     localizedData = data.EN
   }
 

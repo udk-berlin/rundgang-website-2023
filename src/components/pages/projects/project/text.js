@@ -3,12 +3,14 @@ import styled from "styled-components";
 
 import getLocalizedData from "@/components/localization/data";
 
-export function ProjectText({ project, projectForDescription, media }) {
+export function ProjectText({ project, media }) {
   let description = ''
   let texts = [];
 
-  if (projectForDescription && projectForDescription.data) {
-    description = getLocalizedData(projectForDescription.data.description);
+  if (project && project.description) {
+    const descriptions ={}
+    project.description.forEach(description => descriptions[description.language] = description)
+    description = getLocalizedData(descriptions).content;
   }
 
   if (media && "languages" in media) {
