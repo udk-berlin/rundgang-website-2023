@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import {
@@ -8,7 +8,7 @@ import {
   StyledSVG,
 } from "@/components/pages/landing/menu/l";
 
-export default function LandingMenuL({ setInfoIsActive }) {
+export default function LandingMenuM({ setInfoIsActive }) {
   const language = useIntl();
   return (
     <MenuContainer>
