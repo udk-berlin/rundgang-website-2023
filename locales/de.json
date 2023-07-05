@@ -1,6 +1,8 @@
 {
   "calender": "Kalender",
   "contact": "Kontakt",
+  "error": "Error",
+  "error.message": "Bitte laden Sie die Seite neu.",
   "faculties.centres": "Fakultäten & Zentren",
   "faculties.centres.all": "Alle Fakultäten & Zentren",
   "faq": "FAQ",
@@ -12,6 +14,8 @@
   "locations": "Orte",
   "other.language.abbreviation": "EN",
   "program": "Programm",
+  "project": "Projekt",
+  "projects": "Projekte",
   "room": "Raum",
   "rooms.all": "Alle Räume",
   "search": "Suche...",

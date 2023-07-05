@@ -35,7 +35,7 @@ export const layoutLTheme = {
     color: "black",
   },
   header: {
-    height: `${header.l.bar.height} + ${header.l.filter.bar.height}`,
+    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height})`,
     bar: {
       height: header.l.bar.height,
     },
@@ -53,9 +53,6 @@ export const layoutLTheme = {
     infoPages: {
       gridTemplateColumns: "1fr 1fr 1fr",
     },
-  },
-  localization: {
-    fontSize: "1.75rem",
   },
 };
 
@@ -84,8 +81,5 @@ export const layoutMTheme = {
     infoPages: {
       gridTemplateColumns: "1fr",
     },
-  },
-  localization: {
-    fontSize: "1.75rem",
   },
 };

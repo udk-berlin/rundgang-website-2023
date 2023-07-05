@@ -34,7 +34,7 @@ export default function Layout({
 
   return (
     <ThemeProvider theme={responsiveTheme}>
-      <Container>
+      <LayoutContainer>
         <SliderProvider>
           <Header disableFilter={disableFilter} />
           <Content>{children}</Content>
@@ -50,12 +50,12 @@ export default function Layout({
             />
           )}
         </SliderProvider>
-      </Container>
+      </LayoutContainer>
     </ThemeProvider>
   );
 }
 
-const Container = styled.div`
+const LayoutContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: ${({ theme }) => theme.header.height} 1fr ${({ theme }) => theme.footer.height}
@@ -63,6 +63,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  //border-left: var(--border-width) solid var(--border-color);
-  //border-right: var(--border-width) solid var(--border-color);
+  // height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
+  // min-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
+  // max-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
 `;
