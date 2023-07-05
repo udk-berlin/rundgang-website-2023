@@ -33,7 +33,6 @@ function DeSVG({ setInfoIsActive }) {
 
   useEffect(() => {
     infoRef.current.addEventListener("click", () => {
-      console.log('click')
       setInfoIsActive(true);
     });
     programRef.current.addEventListener("click", () => {
