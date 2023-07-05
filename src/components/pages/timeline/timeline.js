@@ -15,12 +15,12 @@ export default function Timeline() {
   const windowSize = useWindowSize()
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(timelineMTheme)
     } else {
       setResponsiveTheme(timelineLTheme)
     }
-  }, [windowSize.width])
+  }, [windowSize?.width])
 
   return (
     <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES}>

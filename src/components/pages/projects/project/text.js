@@ -7,6 +7,8 @@ export function ProjectText({ project, data }) {
   let description = getLocalizedData(project.description);
   let texts = [];
 
+  console.log(data);
+
   if (data && "languages" in data) {
     let content = getLocalizedData(data.languages).content;
     Object.values(content).forEach((item) => {
@@ -51,7 +53,7 @@ const ProjectTextContainer = styled.div`
 const ProjectTextText = styled.div``;
 
 const ProjectTextHeading = styled.div`
-  font-size: ${({ theme }) => theme.additionalText.heading};
+  font-size: ${({ theme }) => theme.text.heading};
   font-weight: 500;
 `;
 

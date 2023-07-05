@@ -8,7 +8,7 @@ import {
 } from "@/providers/saved_projects";
 
 import ProjectLink from "@/components/pages/projects/project/link";
-import ProjectImage from "@/components/pages/projects/project/image";
+import ProjectImage from "@/components/pages/projects/project/media/image";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
