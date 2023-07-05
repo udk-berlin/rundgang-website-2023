@@ -10,12 +10,12 @@ export default function LandingBackground() {
   const videoRef = useRef();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setMobile(true);
     } else {
       setMobile(false);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   useEffect(() => {
     setPath(

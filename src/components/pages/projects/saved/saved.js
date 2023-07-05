@@ -30,14 +30,14 @@ export default function SavedProjects() {
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.s) {
+    if (windowSize?.width <= breakpoints.s) {
       setResponsiveTheme(programSTheme);
-    } else if (windowSize.width <= breakpoints.m) {
+    } else if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(programMTheme);
     } else {
       setResponsiveTheme(programLTheme);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <Layout>

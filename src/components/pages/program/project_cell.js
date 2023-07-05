@@ -49,12 +49,12 @@ export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setMobile(true);
     } else {
       setMobile(false);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   const handleClick = () => {
     if (savedProjects.includes(project.id)) {
