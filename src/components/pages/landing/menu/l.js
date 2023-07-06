@@ -37,16 +37,13 @@ function DeSVG({ setInfoIsActive, setIsLinkClicked }) {
     });
     programRef.current.addEventListener("click", () => {
       setIsLinkClicked(true)
-      setIsLinkClicked(true)
       router.push("/program");
     });
     locationsRef.current.addEventListener("click", () => {
       setIsLinkClicked(true)
-      setIsLinkClicked(true)
       router.push("/locations");
     });
     timelineRef.current.addEventListener("click", () => {
-      setIsLinkClicked(true)
       setIsLinkClicked(true)
       router.push("/timeline");
     });

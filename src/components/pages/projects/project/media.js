@@ -8,13 +8,25 @@ export default function ProjectMedia({ project, media, contexts, fullSize = true
   return (
     <MediaContainer>
       {infoGridPos ? <ProjectInfoGrid project={project} contexts={contexts} /> : <></>}
-      <ImageMedia project={project} fullSize={fullSize} />
+      <ThumbnailMedia project={project} fullSize={fullSize} />
       <ProjectAdditionalMedia project={project} media={media} />
     </MediaContainer>
   )
 }
 
-function ImageMedia({ project, fullSize = false }) {
+function ThumbnailMedia({ project, fullSize = false }) {
+  if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
+
+  return (
+    <ThumbnailMediaContainer
+      src={fullSize ? project.thumbnail_full_size : project.thumbnail}
+      alt={project.name}
+      loading="lazy"
+    />
+  );
+}
+
+export function ImageMedia({ project, fullSize = false }) {
   if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
 
   return (
@@ -110,11 +122,23 @@ const PlaceholderImageContainer = styled.div`
   min-height: ${({ theme }) => theme.media.placeholder.height};
   max-height: ${({ theme }) => theme.media.placeholder.height};
 
-  width: auto;
+  width: ${({ theme }) => theme.media.placeholder.width};
+  min-width: ${({ theme }) => theme.media.placeholder.width};
+  max-width: ${({ theme }) => theme.media.placeholder.width};
 
   padding-bottom: 100%;
   
   background: ${({ theme }) => theme.colors.pink};
+`;
+
+const ThumbnailMediaContainer = styled.img`
+  height: ${({ theme }) => theme.media.thumbnail.height};
+  min-height: ${({ theme }) => theme.media.thumbnail.height};
+  max-height: ${({ theme }) => theme.media.thumbnail.height};
+
+  width: ${({ theme }) => theme.media.thumbnail.width};
+  min-width: ${({ theme }) => theme.media.thumbnail.width};
+  max-width: ${({ theme }) => theme.media.thumbnail.width};
 `;
 
 const ImageMediaContainer = styled.img`

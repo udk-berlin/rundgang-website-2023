@@ -10,7 +10,7 @@ import ProjectMedia from "@/components/pages/projects/project/media";
 
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
-import { getRenderJsonUrl, fetcher, getUrl } from "@/utils/api/api";
+import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
 import useWindowSize from "@/hooks/window_size";
 import {
   projectBreakpoints,
@@ -49,23 +49,32 @@ const CONTEXTS_QUERY = gql`
 
 export default function Project({ id, setIsLinkClicked }) {
   const projectQuery = gql`
-  {
-    item(id: "${id}") {
-      name
-      id
-      origin {
-        authors {
-          id
-          name
-        }
+{
+	item(id: "${id}") {
+    name,
+    thumbnail,
+    thumbnail_full_size,
+    allocation {
+      temporal {
+        start
+        end
       }
-      parents {
+    },
+    origin {
+      authors {
         id
+        name
       }
-      thumbnail
-      thumbnail_full_size
-    }
-  }
+    },  
+    parents {
+     id
+    },
+    description {
+      language
+      content
+    } 
+	}
+}
 `;
 
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
@@ -77,11 +86,6 @@ export default function Project({ id, setIsLinkClicked }) {
   const contexts = useMemo(
     () => buildObjects(contextsResponse),
     [contextsResponse]
-  );
-
-  const projectForDescription = useSWR(
-    getUrl(id),
-    fetcher
   );
 
   const media = useSWR(
@@ -131,7 +135,6 @@ export default function Project({ id, setIsLinkClicked }) {
                 )}
                 <ProjectText
                   project={project.data.item}
-                  projectForDescription={projectForDescription}
                   media={media?.data}
                 />
               </InfoContainer>
