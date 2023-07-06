@@ -501,8 +501,7 @@ export const StyledSVG = styled.svg`
 `;
 
 export const StyledPath = styled.path`
-  fill: ${({ isHovered }) => (isHovered ? "#fff" : "none")};
-  fill: ${({ isClicked }) => (isClicked ? "#fff" : "none")};
+  fill: ${({ isHovered, isClicked }) => (isHovered || isClicked ? "#fff" : "none")};
   stroke: #fff;
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
