@@ -59,16 +59,16 @@ export default function Project({ id, setIsLinkClicked }) {
         start
         end
       }
-    },
+    }
     origin {
       authors {
         id
         name
       }
-    },  
+    }  
     parents {
      id
-    },
+    }
     description {
       language
       content

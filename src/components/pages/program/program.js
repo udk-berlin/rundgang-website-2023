@@ -19,9 +19,9 @@ import LoadingLayout from "@/components/layout/loading";
 const CONTEXTS_QUERY = gql`
 {
   contexts {
-    id,
-    name,
-    template,
+    id
+    name
+    template
     parents {
       id
     }

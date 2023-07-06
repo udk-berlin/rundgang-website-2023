@@ -15,6 +15,12 @@ const PROJECTS_QUERY = gql`
     items {
       name
       id
+      allocation {
+        temporal {
+          start
+          end
+        }
+      }
       origin {
         authors {
           id
