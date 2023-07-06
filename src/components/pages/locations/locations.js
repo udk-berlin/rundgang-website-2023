@@ -11,6 +11,7 @@ import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/pages/locations";
 
 export default function Locations({ locations }) {
+  const [locationSelected, setLocationSelected] = useState(false)
   const [responsiveTheme, setResponsiveTheme] = useState(locationsLTheme);
   const windowSize = useWindowSize();
 
@@ -23,20 +24,18 @@ export default function Locations({ locations }) {
   }, [windowSize?.width]);
 
   return (
-    <Layout>
-      <ThemeProvider theme={responsiveTheme}>
-        <LocationsContainer>
-          <LocationsMap locations={locations} />
-          <LocationsGroundPlan />
-          {
-            responsiveTheme.id === 'l' ?
-              <LocationsFloorPlanPopup /> :
-              <></>
-          }
-          <LocationsProgram />
-        </LocationsContainer>
-      </ThemeProvider>
-    </Layout>
+    <ThemeProvider theme={responsiveTheme}>
+      <LocationsContainer>
+        <LocationsMap locations={locations} locationSelected={locationSelected} />
+        <LocationsGroundPlan />
+        {
+          responsiveTheme.id === 'l' ?
+            <LocationsFloorPlanPopup /> :
+            <></>
+        }
+        <LocationsProgram setLocationSelected={setLocationSelected} responsiveTheme={responsiveTheme} />
+      </LocationsContainer>
+    </ThemeProvider>
   );
 }
 

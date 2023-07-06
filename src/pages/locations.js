@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { getItems } from "@/utils/api/items";
 import { getFormatsFilters } from "@/utils/api/formats";
@@ -14,6 +14,8 @@ import { FilterProvider } from "@/providers/filter";
 import Page from "@/components/pages/page";
 import Locations from "@/components/pages/locations/locations";
 import { SavedProjectsProvider } from "@/providers/saved_projects";
+import LoadingLayout from "@/components/layout/loading";
+import Layout from "@/components/layout/layout";
 
 export async function getStaticProps() {
   const projects = await getItems();
@@ -45,20 +47,28 @@ export default function LocationsPage({
   structures,
   structuresFilters,
 }) {
+  const [isLinkClicked, setIsLinkClicked] = useState(false)
+
   return (
     <Page title="locations">
-      <SavedProjectsProvider>
-        <FilterProvider
-          projects={projects}
-          locations={locations}
-          formats={formats}
-          formatsFilters={formatsFilters}
-          structures={structures}
-          structuresFilters={structuresFilters}
-        >
-          <Locations locations={locations} />
-        </FilterProvider>
-      </SavedProjectsProvider>
+      {
+        isLinkClicked ?
+          <LoadingLayout /> :
+          <SavedProjectsProvider>
+            <FilterProvider
+              projects={projects}
+              locations={locations}
+              formats={formats}
+              formatsFilters={formatsFilters}
+              structures={structures}
+              structuresFilters={structuresFilters}
+            >
+              <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
+                <Locations locations={locations} />
+              </Layout>
+            </FilterProvider>
+          </SavedProjectsProvider>
+      }
     </Page>
   );
 }

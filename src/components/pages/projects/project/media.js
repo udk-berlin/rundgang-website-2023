@@ -26,7 +26,7 @@ function ThumbnailMedia({ project, fullSize = false }) {
   );
 }
 
-function ImageMedia({ project, fullSize = false }) {
+export function ProjectImageMedia({ project, fullSize = false }) {
   if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
 
   return (
@@ -42,8 +42,6 @@ export function ProjectAdditionalMedia({ project, media }) {
   const theme = useTheme();
   const videoRef = useRef(null);
   let mediaItems = [];
-
-  console.log(media)
 
   useEffect(() => {
     if (videoRef.current && theme.id === 'l') {

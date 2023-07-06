@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { getFormatsFilters } from "@/utils/api/formats";
 import { getStructuresFilters } from "@/utils/api/structures";
@@ -10,11 +10,14 @@ import {
 
 import { FilterProvider } from "@/providers/filter";
 
-import { Suspense } from "react";
 import Page from "@/components/pages/page";
 import Timeline from "@/components/pages/timeline/timeline";
 import { getItems } from "@/utils/api/items";
 import { SavedProjectsProvider } from "@/providers/saved_projects";
+import LoadingLayout from "@/components/layout/loading";
+import Layout from "@/components/layout/layout";
+
+const NUMBER_OF_SLIDER_STATES = 3
 
 export async function getStaticProps() {
   const projects = await getItems();
@@ -46,19 +49,27 @@ export default function TimelinePage({
   structures,
   structuresFilters,
 }) {
+  const [isLinkClicked, setIsLinkClicked] = useState(false)
+
   return (
     <Page title="timeline">
-      <SavedProjectsProvider>
-        <FilterProvider
-          projects={projects}
-          locations={locations}
-          formats={formats}
-          formatsFilters={formatsFilters}
-          structures={structures}
-          structuresFilters={structuresFilters}>
-          <Timeline />
-        </FilterProvider>
-      </SavedProjectsProvider>
+      {
+        isLinkClicked ?
+          <LoadingLayout /> :
+          <SavedProjectsProvider>
+            <FilterProvider
+              projects={projects}
+              locations={locations}
+              formats={formats}
+              formatsFilters={formatsFilters}
+              structures={structures}
+              structuresFilters={structuresFilters}>
+              <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES} setIsLinkClicked={setIsLinkClicked}>
+                <Timeline />
+              </Layout>
+            </FilterProvider>
+          </SavedProjectsProvider>
+      }
     </Page>
   );
 }

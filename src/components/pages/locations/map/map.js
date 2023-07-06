@@ -23,7 +23,7 @@ const LOCATION_ID_TO_MAX_ZOOM = {
   "!PsyURUpKAbSPistHpQ:content.udk-berlin.de": 15.4,
   //'!hjTkjNaIDkzxNWQZTR:content.udk-berlin.de': 15.8,
   "!RuJBwEwOQcFrQabJnn:content.udk-berlin.de": 14.1,
-  //'!aLyedVYnhynRwlhXUm:content.udk-berlin.de': 14.7,
+  '!YIwQSiHDpoiNHDMWmC:content.udk-berlin.de': 14.7,
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": 13.7,
   "!GFauydmVRlpqvDETXH:content.udk-berlin.de": 14.66,
   //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': 15.2,
@@ -42,7 +42,7 @@ const LOCATION_ID_TO_LNG_LAT = {
   "!PsyURUpKAbSPistHpQ:content.udk-berlin.de": { lng: 13.329, lat: 52.5098 },
   //'!hjTkjNaIDkzxNWQZTR:content.udk-berlin.de': {lng: 13.32299, lat: 52.5169},
   "!RuJBwEwOQcFrQabJnn:content.udk-berlin.de": { lng: 13.3299, lat: 52.498635 },
-  //'!aLyedVYnhynRwlhXUm:content.udk-berlin.de': {lng: 13.32215, lat: 52.51705},
+  '!YIwQSiHDpoiNHDMWmC:content.udk-berlin.de': {lng: 13.32215, lat: 52.51705},
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": {
     lng: 13.327300406397331,
     lat: 52.50967152502669,
@@ -73,11 +73,10 @@ const LOCATION_ID_TO_ORDER_MAPPER = {
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": -1,
 };
 
-export default function LocationsMap({ locations }) {
+export default function LocationsMap({ locations, locationSelected = false }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const dispatch = useFilterDispatch();
-  const filter = useFilter();
   const markersCache = { groundPlan: {}, text: {} };
 
   useEffect(() => {
@@ -179,7 +178,7 @@ export default function LocationsMap({ locations }) {
     });
   });
 
-  return <MapContainer ref={mapContainerRef} locationSelected={!!filter.location} />;
+  return <MapContainer ref={mapContainerRef} locationSelected={locationSelected} />;
 }
 
 const MapContainer = styled.div`

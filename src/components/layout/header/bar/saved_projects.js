@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { SavedProjectsLink } from "@/components/localization/links";
 import { useSavedProjects } from "@/providers/saved_projects";
 
-export default function HeaderBarSavedProjects() {
+export default function HeaderBarSavedProjects({ setIsLinkClicked }) {
   const savedProjects = useSavedProjects();
   const numberOfSavedProjects = savedProjects ? savedProjects.length : 0;
   const numberOfSavedProjectsForPath = !savedProjects
@@ -17,13 +17,13 @@ export default function HeaderBarSavedProjects() {
 
   return (
     <SavedProjectsContainer>
-      <SavedProjectsLink>
+      <SavedProjectsLink setIsLinkClicked={setIsLinkClicked}>
         <NumberOfSavedProjectsContainer>
           {numberOfSavedProjects}
         </NumberOfSavedProjectsContainer>
       </SavedProjectsLink>
       <SavedProjectsSVGContainer numberOfSavedProjects={numberOfSavedProjects}>
-        <SavedProjectsLink>
+        <SavedProjectsLink setIsLinkClicked={setIsLinkClicked}>
           <div
             onMouseEnter={() => setIsActive(true)}
             onMouseLeave={() => setIsActive(false)}

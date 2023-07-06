@@ -3,22 +3,22 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 
-export default function LandingMenuL({ setInfoIsActive, setLinkClicked }) {
+export default function LandingMenuL({ setInfoIsActive, setIsLinkClicked }) {
   const language = useIntl();
   return (
     <MenuContainer>
       <SVGContainer>
         {language.locale === "en" ? (
-          <EnSVG setInfoIsActive={setInfoIsActive} setLinkClicked={setLinkClicked}/>
+          <EnSVG setInfoIsActive={setInfoIsActive} setIsLinkClicked={setIsLinkClicked}/>
         ) : (
-          <DeSVG setInfoIsActive={setInfoIsActive} setLinkClicked={setLinkClicked}/>
+          <DeSVG setInfoIsActive={setInfoIsActive} setIsLinkClicked={setIsLinkClicked}/>
         )}
       </SVGContainer>
     </MenuContainer>
   );
 }
 
-function DeSVG({ setInfoIsActive, setLinkClicked }) {
+function DeSVG({ setInfoIsActive, setIsLinkClicked }) {
   const [isProgramHovered, setProgramIsHovered] = useState(false);
   const [isInfoHovered, setInfoIsHovered] = useState(false);
   const [isLocationsHovered, setLocationsIsHovered] = useState(false);
@@ -36,15 +36,15 @@ function DeSVG({ setInfoIsActive, setLinkClicked }) {
       setInfoIsActive(true);
     });
     programRef.current.addEventListener("click", () => {
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/program");
     });
     locationsRef.current.addEventListener("click", () => {
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/locations");
     });
     timelineRef.current.addEventListener("click", () => {
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/timeline");
     });
   }, []);
@@ -216,7 +216,7 @@ function DeSVG({ setInfoIsActive, setLinkClicked }) {
   );
 }
 
-function EnSVG({ setInfoIsActive, setLinkClicked }) {
+function EnSVG({ setInfoIsActive, setIsLinkClicked }) {
   const [isProgramHovered, setProgramIsHovered] = useState(false);
   const [isInfoHovered, setInfoIsHovered] = useState(false);
   const [isLocationsHovered, setLocationsIsHovered] = useState(false);
@@ -234,15 +234,15 @@ function EnSVG({ setInfoIsActive, setLinkClicked }) {
       setInfoIsActive(true);
     });
     programRef.current.addEventListener("click", () => {
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/en/program");
     });
     locationsRef.current.addEventListener("click", () => {
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/en/locations");
     });
     timelineRef.current.addEventListener("click", () => {
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/en/timeline");
     });
   }, []);
@@ -498,8 +498,7 @@ export const StyledSVG = styled.svg`
 `;
 
 export const StyledPath = styled.path`
-  fill: ${({ isHovered }) => (isHovered ? "#fff" : "none")};
-  fill: ${({ isClicked }) => (isClicked ? "#fff" : "none")};
+  fill: ${({ isHovered, isClicked }) => (isHovered || isClicked ? "#fff" : "none")};
   stroke: #fff;
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;

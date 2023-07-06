@@ -7,11 +7,8 @@ import LandingBackground from "@/components/pages/landing/background";
 
 import useWindowSize from "@/hooks/window_size";
 import { landingLTheme, landingMTheme, breakpoints } from "@/themes/pages/landing";
-import Layout from "@/components/layout/layout";
-import {LoadingContainer} from "@/components/loading";
 
-export default function Landing () {
-  const [linkClicked, setLinkClicked] = useState(false)
+export default function Landing ({ setIsLinkClicked }) {
   const [responsiveTheme, setResponsiveTheme] = useState(landingLTheme)
   const windowSize = useWindowSize()
 
@@ -24,19 +21,9 @@ export default function Landing () {
   }, [windowSize?.width])
 
   return (
-    <>
-      {
-        linkClicked ?
-        (
-          <Layout disableFilter={true} disableSlider={true}>
-            <LoadingContainer>Loading...</LoadingContainer>
-          </Layout>
-        ) :
-          <ThemeProvider theme={responsiveTheme}>
-            <LandingBackground />
-            <LandingContent setLinkClicked={setLinkClicked} />
-          </ThemeProvider>
-      }
-    </>
+    <ThemeProvider theme={responsiveTheme}>
+      <LandingBackground />
+      <LandingContent setIsLinkClicked={setIsLinkClicked} />
+    </ThemeProvider>
   )
 }

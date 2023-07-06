@@ -13,8 +13,8 @@ import SavedProjects from "@/components/pages/projects/saved/saved";
 import {gql, useQuery} from "@apollo/client";
 import Layout from "@/components/layout/layout";
 import {LoadingContainer} from "@/components/loading";
-import Program from "@/components/pages/program/program";
-
+import React, {useState} from "react";
+import LoadingLayout from "@/components/layout/loading";
 
 const PROJECTS_QUERY = gql`
   {
@@ -54,17 +54,23 @@ export default function SavedProjectsPage({
   structures,
   structuresFilters,
 }) {
+  const [isLinkClicked, setIsLinkClicked] = useState(false)
+
   return (
     <Page title="Saved Projects">
-      <SavedProjectsProvider>
-        {<SavedProjectsContainer structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}/>}
-      </SavedProjectsProvider>
+      {
+        isLinkClicked ?
+          <LoadingLayout /> :
+          <SavedProjectsProvider>
+            {<SavedProjectsContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}/>}
+          </SavedProjectsProvider>
+      }
     </Page>
   );
 }
 
 
-function SavedProjectsContainer ({ formats, formatsFilters, structures, structuresFilters }) {
+function SavedProjectsContainer ({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
   const projects = useQuery(PROJECTS_QUERY);
   return (
     <>
@@ -84,11 +90,12 @@ function SavedProjectsContainer ({ formats, formatsFilters, structures, structur
               structuresFilters={structuresFilters}
               useFast={true}
             >
-              <SavedProjects />
+              <Layout setIsLinkClicked={setIsLinkClicked}>
+                <SavedProjects />
+              </Layout>
             </FilterProvider>
           )
       }
     </>
   )
 }
-

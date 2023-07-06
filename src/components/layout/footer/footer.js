@@ -4,12 +4,12 @@ import FooterSlider from "@/components/layout/footer/slider";
 import FooterInfoPages from "@/components/layout/footer/info_pages";
 import FooterTitle from "@/components/layout/footer/title";
 
-export default function Footer({ numberOfSliderStates, disableSlider = false }) {
+export default function Footer({ numberOfSliderStates, disableSlider = false, setIsLinkClicked }) {
   return (
     <FooterContainer>
       <FooterSlider numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />
-      <FooterTitle />
-      <FooterInfoPages />
+      <FooterTitle setIsLinkClicked={setIsLinkClicked}/>
+      <FooterInfoPages setIsLinkClicked={setIsLinkClicked}/>
     </FooterContainer>
   );
 }

@@ -8,7 +8,7 @@ import HeaderBarMobile from "@/components/layout/header/bar/bar_mobile";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/layout";
 
-export default function Header({ disableFilter }) {
+export default function Header({ disableFilter, setIsLinkClicked }) {
   const [showFilters, setShowFilters] = useState(false);
 
   const [mobile, setMobile] = useState(false);
@@ -24,7 +24,7 @@ export default function Header({ disableFilter }) {
 
   return (
     <HeaderContainer>
-      {mobile ? <HeaderBarMobile /> : <HeaderBar />}
+      {mobile ? <HeaderBarMobile setIsLinkClicked={setIsLinkClicked} /> : <HeaderBar setIsLinkClicked={setIsLinkClicked} />}
       <HeaderFiltersBar
         showFilters={showFilters}
         setShowFilters={setShowFilters}

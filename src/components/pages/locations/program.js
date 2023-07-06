@@ -4,11 +4,18 @@ import styled from "styled-components";
 import ProjectCell from "@/components/pages/locations/program/project_cell";
 import { useFilter } from "@/providers/filter";
 
-export default function LocationsProgram() {
+export default function LocationsProgram({ setLocationSelected, responsiveTheme}) {
   const filter = useFilter();
 
   if (!filter.location) {
+    setLocationSelected(false)
     return <></>;
+  }
+
+  if (responsiveTheme.id === 'm') {
+    setLocationSelected(true)
+  } else {
+    setLocationSelected(false)
   }
 
   return (

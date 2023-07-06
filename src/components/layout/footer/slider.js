@@ -64,7 +64,7 @@ const CustomSlider = styled(Slider)`
     width: 15px !important;
     height: 15px !important;
     
-    border-radius: 5px !important;
+    border-radius: 10px !important;
   }
 
   > .MuiSlider-track {

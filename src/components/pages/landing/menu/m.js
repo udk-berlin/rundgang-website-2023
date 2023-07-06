@@ -9,22 +9,22 @@ import {
 } from "@/components/pages/landing/menu/l";
 
 
-export default function LandingMenuM({ setInfoIsActive, infoIsActive, setLinkClicked }) {
+export default function LandingMenuM({ setInfoIsActive, infoIsActive, setIsLinkClicked }) {
   const language = useIntl();
   return (
     <MenuContainer>
       <SVGContainer>
         {language.locale === "en" ? (
-          <EnSVG setInfoIsActive={setInfoIsActive} infoIsActive={infoIsActive} setLinkClicked={setLinkClicked} />
+          <EnSVG setInfoIsActive={setInfoIsActive} infoIsActive={infoIsActive} setIsLinkClicked={setIsLinkClicked} />
         ) : (
-          <DeSVG setInfoIsActive={setInfoIsActive} infoIsActive={infoIsActive} setLinkClicked={setLinkClicked} />
+          <DeSVG setInfoIsActive={setInfoIsActive} infoIsActive={infoIsActive} setIsLinkClicked={setIsLinkClicked} />
         )}
       </SVGContainer>
     </MenuContainer>
   );
 }
 
-function DeSVG({ setInfoIsActive, infoIsActive, setLinkClicked }) {
+function DeSVG({ setInfoIsActive, infoIsActive, setIsLinkClicked }) {
   const [isInfoClicked, setIsInfoClicked] = useState(false);
   const [isProgramClicked, setIsProgramClicked] = useState(false);
   const [isLocationsClicked, setIsLocationsClicked] = useState(false);
@@ -46,22 +46,22 @@ function DeSVG({ setInfoIsActive, infoIsActive, setLinkClicked }) {
   useEffect(() => {
     infoRef.current.addEventListener("click", () => {
       setIsInfoClicked(true)
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       setInfoIsActive(true);
     });
     programRef.current.addEventListener("click", () => {
       setIsProgramClicked(true)
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/program");
     });
     locationsRef.current.addEventListener("click", () => {
       setIsLocationsClicked(true)
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/locations");
     });
     timelineRef.current.addEventListener("click", () => {
       setIsTimelineClicked(true)
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/timeline");
     });
   }, []);
@@ -109,7 +109,7 @@ function DeSVG({ setInfoIsActive, infoIsActive, setLinkClicked }) {
   );
 }
 
-function EnSVG({ setInfoIsActive, infoIsActive, setLinkClicked }) {
+function EnSVG({ setInfoIsActive, infoIsActive, setIsLinkClicked }) {
   const [isInfoClicked, setIsInfoClicked] = useState(false);
   const [isProgramClicked, setIsProgramClicked] = useState(false);
   const [isLocationsClicked, setIsLocationsClicked] = useState(false);
@@ -135,17 +135,17 @@ function EnSVG({ setInfoIsActive, infoIsActive, setLinkClicked }) {
     });
     programRef.current.addEventListener("click", () => {
       setIsProgramClicked(true)
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/program");
     });
     locationsRef.current.addEventListener("click", () => {
       setIsLocationsClicked(true)
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/locations");
     });
     timelineRef.current.addEventListener("click", () => {
       setIsTimelineClicked(true)
-      setLinkClicked(true)
+      setIsLinkClicked(true)
       router.push("/timeline");
     });
   }, []);
