@@ -21,7 +21,7 @@ export default function LandingContent ({ setIsLinkClicked }) {
             <LandingMenuL setInfoIsActive={setInfoIsActive} setIsLinkClicked={setIsLinkClicked}/> :
             <LandingMenuM setInfoIsActive={setInfoIsActive} infoIsActive={infoIsActive} setIsLinkClicked={setIsLinkClicked}/>
         }
-        <FooterLanding />
+        <FooterLanding setIsLinkClicked={setIsLinkClicked}/>
       </LandingContainer>
     </>
   )

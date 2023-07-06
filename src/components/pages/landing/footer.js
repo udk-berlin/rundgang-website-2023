@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import {ContactLink, ImprintLink, FaqLink, SwitchLocalizationLink} from "@/components/localization/links";
 import React from "react";
 
-export default function LandingFooter () {
+export default function LandingFooter ({ setIsLinkClicked }) {
   const theme = useTheme()
 
   return (
@@ -12,34 +12,34 @@ export default function LandingFooter () {
       {
         theme.id === 'l' ?
           <LFooterContainer>
-            <FooterContent />
+            <FooterContent setIsLinkClicked={setIsLinkClicked} />
           </LFooterContainer>
           :
           <MFooterContainer>
-            <FooterContent />
+            <FooterContent setIsLinkClicked={setIsLinkClicked} />
           </MFooterContainer>
       }
     </>
   )
 }
 
-function FooterContent () {
+function FooterContent ({ setIsLinkClicked }) {
   const theme = useTheme()
 
   return (
     <>
       <FooterContainer>
         <ContactContainer>
-          <ContactLink>
+          <ContactLink setIsLinkClicked={setIsLinkClicked}>
             <FormattedMessage id={'contact'} />
           </ContactLink>
         </ContactContainer>
         <ImprintContainer>
-          <ImprintLink>
+          <ImprintLink setIsLinkClicked={setIsLinkClicked}>
             <FormattedMessage id={'imprint'} />
           </ImprintLink>
         </ImprintContainer>
-        <FaqContainer>
+        <FaqContainer setIsLinkClicked={setIsLinkClicked}>
           <FaqLink>
             <FormattedMessage id={'faq'} />
           </FaqLink>
