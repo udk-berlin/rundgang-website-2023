@@ -50,7 +50,7 @@ export default function InfoGridFormat({ project, contexts, margin }) {
         {
           formats.map(format => {
             return (
-              <InfoGridItemLink margin={format in formatToMarginLeftMapper && !margin ? formatToMarginLeftMapper[format] : formatToMarginLeftMapper.default}>
+              <InfoGridItemLink href={'#'} margin={format in formatToMarginLeftMapper && !margin ? formatToMarginLeftMapper[format] : formatToMarginLeftMapper.default}>
                 {format}
               </InfoGridItemLink>
             )

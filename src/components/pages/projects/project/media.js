@@ -2,7 +2,6 @@ import React, {useEffect, useRef} from "react";
 import styled, {useTheme} from "styled-components";
 
 import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
-// import ProjectImageMedia, { ProjectAdditionalMedia } from "@/components/pages/projects/project/media/image";
 import getLocalizedData from "@/components/localization/data";
 
 export default function ProjectMedia({ project, media, contexts, fullSize = true, infoGridPos }) {
@@ -10,7 +9,7 @@ export default function ProjectMedia({ project, media, contexts, fullSize = true
     <MediaContainer>
       {infoGridPos ? <ProjectInfoGrid project={project} contexts={contexts} /> : <></>}
       <ImageMedia project={project} fullSize={fullSize} />
-      {/*<ProjectAdditionalMedia project={project} media={media} />*/}
+      <ProjectAdditionalMedia project={project} media={media} />
     </MediaContainer>
   )
 }
@@ -19,7 +18,7 @@ function ImageMedia({ project, fullSize = false }) {
   if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
 
   return (
-    <ImageMedia
+    <ImageMediaContainer
       src={fullSize ? project.thumbnail_full_size : project.thumbnail}
       alt={project.name}
       loading="lazy"

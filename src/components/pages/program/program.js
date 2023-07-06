@@ -65,7 +65,7 @@ export default function Program() {
       {
         windowSize?.width ?
           (
-            <Layout>
+            <Layout defaultSliderPosition={2}>
               <ThemeProvider theme={responsiveTheme}>
                 <ProgramContainer>
                   <Masonry

@@ -6,7 +6,7 @@ import ProjectAuthors from "@/components/pages/projects/project/authors";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import Layout from "@/components/layout/layout";
 
-import ProjectMedia from "@/components/pages/projects/project/media/media";
+import ProjectMedia from "@/components/pages/projects/project/media";
 
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
