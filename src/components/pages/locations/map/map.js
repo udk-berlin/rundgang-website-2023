@@ -73,11 +73,10 @@ const LOCATION_ID_TO_ORDER_MAPPER = {
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": -1,
 };
 
-export default function LocationsMap({ locations }) {
+export default function LocationsMap({ locations, locationSelected = false }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const dispatch = useFilterDispatch();
-  const filter = useFilter();
   const markersCache = { groundPlan: {}, text: {} };
 
   useEffect(() => {
@@ -179,7 +178,7 @@ export default function LocationsMap({ locations }) {
     });
   });
 
-  return <MapContainer ref={mapContainerRef} locationSelected={!!filter.location} />;
+  return <MapContainer ref={mapContainerRef} locationSelected={locationSelected} />;
 }
 
 const MapContainer = styled.div`

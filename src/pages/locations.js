@@ -63,7 +63,7 @@ export default function LocationsPage({
               structures={structures}
               structuresFilters={structuresFilters}
             >
-              <Layout setIsLinkClicked={setIsLinkClicked}>
+              <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
                 <Locations locations={locations} />
               </Layout>
             </FilterProvider>
