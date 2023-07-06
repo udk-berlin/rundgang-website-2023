@@ -4,13 +4,11 @@ import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/progr
 
 import Page from "@/components/pages/page";
 import Program from "@/components/pages/program/program";
-
 import { FilterProvider } from "@/providers/filter";
-
-
 import { SavedProjectsProvider } from '@/providers/saved_projects'
 import {gql, useQuery} from "@apollo/client";
 import LoadingLayout from "@/components/layout/loading";
+import React, {useState} from "react";
 
 const PROJECTS_QUERY = gql`
   {
@@ -43,16 +41,22 @@ export async function getStaticProps () {
 }
 
 export default function ProgramPage ({ formats, formatsFilters, structures, structuresFilters }) {
+  const [isLinkClicked, setIsLinkClicked] = useState(false)
+
   return (
     <Page title="program">
-      <SavedProjectsProvider>
-        {<ProgramPageContainer structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}/>}
-      </SavedProjectsProvider>
+      {
+        isLinkClicked ?
+          <LoadingLayout /> :
+          <SavedProjectsProvider>
+            {<ProgramPageContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}/>}
+          </SavedProjectsProvider>
+      }
     </Page>
   )
 }
 
-function ProgramPageContainer ({ formats, formatsFilters, structures, structuresFilters }) {
+function ProgramPageContainer ({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
   const projects = useQuery(PROJECTS_QUERY);
 
   return (
@@ -64,7 +68,7 @@ function ProgramPageContainer ({ formats, formatsFilters, structures, structures
           ) :
           (
             <FilterProvider projects={projects.data.items} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters} useFast={true}>
-              <Program />
+              <Program setIsLinkClicked={setIsLinkClicked} />
             </FilterProvider>
           )
       }

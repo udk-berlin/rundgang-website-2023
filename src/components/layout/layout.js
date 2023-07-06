@@ -17,7 +17,7 @@ export default function Layout({
   disableFilter = false,
   numberOfSliderStates = 7,
   disableSlider = false,
-  defaultSliderPosition = 0
+  defaultSliderPosition = 0, setIsLinkClicked
 }) {
   const [responsiveTheme, setResponsiveTheme] = useState(layoutLTheme);
   const [mobile, setMobile] = useState(false);
@@ -37,7 +37,7 @@ export default function Layout({
     <ThemeProvider theme={responsiveTheme}>
       <LayoutContainer>
         <SliderProvider defaultPosition={defaultSliderPosition}>
-          <Header disableFilter={disableFilter} />
+          <Header disableFilter={disableFilter} setIsLinkClicked={setIsLinkClicked} />
           <Content>{children}</Content>
           {mobile ? (
             <FooterMobile
@@ -48,6 +48,7 @@ export default function Layout({
             <Footer
               numberOfSliderStates={numberOfSliderStates}
               disableSlider={disableSlider}
+              setIsLinkClicked={setIsLinkClicked}
             />
           )}
         </SliderProvider>

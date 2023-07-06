@@ -4,12 +4,12 @@ import styled from "styled-components";
 
 import { TimelineLink } from "@/components/localization/links";
 
-export default function HeaderBarTimeline() {
+export default function HeaderBarTimeline({ setIsLinkClicked }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <TimelineContainer>
-      <TimelineLink>
+      <TimelineLink setIsLinkClicked={setIsLinkClicked}>
         <Timeline
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}

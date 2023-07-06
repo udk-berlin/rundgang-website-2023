@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 import { ProgramLink } from "@/components/localization/links";
 
-export default function HeaderBarProgram() {
+export default function HeaderBarProgram({ setIsLinkClicked }) {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <ProgramLink>
+    <ProgramLink setIsLinkClicked={setIsLinkClicked}>
       <div
         onMouseEnter={() => setIsActive(true)}
         onMouseLeave={() => setIsActive(false)}

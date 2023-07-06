@@ -4,7 +4,6 @@ import styled, { ThemeProvider } from "styled-components";
 import { useFilter } from "@/providers/filter";
 import { useSavedProjects } from "@/providers/saved_projects";
 
-import Layout from "@/components/layout/layout";
 import ProjectCell from "@/components/pages/program/project_cell";
 import {useEffect, useMemo, useState} from "react";
 import {
@@ -68,20 +67,18 @@ export default function SavedProjects() {
   }, [windowSize?.width]);
 
   return (
-    <Layout>
-      <ThemeProvider theme={responsiveTheme}>
-        <SavedProjectsContainer>
-          <Masonry
-            columnsCount={responsiveTheme.MASONRY_COLUMNS}
-            gutter={responsiveTheme.MASONRY_GUTTER}
-          >
-            {projects.map((project) => (
-              <ProjectCell project={project} contexts={contexts}/>
-            ))}
-          </Masonry>
-        </SavedProjectsContainer>
-      </ThemeProvider>
-    </Layout>
+    <ThemeProvider theme={responsiveTheme}>
+      <SavedProjectsContainer>
+        <Masonry
+          columnsCount={responsiveTheme.MASONRY_COLUMNS}
+          gutter={responsiveTheme.MASONRY_GUTTER}
+        >
+          {projects.map((project) => (
+            <ProjectCell project={project} contexts={contexts}/>
+          ))}
+        </Masonry>
+      </SavedProjectsContainer>
+    </ThemeProvider>
   );
 }
 

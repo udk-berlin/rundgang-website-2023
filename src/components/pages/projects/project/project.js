@@ -20,6 +20,8 @@ import {
 } from "@/themes/pages/project";
 import { gql, useQuery } from "@apollo/client";
 
+const NUMBER_OF_SLIDER_STATES = 5
+
 function buildObjects(res) {
   const obj = {};
 
@@ -45,7 +47,7 @@ const CONTEXTS_QUERY = gql`
   }
 `;
 
-export default function Project({ id }) {
+export default function Project({ id, setIsLinkClicked }) {
   const projectQuery = gql`
   {
     item(id: "${id}") {
@@ -105,6 +107,7 @@ export default function Project({ id }) {
       disableFilter={true}
       disableSlider={infoGridPos}
       numberOfSliderStates={5}
+      setIsLinkClicked={setIsLinkClicked}
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>

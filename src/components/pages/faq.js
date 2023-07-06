@@ -34,12 +34,12 @@ export default function Faq() {
     disclaimer = faqDisclaimer.en;
 
   return (
-    <Layout disableFilter={true} disableSlider={true}>
+    <>
       {/* <StaticLayout layout={"faq"} title={"faq"}> */}
       <StaticLayout title={"faq"}>
         {/* <Accordion items={faqs} /> */}
         {disclaimer}
       </StaticLayout>
-    </Layout>
+    </>
   );
 }

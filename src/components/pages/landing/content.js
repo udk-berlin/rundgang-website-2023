@@ -7,7 +7,7 @@ import LandingInfo from "@/components/pages/landing/info";
 import LandingMenuL from "@/components/pages/landing/menu/l";
 import LandingMenuM from "@/components/pages/landing/menu/m";
 
-export default function LandingContent ({ setMenuLinkClicked }) {
+export default function LandingContent ({ setIsLinkClicked }) {
   const theme = useTheme()
   const [infoIsActive, setInfoIsActive] = useState(false)
 
@@ -18,8 +18,8 @@ export default function LandingContent ({ setMenuLinkClicked }) {
         <HeaderLanding />
         {
           theme.id === 'l' ?
-            <LandingMenuL setInfoIsActive={setInfoIsActive} setMenuLinkClicked={setMenuLinkClicked}/> :
-            <LandingMenuM setInfoIsActive={setInfoIsActive} infoIsActive={infoIsActive} setMenuLinkClicked={setMenuLinkClicked}/>
+            <LandingMenuL setInfoIsActive={setInfoIsActive} setIsLinkClicked={setIsLinkClicked}/> :
+            <LandingMenuM setInfoIsActive={setInfoIsActive} infoIsActive={infoIsActive} setIsLinkClicked={setIsLinkClicked}/>
         }
         <FooterLanding />
       </LandingContainer>

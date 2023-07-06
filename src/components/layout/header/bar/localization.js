@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { SwitchLocalizationLink } from "@/components/localization/links";
 
-export default function HeaderBarLocalization({ classname }) {
+export default function HeaderBarLocalization({  setIsLinkClicked, classname }) {
   return (
     <LocalizationContainer className={classname}>
       <SwitchLocalizationLink />

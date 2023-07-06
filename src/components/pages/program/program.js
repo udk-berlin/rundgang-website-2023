@@ -41,7 +41,7 @@ function buildObjects(res) {
   return obj
 }
 
-export default function Program() {
+export default function Program({ setIsLinkClicked }) {
   let contextsResponse = useQuery(CONTEXTS_QUERY);
   const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 
@@ -65,7 +65,7 @@ export default function Program() {
       {
         windowSize?.width ?
           (
-            <Layout defaultSliderPosition={2}>
+            <Layout setIsLinkClicked={setIsLinkClicked} defaultSliderPosition={2}>
               <ThemeProvider theme={responsiveTheme}>
                 <ProgramContainer>
                   <Masonry
