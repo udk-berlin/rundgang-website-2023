@@ -8,22 +8,22 @@ import LandingBackground from "@/components/pages/landing/background";
 import useWindowSize from "@/hooks/window_size";
 import { landingLTheme, landingMTheme, breakpoints } from "@/themes/pages/landing";
 
-export default function Landing () {
+export default function Landing ({ setIsLinkClicked }) {
   const [responsiveTheme, setResponsiveTheme] = useState(landingLTheme)
   const windowSize = useWindowSize()
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(landingMTheme)
     } else {
       setResponsiveTheme(landingLTheme)
     }
-  }, [windowSize.width])
+  }, [windowSize?.width])
 
   return (
     <ThemeProvider theme={responsiveTheme}>
       <LandingBackground />
-      <LandingContent />
+      <LandingContent setIsLinkClicked={setIsLinkClicked} />
     </ThemeProvider>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
@@ -8,17 +8,18 @@ import {
 } from "@/providers/saved_projects";
 
 import ProjectLink from "@/components/pages/projects/project/link";
-import ProjectImage from "@/components/pages/projects/project/image";
+import ProjectImage from "@/components/pages/projects/project/media";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
+import useWindowSize from "@/hooks/window_size";
+import { breakpoints } from "@/themes/theme";
 
-export default function ProjectCell({ key, project }) {
+export default function ProjectCell({ project, contexts }) {
   const [cellHovered, setCellHovered] = useState(false);
 
   return (
     <ProjectCellContainer
-      key={key}
       onMouseEnter={() => setCellHovered(true)}
       onMouseLeave={() => setCellHovered(false)}
     >
@@ -34,15 +35,25 @@ export default function ProjectCell({ key, project }) {
       />
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
-      <InfoGrid project={project} />
+      <InfoGrid project={project} contexts={contexts} />
     </ProjectCellContainer>
-  );
+  )
 }
 
 export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [mobile, setMobile] = useState(false);
   const savedProjects = useSavedProjects();
   const setSavedProjects = useSetSavedProjects();
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize?.width <= breakpoints.m) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }, [windowSize?.width]);
 
   const handleClick = () => {
     if (savedProjects.includes(project.id)) {
@@ -55,10 +66,18 @@ export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
   };
 
   let svg;
-  if (cellHovered && !savedProjects.includes(project.id)) {
-    svg = <SVGHOverlay src={pathPassive} />;
-  } else if (savedProjects && savedProjects.includes(project.id)) {
-    svg = <SVGHOverlay src={pathActive} />;
+  if (mobile) {
+    if (!savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathPassive} />;
+    } else if (savedProjects && savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathActive} />;
+    }
+  } else {
+    if (cellHovered && !savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathPassive} />;
+    } else if (savedProjects && savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={pathActive} />;
+    }
   }
 
   return (

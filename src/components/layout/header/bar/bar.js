@@ -7,17 +7,17 @@ import HeaderBarLocalization from "@/components/layout/header/bar/localization";
 import HeaderBarLocations from "@/components/layout/header/bar/locations";
 import HeaderBarProgram from "@/components/layout/header/bar/program";
 
-export default function HeaderBar() {
+export default function HeaderBar({ setIsLinkClicked }) {
   return (
     <HeaderBarContainer>
       <HeaderBarLeftContainer>
-        <HeaderBarLocations />
-        <HeaderBarProgram />
+        <HeaderBarLocations setIsLinkClicked={setIsLinkClicked}/>
+        <HeaderBarProgram setIsLinkClicked={setIsLinkClicked} />
       </HeaderBarLeftContainer>
-      <HeaderBarTimeline />
+      <HeaderBarTimeline setIsLinkClicked={setIsLinkClicked} />
       <HeaderBarRightContainer>
-        <HeaderBarSavedProjects />
-        <HeaderBarLocalization />
+        <HeaderBarSavedProjects setIsLinkClicked={setIsLinkClicked} />
+        <HeaderBarLocalization setIsLinkClicked={setIsLinkClicked} />
       </HeaderBarRightContainer>
     </HeaderBarContainer>
   );
@@ -28,12 +28,11 @@ const HeaderBarContainer = styled.div`
   grid-template-columns: 2fr 6fr 2fr;
   align-items: center;
 
-  height: var(--layout-header-bar-container-height);
+  height: ${({ theme }) => theme.header.bar.height };
   padding: 0 0.75rem;
 `;
 
 const HeaderBarLeftContainer = styled.div`
-  //padding-left: 0.5rem;
   display: flex;
   gap: 1.5rem;
 `;

@@ -4,12 +4,12 @@ import FooterSlider from "@/components/layout/footer/slider";
 import FooterInfoPages from "@/components/layout/footer/info_pages";
 import FooterTitle from "@/components/layout/footer/title";
 
-export default function Footer({ numberOfSliderStates, disableSlider = false }) {
+export default function Footer({ numberOfSliderStates, disableSlider = false, setIsLinkClicked }) {
   return (
     <FooterContainer>
       <FooterSlider numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />
-      <FooterTitle />
-      <FooterInfoPages />
+      <FooterTitle setIsLinkClicked={setIsLinkClicked}/>
+      <FooterInfoPages setIsLinkClicked={setIsLinkClicked}/>
     </FooterContainer>
   );
 }
@@ -20,20 +20,20 @@ const FooterContainer = styled.div`
   left: 0;
 
   width: 100%;
-  height: 45px; //var(--layout-header-bar-container-height);
+  height: ${({ theme }) => theme.footer.height};
 
   display: grid;
-  grid-template-columns: var(--layout-footer-grid-template-columns);
+  grid-template-columns: ${({ theme }) => theme.footer.gridTemplateColumn1} ${({ theme }) => theme.footer.gridTemplateColumn2} ${({ theme }) => theme.footer.gridTemplateColumn3};
   align-items: center;
 
-  border: var(--border-width) solid var(--border-color);
-  background: var(--color-white);
+  border: ${({ theme }) => theme.border};
+  background: white;
 
   > *:nth-child(1) {
-    border-right: var(--border-width) solid var(--border-color);
+    border-right: ${({ theme }) => theme.border};
   }
 
   > *:nth-child(3) {
-    border-left: var(--border-width) solid var(--border-color);
+    border-left: ${({ theme }) => theme.border};
   }
 `;

@@ -1,86 +1,159 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import styled, { ThemeProvider } from "styled-components";
 
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import Layout from "@/components/layout/layout";
-import ProjectImage, {
-  ProjectAdditionalMedia,
-} from "@/components/pages/projects/project/image";
-import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
+
+import ProjectMedia from "@/components/pages/projects/project/media";
+
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
 import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
 import useWindowSize from "@/hooks/window_size";
 import {
+  projectBreakpoints,
   projectLTheme,
   projectMTheme,
   projectSTheme,
 } from "@/themes/pages/project";
-import { breakpoints } from "@/themes/theme";
+import { gql, useQuery } from "@apollo/client";
 
-export default function Project({ project }) {
-  const { data, error, isLoading } = useSWR(
-    getRenderJsonUrl(project.id),
-    fetcher
-  );
+const NUMBER_OF_SLIDER_STATES = 5
+
+function buildObjects(res) {
+  const obj = {};
+
+  if (res && res.data && res.data.contexts) {
+    res.data.contexts.forEach((context) => {
+      obj[context.id] = context;
+    });
+  }
+
+  return obj;
+}
+
+const CONTEXTS_QUERY = gql`
+  {
+    contexts {
+      id
+      name
+      template
+      parents {
+        id
+      }
+    }
+  }
+`;
+
+export default function Project({ id, setIsLinkClicked }) {
+  const projectQuery = gql`
+{
+	item(id: "${id}") {
+    name,
+    thumbnail,
+    thumbnail_full_size,
+    allocation {
+      temporal {
+        start
+        end
+      }
+    }
+    origin {
+      authors {
+        id
+        name
+      }
+    }  
+    parents {
+     id
+    }
+    description {
+      language
+      content
+    } 
+	}
+}
+`;
+
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
 
+  const project = useQuery(projectQuery);
+  let contextsResponse = useQuery(CONTEXTS_QUERY);
+  const contexts = useMemo(
+    () => buildObjects(contextsResponse),
+    [contextsResponse]
+  );
+
+  const media = useSWR(
+    getRenderJsonUrl(id),
+    fetcher
+  );
+
   useEffect(() => {
-    if (windowSize.width <= breakpoints.s) {
+    if (windowSize?.width <= projectBreakpoints.s) {
       setResponsiveTheme(projectSTheme);
       setInfoGridPos(false);
-    } else if (windowSize.width <= breakpoints.m) {
+    } else if (windowSize?.width <= projectBreakpoints.m) {
       setResponsiveTheme(projectMTheme);
       setInfoGridPos(false);
     } else {
       setResponsiveTheme(projectLTheme);
       setInfoGridPos(true);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
-    <Layout disableFilter={true}>
+    <Layout
+      disableFilter={true}
+      disableSlider={infoGridPos}
+      numberOfSliderStates={NUMBER_OF_SLIDER_STATES}
+      setIsLinkClicked={setIsLinkClicked}
+    >
       <ThemeProvider theme={responsiveTheme}>
-        <Container>
-          <ImageContainer>
-            {infoGridPos ? <ProjectInfoGrid project={project} /> : <></>}
-            <ProjectImage project={project} fullSize={true} />
-            <ProjectAdditionalMedia project={project} data={data} />
-            <img src="https://placehold.co/6000x4000" />
-          </ImageContainer>
-          <InfoContainer>
-            <ProjectTitle project={project} />
-            <ProjectAuthors project={project} fontSize={1} />
-            {infoGridPos ? <></> : <InfoGrid project={project} />}
-            <ProjectText project={project} data={data} />
-          </InfoContainer>
-        </Container>
+        <ProjectContainer>
+          {project.loading || project.error ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              <ProjectMedia
+                project={project.data.item}
+                media={media?.data}
+                contexts={contexts}
+                infoGridPos={infoGridPos}
+              />
+              <InfoContainer>
+                <ProjectTitle project={project.data.item} link={false} />
+                <ProjectAuthors project={project.data.item} fontSize={1} />
+                {infoGridPos ? (
+                  <></>
+                ) : (
+                  <InfoGrid project={project.data.item} contexts={contexts} />
+                )}
+                <ProjectText
+                  project={project.data.item}
+                  media={media?.data}
+                />
+              </InfoContainer>
+            </>
+          )}
+        </ProjectContainer>
       </ThemeProvider>
     </Layout>
   );
 }
 
-const Container = styled.div`
+const ProjectContainer = styled.div`
   display: flex;
-  flex-direction: ${({ theme }) => theme.container.flexDirection};
-`;
-
-const ImageContainer = styled.div`
-  flex: 6;
-  height: ${({ theme }) => theme.imageContainer.height};
-  color: white;
-  overflow: scroll;
-  position: relative;
-  display: flex;
-  flex-direction: ${({ theme }) => theme.imageContainer.flexDirection};
+  flex-direction: ${({ theme }) => theme.flexDirection};
+  margin-bottom: ${({ theme }) => theme.marginBottom};
 `;
 
 const InfoContainer = styled.div`
-  padding: ${({ theme }) => theme.infoContainer.padding};
+  padding: ${({ theme }) => theme.info.padding};
   flex: 4;
   height: calc(
     100vh - var(--layout-header-search-container-height) -

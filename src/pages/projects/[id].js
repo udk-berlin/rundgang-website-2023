@@ -1,46 +1,24 @@
-import {getItemIds, getItems} from "@/utils/api/items";
+import React, {useState} from 'react'
+import { useRouter } from 'next/router'
+
 import Page from "@/components/pages/page";
 import Project from "@/components/pages/projects/project/project";
-
-import {LOCALES} from "@/components/localization/provider";
 import { SavedProjectsProvider } from '@/providers/saved_projects'
-import React from 'react'
+import LoadingLayout from "@/components/layout/loading";
 
-export async function getStaticProps ({ params }) {
-  const projects = await getItems()
-  const project = projects[params.id]
-  return { props: { project } }
-}
+export default function ProjectPage () {
+  const router = useRouter()
+  const [isLinkClicked, setIsLinkClicked] = useState(false)
 
-export async function getStaticPaths() {
-  const ids = await getItemIds();
-  const paths = []
-
-  ids.forEach(id => {
-    LOCALES.forEach(locale => {
-      paths.push(
-        {
-          params: {
-            id: id,
-          },
-          locale
-        }
-      )
-    })
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export default function ProjectPage ({ project }) {
   return (
-    <Page>
-      <SavedProjectsProvider>
-        <Project project={project} />
-      </SavedProjectsProvider>
+    <Page title={'project'}>
+      {
+        isLinkClicked || !router || !router.query || !router.query.id ?
+          <LoadingLayout /> :
+          <SavedProjectsProvider>
+            <Project id={router.query.id} setIsLinkClicked={setIsLinkClicked}/>
+          </SavedProjectsProvider>
+      }
     </Page>
   )
 }

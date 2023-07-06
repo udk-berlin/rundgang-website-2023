@@ -7,16 +7,16 @@ import {
   FaqLink,
 } from "@/components/localization/links";
 
-export default function FooterInfoPages() {
+export default function FooterInfoPages({ setIsLinkClicked }) {
   return (
     <InfoPagesContainer>
-      <ContactLink>
+      <ContactLink setIsLinkClicked={setIsLinkClicked}>
         <FormattedMessage id={"contact"} />
       </ContactLink>
-      <ImprintLink>
+      <ImprintLink setIsLinkClicked={setIsLinkClicked}>
         <FormattedMessage id={"imprint"} />
       </ImprintLink>
-      <FaqLink>
+      <FaqLink setIsLinkClicked={setIsLinkClicked}>
         <FormattedMessage id={"faq"} />
       </FaqLink>
     </InfoPagesContainer>
@@ -26,7 +26,7 @@ export default function FooterInfoPages() {
 const InfoPagesContainer = styled.div`
   display: grid;
   grid-template-columns: ${({ theme }) =>
-    theme.footerInfoPages.gridTemplateColumns};
+    theme.footer.infoPages.gridTemplateColumns};
   align-items: center;
   justify-items: center;
 

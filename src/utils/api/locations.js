@@ -1,79 +1,73 @@
-import { get, getTree } from '@/utils/api/api'
+import { getId, getTree } from '@/utils/api/api'
 
-let locationsCached = false
-let locations = {}
+import { REST_API_LOCATIONS_ROOT_ID } from "@/utils/api/items";
 
-let locationDetailsCached = false
-const locationDetails = {}
 
 export async function getLocations () {
-  if (!locationsCached) {
-    const tree = await getTree(process.env.REST_API_LOCATIONS_ROOT_ID)
-    Object.values(tree.children).forEach( location => {
+  const locations = {}
+  const data = await getTree(REST_API_LOCATIONS_ROOT_ID)
+
+  if ('statusCode' in data && data.statusCode === 404) {}
+  else {
+    Object.values(data.children).forEach( location => {
       locations[location.id] = location
     })
-    locationsCached = true
+
+    const locationDetails = await getLocationDetails(Object.keys(locations))
+
+    Object.keys(locations).forEach(id => {
+      if ('lng' in locationDetails[id] && 'lat' in locationDetails[id]) {
+        locations[id] = {
+          ...locations[id],
+          ...locationDetails[id]
+        }
+      } else {
+        delete locations[id];
+      }
+    })
   }
-
-  const locationDetails = await getLocationDetails(Object.keys(locations))
-
-  Object.keys(locations).forEach(id => {
-    locations[id] = { ...locations[id], ...locationDetails[id] }
-  })
 
   return locations
 }
 
 export async function getLocationDetails ( locationIds ){
-  if (!locationDetailsCached) {
-    const promises = []
+  const details = {}
+  const promises = []
 
-    const buildLocationDetail = (data) => {
-      const locationDetail = { id: data.id }
+  const buildLocationDetail = (data) => {
+    const locationDetail = { id: data.id }
 
-      if ('physical' in data.allocation) {
-        locationDetail.lng = data.allocation.physical[0].lng
-        locationDetail.lat = data.allocation.physical[0].lat
-      }
-
-      if ('temporal' in data.allocation) {
-        locationDetail.temporal = []
-
-        data.allocation.temporal.forEach(time => {
-          locationDetail.temporal.push({
-            start: parseInt(time.start) * 1000,
-            end: parseInt(time.end) * 1000,
-          })
-        })
-      }
-
-      return locationDetail
+    if ('physical' in data.allocation) {
+      locationDetail.lng = data.allocation.physical[0].lng
+      locationDetail.lat = data.allocation.physical[0].lat
     }
 
-    locationIds.forEach(locationId => { promises.push(get(locationId)) })
+    if ('temporal' in data.allocation) {
+      locationDetail.temporal = []
 
-    await Promise
-      .all(promises)
-      .then(data => { data.forEach(d => { locationDetails[d.id] = buildLocationDetail(d) }) })
+      data.allocation.temporal.forEach(time => {
+        locationDetail.temporal.push({
+          start: parseInt(time.start) * 1000,
+          end: parseInt(time.end) * 1000,
+        })
+      })
+    }
 
-    locationDetailsCached = false
+    return locationDetail
   }
 
-  return locationDetails
-}
+  locationIds.forEach(locationId => { promises.push(getId(locationId)) })
 
+  await Promise
+    .all(promises)
+    .then(data => {
+      data.forEach(d => {
+        if ('statusCode' in data) {}
+        else {
+          details[d.id] = buildLocationDetail(d)
+        }
+      })
+    })
 
-function filter(array) {
-  const getChildren = (result, object) => {
-    if (object.type === 'item') {
-      result.push(object);
-      return result;
-    }
-    const children = Object.values(object.children).reduce(getChildren, []);
-    if (children.length) result.push({ ...object, children });
-
-    return result;
-  };
-
-  return array.reduce(getChildren, []);
+  return details
 }

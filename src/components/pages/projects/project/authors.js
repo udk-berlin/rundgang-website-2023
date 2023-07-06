@@ -1,17 +1,19 @@
 import { useSlider } from "@/providers/slider";
 import styled from "styled-components";
+import React from "react";
 
 const SLIDER_INDEX = 2;
 
 export default function ProjectAuthors({ project, fontSize = 1 }) {
   const slider = useSlider();
+  const authors = project?.origin?.authors ? project.origin.authors : [];
   return (
     <ProjectAuthorsContainer
       fontSize={fontSize}
       slider={slider}
-      hasAuthors={project.authors.length > 0}
+      hasAuthors={authors.length > 0}
     >
-      {project.authors.map((author) => (
+      {authors.map((author) => (
         <span>{author.name}</span>
       ))}
     </ProjectAuthorsContainer>
@@ -24,12 +26,14 @@ const ProjectAuthorsContainer = styled.div`
   /* margin: ${(props) =>
     props.slider.position >= SLIDER_INDEX ? "0.5rem 0 1rem 0" : "0px"} */
   height: ${(props) =>
-    props.slider.position >= SLIDER_INDEX && props.hasAuthors ? "30px" : "0px"};
+    props.slider.position >= props.theme.author.sliderIndex && props.hasAuthors
+      ? "30px"
+      : "0px"};
   overflow-y: hidden;
   transition: all 0.4s;
 
   padding-top: ${(props) =>
-    props.slider.position >= SLIDER_INDEX ? "0.25rem" : "0"};
+    props.slider.position >= props.theme.author.sliderIndex ? "0.25rem" : "0"};
 
   display: flex;
   flex-wrap: nowrap;

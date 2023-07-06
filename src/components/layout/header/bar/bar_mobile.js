@@ -8,15 +8,15 @@ import HeaderBarLocations from "@/components/layout/header/bar/locations";
 import HeaderBarProgram from "@/components/layout/header/bar/program";
 import HeaderBarR from "@/components/layout/header/bar/r";
 
-export default function HeaderBarMobile() {
+export default function HeaderBarMobile({ setIsLinkClicked }) {
   return (
     <HeaderBarContainer>
       <HeaderBarLeftContainer>
-        <HeaderBarR />
+        <HeaderBarR setIsLinkClicked={setIsLinkClicked} />
       </HeaderBarLeftContainer>
-      <HeaderBarTimeline />
+      <HeaderBarTimeline setIsLinkClicked={setIsLinkClicked} />
       <HeaderBarRightContainer>
-        <HeaderBarSavedProjects />
+        <HeaderBarSavedProjects setIsLinkClicked={setIsLinkClicked} />
       </HeaderBarRightContainer>
     </HeaderBarContainer>
   );

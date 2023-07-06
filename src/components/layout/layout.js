@@ -7,61 +7,62 @@ import FooterMobile from "@/components/layout/footer/footer_mobile";
 import { useEffect, useState } from "react";
 import useWindowSize from "@/hooks/window_size";
 import {
-  layoutBreakpoints,
+  breakpoints,
   layoutLTheme,
   layoutMTheme,
-  layoutSTheme,
 } from "@/themes/layout";
-import { breakpoints } from "@/themes/theme";
 
 export default function Layout({
   children,
   disableFilter = false,
   numberOfSliderStates = 7,
+  disableSlider = false,
+  defaultSliderPosition = 0, setIsLinkClicked
 }) {
   const [responsiveTheme, setResponsiveTheme] = useState(layoutLTheme);
   const [mobile, setMobile] = useState(false);
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(layoutMTheme);
       setMobile(true);
     } else {
       setResponsiveTheme(layoutLTheme);
       setMobile(false);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <ThemeProvider theme={responsiveTheme}>
-      <Container>
-        <SliderProvider>
-          <Header disableFilter={disableFilter} />
+      <LayoutContainer>
+        <SliderProvider defaultPosition={defaultSliderPosition}>
+          <Header disableFilter={disableFilter} setIsLinkClicked={setIsLinkClicked} />
           <Content>{children}</Content>
           {mobile ? (
-            <FooterMobile numberOfSliderStates={numberOfSliderStates} />
+            <FooterMobile
+              numberOfSliderStates={numberOfSliderStates}
+              disableSlider={disableSlider}
+            />
           ) : (
-            <Footer numberOfSliderStates={numberOfSliderStates} />
+            <Footer
+              numberOfSliderStates={numberOfSliderStates}
+              disableSlider={disableSlider}
+              setIsLinkClicked={setIsLinkClicked}
+            />
           )}
         </SliderProvider>
-      </Container>
+      </LayoutContainer>
     </ThemeProvider>
   );
 }
 
-const Container = styled.div`
+const LayoutContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows:
-    calc(
-      var(--layout-header-bar-container-height) +
-        var(--layout-header-search-container-height) + 2 * var(--border-width)
-    )
-    1fr var(--layout-header-bar-container-height);
+  grid-template-rows: ${({ theme }) => theme.header.height} 1fr ${({ theme }) => theme.footer.height}
+  
 `;
 
 const Content = styled.div`
-  //border-left: var(--border-width) solid var(--border-color);
-  //border-right: var(--border-width) solid var(--border-color);
 `;

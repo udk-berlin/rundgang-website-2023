@@ -6,6 +6,8 @@ import {
   baseMTheme,
 } from "@/themes/theme";
 
+import {layoutLTheme, layoutMTheme} from "@/themes/layout";
+
 export const FIRST_TIME = 1689919200000;
 export const LAST_TIME = 1690149600000;
 export const PROJECTS_FIRST_TIME = 1689922800000;
@@ -73,6 +75,8 @@ export const timelineWidthsWithoutVW = {
 
 export const timelineLTheme = {
   ...baseLTheme,
+  id: 'l',
+  height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height} + ${baseLTheme.borderWidth})`,
   width: timelineWidths.l,
   widthPerMinute: `calc(${timelineWidths.l} / ${NUMBER_OF_HOURS * 60})`,
   widthPerHour: `calc(${timelineWidths.l} / ${NUMBER_OF_HOURS})`,
@@ -103,6 +107,8 @@ export const timelineLTheme = {
 
 export const timelineMTheme = {
   ...baseMTheme,
+  id: 'm',
+  height: `calc(100vh - ${layoutMTheme.header.height} - ${layoutMTheme.header.height} - 45px - 45px)`,
   width: timelineWidths.m,
   widthPerMinute: `calc(${timelineWidths.m} / ${NUMBER_OF_HOURS * 60})`,
   widthPerHour: `calc(${timelineWidths.m} / ${NUMBER_OF_HOURS})`,

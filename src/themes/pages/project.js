@@ -1,20 +1,62 @@
 import { baseLTheme, baseMTheme, fontSizes } from "@/themes/theme";
+import { layoutLTheme, layoutMTheme } from "@/themes/layout";
+
+export const projectBreakpoints = {
+  m: 1400,
+  s: 800,
+};
 
 export const projectLTheme = {
   ...baseLTheme,
-  container: {
-    flexDirection: "row",
-  },
-  imageContainer: {
-    flexDirection: "column",
-    height:
-      "calc(100vh - var(--layout-header-search-container-height) -calc(var(--layout-header-bar-container-height) * 2));",
-  },
-  infoContainer: {
+  id: "l",
+  flexDirection: "row",
+  marginBottom: 0,
+  info: {
     padding: "1rem",
   },
   title: {
     fontSize: fontSizes.l.large,
+    sliderIndex: 0,
+  },
+  author: {
+    sliderIndex: 0,
+  },
+  format: {
+    sliderIndex: 1,
+  },
+  carousel: {
+    sliderOffset: 2,
+  },
+  media: {
+    display: "",
+    flexDirection: "",
+    height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
+    width: "50vw",
+    overflowX: "hidden",
+    overflowY: "scroll",
+    thumbnail: {
+      height: "auto",
+      width: "50vw",
+    },
+    image: {
+      height: "auto",
+      width: "50vw",
+    },
+    placeholder: {
+      height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
+      width: "50vw",
+    },
+    audio: {
+      width: "50vw",
+    },
+    video: {
+      height: "",
+      width: "50vw",
+      ratio: 1.777777777,
+    },
+  },
+  text: {
+    heading: fontSizes.l.medium,
   },
 };
 
@@ -23,31 +65,101 @@ export const projectMTheme = {
   container: {
     flexDirection: "row",
   },
-  imageContainer: {
-    flexDirection: "row",
-    height:
-      "calc(100vh - var(--layout-header-search-container-height) -calc(var(--layout-header-bar-container-height) * 2));",
-  },
-  infoContainer: {
+  info: {
     padding: "0.75rem",
   },
   title: {
     fontSize: fontSizes.l.medium,
+    sliderIndex: 0,
+  },
+  author: {
+    sliderIndex: 0,
+  },
+  format: {
+    sliderIndex: 1,
+  },
+  carousel: {
+    sliderOffset: 2,
+  },
+  media: {
+    display: "",
+    flexDirection: "",
+    height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
+    width: "50vw",
+    overflowX: "hidden",
+    overflowY: "scroll",
+    thumbnail: {
+      height: "auto",
+      width: "50vw",
+    },
+    image: {
+      height: "auto",
+      width: "50vw",
+    },
+    placeholder: {
+      height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
+      width: "auto",
+    },
+    audio: {
+      width: "50vw",
+    },
+    video: {
+      height: "",
+      width: "50vw",
+      ratio: 1.777777777,
+    },
+  },
+  additionalText: {
+    heading: fontSizes.l.medium,
   },
 };
 
 export const projectSTheme = {
-  container: {
-    flexDirection: "column",
-  },
-  imageContainer: {
-    flexDirection: "row",
-    height: "",
-  },
-  infoContainer: {
+  ...baseMTheme,
+  id: "l",
+  flexDirection: "column",
+  marginBottom: `calc(${layoutMTheme.footer.height} + 1vh)`,
+  info: {
     padding: "1rem",
   },
   title: {
     fontSize: fontSizes.l.medium,
+    sliderIndex: 0,
+  },
+  author: {
+    sliderIndex: 0,
+  },
+  format: {
+    sliderIndex: 1,
+  },
+  carousel: {
+    sliderOffset: 2,
+  },
+  media: {
+    display: "flex",
+    flexDirection: "row",
+    height: "auto",
+    width: "100vw",
+    overflowX: "scroll",
+    overflowY: "hidden",
+    thumbnail: {
+      height: "auto",
+      width: "100vw",
+    },
+    placeholder: {
+      height: "50vh",
+      width: "100vw",
+    },
+    audio: {
+      width: "100vw",
+    },
+    video: {
+      height: "100vw",
+      width: `calc(${1.777777777} * 100vw)`,
+      ratio: 1.777777777,
+    },
+  },
+  text: {
+    heading: fontSizes.l.medium,
   },
 };

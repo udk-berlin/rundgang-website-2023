@@ -5,6 +5,7 @@ import {
   ImprintLink,
   LocationsLink,
   ProgramLink,
+  TimelineLink,
 } from "@/components/localization/links";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -20,6 +21,10 @@ export default function MobileMenu() {
         <span>&rarr;&nbsp;</span>
         <FormattedMessage id="locations" />
       </LocationsLink>
+      <TimelineLink>
+        <span>&rarr;&nbsp;</span>
+        <FormattedMessage id="timeline" />
+      </TimelineLink>
       <ContactLink>
         <span>&rarr;&nbsp;</span>
         <FormattedMessage id="contact" />
@@ -32,31 +37,43 @@ export default function MobileMenu() {
         <span>&rarr;&nbsp;</span>
         <FormattedMessage id="faq" />
       </FaqLink>
-      <MobileLocalization />
+      <MobileLocalizationContainer>
+        <HeaderBarLocalization />
+      </MobileLocalizationContainer>
     </MobileMenuContainer>
   );
 }
 
 const MobileMenuContainer = styled.div`
+  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(15px);
   padding: 0.5rem;
+
   > a {
     color: white;
   }
   width: min-content;
   margin-left: auto;
   margin-right: 0;
-  outline: var(--border-width) solid var(--border-color);
+  border: var(--border-width) solid var(--border-color);
+
   font-weight: 500;
 `;
 
-const MobileLocalization = styled(HeaderBarLocalization)`
-  > Link {
-    color: white;
+const MobileLocalizationContainer = styled.div`
+  > div {
+    > div {
+      color: white;
+      > div {
+        > a {
+          color: white;
+        }
+      }
+    }
   }
 `;

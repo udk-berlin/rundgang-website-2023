@@ -19,12 +19,12 @@ export default function TimelineHours() {
   const [useHalfDayHours, setUseHalfDayHours] = useState(false);
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setUseHalfDayHours(true);
     } else {
       setUseHalfDayHours(false);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <HoursContainer>

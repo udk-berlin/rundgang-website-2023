@@ -1,20 +1,34 @@
+import useWindowSize from "@/hooks/window_size";
+import { breakpoints } from "@/themes/theme";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-export default function LandingBackground () {
+export default function LandingBackground() {
+  const [path, setPath] = useState(null);
+  const windowSize = useWindowSize();
+  const videoRef = useRef();
+
+  useEffect(() => {
+    if (windowSize?.width <= breakpoints.m) {
+      setPath("/assets/media/bg_video" + Math.floor(Math.random() * 5) + "_mobile");
+    } else {
+      setPath("/assets/media/bg_video" + Math.floor(Math.random() * 2));
+    }
+    videoRef.current?.load();
+  }, [windowSize?.width]);
+
   return (
     <BackgroundVideo
       autoPlay
       muted
       loop
       playsInline
-      poster="/assets/media/images/background_video1_fallback.jpg"
+      poster={path + "_fallback" + ".webp"}
+      ref={videoRef}
     >
-      <source
-        src={'/assets/media/videos/background_video1.webm'}
-        type="video/webm"
-      />
+      <source src={path + ".webm"} type="video/webm" />
     </BackgroundVideo>
-  )
+  );
 }
 
 const BackgroundVideo = styled.video`
@@ -27,4 +41,4 @@ const BackgroundVideo = styled.video`
   height: 100vh;
 
   object-fit: cover;
-`
+`;

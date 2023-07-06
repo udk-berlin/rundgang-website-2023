@@ -3,10 +3,10 @@ import { createContext, useContext, useReducer } from 'react'
 const SliderContext = createContext(null)
 const SliderDispatchContext = createContext(null)
 
-export function SliderProvider ({ children }) {
+export function SliderProvider ({ children, defaultPosition = 0 }) {
   const [slider, dispatch] = useReducer(
     sliderReducer,
-    {position: 0, origin: null}
+    {position: defaultPosition, origin: null}
   )
 
   return (

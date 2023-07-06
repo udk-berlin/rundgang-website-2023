@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Masonry from "react-responsive-masonry";
+import { useQuery, gql } from "@apollo/client";
 
 import { useFilter } from "@/providers/filter";
 
@@ -13,38 +14,74 @@ import {
   programMTheme,
   programSTheme,
 } from "@/themes/pages/program";
+import LoadingLayout from "@/components/layout/loading";
 
-export default function Program() {
+const CONTEXTS_QUERY = gql`
+{
+  contexts {
+    id
+    name
+    template
+    parents {
+      id
+    }
+  }
+}
+`;
+
+function buildObjects(res) {
+  const obj = {}
+
+  if (res && res.data && res.data.contexts) {
+    res.data.contexts.forEach(context => {
+      obj[context.id] = context
+    })
+  }
+
+  return obj
+}
+
+export default function Program({ setIsLinkClicked }) {
+  let contextsResponse = useQuery(CONTEXTS_QUERY);
+  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
+
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
 
   const filter = useFilter();
 
   useEffect(() => {
-    if (windowSize.width <= breakpoints.s) {
+    if (windowSize?.width <= breakpoints.s) {
       setResponsiveTheme(programSTheme);
-    } else if (windowSize.width <= breakpoints.m) {
+    } else if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(programMTheme);
     } else {
       setResponsiveTheme(programLTheme);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
-    <Layout>
-      <ThemeProvider theme={responsiveTheme}>
-        <ProgramContainer>
-          <Masonry
-            columnsCount={responsiveTheme.MASONRY_COLUMNS}
-            gutter={responsiveTheme.MASONRY_GUTTER}
-          >
-            {Object.values(filter.filteredProjects).map((project) => (
-              <ProjectCell project={project} />
-            ))}
-          </Masonry>
-        </ProgramContainer>
-      </ThemeProvider>
-    </Layout>
+    <>
+      {
+        windowSize?.width ?
+          (
+            <Layout setIsLinkClicked={setIsLinkClicked} defaultSliderPosition={2}>
+              <ThemeProvider theme={responsiveTheme}>
+                <ProgramContainer>
+                  <Masonry
+                    columnsCount={responsiveTheme.MASONRY_COLUMNS}
+                    gutter={responsiveTheme.MASONRY_GUTTER}>
+                    {filter.filteredProjects.map((project) => (
+                      <ProjectCell project={project} contexts={contexts} />
+                    ))}
+                  </Masonry>
+                </ProgramContainer>
+              </ThemeProvider>
+            </Layout>
+          ) : <LoadingLayout />
+
+      }
+    </>
   );
 }
 
@@ -55,7 +92,7 @@ const ProgramContainer = styled.div`
   );
 
   margin-bottom: -2px;
-  padding: var(--program-padding);
+  padding: ${({ theme }) => theme.MASONRY_GUTTER};
 
   border-bottom: var(--border-width) solid var(--border-color);
   border-right: var(--border-width) solid var(--border-color);

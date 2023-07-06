@@ -19,7 +19,7 @@ const GridLine = styled.div`
   z-index: -1;
   bottom: 0;
   left: calc(${({theme}) => theme.widthPerHour} * ${({hour}) => hour});
-
+  
   height: 100%;
 
   border-left: ${({theme}) => theme.grid.border};

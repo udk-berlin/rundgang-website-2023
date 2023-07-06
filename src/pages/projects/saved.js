@@ -1,34 +1,101 @@
-import { getItems } from "@/utils/api/items";
-import { getFormatsFilters } from '@/utils/api/formats'
+import { getFormatsFilters } from "@/utils/api/formats";
 import { getStructuresFilters } from "@/utils/api/structures";
-import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/program'
+import {
+  getProgramFormats,
+  getProgramStructures,
+} from "@/utils/api/pages/program";
 
-import { FilterProvider } from '@/providers/filter'
-import { SavedProjectsProvider } from '@/providers/saved_projects'
+import { FilterProvider } from "@/providers/filter";
+import { SavedProjectsProvider } from "@/providers/saved_projects";
 
 import Page from "@/components/pages/page";
-import SavedProjects from '@/components/pages/projects/saved/saved'
+import SavedProjects from "@/components/pages/projects/saved/saved";
+import {gql, useQuery} from "@apollo/client";
+import Layout from "@/components/layout/layout";
+import {LoadingContainer} from "@/components/loading";
+import React, {useState} from "react";
+import LoadingLayout from "@/components/layout/loading";
 
-export async function getStaticProps () {
-  const projects = await getItems()
+const PROJECTS_QUERY = gql`
+  {
+    items {
+      name
+      id
+      origin {
+        authors {
+          id
+          name
+        }
+      }
+      parents {
+        id
+      }
+      thumbnail
+      thumbnail_full_size
+    }
+  }
+`;
 
-  const formats = await getProgramFormats()
-  const formatsFilters = await getFormatsFilters()
+export async function getStaticProps() {
+  const formats = await getProgramFormats();
+  const formatsFilters = await getFormatsFilters();
 
-  const structures = await getProgramStructures()
-  const structuresFilters = await getStructuresFilters()
+  const structures = await getProgramStructures();
+  const structuresFilters = await getStructuresFilters();
 
-  return { props: { projects, formats, formatsFilters, structures, structuresFilters} }
+  return {
+    props: { formats, formatsFilters, structures, structuresFilters },
+  };
 }
 
-export default function SavedProjectsPage ({ projects, formats, formatsFilters, structures, structuresFilters }) {
+export default function SavedProjectsPage({
+  formats,
+  formatsFilters,
+  structures,
+  structuresFilters,
+}) {
+  const [isLinkClicked, setIsLinkClicked] = useState(false)
+
   return (
-    <Page>
-      <SavedProjectsProvider>
-        <FilterProvider projects={projects} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}>
-          <SavedProjects />
-        </FilterProvider>
-      </SavedProjectsProvider>
+    <Page title="Saved Projects">
+      {
+        isLinkClicked ?
+          <LoadingLayout /> :
+          <SavedProjectsProvider>
+            {<SavedProjectsContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}/>}
+          </SavedProjectsProvider>
+      }
     </Page>
+  );
+}
+
+
+function SavedProjectsContainer ({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
+  const projects = useQuery(PROJECTS_QUERY);
+  return (
+    <>
+      {
+        projects.loading || projects.error ?
+          (
+            <Layout disableFilter={true}>
+              <LoadingContainer>Loading...</LoadingContainer>
+            </Layout>
+          ) :
+          (
+            <FilterProvider
+              projects={projects.data.items}
+              structures={structures}
+              formats={formats}
+              formatsFilters={formatsFilters}
+              structuresFilters={structuresFilters}
+              useFast={true}
+            >
+              <Layout setIsLinkClicked={setIsLinkClicked}>
+                <SavedProjects />
+              </Layout>
+            </FilterProvider>
+          )
+      }
+    </>
   )
 }

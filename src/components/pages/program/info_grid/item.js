@@ -46,30 +46,38 @@ export function InfoGridCardItem({ className, children, margin }) {
   const borderRef = useRef(null);
 
   useEffect(() => {
-    borderRef.current.style.marginLeft =
-      scale(hashCode(inlineRef.current.textContent), 0, 99, 0, 70) + "%";
-    borderRef.current.style.width =
-      inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
-    borderRef.current.style.minWidth =
-      inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
-    borderRef.current.style.maxWidth =
-      inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+    if (borderRef?.current && inlineRef?.current) {
+      borderRef.current.style.marginLeft =
+        scale(hashCode(inlineRef.current.textContent), 0, 99, 0, 70) + "%";
+      borderRef.current.style.width =
+        inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+      borderRef.current.style.minWidth =
+        inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+      borderRef.current.style.maxWidth =
+        inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+    }
   }, []);
 
   return (
-    <InfoGridItemContainer
-      ref={borderRef}
-      className={className}
-      // margin={margin}
-    >
-      <div style={{ display: "inline" }} ref={inlineRef}>
-        {children}
-      </div>
-    </InfoGridItemContainer>
+    <>
+      {
+        children ? (
+          <InfoGridItemContainer
+            ref={borderRef}
+            className={className}
+            // margin={margin}
+          >
+            <div style={{ display: "inline" }} ref={inlineRef}>
+              {children}
+            </div>
+          </InfoGridItemContainer>
+        ) : <></>
+      }
+    </>
   );
 }
 
-function convertRemToPixels(rem) {
+export function convertRemToPixels(rem) {
   return Math.round(
     rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
   );
@@ -88,8 +96,8 @@ function hashCode(str) {
     hash = Math.abs(hash);
   }
 
-  let sub = String(hash).substring(0, 2);
-  hash = Number(sub);
+  let sub = String(hash);
+  hash = Number(sub.substring(sub.length - 2));
   return hash;
 }
 

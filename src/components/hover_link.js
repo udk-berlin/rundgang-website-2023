@@ -23,10 +23,10 @@ export const HoverLinkContainer = styled.div`
   }
 `;
 
-export function HoverLink({ href = "/", children }) {
+export function HoverLink({ href = "/", setIsLinkClicked, children }) {
   return (
     <HoverLinkContainer>
-      <LocalizedLink href={href}>
+      <LocalizedLink setIsLinkClicked={setIsLinkClicked} href={href}>
         <div>{children}</div>
       </LocalizedLink>
     </HoverLinkContainer>

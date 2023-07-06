@@ -60,7 +60,7 @@ export default function TimelineContent() {
     if (slider.origin !== 'scroll') {
       ref.current?.scrollTo({left: days[slider.position].hoursBefore * widthPerHour - ((window.innerWidth - days[slider.position].hours * widthPerHour) / 2), behavior: 'smooth'})
     }
-  }, [slider.position, slider.origin, windowSize.width])
+  }, [slider.position, slider.origin, windowSize?.width])
 
   return (
     <ContentContainer id={'timeline'} ref={ref} onScroll={handleScroll} >
@@ -78,13 +78,13 @@ const ContentContainer = styled.div`
   overflow-x: auto;
   overflow-y: auto;
 
-  min-height: calc(100vh - var(--layout-header-height) - var(--layout-footer-height) + ${({theme}) => theme.borderWidth});
+  min-height: ${({theme}) => theme.height };
   
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;
 
-  margin-bottom: -2px;
+  margin-bottom: -100px;
   
   border-bottom: ${({theme}) => theme.border};
   border-right: ${({theme}) => theme.border};

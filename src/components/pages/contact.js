@@ -3,7 +3,6 @@ import { useIntl } from "react-intl";
 import StaticLayout, {
   StaticLayoutParagraph,
 } from "@/components/layout/static_layout";
-import Layout from "@/components/layout/layout";
 
 const CONTACTS = {
   de: [
@@ -569,14 +568,12 @@ export default function Contact() {
   if (language.locale === "en" && "en" in CONTACTS) contacts = CONTACTS.en;
 
   return (
-    <Layout disableFilter={true} disableSlider={true}>
-      <StaticLayout title={"contact"}>
-        <div>
-          {contacts.map((contact) => (
-            <StaticLayoutParagraph content={contact} />
-          ))}
-        </div>
-      </StaticLayout>
-    </Layout>
+    <StaticLayout title={"contact"}>
+      <div>
+        {contacts.map((contact) => (
+          <StaticLayoutParagraph content={contact} />
+        ))}
+      </div>
+    </StaticLayout>
   );
 }

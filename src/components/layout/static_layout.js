@@ -17,12 +17,12 @@ export default function StaticLayout({
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= staticBreakpoints.m) {
+    if (windowSize?.width <= staticBreakpoints.m) {
       setResponsiveTheme(staticMTheme);
     } else {
       setResponsiveTheme(staticLTheme);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <ThemeProvider theme={responsiveTheme}>
@@ -72,7 +72,6 @@ export function StaticLayoutParagraph({ content }) {
       {content.titles.map((title) => (
         <StaticParagraphTitle>{title}</StaticParagraphTitle>
       ))}
-      {/* {console.log(content.texts)} */}
       {content.texts?.map((text) => (
         <div>
           {text.link ? (

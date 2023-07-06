@@ -36,7 +36,10 @@ const IMPRINT = {
           text: "Entwicklung: udk/spaces",
         },
         {
-          text: "Gestaltung: Marisa Nest, Juan Pablo Gaviria Bedoya, Lukas Esser",
+          text: "Gestaltung: Sophie Pischel und Ira Göller",
+        },
+        {
+          text: "Websitegestaltung: Marisa Nest, Juan Pablo Gaviria Bedoya, Lukas Esser",
         },
         {
           text: "Redaktion: Stabsstelle Überfakultäre Veranstaltungen",
@@ -139,14 +142,12 @@ export default function Imprint() {
   if (language.locale === "en" && "en" in IMPRINT) imprint = IMPRINT.en;
 
   return (
-    <Layout disableFilter={true} disableSlider={true}>
-      <StaticLayout title={"imprint"}>
-        <div>
-          {imprint.map((imprint) => (
-            <StaticLayoutParagraph content={imprint} />
-          ))}
-        </div>
-      </StaticLayout>
-    </Layout>
+    <StaticLayout title={"imprint"}>
+      <div>
+        {imprint.map((imprint) => (
+          <StaticLayoutParagraph content={imprint} />
+        ))}
+      </div>
+    </StaticLayout>
   );
 }

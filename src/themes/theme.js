@@ -27,6 +27,17 @@ export const fontWeights = {
   },
 };
 
+export const borderWidth = {
+  l: {
+    small: 500,
+    medium: 600,
+  },
+  m: {
+    small: 500,
+    medium: 600,
+  },
+};
+
 export const colors = {
   pink: "#d1acd0",
   pinkLight: "#ebdcea",

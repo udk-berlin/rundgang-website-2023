@@ -6,25 +6,25 @@ import HeaderFilters from "@/components/layout/header/filters/filters";
 import { useEffect, useState } from "react";
 import HeaderBarMobile from "@/components/layout/header/bar/bar_mobile";
 import useWindowSize from "@/hooks/window_size";
-import { layoutBreakpoints } from "@/themes/layout";
+import { breakpoints } from "@/themes/layout";
 
-export default function Header({ disableFilter }) {
+export default function Header({ disableFilter, setIsLinkClicked }) {
   const [showFilters, setShowFilters] = useState(false);
 
   const [mobile, setMobile] = useState(false);
   const windowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width <= layoutBreakpoints.m) {
+    if (windowSize?.width <= breakpoints.m) {
       setMobile(true);
     } else {
       setMobile(false);
     }
-  }, [windowSize.width]);
+  }, [windowSize?.width]);
 
   return (
     <HeaderContainer>
-      {mobile ? <HeaderBarMobile /> : <HeaderBar />}
+      {mobile ? <HeaderBarMobile setIsLinkClicked={setIsLinkClicked} /> : <HeaderBar setIsLinkClicked={setIsLinkClicked} />}
       <HeaderFiltersBar
         showFilters={showFilters}
         setShowFilters={setShowFilters}

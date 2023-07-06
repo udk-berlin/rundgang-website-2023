@@ -19,18 +19,11 @@
   --info-border-width: 2px;
   --info-border-color: #000;
 
-  --locations-map-height: calc(
-    100vh - 2 * var(--layout-header-bar-container-height) -
-      var(--layout-header-search-container-height) - 2 * var(--border-width)
-  );
   --locations-overlays-top: calc(
     var(--layout-header-bar-container-height) +
       var(--layout-header-search-container-height) + 2 * var(--border-width)
   );
   --locations-ground-plan-height: var(--layout-footer-grid-template-column-1);
-  --locations-ground-plan-infos-height: calc(
-    var(--locations-map-height) - var(--locations-ground-plan-height)
-  );
 
   --layout-header-bar-container-height: 60px;
   --layout-header-search-container-height: 34px;
@@ -57,7 +50,6 @@
   --layout-footer-grid-template-column-1: 25vw;
   --layout-footer-grid-template-column-2: 1fr;
   --layout-footer-grid-template-column-3: 25vw;
-  --layout-footer-grid-template-columns: var(--layout-footer-grid-template-column-1) var(--layout-footer-grid-template-column-2) var(--layout-footer-grid-template-column-3);
   --layout-footer-mobile-grid-template-column: 8fr 1fr;
 
   --program-padding: 0.75rem;
@@ -106,6 +98,7 @@
   padding: 0;
   margin: 0;
 }
+
 
 html {
   font-family: "Denim", sans-serif;

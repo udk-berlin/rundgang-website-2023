@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
 import InfoGridDate from "@/components/pages/program/info_grid/date";
 import {
@@ -6,42 +6,45 @@ import {
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
 import { useSlider } from "@/providers/slider";
+import useWindowSize from "@/hooks/window_size";
 
-export default function InfoGridCarousel({ project }) {
+export default function InfoGridCarousel({ project, contexts}) {
   return (
     <Carousel>
       <InfoGridDate project={project} />
-      <InfoGridLocation project={project} />
-      <InfoGridContext project={project} />
+      <InfoGridLocation project={project} contexts={contexts} />
+      <InfoGridContext project={project} contexts={contexts} />
     </Carousel>
   );
 }
 
 function Carousel({ children }) {
   const slider = useSlider();
+  const theme = useTheme();
   const [carouselHeight, setCarouselHeight] = useState(0);
   const carouselRef = useRef(null);
+  const windowSize = useWindowSize();
 
   const scrollToCurrentIndex = () => {
     if (carouselRef.current) {
       const { offsetWidth } = carouselRef.current;
       carouselRef.current.scrollTo({
-        left: offsetWidth * (slider.position - 4),
+        left: offsetWidth * (slider.position - theme.carousel.sliderOffset),
         behavior: "smooth",
       });
     }
   };
 
   useEffect(() => {
-    if (slider.position >= 4) {
-      let child = slider.position - 4;
+    if (slider.position >= theme.carousel.sliderOffset) {
+      let child = slider.position - theme.carousel.sliderOffset;
       const currentSlide = carouselRef.current.children[child];
       setCarouselHeight(currentSlide.clientHeight);
       scrollToCurrentIndex();
     } else {
       setCarouselHeight("0px");
     }
-  }, [slider.position]);
+  }, [slider.position, windowSize?.width]);
 
   return (
     <>
