@@ -8,7 +8,7 @@ const ID_TO_GROUNDPLAN_FILENAME_MAPPER = {
   '!PsyURUpKAbSPistHpQ:content.udk-berlin.de': '001',
   //'!hjTkjNaIDkzxNWQZTR:content.udk-berlin.de': '002',
   '!RuJBwEwOQcFrQabJnn:content.udk-berlin.de': '003',
-  //'!aLyedVYnhynRwlhXUm:content.udk-berlin.de': '004',
+  '!YIwQSiHDpoiNHDMWmC:content.udk-berlin.de': '004',
   '!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de': '005',
   '!GFauydmVRlpqvDETXH:content.udk-berlin.de': '006',
   //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': '007',
