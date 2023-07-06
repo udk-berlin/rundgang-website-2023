@@ -8,7 +8,7 @@ import {
 } from "@/providers/saved_projects";
 
 import ProjectLink from "@/components/pages/locations/project/link";
-import ProjectImage from "@/components/pages/locations/project/media/image";
+import { ProjectImageMedia } from "@/components/pages/projects/project/media";
 import ProjectTitle from "@/components/pages/locations/project/title";
 import ProjectAuthors from "@/components/pages/locations/project/authors";
 import InfoGrid from "@/components/pages/locations/program/info_grid/info_grid";
@@ -25,7 +25,7 @@ export default function ProjectCell({ key, project }) {
       onMouseLeave={() => setCellHovered(false)}
     >
       <ProjectLink project={project}>
-        <ProjectImage project={project} />
+        <ProjectImageMedia project={project} />
       </ProjectLink>
 
       <SVGOverlay

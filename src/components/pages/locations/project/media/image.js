@@ -7,7 +7,7 @@ export default function ProjectImageMedia({ project, fullSize = false }) {
   if (!("thumbnail" in project) || !(project.thumbnail)) return <PlaceholderImage />;
 
   return (
-    <ImageMedia
+    <ImageMediaContainer
       src={fullSize ? project.thumbnail_full_size : project.thumbnail}
       alt={project.name}
       loading="lazy"
@@ -90,7 +90,7 @@ const PlaceholderImage = styled.div`
   background: ${({ theme }) => theme.colors.pink};
 `;
 
-const ImageMedia = styled.img`
+const ImageMediaContainer = styled.img`
   height: ${({ theme }) => theme.media.image.height};
   min-height: ${({ theme }) => theme.media.image.height};
   max-height: ${({ theme }) => theme.media.image.height};

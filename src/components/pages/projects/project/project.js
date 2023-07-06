@@ -110,7 +110,7 @@ export default function Project({ id, setIsLinkClicked }) {
     <Layout
       disableFilter={true}
       disableSlider={infoGridPos}
-      numberOfSliderStates={5}
+      numberOfSliderStates={NUMBER_OF_SLIDER_STATES}
       setIsLinkClicked={setIsLinkClicked}
     >
       <ThemeProvider theme={responsiveTheme}>

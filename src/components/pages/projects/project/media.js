@@ -26,7 +26,7 @@ function ThumbnailMedia({ project, fullSize = false }) {
   );
 }
 
-export function ImageMedia({ project, fullSize = false }) {
+export function ProjectImageMedia({ project, fullSize = false }) {
   if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
 
   return (
