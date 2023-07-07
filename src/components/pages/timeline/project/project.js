@@ -69,7 +69,7 @@ export default function TimelineProject({ project, previousProject, nextProjectG
           project.thumbnail ?
             <ProjectLink project={project}>
               <ProjectImage
-                src={project.thumbnail}
+                src={project.thumbnail.replace('crop', 'scale')}
                 alt={project.name}
                 loading="lazy"
                 showImage={showImage}

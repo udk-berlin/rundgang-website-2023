@@ -4,7 +4,7 @@ import styled, {useTheme} from "styled-components";
 import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
 import getLocalizedData from "@/components/localization/data";
 
-export default function ProjectMedia({ project, media, contexts, fullSize = true, infoGridPos }) {
+export default function ProjectMedia({ project, media, contexts, fullSize = false, infoGridPos }) {
   return (
     <MediaContainer>
       {infoGridPos ? <ProjectInfoGrid project={project} contexts={contexts} /> : <></>}
@@ -19,7 +19,7 @@ function ThumbnailMedia({ project, fullSize = false }) {
 
   return (
     <ThumbnailMediaContainer
-      src={fullSize ? project.thumbnail_full_size : project.thumbnail}
+      src={fullSize ? project.thumbnail_full_size : project.thumbnail.replace('crop', 'scale')}
       alt={project.name}
       loading="lazy"
     />
@@ -31,7 +31,7 @@ export function ProjectImageMedia({ project, fullSize = false }) {
 
   return (
     <ImageMediaContainer
-      src={fullSize ? project.thumbnail_full_size : project.thumbnail}
+      src={fullSize ? project.thumbnail_full_size : project.thumbnail.replace('crop', 'scale')}
       alt={project.name}
       loading="lazy"
     />

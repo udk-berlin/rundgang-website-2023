@@ -5,25 +5,25 @@ import styled from "styled-components";
 export function InfoGridLocation({ project, contexts }) {
   const locations = []
 
-  project.parents.forEach(parent => {
-    if (parent) {
+  project.parents?.forEach(parent => {
+    if (parent && parent.id) {
       let context = contexts[parent.id]
-      if (context) {
+      if (context && context.template) {
         if (context.template === 'location-room') {
           let room = context
           let floor
           let building
 
-          context = contexts[room.parents[0].id]
+          context = room.parents && room.parents[0] ? contexts[room.parents[0].id] : null
 
-          if (context && context.template === 'location-level') {
+          if (context && context.template && context.template  === 'location-level') {
             floor = context
-            context = contexts[floor.parents[0].id]
+            context = floor.parents && floor.parents[0] ? contexts[floor.parents[0].id] : null
 
-            if (context && context.template === 'location-building') {
+            if (context && context.template && context.template === 'location-building') {
               building = context
             }
-          } else if (context.template === 'location-building') {
+          } else if (context && context.template && context.template === 'location-building') {
             building = context
           }
 
@@ -69,41 +69,41 @@ export function InfoGridLocation({ project, contexts }) {
 export function InfoGridContext({ project, contexts }) {
   const structures = []
 
-  project.parents.forEach(parent => {
-    if (parent) {
+  project.parents?.forEach(parent => {
+    if (parent && parent.id) {
       let context = contexts[parent.id]
-      if (context && context.template === 'class') {
+      if (context && context.template && context.template === 'class') {
         let clazz = context
         let course
         let subject
         let institute
         let faculty
-        //
-        // context = contexts[clazz.parents[0].id]
-        //
-        // if (context && context.template === 'course') {
-        //   course = context
-        //   context = contexts[course.parents[0].id]
-        //
-        //   if (context && context.template === 'institute') {
-        //     institute = context
-        //   } else if (context && context.template === 'faculty') {
-        //     faculty = context
-        //   }
-        // } else if (context.template === 'subject') {
-        //   subject = context
-        //   context = contexts[subject.parents[0].id]
-        //
-        //   if (context && context.template === 'institute') {
-        //     institute = context
-        //   } else if (context && context.template === 'faculty') {
-        //     faculty = context
-        //   }
-        // } else if (context && context.template === 'institute') {
-        //   institute = context
-        // } else if (context && context.template === 'faculty') {
-        //   faculty = context
-        // }
+
+        context = clazz.parents && clazz.parents[0] ? contexts[clazz.parents[0].id] : null
+
+        if (context && context.template && context.template === 'course') {
+          course = context
+          context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            institute = context
+          } else if (context && context.template && context.template === 'faculty') {
+            faculty = context
+          }
+        } else if (context && context.template && context.template === 'subject') {
+          subject = context
+          context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            institute = context
+          } else if (context && context.template && context.template === 'faculty') {
+            faculty = context
+          }
+        } else if (context && context.template && context.template === 'institute') {
+          institute = context
+        } else if (context && context.template && context.template === 'faculty') {
+          faculty = context
+        }
 
         structures.push(
           {
@@ -115,38 +115,38 @@ export function InfoGridContext({ project, contexts }) {
           }
         )
       }
-      else if (context && context.template === 'course') {
+      else if (context && context.template && context.template === 'course') {
         let clazz
         let course = context
         let subject
         let institute
         let faculty
 
-        // context = contexts[course.parents[0].id]
-        //
-        // if (context && context.template === 'class') {
-        //   clazz = context
-        //   context = contexts[clazz.parents[0].id]
-        //
-        //   if (context && context.template === 'institute') {
-        //     institute = context
-        //   } else if (context && context.template === 'faculty') {
-        //     faculty = context
-        //   }
-        // } else if (context.template === 'subject') {
-        //   subject = context
-        //   context = contexts[subject.parents[0].id]
-        //
-        //   if (context && context.template === 'institute') {
-        //     institute = context
-        //   } else if (context && context.template === 'faculty') {
-        //     faculty = context
-        //   }
-        // } else if (context && context.template === 'institute') {
-        //   institute = context
-        // } else if (context && context.template === 'faculty') {
-        //   faculty = context
-        // }
+        context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
+
+        if (context && context.template && context.template === 'class') {
+          clazz = context
+          context = clazz.parents && clazz.parents[0] ? contexts[clazz.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            institute = context
+          } else if (context && context.template && context.template === 'faculty') {
+            faculty = context
+          }
+        } else if (context && context.template && context.template === 'subject') {
+          subject = context
+          context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            institute = context
+          } else if (context && context.template && context.template === 'faculty') {
+            faculty = context
+          }
+        } else if (context && context.template && context.template === 'institute') {
+          institute = context
+        } else if (context && context.template && context.template === 'faculty') {
+          faculty = context
+        }
 
         structures.push(
           {
@@ -158,48 +158,48 @@ export function InfoGridContext({ project, contexts }) {
           }
         )
       }
-      else if (context && context.template === 'subject') {
+      else if (context && context.template && context.template === 'subject') {
         let clazz
         let course
         let subject = context
         let institute
         let faculty
 
-        context = contexts[subject.parents[0].id]
+        context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
 
-        // if (context && context.template === 'class') {
-        //   clazz = context
-        //   context = contexts[clazz.parents[0].id]
-        //
-        //   if (context && context.template === 'institute') {
-        //     institute = context
-        //   } else if (context && context.template === 'faculty') {
-        //     faculty = context
-        //   }
-        // } else if (context.template === 'course') {
-        //   course = context
-        //   context = contexts[course.parents[0].id]
-        //
-        //   if (context && context.template === 'institute') {
-        //     institute = context
-        //   } else if (context && context.template === 'faculty') {
-        //     faculty = context
-        //   }
-        // } else if (context && context.template === 'institute') {
-        //   institute = context
-        // } else if (context && context.template === 'faculty') {
-        //   faculty = context
-        // }
-        //
-        // structures.push(
-        //   {
-        //     clazz: clazz?.name,
-        //     course: course?.name,
-        //     subject: subject?.name,
-        //     institute: institute?.name,
-        //     faculty: faculty?.name,
-        //   }
-        // )
+        if (context && context.template && context.template === 'class') {
+          clazz = context
+          context = subject.parents && subject.parents[0] ? contexts[clazz.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            institute = context
+          } else if (context && context.template && context.template === 'faculty') {
+            faculty = context
+          }
+        } else if (context && context.template && context.template === 'course') {
+          course = context
+          context = subject.parents && subject.parents[0] ? contexts[course.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            institute = context
+          } else if (context && context.template && context.template === 'faculty') {
+            faculty = context
+          }
+        } else if (context && context.template && context.template === 'institute') {
+          institute = context
+        } else if (context && context.template && context.template === 'faculty') {
+          faculty = context
+        }
+
+        structures.push(
+          {
+            clazz: clazz?.name,
+            course: course?.name,
+            subject: subject?.name,
+            institute: institute?.name,
+            faculty: faculty?.name,
+          }
+        )
       }
       else if (context && context.template === 'institute') {
         let clazz
@@ -208,11 +208,11 @@ export function InfoGridContext({ project, contexts }) {
         let institute = context
         let faculty
 
-        // context = contexts[institute.parents[0].id]
-        //
-        // if (context && context.template === 'faculty') {
-        //   faculty = context
-        // }
+        context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+        if (context && context.template && context.template === 'faculty') {
+          faculty = context
+        }
 
         structures.push(
           {
@@ -231,11 +231,11 @@ export function InfoGridContext({ project, contexts }) {
         let institute
         let faculty = context
 
-        // context = contexts[faculty.parents[0].id]
-        //
-        // if (context && context.template === 'institute') {
-        //   institute = context
-        // }
+        context = faculty.parents && faculty.parents[0] ? contexts[faculty.parents[0].id] : null
+
+        if (context && context.template && context.template === 'institute') {
+          institute = context
+        }
 
         structures.push(
           {
