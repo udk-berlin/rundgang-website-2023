@@ -4,11 +4,11 @@ import { useEffect, useRef } from "react";
 import getLocalizedData from "@/components/localization/data";
 
 export default function ProjectImageMedia({ project, fullSize = false }) {
-  if (!("thumbnail" in project) || !(project.thumbnail)) return <PlaceholderImage />;
+  if (!(project) || !(project.thumbnail)) return <PlaceholderImage />;
 
   return (
     <ImageMediaContainer
-      src={fullSize ? project.thumbnail_full_size : project.thumbnail}
+      src={fullSize ? project.thumbnail_full_size : project.thumbnail.replace('crop', 'scale')}
       alt={project.name}
       loading="lazy"
     />

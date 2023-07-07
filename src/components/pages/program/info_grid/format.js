@@ -33,13 +33,11 @@ export default function InfoGridFormat({ project, contexts, margin }) {
   const slider = useSlider();
   const formats = []
 
-  project.parents.forEach(parent => {
-    if (parent) {
+  project.parents?.forEach(parent => {
+    if (parent && parent.id) {
       const context = contexts[parent.id]
-      if (context) {
-        if (context.template === 'format-element') {
-          formats.push(context.name)
-        }
+      if (context && context.template && context.template === 'format-element') {
+        formats.push(context.name)
       }
     }
   })

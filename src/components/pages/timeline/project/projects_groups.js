@@ -26,7 +26,7 @@ function flattenProjects(projects) {
           name: project.name,
           start: time.start < FIRST_TIME ? FIRST_TIME : time.start,
           end: time.end > LAST_TIME ? LAST_TIME : time.end,
-          thumbnail: project.thumbnail
+          thumbnail: project.thumbnail.replace('crop', 'scale')
         })
       })
     }
