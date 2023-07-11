@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import maplibregl from "maplibre-gl";
 import styled from "styled-components";
 
-import { useFilter, useFilterDispatch } from "@/providers/filter";
+import { useFilterDispatch } from "@/providers/filter";
 import ResponsiveMarker from "@/components/pages/locations/map/marker";
 
 const MAP_CONFIGURATION = {
@@ -26,7 +26,7 @@ const LOCATION_ID_TO_MAX_ZOOM = {
   '!YIwQSiHDpoiNHDMWmC:content.udk-berlin.de': 14.7,
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": 13.7,
   "!GFauydmVRlpqvDETXH:content.udk-berlin.de": 14.66,
-  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': 15.2,
+  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': 15.2, //!RpTarLRqYYIdDCBLyV:content.udk-berlin.de
   "!eVjUBtkIgDQkQSKVxm:content.udk-berlin.de": 15.45,
   //'!fwsuOeorRCZtTqwukc:content.udk-berlin.de': 16.8,
   "!OkEblSLtaWAObRcCHm:content.udk-berlin.de": 15.6,
@@ -36,6 +36,7 @@ const LOCATION_ID_TO_MAX_ZOOM = {
   //'!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': 16,
   //'!bwyfqxrdHCbwOYLLgp:content.udk-berlin.de': 14.4,
   //'!jocCvZKGntdCmvmmUG:content.udk-berlin.de': 15.2,
+  '!RpTarLRqYYIdDCBLyV:content.udk-berlin.de': 15.2
 };
 
 const LOCATION_ID_TO_LNG_LAT = {
@@ -51,7 +52,7 @@ const LOCATION_ID_TO_LNG_LAT = {
     lng: 13.3588243,
     lat: 52.4908045,
   },
-  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': {lng: 13.32859, lat: 52.50939},
+  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': {lng: 13.32859, lat: 52.50939}, //!RpTarLRqYYIdDCBLyV:content.udk-berlin.de
   "!eVjUBtkIgDQkQSKVxm:content.udk-berlin.de": {
     lng: 13.329011660461106,
     lat: 52.513815995810795,
@@ -67,6 +68,7 @@ const LOCATION_ID_TO_LNG_LAT = {
   //'!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': {lng: 13.3748, lat: 52.5517},
   //'!bwyfqxrdHCbwOYLLgp:content.udk-berlin.de': {lng: 13.322555087168652, lat: 52.51741297926878},
   //'!jocCvZKGntdCmvmmUG:content.udk-berlin.de': {lng: 13.3281, lat: 52.50895},
+  "!RpTarLRqYYIdDCBLyV:content.udk-berlin.de": { lng: 13.329100213983617, lat: 52.50967878838072 },
 };
 
 const LOCATION_ID_TO_ORDER_MAPPER = {
@@ -112,23 +114,27 @@ export default function LocationsMap({ locations, locationSelected = false }) {
       Object.values(locations)
         .sort(sortById)
         .forEach((location) => {
-          markersCache["groundPlan"][location.id] = buildMarker(
-            mapRef,
-            location,
-            markersCache["groundPlan"],
-            false
-          );
+          if (location.id in LOCATION_ID_TO_LNG_LAT) {
+            markersCache["groundPlan"][location.id] = buildMarker(
+              mapRef,
+              location,
+              markersCache["groundPlan"],
+              false
+            );
+          }
         });
 
       Object.values(locations)
         .sort(sortById)
         .forEach((location) => {
-          markersCache["text"][location.id] = buildMarker(
-            mapRef,
-            location,
-            markersCache["text"],
-            true
-          );
+          if (location.id in LOCATION_ID_TO_LNG_LAT) {
+            markersCache["text"][location.id] = buildMarker(
+              mapRef,
+              location,
+              markersCache["text"],
+              true
+            );
+          }
         });
 
       mapRef.current.on("zoom", () => {
@@ -210,14 +216,8 @@ function buildMarker(mapRef, location, cache, useTextBox) {
     <ResponsiveMarker location={location} useTextBox={useTextBox} />
   );
 
-  let lng =
-    location.id in LOCATION_ID_TO_LNG_LAT
-      ? LOCATION_ID_TO_LNG_LAT[location.id].lng
-      : location.lng;
-  let lat =
-    location.id in LOCATION_ID_TO_LNG_LAT
-      ? LOCATION_ID_TO_LNG_LAT[location.id].lat
-      : location.lat;
+  let { lng, lat } = LOCATION_ID_TO_LNG_LAT[location.id]
+
   if (useTextBox) {
     lng = lng - 0.0002;
     lat = lat - 0.0002;

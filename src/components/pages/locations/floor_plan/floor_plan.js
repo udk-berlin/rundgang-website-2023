@@ -92,7 +92,6 @@ const LocationsFloorPlanContainer = styled.div`
       align-items: center;
       
       > svg {
-        padding: 2rem;
         max-width: 100%;
         max-height: 100%;
 
