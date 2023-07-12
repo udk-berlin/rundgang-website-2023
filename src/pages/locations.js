@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 
-import { getItems } from "@/utils/api/items";
+import { getItems } from '@/utils/api/items'
 import { getFormatsFilters } from "@/utils/api/formats";
 import { getStructuresFilters } from "@/utils/api/structures";
 import {
-  getLocationsLocations,
   getLocationsFormats,
   getLocationsStructures,
 } from "@/utils/api/pages/locations";
@@ -19,7 +18,6 @@ import Layout from "@/components/layout/layout";
 
 export async function getStaticProps() {
   const projects = await getItems();
-  const locations = await getLocationsLocations();
 
   const formats = await getLocationsFormats();
   const formatsFilters = await getFormatsFilters();
@@ -32,7 +30,6 @@ export async function getStaticProps() {
       projects,
       formats,
       formatsFilters,
-      locations,
       structures,
       structuresFilters,
     },
@@ -41,7 +38,6 @@ export async function getStaticProps() {
 
 export default function LocationsPage({
   projects,
-  locations,
   formats,
   formatsFilters,
   structures,
@@ -57,14 +53,13 @@ export default function LocationsPage({
           <SavedProjectsProvider>
             <FilterProvider
               projects={projects}
-              locations={locations}
               formats={formats}
               formatsFilters={formatsFilters}
               structures={structures}
               structuresFilters={structuresFilters}
             >
               <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
-                <Locations locations={locations} />
+                {/* <Locations locations={locations} /> */}
               </Layout>
             </FilterProvider>
           </SavedProjectsProvider>

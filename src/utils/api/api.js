@@ -18,6 +18,10 @@ export async function getTree (id) {
   return await get(`${id}/tree`)
 }
 
+export function getTreeUrl (id) {
+  return getUrl(`${id}/tree`)
+}
+
 export function getRenderJsonUrl (id) {
   return getUrl(`${id}/render/json`)
 }

@@ -1,9 +1,24 @@
 import { createContext, useContext, useReducer } from 'react'
 import filterReducer from "@/providers/filter_reducer";
 import fastFilterReducer from "@/providers/fast_filter_reducer";
+import useSWR from 'swr'
+import { getLocationsTreeUrl } from '@/utils/api/locations'
 
 const FilterContext = createContext(null)
 const FilterDispatchContext = createContext(null)
+const fetcher = (url) => fetch(url).then((res) => {
+  res = res.json()
+
+  const locations = {}
+  Object.values(res.data.children).forEach( location => {
+    locations[location.id] = location
+  })
+
+  //const locationsLocations = {}
+  //filter(Object.values(locations)).forEach(location => locationsLocations[location.id] = location)
+
+  return undefined
+});
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -13,7 +28,12 @@ function shuffleArray(array) {
 
   return array
 }
-export function FilterProvider ({ projects, locations = {}, formats, formatsFilters, structures, structuresFilters, children, useFast = false }) {
+export function FilterProvider ({ projects, formats, formatsFilters, structures, structuresFilters, children, useFast = false }) {
+  const locations = useSWR(
+    getLocationsTreeUrl(),
+    fetcher
+  );
+
   let reducer
 
   if (useFast) {
