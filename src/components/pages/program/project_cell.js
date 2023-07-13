@@ -15,7 +15,7 @@ import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/theme";
 
-export default function ProjectCell({ project, contexts }) {
+export default function ProjectCell({ project }) {
   const [cellHovered, setCellHovered] = useState(false);
 
   return (
@@ -35,7 +35,7 @@ export default function ProjectCell({ project, contexts }) {
       />
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
-      <InfoGrid project={project} contexts={contexts} />
+      <InfoGrid project={project} />
     </ProjectCellContainer>
   )
 }

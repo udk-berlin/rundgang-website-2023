@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { useFilterDispatch } from "@/providers/filter";
 import ResponsiveMarker from "@/components/pages/locations/map/marker";
+import {useData} from "@/providers/data";
 
 const MAP_CONFIGURATION = {
   style:
@@ -75,7 +76,7 @@ const LOCATION_ID_TO_ORDER_MAPPER = {
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": -1,
 };
 
-export default function LocationsMap({ locations, locationSelected = false }) {
+export default function LocationsMap({ projects, locations, locationSelected = false }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const dispatch = useFilterDispatch();
@@ -110,79 +111,83 @@ export default function LocationsMap({ locations, locationSelected = false }) {
     });
 
     mapRef.current.on("load", () => {
-      mapRef.current.resize();
-      Object.values(locations)
-        .sort(sortById)
-        .forEach((location) => {
-          if (location.id in LOCATION_ID_TO_LNG_LAT) {
-            markersCache["groundPlan"][location.id] = buildMarker(
-              mapRef,
-              location,
-              markersCache["groundPlan"],
-              false
-            );
-          }
+        mapRef.current.resize();
+        Object.values(locations)
+          .sort(sortById)
+          .forEach((location) => {
+            if (location.id in LOCATION_ID_TO_LNG_LAT) {
+              markersCache["groundPlan"][location.id] = buildMarker(
+                mapRef,
+                location,
+                markersCache["groundPlan"],
+                false
+              );
+            }
+          });
+
+        Object.values(locations)
+          .sort(sortById)
+          .forEach((location) => {
+            if (location.id in LOCATION_ID_TO_LNG_LAT) {
+              markersCache["text"][location.id] = buildMarker(
+                mapRef,
+                location,
+                markersCache["text"],
+                true
+              );
+            }
+          });
+
+        mapRef.current.on("zoom", () => {
+          setTimeout(() => {
+            let zoom = mapRef.current.getZoom();
+            if (zoom > 13.6) {
+              Object.values(locations)
+                .sort(sortById)
+                .forEach((location) => {
+                  const scale = zoom - LOCATION_ID_TO_MAX_ZOOM[location.id];
+                  if (
+                    scale !== markersCache["groundPlan"][location.id].scale &&
+                    scale > 0
+                  ) {
+                    markersCache["groundPlan"][location.id].scale = scale;
+                    markersCache["groundPlan"][location.id].markerRoot.render(
+                      <ResponsiveMarker location={location} scale={scale} />
+                    );
+                  } else if (
+                    markersCache["groundPlan"][location.id].scale > 0 &&
+                    scale <= 0
+                  ) {
+                    markersCache["groundPlan"][location.id].scale = scale;
+                    markersCache["groundPlan"][location.id].markerRoot.render(
+                      <ResponsiveMarker location={location} />
+                    );
+                  }
+                });
+            }
+          }, 500);
         });
 
-      Object.values(locations)
-        .sort(sortById)
-        .forEach((location) => {
-          if (location.id in LOCATION_ID_TO_LNG_LAT) {
-            markersCache["text"][location.id] = buildMarker(
-              mapRef,
-              location,
-              markersCache["text"],
-              true
-            );
+        mapRef.current.on("click", (e) => {
+          if (e.originalEvent.target.id) {
+            const id = e.originalEvent.target.id.replaceAll("marker-", "");
+
+            dispatch({
+              type: "filter-location",
+              location: locations[id],
+              locations: locations,
+              projects: projects
+            });
+          } else {
+            dispatch({
+              type: "all-locations",
+              locations: locations,
+              projects: projects
+            });
           }
         });
-
-      mapRef.current.on("zoom", () => {
-        setTimeout(() => {
-          let zoom = mapRef.current.getZoom();
-          if (zoom > 13.6) {
-            Object.values(locations)
-              .sort(sortById)
-              .forEach((location) => {
-                const scale = zoom - LOCATION_ID_TO_MAX_ZOOM[location.id];
-                if (
-                  scale !== markersCache["groundPlan"][location.id].scale &&
-                  scale > 0
-                ) {
-                  markersCache["groundPlan"][location.id].scale = scale;
-                  markersCache["groundPlan"][location.id].markerRoot.render(
-                    <ResponsiveMarker location={location} scale={scale} />
-                  );
-                } else if (
-                  markersCache["groundPlan"][location.id].scale > 0 &&
-                  scale <= 0
-                ) {
-                  markersCache["groundPlan"][location.id].scale = scale;
-                  markersCache["groundPlan"][location.id].markerRoot.render(
-                    <ResponsiveMarker location={location} />
-                  );
-                }
-              });
-          }
-        }, 500);
       });
-
-      mapRef.current.on("click", (e) => {
-        if (e.originalEvent.target.id) {
-          const id = e.originalEvent.target.id.replaceAll("marker-", "");
-
-          dispatch({
-            type: "filter-location",
-            location: locations[id],
-          });
-        } else {
-          dispatch({
-            type: "all-locations",
-          });
-        }
-      });
-    });
-  });
+  }, [locations, projects]);
 
   return <MapContainer ref={mapContainerRef} locationSelected={locationSelected} />;
 }

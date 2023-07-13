@@ -1,24 +1,9 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer, useState, useEffect } from 'react'
 import filterReducer from "@/providers/filter_reducer";
 import fastFilterReducer from "@/providers/fast_filter_reducer";
-import useSWR from 'swr'
-import { getLocationsTreeUrl } from '@/utils/api/locations'
 
 const FilterContext = createContext(null)
 const FilterDispatchContext = createContext(null)
-const fetcher = (url) => fetch(url).then((res) => {
-  res = res.json()
-
-  const locations = {}
-  Object.values(res.data.children).forEach( location => {
-    locations[location.id] = location
-  })
-
-  //const locationsLocations = {}
-  //filter(Object.values(locations)).forEach(location => locationsLocations[location.id] = location)
-
-  return undefined
-});
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -28,17 +13,14 @@ function shuffleArray(array) {
 
   return array
 }
-export function FilterProvider ({ projects, formats, formatsFilters, structures, structuresFilters, children, useFast = false }) {
-  const locations = useSWR(
-    getLocationsTreeUrl(),
-    fetcher
-  );
-
+export function FilterProvider ({ locations, projects, formats, formatsFilters, structures, structuresFilters, children, useFast = false }) {
   let reducer
 
   if (useFast) {
-    projects = [...projects]
-    shuffleArray(projects)
+    if (projects) {
+      projects = [...projects]
+      shuffleArray(projects)
+    }
     reducer = fastFilterReducer
   } else {
     reducer = filterReducer
@@ -47,9 +29,7 @@ export function FilterProvider ({ projects, formats, formatsFilters, structures,
   const [filter, dispatch] = useReducer(
     reducer,
     {
-      projects: projects,
       filteredProjects: projects,
-      locations: locations,
       filteredLocations: locations,
       formats: formats,
       formatsFilters: formatsFilters,

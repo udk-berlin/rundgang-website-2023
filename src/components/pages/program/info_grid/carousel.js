@@ -7,13 +7,14 @@ import {
 } from "@/components/pages/program/info_grid/cards";
 import { useSlider } from "@/providers/slider";
 import useWindowSize from "@/hooks/window_size";
+import {useData} from "@/providers/data";
 
-export default function InfoGridCarousel({ project, contexts}) {
+export default function InfoGridCarousel({ project }) {
   return (
     <Carousel>
       <InfoGridDate project={project} />
-      <InfoGridLocation project={project} contexts={contexts} />
-      <InfoGridContext project={project} contexts={contexts} />
+      <InfoGridLocation project={project} />
+      <InfoGridContext project={project} />
     </Carousel>
   );
 }

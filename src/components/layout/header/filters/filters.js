@@ -3,8 +3,10 @@ import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
 import { useFilter, useFilterDispatch } from "@/providers/filter";
+import { useData } from "@/providers/data";
 
 export default function HeaderFilters({ showFilters, setShowFilters }) {
+  const { projects, locations} = useData()
   const filter = useFilter();
   const dispatch = useFilterDispatch();
   const filterCategories = [
@@ -51,7 +53,7 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
             <FilterNameContainer
               key={-1}
               onClick={() => {
-                dispatch({ type: category.filterAllDispatchType });
+                dispatch({ type: category.filterAllDispatchType, projects: projects, locations: locations });
               }}
               selected={category.nonSelected()}
             >
@@ -61,7 +63,7 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
               <FilterNameContainer
                 key={f.id}
                 onClick={() =>
-                  dispatch({ type: category.filterDispatchType, id: f.id })
+                  dispatch({ type: category.filterDispatchType, id: f.id, projects: projects, locations: locations})
                 }
                 selected={category.selected(f)}
               >

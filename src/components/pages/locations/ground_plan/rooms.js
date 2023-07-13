@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
+import { useData } from "@/providers/data";
 
 export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsContainerHeight }) {
   const filter = useFilter()
@@ -25,6 +26,7 @@ export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsCon
 }
 
 function LocationsGroundPlanRoom ({ key, room }) {
+  const { projects, locations } = useData()
   const filter = useFilter()
   const dispatch = useFilterDispatch()
 
@@ -32,7 +34,9 @@ function LocationsGroundPlanRoom ({ key, room }) {
     dispatch(
       {
         type: 'filter-room',
-        room: room
+        room: room,
+        projects: projects,
+        locations: locations
       })
   }
 
@@ -46,13 +50,16 @@ function LocationsGroundPlanRoom ({ key, room }) {
 }
 
 function LocationsGroundPlanRoomsAll () {
+  const { projects, locations } = useData()
   const filter = useFilter()
   const dispatch = useFilterDispatch()
 
   const handleClick = (e) => {
     dispatch(
       {
-        type: 'all-rooms'
+        type: 'all-rooms',
+        projects: projects,
+        locations: locations
       })
   }
 

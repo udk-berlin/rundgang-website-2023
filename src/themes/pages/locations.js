@@ -75,13 +75,17 @@ export const locationsLTheme = {
     sliderOffset: 4,
   },
   media: {
+    thumbnail: {
+      height: 'auto',
+      width: '100%'
+    },
     image: {
       height: 'auto',
       width: '100%'
     },
-
     placeholder: {
       height: "100%",
+      width: "auto",
     },
   },
 };
@@ -140,13 +144,17 @@ export const locationsMTheme = {
     sliderOffset: 4,
   },
   media: {
+    thumbnail: {
+      height: 'auto',
+      width: '100%'
+    },
     image: {
       height: 'auto',
       width: '100%'
     },
-
     placeholder: {
       height: "100%",
+      width: "auto",
     },
   },
 };

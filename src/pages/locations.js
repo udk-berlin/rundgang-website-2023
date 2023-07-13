@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 
-import { getItems } from '@/utils/api/items'
 import { getFormatsFilters } from "@/utils/api/formats";
 import { getStructuresFilters } from "@/utils/api/structures";
 import {
@@ -15,10 +14,9 @@ import Locations from "@/components/pages/locations/locations";
 import { SavedProjectsProvider } from "@/providers/saved_projects";
 import LoadingLayout from "@/components/layout/loading";
 import Layout from "@/components/layout/layout";
+import {DataProvider, useData} from "@/providers/data";
 
 export async function getStaticProps() {
-  const projects = await getItems();
-
   const formats = await getLocationsFormats();
   const formatsFilters = await getFormatsFilters();
 
@@ -27,7 +25,6 @@ export async function getStaticProps() {
 
   return {
     props: {
-      projects,
       formats,
       formatsFilters,
       structures,
@@ -37,7 +34,6 @@ export async function getStaticProps() {
 }
 
 export default function LocationsPage({
-  projects,
   formats,
   formatsFilters,
   structures,
@@ -50,20 +46,38 @@ export default function LocationsPage({
       {
         isLinkClicked ?
           <LoadingLayout /> :
-          <SavedProjectsProvider>
-            <FilterProvider
-              projects={projects}
-              formats={formats}
-              formatsFilters={formatsFilters}
-              structures={structures}
-              structuresFilters={structuresFilters}
-            >
-              <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
-                {/* <Locations locations={locations} /> */}
-              </Layout>
-            </FilterProvider>
-          </SavedProjectsProvider>
+          <DataProvider>
+            <SavedProjectsProvider>
+              <LocationsPageContainer setIsLinkClicked={setIsLinkClicked} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters}/>
+            </SavedProjectsProvider>
+          </DataProvider>
       }
     </Page>
+  );
+}
+
+function LocationsPageContainer({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
+  const { locations, projects } = useData()
+
+  return (
+    <>
+      {
+        locations && projects ?
+          <FilterProvider
+            locations={locations}
+            projects={projects}
+            formats={formats}
+            formatsFilters={formatsFilters}
+            structures={structures}
+            structuresFilters={structuresFilters}
+            useFast={true}
+          >
+            <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
+              <Locations />
+            </Layout>
+          </FilterProvider> :
+          <LoadingLayout />
+      }
+    </>
   );
 }

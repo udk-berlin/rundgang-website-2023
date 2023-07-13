@@ -1,11 +1,13 @@
 import { InfoGridCardItem } from "@/components/pages/program/info_grid/item";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import {useData} from "@/providers/data";
 
-export function InfoGridLocation({ project, contexts }) {
+export function InfoGridLocation({ project }) {
+  const { contexts } = useData()
   const locations = []
 
-  project.parents?.forEach(parent => {
+  contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
       let context = contexts[parent.id]
       if (context && context.template) {
@@ -66,10 +68,11 @@ export function InfoGridLocation({ project, contexts }) {
   );
 }
 
-export function InfoGridContext({ project, contexts }) {
+export function InfoGridContext({ project }) {
+  const { contexts } = useData()
   const structures = []
 
-  project.parents?.forEach(parent => {
+  contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
       let context = contexts[parent.id]
       if (context && context.template && context.template === 'class') {

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import InfoGridItemLink from "@/components/pages/program/info_grid/item";
 import { useSlider } from "@/providers/slider";
+import {useData} from "@/providers/data";
 
 const formatToMarginLeftMapper = {
   Ausstellung: "73",
@@ -29,11 +30,12 @@ const formatToMarginLeftMapper = {
   default: "2",
 };
 
-export default function InfoGridFormat({ project, contexts, margin }) {
+export default function InfoGridFormat({ project, margin }) {
+  const { contexts } = useData()
   const slider = useSlider();
   const formats = []
 
-  project.parents?.forEach(parent => {
+  contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
       const context = contexts[parent.id]
       if (context && context.template && context.template === 'format-element') {
