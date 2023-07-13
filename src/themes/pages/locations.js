@@ -34,7 +34,7 @@ export const locationsLTheme = {
     top: top.l,
     gridTemplateColumns: `${layoutLTheme.footer.gridTemplateColumn1} ${layoutLTheme.footer.gridTemplateColumn2} ${layoutLTheme.footer.gridTemplateColumn3}`,
     info: {
-      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1})`,
+      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1} - 2 * ${baseLTheme.borderWidth})`,
     },
     content: {
       height: '100%',

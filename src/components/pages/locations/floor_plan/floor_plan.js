@@ -6,6 +6,12 @@ import styled from 'styled-components'
 import { fetcher, getUrl } from "@/utils/api/api";
 import { useFilter, useFilterDispatch } from "@/providers/filter";
 
+// data-id="udk-berlin|4004|1|112/113
+
+const mapper = {
+  "grunewald": 4004
+}
+
 export default function LocationsFloorPlan() {
   const filter = useFilter()
   const dispatch = useFilterDispatch()
@@ -73,9 +79,9 @@ const LocationsFloorPlanContainer = styled.div`
   min-height: var(--locations-ground-plan-height);
   max-height: var(--locations-ground-plan-height);
 
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: calc(100% + var(--border-width));
+  min-width: calc(100% + var(--border-width));
+  max-width: calc(100% + var(--border-width));
 
   pointer-events: all;
 

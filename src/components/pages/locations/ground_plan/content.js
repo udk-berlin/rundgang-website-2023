@@ -55,10 +55,10 @@ const LocationsGroundPlanLocationContainer = styled.div`
 
 const LocationsGroundPlanContentContainer = styled.div`
   position: relative;
-  
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+
+  width: calc(100% + var(--border-width));
+  min-width: calc(100% + var(--border-width));
+  max-width: calc(100% + var(--border-width));
 
   height: ${({ theme })=> theme.groundPlan.content.height};
   min-height: ${({ theme })=> theme.groundPlan.content.height};
