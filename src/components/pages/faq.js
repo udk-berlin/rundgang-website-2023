@@ -20,7 +20,7 @@ const FAQS = {
         "Lietzenburger Straße 45, 10777 Berlin",
         "Straße des 17. Juni 118, 10623 Berlin",
         "</br>",
-        "Weitere Informationen zur Anfahrt der einzelnen Standorte befinden sich auf der <a href='https://www.udk-berlin.de/service/standorte-der-udk-berlin/'>Serviceseite der UdK</a>.",
+        "Weitere Informationen zur Anfahrt der einzelnen Standorte befinden sich auf der <a href='https://www.udk-berlin.de/service/standorte-der-udk-berlin/'>Serviceseite der UdK Berlin</a>.",
       ]
     },
     {
@@ -36,7 +36,7 @@ const FAQS = {
     {
       title: "Bändchen",
       texts: [
-        "Angehörige der Universität der Künste können sich ab Montag, dem 17. Juli 2023, nach vorheriger Registrierung ein Bändchen am Ticketcounter im Konzertsaalfoyer abholen. Registrierung und Bändchen sind notwendig, um am Rundgang einen vorrangigen Einlass zu erhalten.",
+        "Angehörige der Universität der Künste Berlin können sich ab Montag, dem 17. Juli 2023, nach vorheriger Registrierung ein Bändchen am Ticketcounter im Konzertsaalfoyer abholen. Registrierung und Bändchen sind notwendig, um am Rundgang einen vorrangigen Einlass zu erhalten.",
         "Mehr zur Registrierung und zum Einlass findest Du <a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/registrierung/'>hier</a>."
       ]
     },
@@ -45,7 +45,7 @@ const FAQS = {
       texts: [
         "Alle Informationen zu den Zugänglichkeiten der Standorte findest Du <a href='https://www.udk-berlin.de/fileadmin/2_dezentral/Referat_Studienangelegenheiten/Sonderinfos/12012022_Barrierefreie_Erschliessung_der_Gebaeude.pdf'>hier</a>.",
         "</br>",
-        "Bei Fragen wende Dich gerne vor dem Rundgang an Marion Arnold, die Beauftragte für Studierende mit Behinderungen und chronischen Krankheiten unter:",
+        "Bei Fragen wende Dich gerne vor dem Rundgang an Christian Schmidts, den Beauftragten für Studierende mit Behinderungen und chronischen Krankheiten unter:",
         "+49 (0)30 3185 2225",
         "barrierefrei@udk-berlin.de",
         "</br>",
@@ -70,7 +70,7 @@ const FAQS = {
     {
       title: "Das ist anders",
       texts: [
-        "Der Rundgang 2023 findet von Freitag, dem 21. Juli, bis zum Sonntag, dem 23. Juli, statt. In diesem Jahr entfällt das interne Sommerfest am Donnerstag. Der Rundgang 2023 ist an allen drei Tagen für Kunst- und Kulturinteressierte geöffnet. Da es in diesem Jahr keinen Preview-Tag für Fachpublikum gibt, ist auch der Freitag, wie an den restlichen Rundgang-Tagen, öffentlich.",
+        "Der Rundgang 2023 findet von Freitag, dem 21. Juli, bis zum Sonntag, dem 23. Juli, statt. In diesem Jahr entfällt das interne Sommerfest am Donnerstag. Der Rundgang 2023 ist an allen drei Tagen für Kunst- und Kulturinteressierte geöffnet. Da es in diesem Jahr keinen Preview-Tag für Fachpublikum gibt, ist auch der Freitag, wie auch die restlichen Rundgang-Tage, öffentlich.",
         "</br>",
         "Neu ist in diesem Jahr außerdem die Anwesenheit eines ausgebildeten Awarenessteams, der Wechsel der Sicherheitsfirma vor Ort und das Angebot eines Safer Space in der Hardenbergstraße 33."
       ]
@@ -139,7 +139,7 @@ const FAQS = {
         "</br>",
         "Studierende und Lehrende der UdK Berlin stellen an den jeweiligen Standorten ihrer Fakultäten und Studiengänge ihre Arbeiten aus.",
         "</br>",
-        "Alle Ansprechpartner:innen der Fakultäten zum Rundgang sind unter <a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/kernteam-udk-berlin-rundgang-2023/'>Team und Kontakt</a> auf der Website der UdK Berlin sowie unter <a href='https://rundgang.udk-berlin.de/contact'>Kontakt</a> auf der Rundgang Plattform aufgeführt.",
+        "Alle Ansprechpartner*innen der Fakultäten zum Rundgang sind unter <a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/kernteam-udk-berlin-rundgang-2023/'>Team und Kontakt</a> auf der Website der UdK Berlin sowie unter <a href='https://rundgang.udk-berlin.de/contact'>Kontakt</a> auf der Rundgang Plattform aufgeführt.",
         "</br>",
         "Bei der Fülle von Angeboten, kann leider nicht vermieden werden, dass es zu Überschneidungen im Programm kommt."
       ]
@@ -159,7 +159,7 @@ const FAQS = {
     {
       title: "Reservierung",
       texts: [
-        "Eine Reservierung von Plätzen für einzelne Veranstaltungen ist nicht möglich. Eine Ausnahme bildet die SCHAU 23. Die <a href='https://www.udk-schau.de/'>Registrierung</a> erfolgt über die Fakultät Gestaltung."
+        "Eine Reservierung von Plätzen für einzelne Veranstaltungen ist nicht möglich. Eine Ausnahme bildet die SCHAU23. Die <a href='https://www.udk-schau.de/'>Registrierung</a> erfolgt über die Fakultät Gestaltung."
       ]
     },
     {
@@ -175,11 +175,11 @@ const FAQS = {
       texts: [
         "Um die Veranstaltung für alle Personen sicher zu gestalten, werden ausgebildete Mitarbeitende für die Sicherheit, den Brandschutz und die Umsetzung des Awarenesskonzeptes vor Ort sein.",
         "</br>",
-        "Der Einsatz von professionell ausgebildetem Sicherheitspersonal ist bei öffentlichen Veranstaltungen in der Größenordnung des Rundgangs gesetzlich verpflichtend. Die Aufgaben des Sicherheitsdienstes umfassen den Einlass an der Hardenbergstraße 33 und der Grunewaldstraße 2-5 sowie die Sicherung der Veranstaltung, das heißt ihrer Besucher:innen, ihrer Ausstattung und Infrastruktur. Das Sicherheitspersonal trägt grüne Westen mit der Aufschrift „Sicherheit“. Außerdem gibt es Mitarbeitende, die zur Sicherung des Brandschutzes vor Ort sind. Diese erkennst Du an den roten Westen mit der Aufschrift „Brandschutz“. Für Konfliktsituationen ist ein externes Awarenessteam vor Ort. Dieses erkennst Du an den lila Westen mit der Aufschrift „Awareness“. Das Awarenessteam ist auch beim Einlass am Standort Hardenbergstraße 33 anwesend.",
+        "Der Einsatz von professionell ausgebildetem Sicherheitspersonal ist bei öffentlichen Veranstaltungen in der Größenordnung des Rundgangs gesetzlich verpflichtend. Die Aufgaben des Sicherheitsdienstes umfassen den Einlass an der Hardenbergstraße 33 und der Grunewaldstraße 2-5 sowie die Sicherung der Veranstaltung, das heißt ihrer Besucher*innen, ihrer Ausstattung und Infrastruktur. Das Sicherheitspersonal trägt grüne Westen mit der Aufschrift „Sicherheit“. Außerdem gibt es Mitarbeitende, die zur Sicherung des Brandschutzes vor Ort sind. Diese erkennst Du an den roten Westen mit der Aufschrift „Brandschutz“. Für Konfliktsituationen ist ein externes Awarenessteam vor Ort. Dieses erkennst Du an den lila Westen mit der Aufschrift „Awareness“. Das Awarenessteam ist auch beim Einlass am Standort Hardenbergstraße 33 anwesend.",
         "</br>",
         "Im Vorfeld des Rundgangs wurden die Mitarbeitenden umfassend geschult. Das Handout zum Briefing kann vorab (Der Link folgt hier in der Woche vor dem Rundgang) eingesehen werden.",
         "</br>",
-        "Aufgabe des Sicherheitspersonals vor Ort ist auch die Unterbindung von Sachbeschädigungen, Vandalismus, Diebstahl sowie die Bewachung und Sicherung von Material und Infrastruktur. Sachbeschädigungen oder Diebstähle sollten dem Sicherheitspersonal oder der Veranstaltungsleitung (Kontakt) gemeldet werden.",
+        "Aufgabe des Sicherheitspersonals vor Ort ist auch die Unterbindung von Sachbeschädigungen, Vandalismus, Diebstahl sowie die Bewachung und Sicherung von Material und Infrastruktur. Sachbeschädigungen oder Diebstähle sollten dem Sicherheitspersonal oder der Veranstaltungsleitung (<a href='https://rundgang.udk-berlin.de/contact'>Kontakt</a>) gemeldet werden.",
         "</br>",
         "Mit der Sicherung der Veranstaltung ist in diesem Jahr die Firma Boretti Solutions beauftragt."
       ]
@@ -193,7 +193,7 @@ const FAQS = {
     {
       title: "Weiteres",
       texts: [
-        "Barbetreibende Klassen können den Liefereingang für die individuelle Getränkelieferung nutzen. In Absprache mit der Veranstaltungsleitung kann der Lieferanteneingang für die individuelle Getränkelieferung einzelner Klassen genutzt werden. Getränkelieferungen über den Haupteingang sind ausgeschlossen.",
+        "Barbetreibende Klassen an der Hardenbergstraße 33 können in Absprache mit der Veranstaltungsleitung den Lieferanteneingang für die Getränkeanlieferung nutzen. Getränkelieferungen über den Haupteingang sind ausgeschlossen.",
         "</br>",
         "Über Anregungen, Tipps und Fragen für den Rundgang 2024 freuen wir uns unter rundgang@udk-berlin.de."
       ]
@@ -215,7 +215,7 @@ const FAQS = {
         "Lietzenburger Strasse 45, 10777 Berlin",
         "118 Strasse des 17. Juni, 10623 Berlin",
         "</br>",
-        "Further information on how to get to the individual locations can be found on the <a href='https://www.udk-berlin.de/service/standorte-der-udk-berlin/'>UdK's service page.</a>",
+        "Further information on how to get to the individual locations can be found on the <a href='https://www.udk-berlin.de/service/standorte-der-udk-berlin/'>UdK Berlin's service page.</a>",
       ]
     },
     {
@@ -230,7 +230,7 @@ const FAQS = {
       title: "Accessibility",
       texts: [
         "You can find all information about the accessibility of the locations <a href='https://www.udk-berlin.de/fileadmin/2_dezentral/Referat_Studienangelegenheiten/Sonderinfos/12012022_Barrierefreie_Erschliessung_der_Gebaeude.pdf'>here</a>.",
-        "If you have any questions before the event, please contact Marion Arnold, the representative for students with disabilities and chronic illnesses, at:",
+        "If you have any questions before the event, please contact Christian Schmidts, the representative for students with disabilities and chronic illnesses, at:",
         "+49 (0)30 3185 2225",
         "barrierefrei@udk-berlin.de",
         "During the 2023 Rundgang, the awareness team and security staff will be available to assist you if you need support or have any questions."
@@ -267,7 +267,7 @@ const FAQS = {
     {
       title: "Further",
       texts: [
-        "Bar operating classes can use the delivery entrance for individual beverage delivery. In consultation with event management, the vendor entrance may be used for individual beverage deliveries for individual classes. Beverage deliveries via the main entrance are excluded.",
+        "Bar-operating classes at Hardenbergstraße 33 may use the vendor entrance for individual beverage deliveries in consultation with the event management. Beverage deliveries via the main entrance are excluded.",
         "We welcome suggestions, tips and questions for the 2024 Rundgang at rundgang@udk-berlin.de."
       ]
     },
@@ -338,7 +338,7 @@ const FAQS = {
     {
       title: "Reservation",
       texts: [
-        "It is not possible to reserve seats for individual events. An exception to this is SCHAU 23, where <a href='https://www.udk-schau.de/'>registration</a> is handled by the Faculty of Design."
+        "It is not possible to reserve seats for individual events. An exception to this is , where <a href='https://www.udk-schau.de/'>registration</a> is handled by the Faculty of Design."
       ]
     },
     {
