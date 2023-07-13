@@ -6,8 +6,8 @@ export const breakpoints = {
 }
 
 const height =  {
-  l: `calc(100vh - ${layoutLTheme.footer.height} - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - 2 * ${baseLTheme.borderWidth})`,
-  m: `calc(100vh - ${layoutMTheme.footer.height} - ${layoutMTheme.header.bar.height} - ${layoutMTheme.header.filter.bar.height} - 2 * ${layoutMTheme.borderWidth})`,
+  l: `calc(100vh - ${layoutLTheme.footer.height} - ${layoutLTheme.header.height})`,
+  m: `calc(100vh - ${layoutMTheme.footer.height} - ${layoutMTheme.header.height})`,
 }
 
 const top = {
@@ -49,7 +49,7 @@ export const locationsLTheme = {
     }
   },
   program: {
-    height: height.l,
+    height: `calc(${height.l} - 2 * ${baseLTheme.borderWidth})`,
     width: '',
     position: 'absolute',
     top: top.l,

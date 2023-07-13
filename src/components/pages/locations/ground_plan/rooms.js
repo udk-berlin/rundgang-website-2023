@@ -40,10 +40,12 @@ function LocationsGroundPlanRoom ({ key, room }) {
       })
   }
 
+  const roomName = roomNameMapperToId(room.name)
+
   return (
     <LocationsGroundPlanRoomContainer key={key} selected={(filter.room && filter.room.id === room.id)} onClick={handleClick}>
       <div>
-        <FormattedMessage id={'room'}/>: {room.name}
+        <FormattedMessage id={roomName.id}/>: {roomName.name}
       </div>
     </LocationsGroundPlanRoomContainer>
   )
@@ -51,7 +53,6 @@ function LocationsGroundPlanRoom ({ key, room }) {
 
 function LocationsGroundPlanRoomsAll () {
   const { projects, locations } = useData()
-  const filter = useFilter()
   const dispatch = useFilterDispatch()
 
   const handleClick = (e) => {
@@ -70,6 +71,20 @@ function LocationsGroundPlanRoomsAll () {
       </div>
     </LocationsGroundPlanRoomContainer>
   )
+}
+
+function roomNameMapperToId(name) {
+  if (name.startsWith('R-') || name.startsWith('RE-') || name.startsWith('R ') || name.startsWith('RE ')) {
+    return {id: 'room', name: name.replace('RE-', '').replace('R-', '').replace('RE ', '').replace('R ', '')}
+  } else if (name.startsWith('V-') || name.startsWith('VF-') || name.startsWith('V ') || name.startsWith('VF ')) {
+    return {id: 'corridor', name: name.replace('VF-', '').replace('V-', '').replace('VF ', '').replace('V ', '')}
+  } else if (name.startsWith('TH-') || name.startsWith('TPH-') || name.startsWith('TH ') || name.startsWith('TPH ')) {
+    return {id: 'stairs', name: name.replace('TH-', '').replace('TPH-', '').replace('TH ', '').replace('TPH ', '')}
+  } else if (name.startsWith('TF-') || name.startsWith('TF ')) {
+    return {id: 'technic', name: name.replace('TF-', '').replace('TF ', '')}
+  } else {
+    return {id: 'room', name: name}
+  }
 }
 
 const LocationsGroundPlanRoomsContainer = styled.div`
