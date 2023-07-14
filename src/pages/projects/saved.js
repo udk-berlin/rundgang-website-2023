@@ -88,7 +88,6 @@ function SavedProjectsContainer ({ setIsLinkClicked, formats, formatsFilters, st
               formats={formats}
               formatsFilters={formatsFilters}
               structuresFilters={structuresFilters}
-              useFast={true}
             >
               <Layout setIsLinkClicked={setIsLinkClicked}>
                 <SavedProjects />

@@ -70,7 +70,6 @@ function LocationsPageContainer({ setIsLinkClicked, formats, formatsFilters, str
             formatsFilters={formatsFilters}
             structures={structures}
             structuresFilters={structuresFilters}
-            useFast={true}
           >
             <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
               <Locations />

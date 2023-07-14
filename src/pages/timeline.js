@@ -61,14 +61,6 @@ export default function TimelinePage({
 function TimelinePageContainer({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
   const { locations, projects } = useData()
 
-  // let filteredLocations = {}
-  // let filteredProjects
-  //
-  // if ( locations && projects ) {
-  //   filteredProjects = projects.filter(project => project.allocation && project.allocation.temporal && project.allocation.temporal.length > 0)
-  //   filter(locations, filteredProjects.map(project => project.id)).forEach(location => filteredLocations[location.id] = location)
-  // }
-
   return (
     <>
       {
@@ -78,9 +70,7 @@ function TimelinePageContainer({ setIsLinkClicked, formats, formatsFilters, stru
             formats={formats}
             formatsFilters={formatsFilters}
             structures={structures}
-            structuresFilters={structuresFilters}
-            useFast={true}
-          >
+            structuresFilters={structuresFilters}>
             <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES} setIsLinkClicked={setIsLinkClicked}>
               <Timeline />
             </Layout>
@@ -89,20 +79,4 @@ function TimelinePageContainer({ setIsLinkClicked, formats, formatsFilters, stru
       }
     </>
   );
-}
-
-
-function filter(locations, projectIds) {
-  const getChildren = (result, object) => {
-    if (object.type === 'item' && projectIds.includes(object.id)) {
-      result.push(object);
-      return result;
-    }
-    const children = Object.values(object.children).reduce(getChildren, []);
-    if (children.length) result.push({ ...object, children });
-
-    return result;
-  };
-
-  return Object.values(locations).reduce(getChildren, []);
 }
