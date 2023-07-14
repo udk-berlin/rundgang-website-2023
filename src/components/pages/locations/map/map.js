@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { useFilterDispatch } from "@/providers/filter";
 import ResponsiveMarker from "@/components/pages/locations/map/marker";
-import {useData} from "@/providers/data";
+import {useData} from "@/providers/data/data";
 
 const MAP_CONFIGURATION = {
   style:

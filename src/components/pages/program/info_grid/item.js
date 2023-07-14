@@ -41,7 +41,7 @@ export function InfoGridItem({ className, children, margin }) {
   );
 }
 
-export function InfoGridCardItem({ className, children, margin }) {
+export function InfoGridCardItem({ id, className, children, margin, withLink }) {
   const inlineRef = useRef(null);
   const borderRef = useRef(null);
 
@@ -61,17 +61,23 @@ export function InfoGridCardItem({ className, children, margin }) {
   return (
     <>
       {
-        children ? (
-          <InfoGridItemContainer
-            ref={borderRef}
-            className={className}
-            // margin={margin}
-          >
-            <div style={{ display: "inline" }} ref={inlineRef}>
+        children ?
+          withLink ? (
+            <InfoGridItemLink href={`/program/${id}`} ref={inlineRef} >
               {children}
-            </div>
-          </InfoGridItemContainer>
-        ) : <></>
+            </InfoGridItemLink>
+            ) : (
+              <InfoGridItemContainer
+                ref={borderRef}
+                className={className}
+                // margin={margin}
+              >
+                <div style={{ display: "inline" }} ref={inlineRef}>
+                  {children}
+                </div>
+              </InfoGridItemContainer>
+            )
+         : <></>
       }
     </>
   );

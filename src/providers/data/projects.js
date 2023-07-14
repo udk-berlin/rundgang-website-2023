@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react'
 import useSWR from 'swr'
-import { getLocationsTreeUrl } from '@/utils/api/locations'
+import {getLocationsTreeUrl, getStructuresTreeUrl, getFormatsTreeUrl, getTree} from '@/utils/api/api'
 import {gql, useQuery} from "@apollo/client";
 
 const PROJECTS_QUERY = gql`
@@ -42,18 +42,31 @@ const CONTEXTS_QUERY = gql`
 }
 `;
 
-const DataContext = createContext({
+const ProjectsDataContext = createContext({
   locations: {},
   projects: {},
   contexts: {},
-  error: null,
+  structures: {},
+  structureFilters: {},
+  formats: {},
+  formatFilters: {},
 })
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export function DataProvider ({ children, onlyTemporalData = false }) {
-  const { data: locations, error } = useSWR(
+export function ProjectsDataProvider ({ children, onlyTemporalData = false }) {
+  const { data: locations } = useSWR(
     getLocationsTreeUrl(),
+    fetcher
+  );
+
+  const { data: structures } = useSWR(
+    getStructuresTreeUrl(),
+    fetcher
+  );
+
+  const { data: formats } = useSWR(
+    getFormatsTreeUrl(),
     fetcher
   );
 
@@ -89,32 +102,61 @@ export function DataProvider ({ children, onlyTemporalData = false }) {
       }
     }
 
-    let filteredContextsObj
+    let contextsObj = {}
 
     if (!contexts.loading && !contexts.error) {
-      filteredContextsObj = buildObjects(contexts)
+      contexts.data.contexts.forEach(context => {
+        contextsObj[context.id] = context
+      })
     }
 
-    return { locations: filteredLocationsObj, error, projects: filteredProjectsObj, contexts: filteredContextsObj }
+    let filteredStructuresObj
+    let structureFilters
+
+    if (structures) {
+      const structuresObjs= {}
+      Object.values(structures.children).forEach(structure => structuresObjs[structure.id] = structure)
+
+      filteredStructuresObj = {}
+      filter(Object.values(structuresObjs)).forEach(structuresObj => filteredStructuresObj[structuresObj.id] = structuresObj)
+
+      structureFilters = getStructuresFilters(structures)
+    }
+
+    let filteredFormatsObj
+    let formatFilters
+
+    if (formats) {
+      const formatsObjs= {}
+      Object.values(formats.children).forEach(format => formatsObjs[format.id] = format)
+
+      filteredFormatsObj = {}
+      filter(Object.values(formatsObjs)).forEach(formatsObj => filteredFormatsObj[formatsObj.id] = formatsObj)
+
+      formatFilters = getFormatsFilters(formats)
+    }
+
+    return { locations: filteredLocationsObj, projects: filteredProjectsObj, contexts: contextsObj, structures: filteredStructuresObj, structureFilters: structureFilters, formats: filteredFormatsObj, formatFilters: formatFilters }
   }, [
     locations,
     projects,
     contexts,
-    error,
+    structures,
+    formats,
   ]);
 
   return (
-    <DataContext.Provider value={value}>
+    <ProjectsDataContext.Provider value={value}>
       {children}
-    </DataContext.Provider>
+    </ProjectsDataContext.Provider>
   )
 }
 
-export function useData() {
-  const context = useContext(DataContext);
+export function useProjectsData() {
+  const context = useContext(ProjectsDataContext);
 
   if (!context) {
-    throw new Error("You need to wrap DataProvider.");
+    throw new Error("You need to wrap ProjectsDataProvider.");
   }
 
   return context;
@@ -150,14 +192,46 @@ function filterByNodeIds(array, nodeIds) {
   return array.reduce(getChildren, []);
 }
 
-function buildObjects(res) {
-  const obj = {}
+function getFormatsFilters (tree) {
+  let filters = {}
 
-  if (res && res.data && res.data.contexts) {
-    res.data.contexts.forEach(context => {
-      obj[context.id] = context
+  const getChildren = (current) => {
+    Object.values(current.children).forEach(child => {
+      if (child.template === 'format-element') {
+        filters[child.id] = {
+          id: child.id,
+          name: child.name,
+          template: child.template
+        }
+      } else {
+        getChildren(child)
+      }
     })
-  }
+  };
 
-  return obj
+  getChildren(tree)
+
+  return filters
+}
+
+function getStructuresFilters (tree) {
+  let filters = {}
+
+  const getChildren = (current) => {
+    Object.values(current.children).forEach(child => {
+      if (child.template === 'centre' || child.template === 'faculty') {
+        filters[child.id] = {
+          id: child.id,
+          name: child.name,
+          template: child.template
+        }
+      } else {
+        getChildren(child)
+      }
+    })
+  };
+
+  getChildren(tree)
+
+  return filters
 }

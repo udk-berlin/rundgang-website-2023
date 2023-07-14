@@ -3,7 +3,7 @@ import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
 import { useFilter, useFilterDispatch } from "@/providers/filter";
-import { useData } from "@/providers/data";
+import { useData } from "@/providers/data/data";
 
 export default function HeaderFilters({ showFilters, setShowFilters }) {
   const { projects, locations} = useData()
@@ -15,7 +15,7 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
       filterAllFormattedMessageId: "faculties.centres.all",
       filterDispatchType: "filter-structure",
       filterAllDispatchType: "all-structures",
-      filters: filter.structuresFilters,
+      filters: filter.structureFilters,
       selected: (f) => {
         return filter.structure === f.id;
       },
@@ -28,7 +28,7 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
       filterAllFormattedMessageId: "formats.all",
       filterDispatchType: "filter-format",
       filterAllDispatchType: "all-formats",
-      filters: filter.formatsFilters,
+      filters: filter.formatFilters,
       selected: (f) => {
         return filter.format === f.id;
       },
@@ -62,6 +62,7 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
             {Object.values(category.filters).map((f) => (
               <FilterNameContainer
                 key={f.id}
+                id={f.id}
                 onClick={() =>
                   dispatch({ type: category.filterDispatchType, id: f.id, projects: projects, locations: locations})
                 }

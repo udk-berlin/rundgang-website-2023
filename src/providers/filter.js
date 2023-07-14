@@ -11,19 +11,21 @@ function shuffleArray(array) {
 
   return array
 }
-export function FilterProvider ({ locations, projects, formats, formatsFilters, structures, structuresFilters, children }) {
+export function FilterProvider ({ projects, locations = null, format =  null, formats, formatFilters, structure = null, structures, structureFilters, children }) {
   projects = [...projects]
   shuffleArray(projects)
 
   const [filter, dispatch] = useReducer(
     filterReducer,
     {
-      filteredProjects: projects,
+      filteredProjects: initialFilter(projects, format, formats, structure, structures),
       filteredLocations: locations,
+      format: format,
       formats: formats,
-      formatsFilters: formatsFilters,
+      formatFilters: formatFilters,
+      structure: structure,
       structures: structures,
-      structuresFilters: structuresFilters
+      structureFilters: structureFilters
     }
   )
 
@@ -76,11 +78,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
 
         location: action.location
       }
@@ -108,11 +110,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'filter-floor': {
@@ -141,11 +143,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'all-floors': {
@@ -173,11 +175,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'filter-room': {
@@ -207,11 +209,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'all-rooms': {
@@ -240,11 +242,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'filter-structure': {
@@ -286,11 +288,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: action.id,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'all-structures': {
@@ -330,10 +332,10 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: state.format,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'filter-format': {
@@ -375,11 +377,11 @@ function filterReducer (state, action) {
 
         formats: state.formats,
         format: action.id,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'all-formats': {
@@ -418,11 +420,11 @@ function filterReducer (state, action) {
         filteredLocations: filteredLocations,
 
         formats: state.formats,
-        formatsFilters: state.formatsFilters,
+        formatFilters: state.formatFilters,
 
         structures: state.structures,
         structure: state.structure,
-        structuresFilters: state.structuresFilters,
+        structureFilters: state.structureFilters,
       }
     }
     case 'set-saved-projects': {
@@ -442,6 +444,25 @@ function filterReducer (state, action) {
     }
   }
 }
+
+function initialFilter (projects, format, formats, structure, structures) {
+  if (format) {
+    return initialFilterByFormat(projects, format, formats)
+  } else if (structure) {
+    return initialFilterByStructure(projects, structure, structures)
+  } else {
+    return projects
+  }
+}
+
+function initialFilterByFormat (projects, format, formats) {
+  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(formats, format)))
+}
+
+function initialFilterByStructure (projects, structure, structures) {
+  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(structures, structure)))
+}
+
 
 function filterByNodeId(tree, nodeId) {
   const resultTree = {}

@@ -3,18 +3,21 @@ import styled, {useTheme} from "styled-components";
 
 import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
 import getLocalizedData from "@/components/localization/data";
+import { useData } from "@/providers/data/data";
 
-export default function ProjectMedia({ project, media, contexts, fullSize = false, infoGridPos }) {
+export default function ProjectMedia({ project, infoGridPos }) {
+  const { media } = useData(true)
+
   return (
     <MediaContainer>
-      {infoGridPos ? <ProjectInfoGrid project={project} contexts={contexts} /> : <></>}
-      <ThumbnailMedia project={project} fullSize={fullSize} />
+      {infoGridPos ? <ProjectInfoGrid project={project} forProjectPage={true} /> : <></>}
+      <ProjectThumbnail project={project} fullSize={true} />
       <ProjectAdditionalMedia project={project} media={media} />
     </MediaContainer>
   )
 }
 
-function ThumbnailMedia({ project, index = 0, fullSize = false }) {
+export function ProjectThumbnail({ project, index = 0, fullSize = false }) {
   if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
 
   return (
@@ -40,7 +43,7 @@ export function ProjectAdditionalMedia({ project, media }) {
     }
   }, [media]);
 
-  if (media && media["languages"]) {
+  if (media && media.languages) {
     let mediaContent = getLocalizedData(media.languages).content;
 
     Object.values(mediaContent).forEach(mediaItem => {

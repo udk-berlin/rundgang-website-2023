@@ -18,7 +18,6 @@ import LoadingLayout from "@/components/layout/loading";
 export default function Program({ setIsLinkClicked }) {
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
-
   const filter = useFilter();
 
   useEffect(() => {

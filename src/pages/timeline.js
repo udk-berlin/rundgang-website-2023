@@ -14,32 +14,32 @@ import Timeline from "@/components/pages/timeline/timeline";
 import { SavedProjectsProvider } from "@/providers/saved_projects";
 import LoadingLayout from "@/components/layout/loading";
 import Layout from "@/components/layout/layout";
-import { DataProvider, useData } from "@/providers/data";
+import { DataProvider, useData } from "@/providers/data/data";
 
 const NUMBER_OF_SLIDER_STATES = 3
 
 export async function getStaticProps() {
   const formats = await getTimelineFormats();
-  const formatsFilters = await getFormatsFilters();
+  const formatFilters = await getFormatsFilters();
 
   const structures = await getTimelineStructures();
-  const structuresFilters = await getStructuresFilters();
+  const structureFilters = await getStructuresFilters();
 
   return {
     props: {
       formats,
-      formatsFilters,
+      formatFilters,
       structures,
-      structuresFilters,
+      structureFilters,
     },
   };
 }
 
 export default function TimelinePage({
   formats,
-  formatsFilters,
+  formatFilters,
   structures,
-  structuresFilters,
+  structureFilters,
 }) {
   const [isLinkClicked, setIsLinkClicked] = useState(false)
 
@@ -50,7 +50,7 @@ export default function TimelinePage({
           <LoadingLayout /> :
           <DataProvider onlyTemporalData={true}>
             <SavedProjectsProvider>
-              <TimelinePageContainer setIsLinkClicked={setIsLinkClicked} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters} />
+              <TimelinePageContainer setIsLinkClicked={setIsLinkClicked} formats={formats} formatFilters={formatFilters} structures={structures} structureFilters={structureFilters} />
             </SavedProjectsProvider>
           </DataProvider>
       }
@@ -58,7 +58,7 @@ export default function TimelinePage({
   );
 }
 
-function TimelinePageContainer({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
+function TimelinePageContainer({ setIsLinkClicked, formats, formatFilters, structures, structureFilters }) {
   const { locations, projects } = useData()
 
   return (
@@ -68,9 +68,9 @@ function TimelinePageContainer({ setIsLinkClicked, formats, formatsFilters, stru
             locations={locations}
             projects={projects}
             formats={formats}
-            formatsFilters={formatsFilters}
+            formatFilters={formatFilters}
             structures={structures}
-            structuresFilters={structuresFilters}>
+            structureFilters={structureFilters}>
             <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES} setIsLinkClicked={setIsLinkClicked}>
               <Timeline />
             </Layout>

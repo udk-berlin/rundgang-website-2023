@@ -8,7 +8,7 @@ import LocationsFloorPlanPopup from "@/components/pages/locations/floor_plan/pop
 import { locationsLTheme, locationsMTheme } from "@/themes/pages/locations";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/pages/locations";
-import {useData} from "@/providers/data";
+import {useData} from "@/providers/data/data";
 
 export default function Locations() {
   const [locationSelected, setLocationSelected] = useState(false)

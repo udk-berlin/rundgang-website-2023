@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { fetcher, getUrl } from "@/utils/api/api";
 import { useFilter, useFilterDispatch } from "@/providers/filter";
-import { useData } from "@/providers/data";
+import { useData } from "@/providers/data/data";
 
 export default function LocationsFloorPlan() {
   const { projects, locations } = useData()

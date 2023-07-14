@@ -1,6 +1,6 @@
 import { FIRST_TIME, LAST_TIME } from "@/themes/pages/timeline";
 import TimelineProjectsGroup from "@/components/pages/timeline/project/projects_group";
-import {useData} from "@/providers/data";
+import {useData} from "@/providers/data/data";
 
 export default function TimelineProjectsGroups({ projectIds, roomIndex = 0 }) {
   const { projects } = useData()

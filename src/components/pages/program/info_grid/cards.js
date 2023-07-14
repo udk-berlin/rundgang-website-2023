@@ -1,10 +1,13 @@
-import { InfoGridCardItem } from "@/components/pages/program/info_grid/item";
-import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import {useData} from "@/providers/data";
+import { FormattedMessage } from "react-intl";
 
-export function InfoGridLocation({ project }) {
-  const { contexts } = useData()
+import { InfoGridCardItem } from "@/components/pages/program/info_grid/item";
+import { useData } from "@/providers/data/data";
+
+const CENTER_ID = '!uGRoYVWPeAFDnpWCYl:content.udk-berlin.de'
+
+export function InfoGridLocation({ project, forProjectPage = false }) {
+  const { contexts } = useData(forProjectPage)
   const locations = []
 
   contexts && project.parents?.forEach(parent => {
@@ -68,187 +71,287 @@ export function InfoGridLocation({ project }) {
   );
 }
 
-export function InfoGridContext({ project }) {
-  const { contexts } = useData()
-  const structures = []
+export function InfoGridContext({ project, forProjectPage = false }) {
+  const { contexts } = useData(forProjectPage)
+  const structures = { faculties: {}, centres: {}, initiatives: {} }
 
   contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
       let context = contexts[parent.id]
-      if (context && context.template && context.template === 'class') {
-        let clazz = context
-        let course
-        let subject
-        let institute
-        let faculty
-
-        context = clazz.parents && clazz.parents[0] ? contexts[clazz.parents[0].id] : null
-
-        if (context && context.template && context.template === 'course') {
-          course = context
-          context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            institute = context
-          } else if (context && context.template && context.template === 'faculty') {
-            faculty = context
-          }
-        } else if (context && context.template && context.template === 'subject') {
-          subject = context
-          context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            institute = context
-          } else if (context && context.template && context.template === 'faculty') {
-            faculty = context
-          }
-        } else if (context && context.template && context.template === 'institute') {
-          institute = context
-        } else if (context && context.template && context.template === 'faculty') {
-          faculty = context
-        }
-
-        structures.push(
-          {
-            clazz: clazz?.name,
-            course: course?.name,
-            subject: subject?.name,
-            institute: institute?.name,
-            faculty: faculty?.name,
-          }
-        )
-      }
-      else if (context && context.template && context.template === 'course') {
-        let clazz
-        let course = context
-        let subject
-        let institute
-        let faculty
-
-        context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
-
-        if (context && context.template && context.template === 'class') {
-          clazz = context
-          context = clazz.parents && clazz.parents[0] ? contexts[clazz.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            institute = context
-          } else if (context && context.template && context.template === 'faculty') {
-            faculty = context
-          }
-        } else if (context && context.template && context.template === 'subject') {
-          subject = context
-          context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            institute = context
-          } else if (context && context.template && context.template === 'faculty') {
-            faculty = context
-          }
-        } else if (context && context.template && context.template === 'institute') {
-          institute = context
-        } else if (context && context.template && context.template === 'faculty') {
-          faculty = context
-        }
-
-        structures.push(
-          {
-            clazz: clazz?.name,
-            course: course?.name,
-            subject: subject?.name,
-            institute: institute?.name,
-            faculty: faculty?.name,
-          }
-        )
-      }
-      else if (context && context.template && context.template === 'subject') {
-        let clazz
-        let course
-        let subject = context
-        let institute
-        let faculty
-
-        context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
-
-        if (context && context.template && context.template === 'class') {
-          clazz = context
-          context = subject.parents && subject.parents[0] ? contexts[clazz.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            institute = context
-          } else if (context && context.template && context.template === 'faculty') {
-            faculty = context
-          }
-        } else if (context && context.template && context.template === 'course') {
-          course = context
-          context = subject.parents && subject.parents[0] ? contexts[course.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            institute = context
-          } else if (context && context.template && context.template === 'faculty') {
-            faculty = context
-          }
-        } else if (context && context.template && context.template === 'institute') {
-          institute = context
-        } else if (context && context.template && context.template === 'faculty') {
-          faculty = context
-        }
-
-        structures.push(
-          {
-            clazz: clazz?.name,
-            course: course?.name,
-            subject: subject?.name,
-            institute: institute?.name,
-            faculty: faculty?.name,
-          }
-        )
-      }
-      else if (context && context.template === 'institute') {
-        let clazz
-        let course
-        let subject
+      if (context && context.template === 'institute') {
         let institute = context
-        let faculty
 
         context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
 
         if (context && context.template && context.template === 'faculty') {
-          faculty = context
-        }
+          let faculty = context
 
-        structures.push(
-          {
-            clazz: clazz?.name,
-            course: course?.name,
-            subject: subject?.name,
-            institute: institute?.name,
-            faculty: faculty?.name,
+          if (!structures.faculties[faculty.id]) {
+            structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
           }
-        )
-      }
-      else if (context && context.template === 'faculty') {
-        let clazz
-        let course
-        let subject
-        let institute
+
+          if (!structures.faculties[faculty.id].institutes[institute.id]) {
+            structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+          }
+        }
+      } else if (context && context.template === 'faculty') {
         let faculty = context
 
-        context = faculty.parents && faculty.parents[0] ? contexts[faculty.parents[0].id] : null
+        if (!structures.faculties[faculty.id]) {
+          structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+        }
+      } else if (context && context.template === 'centre') {
+        let centre = context
 
-        if (context && context.template && context.template === 'institute') {
-          institute = context
+        if (!structures.centres[centre.id]) {
+          structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
+        }
+      } else if (context && context.template === 'initiative') {
+        let initiative = context
+
+        if (!structures.initiatives[initiative.id]) {
+          structures.initiatives[initiative.id] = {...initiative}
+        }
+      } else if (context && context.template === 'consulting service') {
+        let consultingService = context
+        context = consultingService.parents && consultingService.parents[0] ? contexts[consultingService.parents[0].id] : null
+
+        if (context && context.template && context.template === 'centre') {
+          let centre = context
+
+          if (!structures.centres[centre.id]) {
+            structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
+          }
+
+          if (!structures.centres[centre.id].consultingServices[consultingService.id]) {
+            structures.centres[centre.id].consultingServices[consultingService.id] = {...consultingService, seminars: {}}
+          }
         }
 
-        structures.push(
-          {
-            clazz: clazz?.name,
-            course: course?.name,
-            subject: subject?.name,
-            institute: institute?.name,
-            faculty: faculty?.name,
+      } else if (context && context.template === 'subject') {
+        let subject = context
+        context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
+
+        if (context && context.template && context.template === 'centre') {
+          let centre = context
+
+          if (!structures.centres[centre.id]) {
+            structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
           }
-        )
+
+          if (!structures.centres[centre.id].subjects[subject.id]) {
+            structures.centres[centre.id].subjects[subject.id] = {...subject, subjects: {}}
+          }
+        } else if (context && context.template && context.template === 'faculty') {
+          let faculty = context
+
+          if (!structures.faculties[faculty.id]) {
+            structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+          }
+
+          if (!structures.faculties[faculty.id].subjects[subject.id]) {
+            structures.faculties[faculty.id].subjects[subject.id] = {...subject, subjects: {}}
+          }
+        } else if (context && context.template && context.template === 'institute') {
+          let institute = context
+          context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+          if (context && context.template && context.template === 'faculty') {
+            let faculty = context
+
+            if (!structures.faculties[faculty.id]) {
+              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+            }
+
+            if (!structures.faculties[faculty.id].institutes[institute.id]) {
+              structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+            }
+
+            if (!structures.faculties[faculty.id].institutes[institute.id].subjects[subject.id]) {
+              structures.faculties[faculty.id].institutes[institute.id].subjects[subject.id] = {...subject, subjects: {}}
+            }
+          }
+        } else if (context && context.template && context.template === 'course') {
+          let course = context
+          context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            let institute = context
+            context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+            if (context && context.template && context.template === 'faculty') {
+              let faculty = context
+
+              if (!structures.faculties[faculty.id]) {
+                structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id]) {
+                structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
+                structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id].subjects[subject.id]) {
+                structures.faculties[faculty.id].institutes[institute.id].courses[course.id].subjects[subject.id] = {...subject, subjects: {}}
+              }
+            }
+          }
+        } else if (context && context.template && context.template === 'subject') {
+          let secondSubject = context
+          context = secondSubject.parents && secondSubject.parents[0] ? contexts[secondSubject.parents[0].id] : null
+
+          if (context && context.template && context.template === 'institute') {
+            let institute = context
+            context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+            if (context && context.template && context.template === 'faculty') {
+              let faculty = context
+
+              if (!structures.faculties[faculty.id]) {
+                structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id]) {
+                structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id]) {
+                structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id] = {...secondSubject, subjects: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id].subjects[subject.id]) {
+                structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id].subjects[subject.id] = {...subject, subjects: {}}
+              }
+            }
+          }
+        }
+      } else if (context && context.template === 'seminar') {
+        let seminar = context
+        context = seminar.parents && seminar.parents[0] ? contexts[seminar.parents[0].id] : null
+
+        if (context && context.template && context.template === 'consulting service') {
+          let consultingService = context
+          context = consultingService.parents && consultingService.parents[0] ? contexts[consultingService.parents[0].id] : null
+
+          if (context && context.template && context.template === 'centre') {
+            let centre = context
+
+            if (!structures.centres[centre.id]) {
+              structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
+            }
+
+            if (!structures.centres[centre.id].consultingServices[consultingService.id]) {
+              structures.centres[centre.id].consultingServices[consultingService.id] = {...consultingService, seminars: {}}
+            }
+
+            if (!structures.centres[centre.id].consultingServices[consultingService.id].seminars[seminar.id]) {
+              structures.centres[centre.id].consultingServices[consultingService.id].seminars[seminar.id] = {...seminar}
+            }
+          }
+        }
+      } else if (context && context.template === 'class') {
+        let clazz = context
+        context = clazz.parents && clazz.parents[0] ? contexts[clazz.parents[0].id] : null
+
+        if (context && context.template && context.template === 'institute') {
+          let institute = context
+          context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+          if (context && context.template && context.template === 'faculty') {
+            let faculty = context
+
+            if (!structures.faculties[faculty.id]) {
+              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+            }
+
+            if (!structures.faculties[faculty.id].institutes[institute.id]) {
+              structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+            }
+
+            if (!structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id]) {
+              structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id] = {...clazz}
+            }
+          }
+        } else if (context && context.template === 'course') {
+          let course = context
+          context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
+
+          if (context && context.template && context.template === 'faculty') {
+            let faculty = context
+
+            if (!structures.faculties[faculty.id]) {
+              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+            }
+
+            if (!structures.faculties[faculty.id].courses[course.id]) {
+              structures.faculties[faculty.id].courses[course.id] = {...course, subjects: {}, classes: {}}
+            }
+
+            if (!structures.faculties[faculty.id].courses[course.id].classes[clazz.id]) {
+              structures.faculties[faculty.id].courses[course.id].classes[clazz.id] = {...clazz}
+            }
+          } else if (context && context.template && context.template === 'institute') {
+            let institute = context
+            context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+            if (context && context.template && context.template === 'faculty') {
+              let faculty = context
+
+              if (!structures.faculties[faculty.id]) {
+                structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id]) {
+                structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
+                structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
+              }
+
+              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id]) {
+                structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id] = {...clazz}
+              }
+            }
+          }
+        }
+      } else if (context && context.template === 'course') {
+        let course = context
+        context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
+
+        if (context && context.template && context.template === 'faculty') {
+          let faculty = context
+
+          if (!structures.faculties[faculty.id]) {
+            structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+          }
+
+          if (!structures.faculties[faculty.id].courses[course.id]) {
+            structures.faculties[faculty.id].courses[course.id] = {...course, subjects: {}, classes: {}}
+          }
+        } else if (context && context.template && context.template === 'institute') {
+          let institute = context
+          context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+          if (context && context.template && context.template === 'faculty') {
+            let faculty = context
+
+            if (!structures.faculties[faculty.id]) {
+              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+            }
+
+            if (!structures.faculties[faculty.id].institutes[institute.id]) {
+              structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+            }
+
+            if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
+              structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
+            }
+          }
+        }
       }
     }
   })
@@ -256,27 +359,82 @@ export function InfoGridContext({ project }) {
   return (
     <Container>
       {
-        structures.map(structure => {
+        Object.values(structures.faculties).map(faculty => {
           return (
             <>
-              <InfoGridCardItem margin="50px">{structure.faculty}</InfoGridCardItem>
-              <InfoGridCardItem margin="150px">{structure.institute}</InfoGridCardItem>
-              <InfoGridCardItem margin="100px">{structure.subject}</InfoGridCardItem>
-              <InfoGridCardItem margin="50px">{structure.course}</InfoGridCardItem>
-              <InfoGridCardItem margin="200px">{structure.class}</InfoGridCardItem>
+              <InfoGridCardItem id={faculty.id} withLink={true} margin="50px">{faculty.name}</InfoGridCardItem>
+              {
+                Object.values(faculty.institutes).map(institute => {
+                  return (
+                    <>
+                      <InfoGridCardItem id={institute.id} margin="150px">{institute.name}</InfoGridCardItem>
+                      {Object.values(institute.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="200px">{clazz.name}</InfoGridCardItem>)}
+                      {
+                        Object.values(institute.subjects).map(subject => {
+                          return (
+                            <>
+                              <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>
+                              {Object.values(subject.subjects).map(secondSubject => <InfoGridCardItem id={secondSubject.id} margin="200px">{secondSubject.name}</InfoGridCardItem>)}
+                            </>
+                          )
+                        })
+                      }
+                      {
+                        Object.values(institute.courses).map(course => {
+                          return (
+                            <>
+                              <InfoGridCardItem id={course.id} margin="50px">{course.name}</InfoGridCardItem>
+                              {Object.values(course.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>)}
+                              {Object.values(course.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="200px">{clazz.name}</InfoGridCardItem>)}
+                            </>
+                          )
+                        }
+                        )
+                      }
+                    </>
+                  )
+                })
+
+              }
+              {Object.values(faculty.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>)}
+              {Object.values(faculty.courses).map(course => <InfoGridCardItem id={course.id} margin="5px">{course.name}</InfoGridCardItem>)}
+            </>
+          )
+        })
+      }
+      {
+        Object.values(structures.centres).map(centre => {
+          return (
+            <>
+              <InfoGridCardItem id={CENTER_ID} withLink={true} margin="50px">{centre.name}</InfoGridCardItem>
+              {Object.values(centre.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>)}
+              {
+                Object.values(centre.consultingServices).map(consultingService => {
+                 return (
+                   <>
+                     <InfoGridCardItem id={consultingService.id} margin="150px">{consultingService.name}</InfoGridCardItem>
+                     {
+                       Object.values(consultingService.seminars).map(seminar => <InfoGridCardItem id={seminar.id} margin="50px">{seminar.name}</InfoGridCardItem>)
+                     }
+                   </>
+                 )
+                })
+              }
+            </>
+          )
+        })
+      }
+
+      {
+        Object.values(structures.initiatives).map(initiative => {
+          return (
+            <>
+              <InfoGridCardItem margin="50px">{initiative.name}</InfoGridCardItem>
             </>
           )
         })
       }
     </Container>
-  );
-}
-
-function Item({ margin, children }) {
-  return (
-    <ItemContainer margin={margin}>
-      <div>{children}</div>
-    </ItemContainer>
   );
 }
 
@@ -287,18 +445,5 @@ const Container = styled.div`
 
   & > * {
     margin-right: var(--info-border-width);
-  }
-`;
-
-const ItemContainer = styled.div`
-  margin-top: var(--info-border-width);
-  display: inline;
-  outline: var(--info-border-width) solid var(--info-border-color);
-  margin-left: ${(props) => props.margin};
-  background-color: #fff;
-  color: #000;
-
-  & > div {
-    padding: 0.2rem 0.4rem;
   }
 `;

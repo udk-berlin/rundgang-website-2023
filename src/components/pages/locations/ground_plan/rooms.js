@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
-import { useData } from "@/providers/data";
+import { useData } from "@/providers/data/data";
 
 export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsContainerHeight }) {
   const filter = useFilter()

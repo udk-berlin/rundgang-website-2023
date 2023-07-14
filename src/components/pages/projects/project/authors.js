@@ -6,7 +6,6 @@ const SLIDER_INDEX = 2;
 
 export default function ProjectAuthors({ project, fontSize = 1 }) {
   const slider = useSlider();
-  console.log(project)
   const authors = project?.origin?.authors ? project.origin.authors : [];
   return (
     <ProjectAuthorsContainer
