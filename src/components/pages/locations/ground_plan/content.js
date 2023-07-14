@@ -32,7 +32,7 @@ const LocationsGroundPlanLocationNameContainer = styled.div`
   align-items: center;
   flex-grow: 1;
 
-  padding: 0.2rem 0.4rem;
+  padding: calc(0.2rem + 1px) 0.4rem;
   
   background-color: var(--color-pink);
   color: var(--color-white);

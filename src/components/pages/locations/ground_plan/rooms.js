@@ -45,7 +45,8 @@ function LocationsGroundPlanRoom ({ key, room }) {
   return (
     <LocationsGroundPlanRoomContainer key={key} selected={(filter.room && filter.room.id === room.id)} onClick={handleClick}>
       <div>
-        <FormattedMessage id={roomName.id}/>: {roomName.name}
+        {roomName.id ? <span><FormattedMessage id={roomName.id}/>: </span> : <></>}
+        {roomName.name}
       </div>
     </LocationsGroundPlanRoomContainer>
   )
@@ -54,6 +55,7 @@ function LocationsGroundPlanRoom ({ key, room }) {
 function LocationsGroundPlanRoomsAll () {
   const { projects, locations } = useData()
   const dispatch = useFilterDispatch()
+  const filter = useFilter()
 
   const handleClick = (e) => {
     dispatch(
@@ -65,7 +67,7 @@ function LocationsGroundPlanRoomsAll () {
   }
 
   return (
-    <LocationsGroundPlanRoomContainer key={-1} onClick={handleClick}>
+    <LocationsGroundPlanRoomContainer key={-1} onClick={handleClick} selected={!filter.room}>
       <div>
         <FormattedMessage id={'rooms.all'}/>
       </div>
@@ -73,7 +75,7 @@ function LocationsGroundPlanRoomsAll () {
   )
 }
 
-function roomNameMapperToId(name) {
+export function roomNameMapperToId(name) {
   if (name.startsWith('R-') || name.startsWith('RE-') || name.startsWith('R ') || name.startsWith('RE ')) {
     return {id: 'room', name: name.replace('RE-', '').replace('R-', '').replace('RE ', '').replace('R ', '')}
   } else if (name.startsWith('V-') || name.startsWith('VF-') || name.startsWith('V ') || name.startsWith('VF ')) {
@@ -82,6 +84,8 @@ function roomNameMapperToId(name) {
     return {id: 'stairs', name: name.replace('TH-', '').replace('TPH-', '').replace('TH ', '').replace('TPH ', '')}
   } else if (name.startsWith('TF-') || name.startsWith('TF ')) {
     return {id: 'technic', name: name.replace('TF-', '').replace('TF ', '')}
+  } else if (name === 'Außenvitrine') {
+    return {id: null, name: name}
   } else {
     return {id: 'room', name: name}
   }
@@ -125,8 +129,8 @@ const LocationsGroundPlanRoomContainer = styled.div`
     color: var(--color-white);
   }
 
-  background-color: ${(props) => (props.selected ? 'var(--color-pink)' : 'var(--color-white)')};
-  color: ${(props) => (props.selected ? 'var(--color-white)' : 'var(--color-black)')};
+  background-color: ${({ selected }) => selected ? 'var(--color-pink)' : 'var(--color-white)'};
+  color: ${({ selected }) => selected ? 'var(--color-white)' : 'var(--color-black)'};
 `
 
 function getRooms (floor) {
