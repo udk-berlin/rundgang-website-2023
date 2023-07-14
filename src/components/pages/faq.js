@@ -177,7 +177,7 @@ const FAQS = {
         "</br>",
         "Der Einsatz von professionell ausgebildetem Sicherheitspersonal ist bei öffentlichen Veranstaltungen in der Größenordnung des Rundgangs gesetzlich verpflichtend. Die Aufgaben des Sicherheitsdienstes umfassen den Einlass an der Hardenbergstraße 33 und der Grunewaldstraße 2-5 sowie die Sicherung der Veranstaltung, das heißt ihrer Besucher*innen, ihrer Ausstattung und Infrastruktur. Das Sicherheitspersonal trägt grüne Westen mit der Aufschrift „Sicherheit“. Außerdem gibt es Mitarbeitende, die zur Sicherung des Brandschutzes vor Ort sind. Diese erkennst Du an den roten Westen mit der Aufschrift „Brandschutz“. Für Konfliktsituationen ist ein externes Awarenessteam vor Ort. Dieses erkennst Du an den lila Westen mit der Aufschrift „Awareness“. Das Awarenessteam ist auch beim Einlass am Standort Hardenbergstraße 33 anwesend.",
         "</br>",
-        "Im Vorfeld des Rundgangs wurden die Mitarbeitenden umfassend geschult. Das Handout zum Briefing kann vorab (Der Link folgt hier in der Woche vor dem Rundgang) eingesehen werden.",
+        "Im Vorfeld des Rundgangs wurden die Mitarbeitenden umfassend geschult. Das Handout zum Briefing kann vorab <a href='/assets/faq/UdKBerlin_RG23_BriefingAwareness.pdf'>hier</a> eingesehen werden.",
         "</br>",
         "Aufgabe des Sicherheitspersonals vor Ort ist auch die Unterbindung von Sachbeschädigungen, Vandalismus, Diebstahl sowie die Bewachung und Sicherung von Material und Infrastruktur. Sachbeschädigungen oder Diebstähle sollten dem Sicherheitspersonal oder der Veranstaltungsleitung (<a href='https://rundgang.udk-berlin.de/contact'>Kontakt</a>) gemeldet werden.",
         "</br>",
@@ -352,9 +352,13 @@ const FAQS = {
       title: "Safety",
       texts: [
         "In order to make the event safe for everyone, trained staff will be on site for security, fire safety and the implementation of the awareness concept.",
+        "</br>",
         "The use of professionally trained security personnel is mandatory by law for public events of the size of the Rundgang. The tasks of the security service include admission at Hardenbergstrasse 33 and Grunewaldstrasse 2-5 as well as securing the event, i.e. its visitors, equipment and infrastructure. The security personnel wear green vests with the inscription \"Security\". There are also employees who are on site to ensure fire protection. You can recognize them by their red vests with the inscription \"Brandschutz\". An external awareness team is on site for conflict situations. You can recognize this team by the purple vests with the inscription \"Awareness\". The awareness team is also present at the entrance to the Hardenbergstraße 33 site.",
-        "The employees have received extensive training prior to the Rundgang. The handout on the briefing can be viewed in advance (the link will follow here in the week before the Rundgang).",
+        "</br>",
+        "The employees have received extensive training prior to the Rundgang. The handout on the briefing can be viewed in advance <a href='/assets/faq/UdKBerlin_RG23_BriefingAwareness.pdf'>here</a>.",
+        "</br>",
         "The task of the security personnel on site is also to prevent damage to property, vandalism, theft and to guard and secure material and infrastructure. Damage to property or theft should be reported to the security personnel or the event management (<a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/kernteam-udk-berlin-rundgang-2023/'>contact</a>).",
+        "</br>",
         "This year, the company <a href='https://boretti-solutions.de/'>Boretti</a> Solutions has been commissioned to provide security for the event.",
       ]
     },
