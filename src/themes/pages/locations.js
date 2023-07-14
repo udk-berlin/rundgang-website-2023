@@ -6,8 +6,8 @@ export const breakpoints = {
 }
 
 const height =  {
-  l: `calc(100vh - ${layoutLTheme.footer.height} - ${layoutLTheme.header.bar.height} - ${layoutLTheme.header.filter.bar.height} - 2 * ${baseLTheme.borderWidth})`,
-  m: `calc(100vh - ${layoutMTheme.footer.height} - ${layoutMTheme.header.bar.height} - ${layoutMTheme.header.filter.bar.height} - 2 * ${layoutMTheme.borderWidth})`,
+  l: `calc(100vh - ${layoutLTheme.footer.height} - ${layoutLTheme.header.height})`,
+  m: `calc(100vh - ${layoutMTheme.footer.height} - ${layoutMTheme.header.height})`,
 }
 
 const top = {
@@ -34,7 +34,7 @@ export const locationsLTheme = {
     top: top.l,
     gridTemplateColumns: `${layoutLTheme.footer.gridTemplateColumn1} ${layoutLTheme.footer.gridTemplateColumn2} ${layoutLTheme.footer.gridTemplateColumn3}`,
     info: {
-      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1})`,
+      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1} - 2 * ${baseLTheme.borderWidth})`,
     },
     content: {
       height: '100%',
@@ -49,7 +49,7 @@ export const locationsLTheme = {
     }
   },
   program: {
-    height: height.l,
+    height: `calc(${height.l} - 2 * ${baseLTheme.borderWidth})`,
     width: '',
     position: 'absolute',
     top: top.l,
@@ -75,13 +75,17 @@ export const locationsLTheme = {
     sliderOffset: 4,
   },
   media: {
+    thumbnail: {
+      height: 'auto',
+      width: '100%'
+    },
     image: {
       height: 'auto',
       width: '100%'
     },
-
     placeholder: {
       height: "100%",
+      width: "auto",
     },
   },
 };
@@ -140,13 +144,17 @@ export const locationsMTheme = {
     sliderOffset: 4,
   },
   media: {
+    thumbnail: {
+      height: 'auto',
+      width: '100%'
+    },
     image: {
       height: 'auto',
       width: '100%'
     },
-
     placeholder: {
       height: "100%",
+      width: "auto",
     },
   },
 };

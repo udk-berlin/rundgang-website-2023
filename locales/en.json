@@ -1,6 +1,7 @@
 {
   "calender": "Calendar",
   "contact": "Contact",
+  "corridor": "Corridor",
   "error": "Error",
   "error.message": "Please reload the page.",
   "faq": "FAQ",
@@ -19,5 +20,7 @@
   "room": "Room",
   "rooms.all": "All rooms",
   "search": "Search...",
+  "stairs": "Stairs",
+  "technic": "Technic",
   "timeline": "Timeline"
 }

@@ -2,51 +2,27 @@ import { getFormatsFilters } from '@/utils/api/formats'
 import { getStructuresFilters } from "@/utils/api/structures";
 import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/program'
 
+import { FilterProvider } from "@/providers/filter";
+
 import Page from "@/components/pages/page";
 import Program from "@/components/pages/program/program";
-import { FilterProvider } from "@/providers/filter";
 import { SavedProjectsProvider } from '@/providers/saved_projects'
-import {gql, useQuery} from "@apollo/client";
+
 import LoadingLayout from "@/components/layout/loading";
 import React, {useState} from "react";
-
-const PROJECTS_QUERY = gql`
-  {
-    items {
-      name
-      id
-      allocation {
-        temporal {
-          start
-          end
-        }
-      }
-      origin {
-        authors {
-          id
-          name
-        }
-      }
-      parents {
-        id
-      }
-      thumbnail
-      thumbnail_full_size
-    }
-  }
-`;
+import { DataProvider, useData } from "@/providers/data/data";
 
 export async function getStaticProps () {
   const formats = await getProgramFormats()
-  const formatsFilters = await getFormatsFilters()
+  const formatFilters = await getFormatsFilters()
 
   const structures = await getProgramStructures()
-  const structuresFilters = await getStructuresFilters()
+  const structureFilters = await getStructuresFilters()
 
-  return { props: { formats, formatsFilters, structures, structuresFilters} }
+  return { props: { formats, formatFilters, structures, structureFilters} }
 }
 
-export default function ProgramPage ({ formats, formatsFilters, structures, structuresFilters }) {
+export default function ProgramPage ({ formats, formatFilters, structures, structureFilters }) {
   const [isLinkClicked, setIsLinkClicked] = useState(false)
 
   return (
@@ -54,29 +30,32 @@ export default function ProgramPage ({ formats, formatsFilters, structures, stru
       {
         isLinkClicked ?
           <LoadingLayout /> :
-          <SavedProjectsProvider>
-            {<ProgramPageContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}/>}
-          </SavedProjectsProvider>
+          <DataProvider>
+            <SavedProjectsProvider>
+              <ProgramPageContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatFilters={formatFilters} structureFilters={structureFilters}/>
+            </SavedProjectsProvider>
+          </DataProvider>
       }
     </Page>
   )
 }
 
-function ProgramPageContainer ({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
-  const projects = useQuery(PROJECTS_QUERY);
+function ProgramPageContainer ({ setIsLinkClicked, formats, formatFilters, structures, structureFilters }) {
+  const { projects } = useData()
 
   return (
     <>
       {
-        projects.loading || projects.error ?
-          (
-            <LoadingLayout />
-          ) :
-          (
-            <FilterProvider projects={projects.data.items} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters} useFast={true}>
-              <Program setIsLinkClicked={setIsLinkClicked} />
-            </FilterProvider>
-          )
+        projects  ?
+          <FilterProvider
+            projects={projects}
+            structures={structures}
+            formats={formats}
+            formatFilters={formatFilters}
+            structureFilters={structureFilters}>
+            <Program setIsLinkClicked={setIsLinkClicked} />
+          </FilterProvider>
+          : <LoadingLayout />
       }
     </>
   )

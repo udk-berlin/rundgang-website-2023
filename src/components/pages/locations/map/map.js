@@ -3,8 +3,9 @@ import { createRoot } from "react-dom/client";
 import maplibregl from "maplibre-gl";
 import styled from "styled-components";
 
-import { useFilter, useFilterDispatch } from "@/providers/filter";
+import { useFilterDispatch } from "@/providers/filter";
 import ResponsiveMarker from "@/components/pages/locations/map/marker";
+import {useData} from "@/providers/data/data";
 
 const MAP_CONFIGURATION = {
   style:
@@ -26,7 +27,7 @@ const LOCATION_ID_TO_MAX_ZOOM = {
   '!YIwQSiHDpoiNHDMWmC:content.udk-berlin.de': 14.7,
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": 13.7,
   "!GFauydmVRlpqvDETXH:content.udk-berlin.de": 14.66,
-  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': 15.2,
+  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': 15.2, //!RpTarLRqYYIdDCBLyV:content.udk-berlin.de
   "!eVjUBtkIgDQkQSKVxm:content.udk-berlin.de": 15.45,
   //'!fwsuOeorRCZtTqwukc:content.udk-berlin.de': 16.8,
   "!OkEblSLtaWAObRcCHm:content.udk-berlin.de": 15.6,
@@ -36,6 +37,7 @@ const LOCATION_ID_TO_MAX_ZOOM = {
   //'!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': 16,
   //'!bwyfqxrdHCbwOYLLgp:content.udk-berlin.de': 14.4,
   //'!jocCvZKGntdCmvmmUG:content.udk-berlin.de': 15.2,
+  '!RpTarLRqYYIdDCBLyV:content.udk-berlin.de': 15.2
 };
 
 const LOCATION_ID_TO_LNG_LAT = {
@@ -51,7 +53,7 @@ const LOCATION_ID_TO_LNG_LAT = {
     lng: 13.3588243,
     lat: 52.4908045,
   },
-  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': {lng: 13.32859, lat: 52.50939},
+  //'!cUpdRzxCGmLkwfrUeq:content.udk-berlin.de': {lng: 13.32859, lat: 52.50939}, //!RpTarLRqYYIdDCBLyV:content.udk-berlin.de
   "!eVjUBtkIgDQkQSKVxm:content.udk-berlin.de": {
     lng: 13.329011660461106,
     lat: 52.513815995810795,
@@ -67,13 +69,14 @@ const LOCATION_ID_TO_LNG_LAT = {
   //'!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': {lng: 13.3748, lat: 52.5517},
   //'!bwyfqxrdHCbwOYLLgp:content.udk-berlin.de': {lng: 13.322555087168652, lat: 52.51741297926878},
   //'!jocCvZKGntdCmvmmUG:content.udk-berlin.de': {lng: 13.3281, lat: 52.50895},
+  "!RpTarLRqYYIdDCBLyV:content.udk-berlin.de": { lng: 13.329100213983617, lat: 52.50967878838072 },
 };
 
 const LOCATION_ID_TO_ORDER_MAPPER = {
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": -1,
 };
 
-export default function LocationsMap({ locations, locationSelected = false }) {
+export default function LocationsMap({ projects, locations, locationSelected = false }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const dispatch = useFilterDispatch();
@@ -108,75 +111,83 @@ export default function LocationsMap({ locations, locationSelected = false }) {
     });
 
     mapRef.current.on("load", () => {
-      mapRef.current.resize();
-      Object.values(locations)
-        .sort(sortById)
-        .forEach((location) => {
-          markersCache["groundPlan"][location.id] = buildMarker(
-            mapRef,
-            location,
-            markersCache["groundPlan"],
-            false
-          );
+        mapRef.current.resize();
+        Object.values(locations)
+          .sort(sortById)
+          .forEach((location) => {
+            if (location.id in LOCATION_ID_TO_LNG_LAT) {
+              markersCache["groundPlan"][location.id] = buildMarker(
+                mapRef,
+                location,
+                markersCache["groundPlan"],
+                false
+              );
+            }
+          });
+
+        Object.values(locations)
+          .sort(sortById)
+          .forEach((location) => {
+            if (location.id in LOCATION_ID_TO_LNG_LAT) {
+              markersCache["text"][location.id] = buildMarker(
+                mapRef,
+                location,
+                markersCache["text"],
+                true
+              );
+            }
+          });
+
+        mapRef.current.on("zoom", () => {
+          setTimeout(() => {
+            let zoom = mapRef.current.getZoom();
+            if (zoom > 13.6) {
+              Object.values(locations)
+                .sort(sortById)
+                .forEach((location) => {
+                  const scale = zoom - LOCATION_ID_TO_MAX_ZOOM[location.id];
+                  if (
+                    scale !== markersCache["groundPlan"][location.id].scale &&
+                    scale > 0
+                  ) {
+                    markersCache["groundPlan"][location.id].scale = scale;
+                    markersCache["groundPlan"][location.id].markerRoot.render(
+                      <ResponsiveMarker location={location} scale={scale} />
+                    );
+                  } else if (
+                    markersCache["groundPlan"][location.id].scale > 0 &&
+                    scale <= 0
+                  ) {
+                    markersCache["groundPlan"][location.id].scale = scale;
+                    markersCache["groundPlan"][location.id].markerRoot.render(
+                      <ResponsiveMarker location={location} />
+                    );
+                  }
+                });
+            }
+          }, 500);
         });
 
-      Object.values(locations)
-        .sort(sortById)
-        .forEach((location) => {
-          markersCache["text"][location.id] = buildMarker(
-            mapRef,
-            location,
-            markersCache["text"],
-            true
-          );
-        });
+        mapRef.current.on("click", (e) => {
+          if (e.originalEvent.target.id) {
+            const id = e.originalEvent.target.id.replaceAll("marker-", "");
 
-      mapRef.current.on("zoom", () => {
-        setTimeout(() => {
-          let zoom = mapRef.current.getZoom();
-          if (zoom > 13.6) {
-            Object.values(locations)
-              .sort(sortById)
-              .forEach((location) => {
-                const scale = zoom - LOCATION_ID_TO_MAX_ZOOM[location.id];
-                if (
-                  scale !== markersCache["groundPlan"][location.id].scale &&
-                  scale > 0
-                ) {
-                  markersCache["groundPlan"][location.id].scale = scale;
-                  markersCache["groundPlan"][location.id].markerRoot.render(
-                    <ResponsiveMarker location={location} scale={scale} />
-                  );
-                } else if (
-                  markersCache["groundPlan"][location.id].scale > 0 &&
-                  scale <= 0
-                ) {
-                  markersCache["groundPlan"][location.id].scale = scale;
-                  markersCache["groundPlan"][location.id].markerRoot.render(
-                    <ResponsiveMarker location={location} />
-                  );
-                }
-              });
+            dispatch({
+              type: "filter-location",
+              location: locations[id],
+              locations: locations,
+              projects: projects
+            });
+          } else {
+            dispatch({
+              type: "all-locations",
+              locations: locations,
+              projects: projects
+            });
           }
-        }, 500);
+        });
       });
-
-      mapRef.current.on("click", (e) => {
-        if (e.originalEvent.target.id) {
-          const id = e.originalEvent.target.id.replaceAll("marker-", "");
-
-          dispatch({
-            type: "filter-location",
-            location: locations[id],
-          });
-        } else {
-          dispatch({
-            type: "all-locations",
-          });
-        }
-      });
-    });
-  });
+  }, [locations, projects]);
 
   return <MapContainer ref={mapContainerRef} locationSelected={locationSelected} />;
 }
@@ -210,14 +221,8 @@ function buildMarker(mapRef, location, cache, useTextBox) {
     <ResponsiveMarker location={location} useTextBox={useTextBox} />
   );
 
-  let lng =
-    location.id in LOCATION_ID_TO_LNG_LAT
-      ? LOCATION_ID_TO_LNG_LAT[location.id].lng
-      : location.lng;
-  let lat =
-    location.id in LOCATION_ID_TO_LNG_LAT
-      ? LOCATION_ID_TO_LNG_LAT[location.id].lat
-      : location.lat;
+  let { lng, lat } = LOCATION_ID_TO_LNG_LAT[location.id]
+
   if (useTextBox) {
     lng = lng - 0.0002;
     lat = lat - 0.0002;

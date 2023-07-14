@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
+import { useData } from "@/providers/data/data";
 
 export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsContainerHeight }) {
   const filter = useFilter()
@@ -25,6 +26,7 @@ export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsCon
 }
 
 function LocationsGroundPlanRoom ({ key, room }) {
+  const { projects, locations } = useData()
   const filter = useFilter()
   const dispatch = useFilterDispatch()
 
@@ -32,37 +34,61 @@ function LocationsGroundPlanRoom ({ key, room }) {
     dispatch(
       {
         type: 'filter-room',
-        room: room
+        room: room,
+        projects: projects,
+        locations: locations
       })
   }
+
+  const roomName = roomNameMapperToId(room.name)
 
   return (
     <LocationsGroundPlanRoomContainer key={key} selected={(filter.room && filter.room.id === room.id)} onClick={handleClick}>
       <div>
-        <FormattedMessage id={'room'}/>: {room.name}
+        {roomName.id ? <span><FormattedMessage id={roomName.id}/>: </span> : <></>}
+        {roomName.name}
       </div>
     </LocationsGroundPlanRoomContainer>
   )
 }
 
 function LocationsGroundPlanRoomsAll () {
-  const filter = useFilter()
+  const { projects, locations } = useData()
   const dispatch = useFilterDispatch()
+  const filter = useFilter()
 
   const handleClick = (e) => {
     dispatch(
       {
-        type: 'all-rooms'
+        type: 'all-rooms',
+        projects: projects,
+        locations: locations
       })
   }
 
   return (
-    <LocationsGroundPlanRoomContainer key={-1} onClick={handleClick}>
+    <LocationsGroundPlanRoomContainer key={-1} onClick={handleClick} selected={!filter.room}>
       <div>
         <FormattedMessage id={'rooms.all'}/>
       </div>
     </LocationsGroundPlanRoomContainer>
   )
+}
+
+export function roomNameMapperToId(name) {
+  if (name.startsWith('R-') || name.startsWith('RE-') || name.startsWith('R ') || name.startsWith('RE ')) {
+    return {id: 'room', name: name.replace('RE-', '').replace('R-', '').replace('RE ', '').replace('R ', '')}
+  } else if (name.startsWith('V-') || name.startsWith('VF-') || name.startsWith('V ') || name.startsWith('VF ')) {
+    return {id: 'corridor', name: name.replace('VF-', '').replace('V-', '').replace('VF ', '').replace('V ', '')}
+  } else if (name.startsWith('TH-') || name.startsWith('TPH-') || name.startsWith('TH ') || name.startsWith('TPH ')) {
+    return {id: 'stairs', name: name.replace('TH-', '').replace('TPH-', '').replace('TH ', '').replace('TPH ', '')}
+  } else if (name.startsWith('TF-') || name.startsWith('TF ')) {
+    return {id: 'technic', name: name.replace('TF-', '').replace('TF ', '')}
+  } else if (name === 'Außenvitrine') {
+    return {id: null, name: name}
+  } else {
+    return {id: 'room', name: name}
+  }
 }
 
 const LocationsGroundPlanRoomsContainer = styled.div`
@@ -103,8 +129,8 @@ const LocationsGroundPlanRoomContainer = styled.div`
     color: var(--color-white);
   }
 
-  background-color: ${(props) => (props.selected ? 'var(--color-pink)' : 'var(--color-white)')};
-  color: ${(props) => (props.selected ? 'var(--color-white)' : 'var(--color-black)')};
+  background-color: ${({ selected }) => selected ? 'var(--color-pink)' : 'var(--color-white)'};
+  color: ${({ selected }) => selected ? 'var(--color-white)' : 'var(--color-black)'};
 `
 
 function getRooms (floor) {
