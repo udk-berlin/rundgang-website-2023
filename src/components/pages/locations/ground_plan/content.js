@@ -32,7 +32,7 @@ const LocationsGroundPlanLocationNameContainer = styled.div`
   align-items: center;
   flex-grow: 1;
 
-  padding: 0.2rem 0.4rem;
+  padding: calc(0.2rem + 1px) 0.4rem;
   
   background-color: var(--color-pink);
   color: var(--color-white);
@@ -55,10 +55,10 @@ const LocationsGroundPlanLocationContainer = styled.div`
 
 const LocationsGroundPlanContentContainer = styled.div`
   position: relative;
-  
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+
+  width: calc(100% + var(--border-width));
+  min-width: calc(100% + var(--border-width));
+  max-width: calc(100% + var(--border-width));
 
   height: ${({ theme })=> theme.groundPlan.content.height};
   min-height: ${({ theme })=> theme.groundPlan.content.height};

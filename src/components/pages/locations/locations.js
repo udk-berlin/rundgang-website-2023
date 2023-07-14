@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 
-import Layout from "@/components/layout/layout";
 import LocationsMap from "@/components/pages/locations/map/map";
 import LocationsProgram from "@/components/pages/locations/program";
 import LocationsGroundPlan from "@/components/pages/locations/ground_plan/ground_plan";
@@ -9,11 +8,13 @@ import LocationsFloorPlanPopup from "@/components/pages/locations/floor_plan/pop
 import { locationsLTheme, locationsMTheme } from "@/themes/pages/locations";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/pages/locations";
+import {useData} from "@/providers/data/data";
 
-export default function Locations({ locations }) {
+export default function Locations() {
   const [locationSelected, setLocationSelected] = useState(false)
   const [responsiveTheme, setResponsiveTheme] = useState(locationsLTheme);
   const windowSize = useWindowSize();
+  const { projects, locations } = useData()
 
   useEffect(() => {
     if (windowSize?.width <= breakpoints.m) {
@@ -26,13 +27,9 @@ export default function Locations({ locations }) {
   return (
     <ThemeProvider theme={responsiveTheme}>
       <LocationsContainer>
-        <LocationsMap locations={locations} locationSelected={locationSelected} />
+        {locations && projects ? <LocationsMap projects={projects} locations={locations} locationSelected={locationSelected} /> : <></>}
         <LocationsGroundPlan />
-        {
-          responsiveTheme.id === 'l' ?
-            <LocationsFloorPlanPopup /> :
-            <></>
-        }
+        {responsiveTheme.id === 'l' ? <LocationsFloorPlanPopup /> : <></>}
         <LocationsProgram setLocationSelected={setLocationSelected} responsiveTheme={responsiveTheme} />
       </LocationsContainer>
     </ThemeProvider>

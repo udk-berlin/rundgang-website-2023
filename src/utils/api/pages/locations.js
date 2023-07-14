@@ -1,14 +1,5 @@
-import { getLocations } from "@/utils/api/locations";
 import { getStructures } from "@/utils/api/structures";
 import { getFormats } from '@/utils/api/formats'
-
-export async function getLocationsLocations() {
-  const locationsLocations = {}
-  const locations = await getLocations()
-
-  filter(Object.values(locations)).forEach(location => locationsLocations[location.id] = location)
-  return locationsLocations
-}
 
 export async function getLocationsFormats() {
   const programFormats = {}

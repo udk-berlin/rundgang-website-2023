@@ -1,6 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
-import filterReducer from "@/providers/filter_reducer";
-import fastFilterReducer from "@/providers/fast_filter_reducer";
+import { createContext, useContext, useReducer, useState, useEffect } from 'react'
 
 const FilterContext = createContext(null)
 const FilterDispatchContext = createContext(null)
@@ -13,28 +11,21 @@ function shuffleArray(array) {
 
   return array
 }
-export function FilterProvider ({ projects, locations = {}, formats, formatsFilters, structures, structuresFilters, children, useFast = false }) {
-  let reducer
-
-  if (useFast) {
-    projects = [...projects]
-    shuffleArray(projects)
-    reducer = fastFilterReducer
-  } else {
-    reducer = filterReducer
-  }
+export function FilterProvider ({ projects, locations = null, format =  null, formats, formatFilters, structure = null, structures, structureFilters, children }) {
+  projects = [...projects]
+  shuffleArray(projects)
 
   const [filter, dispatch] = useReducer(
-    reducer,
+    filterReducer,
     {
-      projects: projects,
-      filteredProjects: projects,
-      locations: locations,
+      filteredProjects: initialFilter(projects, format, formats, structure, structures),
       filteredLocations: locations,
+      format: format,
       formats: formats,
-      formatsFilters: formatsFilters,
+      formatFilters: formatFilters,
+      structure: structure,
       structures: structures,
-      structuresFilters: structuresFilters
+      structureFilters: structureFilters
     }
   )
 
@@ -53,4 +44,498 @@ export function useFilter () {
 
 export function useFilterDispatch () {
   return useContext(FilterDispatchContext)
+}
+
+function filterReducer (state, action) {
+  switch (action.type) {
+    case 'loaded': {
+      return {
+        ...state,
+        filteredProjects: action.projects,
+        filteredLocations: action.location,
+      }
+    }
+    case 'filter-location': {
+      let filteredLocations = filterByNodeId(action.locations, action.location.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(action.projects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+
+        location: action.location
+      }
+    }
+    case 'all-locations': {
+      let filteredLocations = action.locations
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(action.projects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+        filteredLocations: state.locations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'filter-floor': {
+      let filteredLocations = filterByNodeId(action.locations, action.floor.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(action.projects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        floor: action.floor,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'all-floors': {
+      let filteredLocations = filterByNodeId(action.locations, state.location.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(action.projects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'filter-room': {
+      let filteredLocations = filterByNodeId(action.locations, action.room.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(action.projects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'all-rooms': {
+      let filteredLocations = filterByNodeId(action.locations, state.floor.id)
+      let itemNodeIds = getItemNodeIds(filteredLocations)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      filteredLocations = filterByNodeIds(filteredLocations, itemNodeIds)
+      const filteredProjects = filterProjectsByNodeIds(action.projects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        floor: state.floor,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'filter-structure': {
+      let filteredProjects = action.projects
+
+      const filteredStructures = filterByNodeId(state.structures, action.id)
+      let itemNodeIds = getItemNodeIds(filteredStructures)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredFormats))
+      }
+
+      let filteredLocations
+
+      if (action.locations) {
+        filteredLocations = filterByNodeIds(action.locations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
+      }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: action.id,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'all-structures': {
+      let filteredProjects = action.projects
+      let itemNodeIds = getProjectsNodeIds(filteredProjects)
+
+      if (state.format) {
+        const filteredFormats = filterByNodeId(state.formats, state.format)
+        itemNodeIds = getItemNodeIds(filteredFormats)
+      }
+
+      let filteredLocations
+
+      if (action.locations) {
+        filteredLocations = filterByNodeIds(action.locations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
+      }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: state.format,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'filter-format': {
+      let filteredProjects = action.projects
+
+      const filteredFormats = filterByNodeId(state.formats, action.id)
+      let itemNodeIds = getItemNodeIds(filteredFormats)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredStructures))
+      }
+
+      let filteredLocations
+
+      if (action.locations) {
+        filteredLocations = filterByNodeIds(action.locations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
+      }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        format: action.id,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'all-formats': {
+      let filteredProjects = action.projects
+      let itemNodeIds = getProjectsNodeIds(filteredProjects)
+
+      if (state.structure) {
+        const filteredStructures = filterByNodeId(state.structures, state.structure)
+        itemNodeIds = getItemNodeIds(filteredStructures)
+      }
+
+      let filteredLocations
+
+      if (action.locations) {
+        filteredLocations = filterByNodeIds(action.locations, itemNodeIds)
+
+        if (state.room) {
+          filteredLocations = filterByNodeId(filteredLocations, state.room.id)
+        } else if (state.floor) {
+          filteredLocations = filterByNodeId(filteredLocations, state.floor.id)
+        } else if (state.location) {
+          filteredLocations = filterByNodeId(filteredLocations, state.location.id)
+        }
+
+        itemNodeIds = filterItemNodeIds(itemNodeIds, getItemNodeIds(filteredLocations))
+      }
+
+      filteredProjects = filterProjectsByNodeIds(filteredProjects, itemNodeIds)
+
+      return {
+        filteredProjects: filteredProjects,
+
+        location: state.location,
+        floor: state.floor,
+        room: action.room,
+        filteredLocations: filteredLocations,
+
+        formats: state.formats,
+        formatFilters: state.formatFilters,
+
+        structures: state.structures,
+        structure: state.structure,
+        structureFilters: state.structureFilters,
+      }
+    }
+    case 'set-saved-projects': {
+      return {
+        ...state,
+        filteredProjects: filterProjectsByNodeIds(state.filteredProjects, action.savedProjectIds)
+      }
+    }
+    case 'remove-saved-project': {
+      return {
+        ...state,
+        filteredProjects: rejectProjectsByNodeId(state.filteredProjects, action.savedProjectId)
+      }
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type)
+    }
+  }
+}
+
+function initialFilter (projects, format, formats, structure, structures) {
+  if (format) {
+    return initialFilterByFormat(projects, format, formats)
+  } else if (structure) {
+    return initialFilterByStructure(projects, structure, structures)
+  } else {
+    return projects
+  }
+}
+
+function initialFilterByFormat (projects, format, formats) {
+  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(formats, format)))
+}
+
+function initialFilterByStructure (projects, structure, structures) {
+  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(structures, structure)))
+}
+
+
+function filterByNodeId(tree, nodeId) {
+  const resultTree = {}
+
+  const getChildren = (result, object) => {
+    if (object.id === nodeId) {
+      result.push(object);
+      return result;
+    }
+    const children = Object.values(object.children).reduce(getChildren, []);
+    if (children.length) result.push({ ...object, children });
+
+    return result;
+  };
+
+  Object.values(tree).reduce(getChildren, []).forEach(subTree => resultTree[subTree.id] = subTree)
+  return resultTree;
+}
+
+function getItemNodeIds(tree) {
+  const itemIds = []
+
+  const getChildren = (current) => {
+    Object.values(current.children).forEach(child => {
+      if (child.type === 'item') {
+        itemIds.push(child.id)
+      } else {
+        getChildren(child)
+      }
+    })
+  };
+
+  Object.values(tree).forEach(treePart => {
+    getChildren(treePart)
+  })
+
+  return itemIds
+}
+
+function getProjectsNodeIds(projects) {
+  return projects.map(project => project.id)
+}
+
+function filterItemNodeIds(itemNodeIdsA, itemNodeIdsB) {
+  return itemNodeIdsA.filter(itemNodeId => itemNodeIdsB.includes(itemNodeId));
+}
+
+function filterProjectsByNodeIds(projects, nodeIds) {
+  if (nodeIds) {
+    return projects.filter(project => nodeIds.includes(project.id))
+  } else {
+    return projects
+  }
+}
+
+function rejectProjectsByNodeId(projects, nodeId) {
+  return projects.filter(project => project !== nodeId)
+}
+
+function filterByNodeIds(tree, nodeIds) {
+  const resultTree = {}
+
+  const getChildren = (result, object) => {
+    if (nodeIds.includes(object.id)) {
+      result.push(object);
+      return result;
+    }
+    const children = Object.values(object.children).reduce(getChildren, []);
+    if (children.length) result.push({ ...object, children });
+
+    return result;
+  };
+
+  Object.values(tree).reduce(getChildren, []).forEach(subTree => resultTree[subTree.id] = subTree)
+  return resultTree;
 }

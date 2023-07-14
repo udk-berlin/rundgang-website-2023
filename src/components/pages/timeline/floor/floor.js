@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
 import TimelineLocationRooms from '@/components/pages/timeline/room/rooms'
+import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 
 export default function TimelineLocationFloor({ floor }) {
   const rooms = Object.values(floor.children).filter(child => child.template === 'location-room')
+  const projectIds = Object.values(floor.children).filter(child => child.type === 'item').map(child => child.id)
 
   return (
     <>
@@ -13,6 +15,7 @@ export default function TimelineLocationFloor({ floor }) {
       </FloorContainer>
 
       <TimelineLocationRooms rooms={rooms} />
+      {projectIds.length > 0 ? <TimelineProjectsGroups projectIds={projectIds} /> : <></>}
     </>
   );
 }

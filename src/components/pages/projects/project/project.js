@@ -10,7 +10,6 @@ import ProjectMedia from "@/components/pages/projects/project/media";
 
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
-import { getRenderJsonUrl, fetcher } from "@/utils/api/api";
 import useWindowSize from "@/hooks/window_size";
 import {
   projectBreakpoints,
@@ -18,80 +17,16 @@ import {
   projectMTheme,
   projectSTheme,
 } from "@/themes/pages/project";
-import { gql, useQuery } from "@apollo/client";
 
 const NUMBER_OF_SLIDER_STATES = 5
 
-function buildObjects(res) {
-  const obj = {};
+import { useData } from "@/providers/data/data";
 
-  if (res && res.data && res.data.contexts) {
-    res.data.contexts.forEach((context) => {
-      obj[context.id] = context;
-    });
-  }
-
-  return obj;
-}
-
-const CONTEXTS_QUERY = gql`
-  {
-    contexts {
-      id
-      name
-      template
-      parents {
-        id
-      }
-    }
-  }
-`;
-
-export default function Project({ id, setIsLinkClicked }) {
-  const projectQuery = gql`
-{
-	item(id: "${id}") {
-    name,
-    thumbnail,
-    thumbnail_full_size,
-    allocation {
-      temporal {
-        start
-        end
-      }
-    }
-    origin {
-      authors {
-        id
-        name
-      }
-    }  
-    parents {
-     id
-    }
-    description {
-      language
-      content
-    } 
-	}
-}
-`;
-
+export default function Project({ setIsLinkClicked }) {
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
-
-  const project = useQuery(projectQuery);
-  let contextsResponse = useQuery(CONTEXTS_QUERY);
-  const contexts = useMemo(
-    () => buildObjects(contextsResponse),
-    [contextsResponse]
-  );
-
-  const media = useSWR(
-    getRenderJsonUrl(id),
-    fetcher
-  );
+  const { project } = useData(true)
 
   useEffect(() => {
     if (windowSize?.width <= projectBreakpoints.s) {
@@ -115,31 +50,19 @@ export default function Project({ id, setIsLinkClicked }) {
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>
-          {project.loading || project.error ? (
-            <div>Loading...</div>
-          ) : (
-            <>
-              <ProjectMedia
-                project={project.data.item}
-                media={media?.data}
-                contexts={contexts}
-                infoGridPos={infoGridPos}
-              />
-              <InfoContainer>
-                <ProjectTitle project={project.data.item} link={false} />
-                <ProjectAuthors project={project.data.item} fontSize={1} />
-                {infoGridPos ? (
-                  <></>
-                ) : (
-                  <InfoGrid project={project.data.item} contexts={contexts} />
-                )}
-                <ProjectText
-                  project={project.data.item}
-                  media={media?.data}
-                />
-              </InfoContainer>
-            </>
-          )}
+          {
+            project ?
+              <>
+                <ProjectMedia project={project} infoGridPos={infoGridPos}/>
+                <InfoContainer>
+                  <ProjectTitle project={project} link={false} />
+                  <ProjectAuthors project={project} fontSize={1} />
+                  {infoGridPos ? <></> : <InfoGrid project={project} forProjectPage={true} />}
+                  <ProjectText />
+                </InfoContainer>
+              </> :
+              <div>Loading...</div>
+          }
         </ProjectContainer>
       </ThemeProvider>
     </Layout>

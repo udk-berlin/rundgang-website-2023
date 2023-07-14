@@ -14,7 +14,11 @@ export default function ProjectAuthors({ project, fontSize = 1 }) {
       hasAuthors={authors.length > 0}
     >
       {authors.map((author) => (
-        <span>{author.name}</span>
+        <>
+          {
+            author ? <span>{author.name}</span> : <></>
+          }
+        </>
       ))}
     </ProjectAuthorsContainer>
   );

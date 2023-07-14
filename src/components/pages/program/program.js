@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Masonry from "react-responsive-masonry";
-import { useQuery, gql } from "@apollo/client";
 
 import { useFilter } from "@/providers/filter";
 
@@ -16,38 +15,9 @@ import {
 } from "@/themes/pages/program";
 import LoadingLayout from "@/components/layout/loading";
 
-const CONTEXTS_QUERY = gql`
-{
-  contexts {
-    id
-    name
-    template
-    parents {
-      id
-    }
-  }
-}
-`;
-
-function buildObjects(res) {
-  const obj = {}
-
-  if (res && res.data && res.data.contexts) {
-    res.data.contexts.forEach(context => {
-      obj[context.id] = context
-    })
-  }
-
-  return obj
-}
-
 export default function Program({ setIsLinkClicked }) {
-  let contextsResponse = useQuery(CONTEXTS_QUERY);
-  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
-
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
-
   const filter = useFilter();
 
   useEffect(() => {
@@ -71,8 +41,8 @@ export default function Program({ setIsLinkClicked }) {
                   <Masonry
                     columnsCount={responsiveTheme.MASONRY_COLUMNS}
                     gutter={responsiveTheme.MASONRY_GUTTER}>
-                    {filter.filteredProjects.map((project) => (
-                      <ProjectCell project={project} contexts={contexts} />
+                    {filter.filteredProjects.map((project, index) => (
+                      <ProjectCell project={project} index={index}/>
                     ))}
                   </Masonry>
                 </ProgramContainer>
