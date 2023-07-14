@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
+import { useData } from "@/providers/data/data";
 
 export default function LocationsGroundPlanFloors ({ setLocationsGroundPlanFloorsContainerHeight }) {
   const ref = useRef();
@@ -24,6 +25,7 @@ export default function LocationsGroundPlanFloors ({ setLocationsGroundPlanFloor
 }
 
 function LocationsGroundPlanFloor ({ key, floor }) {
+  const { projects, locations } = useData()
   const filter = useFilter()
   const dispatch = useFilterDispatch()
 
@@ -31,7 +33,9 @@ function LocationsGroundPlanFloor ({ key, floor }) {
     dispatch(
       {
         type: 'filter-floor',
-        floor: floor
+        floor: floor,
+        projects: projects,
+        locations: locations
       })
   }
 
@@ -45,13 +49,16 @@ function LocationsGroundPlanFloor ({ key, floor }) {
 }
 
 function LocationsGroundPlanFloorAll () {
+  const { projects, locations } = useData()
   const filter = useFilter()
   const dispatch = useFilterDispatch()
 
   const handleClick = (e) => {
     dispatch(
       {
-        type: 'all-floors'
+        type: 'all-floors',
+        projects: projects,
+        locations: locations
       })
   }
 

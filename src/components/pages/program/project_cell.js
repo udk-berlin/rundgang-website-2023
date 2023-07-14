@@ -8,14 +8,14 @@ import {
 } from "@/providers/saved_projects";
 
 import ProjectLink from "@/components/pages/projects/project/link";
-import ProjectImage from "@/components/pages/projects/project/media";
+import { ProjectThumbnail } from "@/components/pages/projects/project/media";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/theme";
 
-export default function ProjectCell({ project, contexts }) {
+export default function ProjectCell({ project, index }) {
   const [cellHovered, setCellHovered] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ export default function ProjectCell({ project, contexts }) {
       onMouseLeave={() => setCellHovered(false)}
     >
       <ProjectLink project={project}>
-        <ProjectImage project={project} />
+        <ProjectThumbnail project={project} index={index} />
       </ProjectLink>
 
       <SVGOverlay
@@ -35,7 +35,7 @@ export default function ProjectCell({ project, contexts }) {
       />
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
-      <InfoGrid project={project} contexts={contexts} />
+      <InfoGrid project={project} />
     </ProjectCellContainer>
   )
 }

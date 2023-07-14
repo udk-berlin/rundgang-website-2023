@@ -99,8 +99,8 @@ export const timelineLTheme = {
     marginBottom: "40px",
   },
   floor: {
-    left: `calc(calc(${timelineWidths.l} / ${NUMBER_OF_HOURS}) / 2)`,
-    width: `calc(100vw - calc(${timelineWidths.m} / ${NUMBER_OF_HOURS}) / 2)`,
+    left: `calc(${timelineWidths.l} / ${NUMBER_OF_HOURS} / 2)`,
+    width: `100vw`,
     borderLeft: "2px solid black",
   },
 };

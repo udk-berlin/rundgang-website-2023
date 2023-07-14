@@ -1,5 +1,5 @@
 import { getTree } from '@/utils/api/api'
-import {REST_API_STRUCTURES_ROOT_ID} from "@/utils/api/items";
+const REST_API_STRUCTURES_ROOT_ID = '!qfrjabHDUXieMVAzFt:content.udk-berlin.de'
 
 export async function getStructures () {
   const structures = {}

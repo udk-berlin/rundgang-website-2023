@@ -38,21 +38,21 @@ const PROJECTS_QUERY = gql`
 
 export async function getStaticProps() {
   const formats = await getProgramFormats();
-  const formatsFilters = await getFormatsFilters();
+  const formatFilters = await getFormatsFilters();
 
   const structures = await getProgramStructures();
-  const structuresFilters = await getStructuresFilters();
+  const structureFilters = await getStructuresFilters();
 
   return {
-    props: { formats, formatsFilters, structures, structuresFilters },
+    props: { formats, formatFilters, structures, structureFilters },
   };
 }
 
 export default function SavedProjectsPage({
   formats,
-  formatsFilters,
+  formatFilters,
   structures,
-  structuresFilters,
+  structureFilters,
 }) {
   const [isLinkClicked, setIsLinkClicked] = useState(false)
 
@@ -62,7 +62,7 @@ export default function SavedProjectsPage({
         isLinkClicked ?
           <LoadingLayout /> :
           <SavedProjectsProvider>
-            {<SavedProjectsContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatsFilters={formatsFilters} structuresFilters={structuresFilters}/>}
+            {<SavedProjectsContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatFilters={formatFilters} structureFilters={structureFilters}/>}
           </SavedProjectsProvider>
       }
     </Page>
@@ -70,7 +70,7 @@ export default function SavedProjectsPage({
 }
 
 
-function SavedProjectsContainer ({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
+function SavedProjectsContainer ({ setIsLinkClicked, formats, formatFilters, structures, structureFilters }) {
   const projects = useQuery(PROJECTS_QUERY);
   return (
     <>
@@ -86,9 +86,8 @@ function SavedProjectsContainer ({ setIsLinkClicked, formats, formatsFilters, st
               projects={projects.data.items}
               structures={structures}
               formats={formats}
-              formatsFilters={formatsFilters}
-              structuresFilters={structuresFilters}
-              useFast={true}
+              formatFilters={formatFilters}
+              structureFilters={structureFilters}
             >
               <Layout setIsLinkClicked={setIsLinkClicked}>
                 <SavedProjects />

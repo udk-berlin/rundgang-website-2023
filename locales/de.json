@@ -1,6 +1,7 @@
 {
   "calender": "Kalender",
   "contact": "Kontakt",
+  "corridor": "Flur",
   "error": "Error",
   "error.message": "Bitte laden Sie die Seite neu.",
   "faculties.centres": "Fakultäten & Zentren",
@@ -19,5 +20,7 @@
   "room": "Raum",
   "rooms.all": "Alle Räume",
   "search": "Suche...",
+  "stairs": "Treppen",
+  "technic": "Technik",
   "timeline": "Zeiten"
 }

@@ -7,19 +7,16 @@ import {
 import InfoGridDate from "@/components/pages/program/info_grid/date";
 import InfoGridFormat from "@/components/pages/program/info_grid/format";
 import { InfoGridContainer } from "@/components/pages/program/info_grid/info_grid";
-import { useSlider } from "@/providers/slider";
-import { useEffect, useRef } from "react";
-import { convertRemToPixels } from "@/components/pages/program/info_grid/item";
 
-export default function ProjectInfoGrid({ project, contexts }) {
+export default function ProjectInfoGrid({ project, forProjectPage = false }) {
   return (
     <ProjectInfoGridContainer>
       <FormatDateContainer>
-        <InfoGridFormat project={project} contexts={contexts} />
+        <InfoGridFormat project={project} forProjectPage={forProjectPage} />
         <InfoGridDate project={project} />
       </FormatDateContainer>
-      <InfoGridLocation project={project} contexts={contexts} />
-      <InfoGridContext project={project} contexts={contexts} />
+      <InfoGridLocation project={project} forProjectPage={forProjectPage} />
+      <InfoGridContext project={project} forProjectPage={forProjectPage} />
     </ProjectInfoGridContainer>
   );
 }

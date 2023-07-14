@@ -5,8 +5,10 @@ import styled from 'styled-components'
 
 import { fetcher, getUrl } from "@/utils/api/api";
 import { useFilter, useFilterDispatch } from "@/providers/filter";
+import { useData } from "@/providers/data/data";
 
 export default function LocationsFloorPlan() {
+  const { projects, locations } = useData()
   const filter = useFilter()
   const dispatch = useFilterDispatch()
 
@@ -16,15 +18,17 @@ export default function LocationsFloorPlan() {
   );
 
   const handleSelectRoom = (e) => {
-    const roomId = e.target.getAttribute('data-production')
+    const roomId = e.target.getAttribute('data-id')
 
     if (roomId) {
-      const room = filter.floor.children.filter(room => room.id === roomId)
+      const room = filter.floor.children.filter(room => {
+        return getRoomDataId(room, filter.floor, filter.location) === roomId
+      })
 
       if (room.length > 0) {
         Object.values(filter.floor.children).forEach(child => {
           if (child.template === 'location-room') {
-            let rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
+            let rooms = document.querySelectorAll(`[data-id="${getRoomDataId(child, filter.floor, filter.location)}"]`);
             rooms.forEach(room => room.style.fill = '')
           }
         })
@@ -33,7 +37,9 @@ export default function LocationsFloorPlan() {
         dispatch(
           {
             type: 'filter-room',
-            room: room[0]
+            room: room[0],
+            projects: projects,
+            locations: locations,
           })
       }
     }
@@ -42,7 +48,7 @@ export default function LocationsFloorPlan() {
   useEffect(() => {
     Object.values(filter.floor.children).forEach(child => {
       if (child.template === 'location-room') {
-        const rooms = document.querySelectorAll(`[data-production="${child.id}"]`);
+        const rooms = document.querySelectorAll(`[data-id="${getRoomDataId(child, filter.floor, filter.location)}"]`);
         if (rooms) {
           rooms.forEach(room => room.style.fill = '')
         }
@@ -50,7 +56,7 @@ export default function LocationsFloorPlan() {
     })
 
     if (filter.room) {
-      const rooms = document.querySelectorAll(`[data-production="${filter.room.id}"]`);
+      const rooms = document.querySelectorAll(`[data-id="${getRoomDataId(filter.room, filter.floor, filter.location)}"]`);
       if (rooms) {
         rooms.forEach(room => room.style.fill = 'var(--color-pink)')
       }
@@ -73,9 +79,9 @@ const LocationsFloorPlanContainer = styled.div`
   min-height: var(--locations-ground-plan-height);
   max-height: var(--locations-ground-plan-height);
 
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: calc(100% + var(--border-width));
+  min-width: calc(100% + var(--border-width));
+  max-width: calc(100% + var(--border-width));
 
   pointer-events: all;
 
@@ -92,7 +98,6 @@ const LocationsFloorPlanContainer = styled.div`
       align-items: center;
       
       > svg {
-        padding: 2rem;
         max-width: 100%;
         max-height: 100%;
 
@@ -106,3 +111,18 @@ const LocationsFloorPlanContainer = styled.div`
     }
   }
 `
+
+function getRoomDataId (room, floor, location) {
+  return `udk-berlin|${locationIdToDataIdMapper[location.id]}|${floor.name}|${room.name}`
+}
+
+
+const locationIdToDataIdMapper = {
+  "!RuJBwEwOQcFrQabJnn:content.udk-berlin.de": 4001,
+  "!YIwQSiHDpoiNHDMWmC:content.udk-berlin.de": 4002,
+  "!PsyURUpKAbSPistHpQ:content.udk-berlin.de": 4003,
+  "!GFauydmVRlpqvDETXH:content.udk-berlin.de": 4004,
+  "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": 4005,
+  "!eVjUBtkIgDQkQSKVxm:content.udk-berlin.de": 4007,
+  "!OkEblSLtaWAObRcCHm:content.udk-berlin.de": 4008
+}

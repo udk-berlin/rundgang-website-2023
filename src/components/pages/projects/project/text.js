@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 import getLocalizedData from "@/components/localization/data";
+import { useData } from "@/providers/data/data";
 
-export function ProjectText({ project, media }) {
+export function ProjectText() {
+  const { project, media } = useData(true)
+
   let description = ''
   let texts = [];
 
