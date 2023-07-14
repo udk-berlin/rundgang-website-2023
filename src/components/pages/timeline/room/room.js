@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 
 export default function TimelineLocationRoom({ room, index }) {
-  const projects = Object.values(room.children).filter(child => child.type === 'item')
+  const projectIds = Object.values(room.children).filter(child => child.type === 'item').map(child => child.id)
 
   return (
     <>
@@ -14,7 +14,7 @@ export default function TimelineLocationRoom({ room, index }) {
         </Room>
       </RoomContainer>
 
-      <TimelineProjectsGroups projects={projects} roomIndex={index} />
+      <TimelineProjectsGroups projectIds={projectIds} roomIndex={index} />
     </>
   );
 }

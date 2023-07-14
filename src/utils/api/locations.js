@@ -1,6 +1,6 @@
 import { getTreeUrl } from '@/utils/api/api'
 
-import { REST_API_LOCATIONS_ROOT_ID } from "@/utils/api/items";
+const REST_API_LOCATIONS_ROOT_ID = '!ZEZxbNWFYYsDgpkhCL:content.udk-berlin.de'
 
 export function getLocationsTreeUrl() {
   return getTreeUrl(REST_API_LOCATIONS_ROOT_ID)

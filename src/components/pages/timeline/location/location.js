@@ -9,7 +9,7 @@ export default function TimelineLocation({ location }) {
   const theme = useTheme()
   const [showContent, setShowContent] = useState(false)
   const floors = Object.values(location.children).filter(child => child.template === 'location-level')
-  const projects = Object.values(location.children).filter(child => child.type === 'item')
+  const projectIds = Object.values(location.children).filter(child => child.type === 'item').map(child => child.id)
 
   useEffect(() => {
     if (theme?.id === 'l') {
@@ -28,7 +28,7 @@ export default function TimelineLocation({ location }) {
       <LocationContentPlaceholder />
       <LocationContentContainer showContent={showContent}>
         <TimelineFloors floors={floors} />
-        <TimelineProjectsGroups projects={projects} />
+        {projectIds.length > 0 ? <TimelineProjectsGroups projectIds={projectIds} /> : <></>}
       </LocationContentContainer>
     </LocationContainer>
   );

@@ -48,7 +48,7 @@ export default function LocationsPage({
           <LoadingLayout /> :
           <DataProvider>
             <SavedProjectsProvider>
-              <LocationsPageContainer setIsLinkClicked={setIsLinkClicked} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters}/>
+              <LocationsPageContainer setIsLinkClicked={setIsLinkClicked} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters} />
             </SavedProjectsProvider>
           </DataProvider>
       }

@@ -1,8 +1,11 @@
 import { FIRST_TIME, LAST_TIME } from "@/themes/pages/timeline";
 import TimelineProjectsGroup from "@/components/pages/timeline/project/projects_group";
+import {useData} from "@/providers/data";
 
-export default function TimelineProjectsGroups({ projects, roomIndex = 0 }) {
-  let projectsGroups = groupProjects(sortFlattenedProjects(flattenProjects(projects)))
+export default function TimelineProjectsGroups({ projectIds, roomIndex = 0 }) {
+  const { projects } = useData()
+  const filteredProjects = projects.filter(project => projectIds.includes(project.id))
+  let projectsGroups = groupProjects(sortFlattenedProjects(flattenProjects(filteredProjects)))
 
   return (
     <div>
@@ -19,13 +22,16 @@ function flattenProjects(projects) {
   const flattenedProjects = []
 
   projects.forEach(project => {
-    if('temporal' in project) {
-      project.temporal.forEach(time => {
+    if(project.allocation && project.allocation.temporal) {
+      project.allocation.temporal.forEach(time => {
+        const start = new Date(time.start * 1000 - 7200000)
+        const end =  new Date(time.end * 1000 - 7200000)
+
         flattenedProjects.push({
           id: project.id,
           name: project.name,
-          start: time.start < FIRST_TIME ? FIRST_TIME : time.start,
-          end: time.end > LAST_TIME ? LAST_TIME : time.end,
+          start: start < FIRST_TIME ? FIRST_TIME : start,
+          end: end > LAST_TIME ? LAST_TIME : end,
           thumbnail: project.thumbnail.replace('crop', 'scale')
         })
       })

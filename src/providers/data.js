@@ -51,7 +51,7 @@ const DataContext = createContext({
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export function DataProvider ({ children }) {
+export function DataProvider ({ children, onlyTemporalData = false }) {
   const { data: locations, error } = useSWR(
     getLocationsTreeUrl(),
     fetcher
@@ -75,6 +75,10 @@ export function DataProvider ({ children }) {
 
     if (!projects.loading && !projects.error) {
       filteredProjectsObj = projects.data.items
+
+      if (onlyTemporalData) {
+        filteredProjectsObj = filteredProjectsObj.filter(project => project.allocation && project.allocation.temporal)
+      }
     }
 
     let filteredContextsObj
