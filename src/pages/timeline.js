@@ -48,7 +48,7 @@ export default function TimelinePage({
       {
         isLinkClicked ?
           <LoadingLayout /> :
-          <DataProvider onlyTemporalData={false}>
+          <DataProvider onlyTemporalData={true}>
             <SavedProjectsProvider>
               <TimelinePageContainer setIsLinkClicked={setIsLinkClicked} formats={formats} formatsFilters={formatsFilters} structures={structures} structuresFilters={structuresFilters} />
             </SavedProjectsProvider>
@@ -61,20 +61,20 @@ export default function TimelinePage({
 function TimelinePageContainer({ setIsLinkClicked, formats, formatsFilters, structures, structuresFilters }) {
   const { locations, projects } = useData()
 
-  let filteredLocations = {}
-  let filteredProjects
-
-  if ( locations && projects ) {
-    filteredProjects = projects.filter(project => project.allocation && project.allocation.temporal && project.allocation.temporal.length > 0)
-    filter(locations, filteredProjects.map(project => project.id)).forEach(location => filteredLocations[location.id] = location)
-  }
+  // let filteredLocations = {}
+  // let filteredProjects
+  //
+  // if ( locations && projects ) {
+  //   filteredProjects = projects.filter(project => project.allocation && project.allocation.temporal && project.allocation.temporal.length > 0)
+  //   filter(locations, filteredProjects.map(project => project.id)).forEach(location => filteredLocations[location.id] = location)
+  // }
 
   return (
     <>
       {
         locations && projects ? <FilterProvider
-            locations={filteredLocations}
-            projects={filteredProjects}
+            locations={locations}
+            projects={projects}
             formats={formats}
             formatsFilters={formatsFilters}
             structures={structures}

@@ -62,22 +62,30 @@ export function DataProvider ({ children, onlyTemporalData = false }) {
 
   const value = useMemo(() => {
     let filteredLocationsObj
-
-    if (locations) {
-      const locationsObjs= {}
-      Object.values(locations.children).forEach(location => locationsObjs[location.id] = location)
-
-      filteredLocationsObj = {}
-      filter(Object.values(locationsObjs)).forEach(locationsObj => filteredLocationsObj[locationsObj.id] = locationsObj)
-    }
-
     let filteredProjectsObj
 
-    if (!projects.loading && !projects.error) {
-      filteredProjectsObj = projects.data.items
+    if (onlyTemporalData) {
+     if (locations && !projects.loading && !projects.error) {
+       filteredProjectsObj = projects.data.items
+       filteredProjectsObj = filteredProjectsObj.filter(project => project.allocation && project.allocation.temporal && project.allocation.temporal.length > 0)
 
-      if (onlyTemporalData) {
-        filteredProjectsObj = filteredProjectsObj.filter(project => project.allocation && project.allocation.temporal)
+       const locationsObjs= {}
+       Object.values(locations.children).forEach(location => locationsObjs[location.id] = location)
+
+       filteredLocationsObj = {}
+       filterByNodeIds(Object.values(locationsObjs), filteredProjectsObj.map(project => project.id)).forEach(locationsObj => filteredLocationsObj[locationsObj.id] = locationsObj)
+      }
+    } else {
+      if (locations) {
+        const locationsObjs= {}
+        Object.values(locations.children).forEach(location => locationsObjs[location.id] = location)
+
+        filteredLocationsObj = {}
+        filter(Object.values(locationsObjs)).forEach(locationsObj => filteredLocationsObj[locationsObj.id] = locationsObj)
+      }
+
+      if (!projects.loading && !projects.error) {
+        filteredProjectsObj = projects.data.items
       }
     }
 
@@ -115,6 +123,21 @@ export function useData() {
 function filter(array) {
   const getChildren = (result, object) => {
     if (object.type === 'item') {
+      result.push(object);
+      return result;
+    }
+    const children = Object.values(object.children).reduce(getChildren, []);
+    if (children.length) result.push({ ...object, children });
+
+    return result;
+  };
+
+  return array.reduce(getChildren, []);
+}
+
+function filterByNodeIds(array, nodeIds) {
+  const getChildren = (result, object) => {
+    if (object.type === 'item' && nodeIds.includes(object.id)) {
       result.push(object);
       return result;
     }
