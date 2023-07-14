@@ -14,26 +14,14 @@ export default function ProjectMedia({ project, media, contexts, fullSize = fals
   )
 }
 
-function ThumbnailMedia({ project, fullSize = false }) {
+function ThumbnailMedia({ project, index = 0, fullSize = false }) {
   if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
 
   return (
     <ThumbnailMediaContainer
       src={fullSize ? project.thumbnail_full_size : project.thumbnail.replace('crop', 'scale')}
       alt={project.name}
-      loading="lazy"
-    />
-  );
-}
-
-export function ProjectImageMedia({ project, fullSize = false }) {
-  if (!(project) || !(project.thumbnail)) return <PlaceholderImageContainer />;
-
-  return (
-    <ImageMediaContainer
-      src={fullSize ? project.thumbnail_full_size : project.thumbnail.replace('crop', 'scale')}
-      alt={project.name}
-      loading="lazy"
+      loading={index < 15 ? 'eager' : 'lazy'}
     />
   );
 }

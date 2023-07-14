@@ -15,7 +15,7 @@ import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import useWindowSize from "@/hooks/window_size";
 import { breakpoints } from "@/themes/theme";
 
-export default function ProjectCell({ project }) {
+export default function ProjectCell({ project, index }) {
   const [cellHovered, setCellHovered] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ export default function ProjectCell({ project }) {
       onMouseLeave={() => setCellHovered(false)}
     >
       <ProjectLink project={project}>
-        <ProjectImage project={project} />
+        <ProjectImage project={project} index={index} />
       </ProjectLink>
 
       <SVGOverlay

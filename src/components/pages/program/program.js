@@ -42,8 +42,8 @@ export default function Program({ setIsLinkClicked }) {
                   <Masonry
                     columnsCount={responsiveTheme.MASONRY_COLUMNS}
                     gutter={responsiveTheme.MASONRY_GUTTER}>
-                    {filter.filteredProjects.map((project) => (
-                      <ProjectCell project={project} />
+                    {filter.filteredProjects.map((project, index) => (
+                      <ProjectCell project={project} index={index}/>
                     ))}
                   </Masonry>
                 </ProgramContainer>
