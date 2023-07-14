@@ -42,7 +42,9 @@ function AccordionItem({ item }) {
       {isActive && (
         <AccordionItemContentWrapper>
           <AccordionItemContentLine />
-          <AccordionItemContent>{item.content}</AccordionItemContent>
+          <AccordionItemTextsContainer>
+            {item.texts.map(text => <AccordionItemText dangerouslySetInnerHTML={{__html: text}} />)}
+          </AccordionItemTextsContainer>
         </AccordionItemContentWrapper>
       )}
     </AccordionItemWrapper>
@@ -81,6 +83,8 @@ const AccordionItemContentWrapper = styled.div`
     theme.accordion.itemContentWrapper.gridTemplateColumns};
 `;
 
+const AccordionItemTextsContainer = styled.div``;
+
 const AccordionItemContentLine = styled.div`
   width: 65px;
   border-bottom: 2px solid #000;
@@ -88,4 +92,8 @@ const AccordionItemContentLine = styled.div`
   align-self: start;
 `;
 
-const AccordionItemContent = styled.div``;
+const AccordionItemText = styled.div`
+  a {
+    text-decoration: underline;
+  }
+`;
