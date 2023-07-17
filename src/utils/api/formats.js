@@ -1,7 +1,4 @@
-import { getTree } from '@/utils/api/api'
-
-const REST_API_FORMATS_ROOT_ID = '!fAUMSBXRVvkiNdaXQe:content.udk-berlin.de'
-
+import { getTree, REST_API_FORMATS_ROOT_ID } from '@/utils/api/api'
 
 export async function getFormats () {
   let formats = {}

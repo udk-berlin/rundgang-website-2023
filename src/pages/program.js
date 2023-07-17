@@ -1,28 +1,14 @@
-import { getFormatsFilters } from '@/utils/api/formats'
-import { getStructuresFilters } from "@/utils/api/structures";
-import { getProgramFormats, getProgramStructures } from '@/utils/api/pages/program'
-
-import { FilterProvider } from "@/providers/filter";
+import React, { useState } from "react";
 
 import Page from "@/components/pages/page";
 import Program from "@/components/pages/program/program";
-import { SavedProjectsProvider } from '@/providers/saved_projects'
-
 import LoadingLayout from "@/components/layout/loading";
-import React, {useState} from "react";
+
 import { DataProvider, useData } from "@/providers/data/data";
+import { SavedProjectsProvider } from '@/providers/saved_projects'
+import { FilterProvider } from "@/providers/filter";
 
-export async function getStaticProps () {
-  const formats = await getProgramFormats()
-  const formatFilters = await getFormatsFilters()
-
-  const structures = await getProgramStructures()
-  const structureFilters = await getStructuresFilters()
-
-  return { props: { formats, formatFilters, structures, structureFilters} }
-}
-
-export default function ProgramPage ({ formats, formatFilters, structures, structureFilters }) {
+export default function ProgramPage () {
   const [isLinkClicked, setIsLinkClicked] = useState(false)
 
   return (
@@ -32,7 +18,7 @@ export default function ProgramPage ({ formats, formatFilters, structures, struc
           <LoadingLayout /> :
           <DataProvider>
             <SavedProjectsProvider>
-              <ProgramPageContainer setIsLinkClicked={setIsLinkClicked} structures={structures} formats={formats} formatFilters={formatFilters} structureFilters={structureFilters}/>
+              <ProgramPageContainer setIsLinkClicked={setIsLinkClicked} />
             </SavedProjectsProvider>
           </DataProvider>
       }
@@ -40,22 +26,22 @@ export default function ProgramPage ({ formats, formatFilters, structures, struc
   )
 }
 
-function ProgramPageContainer ({ setIsLinkClicked, formats, formatFilters, structures, structureFilters }) {
-  const { projects } = useData()
+function ProgramPageContainer ({ setIsLinkClicked }) {
+  const { projects, structures, structureFilters , formats, formatFilters } = useData()
 
   return (
     <>
       {
-        projects  ?
+        projects && structures && structureFilters && formats && formatFilters ?
           <FilterProvider
             projects={projects}
             structures={structures}
+            structureFilters={structureFilters}
             formats={formats}
-            formatFilters={formatFilters}
-            structureFilters={structureFilters}>
+            formatFilters={formatFilters}>
             <Program setIsLinkClicked={setIsLinkClicked} />
-          </FilterProvider>
-          : <LoadingLayout />
+          </FilterProvider> :
+          <LoadingLayout />
       }
     </>
   )

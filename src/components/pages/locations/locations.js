@@ -5,12 +5,15 @@ import LocationsMap from "@/components/pages/locations/map/map";
 import LocationsProgram from "@/components/pages/locations/program";
 import LocationsGroundPlan from "@/components/pages/locations/ground_plan/ground_plan";
 import LocationsFloorPlanPopup from "@/components/pages/locations/floor_plan/popup";
-import { locationsLTheme, locationsMTheme } from "@/themes/pages/locations";
-import useWindowSize from "@/hooks/window_size";
-import { breakpoints } from "@/themes/pages/locations";
-import {useData} from "@/providers/data/data";
+import Layout from "@/components/layout/layout";
 
-export default function Locations() {
+import { locationsLTheme, locationsMTheme } from "@/themes/pages/locations";
+import { breakpoints } from "@/themes/pages/locations";
+
+import useWindowSize from "@/hooks/window_size";
+import { useData } from "@/providers/data/data";
+
+export default function Locations({ setIsLinkClicked }) {
   const [locationSelected, setLocationSelected] = useState(false)
   const [responsiveTheme, setResponsiveTheme] = useState(locationsLTheme);
   const windowSize = useWindowSize();
@@ -25,14 +28,16 @@ export default function Locations() {
   }, [windowSize?.width]);
 
   return (
-    <ThemeProvider theme={responsiveTheme}>
-      <LocationsContainer>
-        {locations && projects ? <LocationsMap projects={projects} locations={locations} locationSelected={locationSelected} /> : <></>}
-        <LocationsGroundPlan />
-        {responsiveTheme.id === 'l' ? <LocationsFloorPlanPopup /> : <></>}
-        <LocationsProgram setLocationSelected={setLocationSelected} responsiveTheme={responsiveTheme} />
-      </LocationsContainer>
-    </ThemeProvider>
+    <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
+      <ThemeProvider theme={responsiveTheme}>
+        <LocationsContainer>
+          {locations && projects ? <LocationsMap projects={projects} locations={locations} locationSelected={locationSelected} /> : <></>}
+          <LocationsGroundPlan />
+          {responsiveTheme.id === 'l' ? <LocationsFloorPlanPopup /> : <></>}
+          <LocationsProgram setLocationSelected={setLocationSelected} responsiveTheme={responsiveTheme} />
+        </LocationsContainer>
+      </ThemeProvider>
+    </Layout>
   );
 }
 

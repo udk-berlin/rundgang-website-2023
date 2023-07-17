@@ -13,6 +13,7 @@ export function InfoGridLocation({ project, forProjectPage = false }) {
   contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
       let context = contexts[parent.id]
+
       if (context && context.template) {
         if (context.template === 'location-room') {
           let room = context
@@ -34,9 +35,9 @@ export function InfoGridLocation({ project, forProjectPage = false }) {
 
           locations.push(
             {
-              room: room?.name,
-              floor: floor?.name,
-              building: building?.name,
+              room: room,
+              floor: floor,
+              building: building,
             }
           )
         }
@@ -50,19 +51,28 @@ export function InfoGridLocation({ project, forProjectPage = false }) {
         locations.map(location => {
           return (
             <>
-              <InfoGridCardItem margin="170px">
-                {location.building}
-              </InfoGridCardItem>
-              <InfoGridCardItem margin="10px">
-                <FormattedMessage id="floor" />
-                :&nbsp;
-                {location.floor}
-              </InfoGridCardItem>
-              <InfoGridCardItem margin="50px">
-                <FormattedMessage id="room" />
-                :&nbsp;
-                {location.room}
-              </InfoGridCardItem>
+              {
+                location.building ?
+                  <InfoGridCardItem href={`/locations/${location.building.id}`} margin="10">
+                    {location.building.name}
+                  </InfoGridCardItem> : <></>
+              }
+              {
+                location.floor ?
+                  <InfoGridCardItem href={`/locations/${location.floor.id}`} margin="25">
+                    <FormattedMessage id="floor" />
+                    :&nbsp;
+                    {location.floor.name}
+                  </InfoGridCardItem> : <></>
+              }
+              {
+                location.room ?
+                  <InfoGridCardItem href={`/locations/${location.room.id}`} margin="50">
+                    <FormattedMessage id="room" />
+                    :&nbsp;
+                    {location.room.name}
+                  </InfoGridCardItem> : <></>
+              }
             </>
           )
         })
@@ -362,19 +372,19 @@ export function InfoGridContext({ project, forProjectPage = false }) {
         Object.values(structures.faculties).map(faculty => {
           return (
             <>
-              <InfoGridCardItem id={faculty.id} withLink={true} margin="50px">{faculty.name}</InfoGridCardItem>
+              <InfoGridCardItem href={`/program/${faculty.id}`} withLink={true} margin="50">{faculty.name}</InfoGridCardItem>
               {
                 Object.values(faculty.institutes).map(institute => {
                   return (
                     <>
-                      <InfoGridCardItem id={institute.id} margin="150px">{institute.name}</InfoGridCardItem>
-                      {Object.values(institute.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="200px">{clazz.name}</InfoGridCardItem>)}
+                      <InfoGridCardItem id={institute.id} margin="15">{institute.name}</InfoGridCardItem>
+                      {Object.values(institute.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="20">{clazz.name}</InfoGridCardItem>)}
                       {
                         Object.values(institute.subjects).map(subject => {
                           return (
                             <>
-                              <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>
-                              {Object.values(subject.subjects).map(secondSubject => <InfoGridCardItem id={secondSubject.id} margin="200px">{secondSubject.name}</InfoGridCardItem>)}
+                              <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>
+                              {Object.values(subject.subjects).map(secondSubject => <InfoGridCardItem id={secondSubject.id} margin="20">{secondSubject.name}</InfoGridCardItem>)}
                             </>
                           )
                         })
@@ -383,9 +393,9 @@ export function InfoGridContext({ project, forProjectPage = false }) {
                         Object.values(institute.courses).map(course => {
                           return (
                             <>
-                              <InfoGridCardItem id={course.id} margin="50px">{course.name}</InfoGridCardItem>
-                              {Object.values(course.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>)}
-                              {Object.values(course.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="200px">{clazz.name}</InfoGridCardItem>)}
+                              <InfoGridCardItem id={course.id} margin="50">{course.name}</InfoGridCardItem>
+                              {Object.values(course.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>)}
+                              {Object.values(course.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="20">{clazz.name}</InfoGridCardItem>)}
                             </>
                           )
                         }
@@ -396,8 +406,8 @@ export function InfoGridContext({ project, forProjectPage = false }) {
                 })
 
               }
-              {Object.values(faculty.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>)}
-              {Object.values(faculty.courses).map(course => <InfoGridCardItem id={course.id} margin="5px">{course.name}</InfoGridCardItem>)}
+              {Object.values(faculty.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>)}
+              {Object.values(faculty.courses).map(course => <InfoGridCardItem id={course.id} margin="50">{course.name}</InfoGridCardItem>)}
             </>
           )
         })
@@ -406,15 +416,15 @@ export function InfoGridContext({ project, forProjectPage = false }) {
         Object.values(structures.centres).map(centre => {
           return (
             <>
-              <InfoGridCardItem id={CENTER_ID} withLink={true} margin="50px">{centre.name}</InfoGridCardItem>
-              {Object.values(centre.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="100px">{subject.name}</InfoGridCardItem>)}
+              <InfoGridCardItem href={`/program/${CENTER_ID}`} withLink={true} margin="50">{centre.name}</InfoGridCardItem>
+              {Object.values(centre.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>)}
               {
                 Object.values(centre.consultingServices).map(consultingService => {
                  return (
                    <>
-                     <InfoGridCardItem id={consultingService.id} margin="150px">{consultingService.name}</InfoGridCardItem>
+                     <InfoGridCardItem id={consultingService.id} margin="15">{consultingService.name}</InfoGridCardItem>
                      {
-                       Object.values(consultingService.seminars).map(seminar => <InfoGridCardItem id={seminar.id} margin="50px">{seminar.name}</InfoGridCardItem>)
+                       Object.values(consultingService.seminars).map(seminar => <InfoGridCardItem id={seminar.id} margin="50">{seminar.name}</InfoGridCardItem>)
                      }
                    </>
                  )
@@ -429,7 +439,7 @@ export function InfoGridContext({ project, forProjectPage = false }) {
         Object.values(structures.initiatives).map(initiative => {
           return (
             <>
-              <InfoGridCardItem margin="50px">{initiative.name}</InfoGridCardItem>
+              <InfoGridCardItem margin="50">{initiative.name}</InfoGridCardItem>
             </>
           )
         })

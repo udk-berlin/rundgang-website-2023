@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useMemo } from 'react'
+import { gql, useQuery } from "@apollo/client";
 import useSWR from 'swr'
-import {getLocationsTreeUrl, getStructuresTreeUrl, getFormatsTreeUrl, getTree} from '@/utils/api/api'
-import {gql, useQuery} from "@apollo/client";
+
+import { getLocationsTreeUrl, getStructuresTreeUrl, getFormatsTreeUrl } from '@/utils/api/api'
 
 const PROJECTS_QUERY = gql`
   {
@@ -234,4 +235,15 @@ function getStructuresFilters (tree) {
   getChildren(tree)
 
   return filters
+}
+
+function flatten (data) {
+  let result = [];
+
+  while (data) {
+    result.push({ name: data.name, config: data.config });
+    data = data.prev;
+  }
+
+  return result;
 }
