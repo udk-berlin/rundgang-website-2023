@@ -13,7 +13,7 @@ import { breakpoints } from "@/themes/pages/locations";
 import useWindowSize from "@/hooks/window_size";
 import { useData } from "@/providers/data/data";
 
-export default function Locations({ setIsLinkClicked }) {
+export default function Locations() {
   const [locationSelected, setLocationSelected] = useState(false)
   const [responsiveTheme, setResponsiveTheme] = useState(locationsLTheme);
   const windowSize = useWindowSize();
@@ -28,7 +28,7 @@ export default function Locations({ setIsLinkClicked }) {
   }, [windowSize?.width]);
 
   return (
-    <Layout defaultSliderPosition={2} setIsLinkClicked={setIsLinkClicked}>
+    <Layout defaultSliderPosition={2}>
       <ThemeProvider theme={responsiveTheme}>
         <LocationsContainer>
           {locations && projects ? <LocationsMap projects={projects} locations={locations} locationSelected={locationSelected} /> : <></>}

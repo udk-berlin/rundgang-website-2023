@@ -15,7 +15,7 @@ import {
 } from "@/themes/pages/program";
 import LoadingLayout from "@/components/layout/loading";
 
-export default function Program({ setIsLinkClicked }) {
+export default function Program() {
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
   const filter = useFilter();
@@ -35,7 +35,7 @@ export default function Program({ setIsLinkClicked }) {
       {
         windowSize?.width ?
           (
-            <Layout setIsLinkClicked={setIsLinkClicked} defaultSliderPosition={2}>
+            <Layout defaultSliderPosition={2}>
               <ThemeProvider theme={responsiveTheme}>
                 <ProgramContainer>
                   <Masonry

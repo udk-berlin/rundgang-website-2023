@@ -18,7 +18,17 @@ export function FilterProvider ({ projects, location = null, floor = null, room 
   const [filter, dispatch] = useReducer(
     filterReducer,
     {
-      filteredProjects: initialFilter(projects, locations, location, floor, room, format, formats, structure, structures),
+      filteredProjects: initialFilter({
+        projects,
+        locations,
+        location,
+        floor,
+        room,
+        format,
+        formats,
+        structure,
+        structures
+      }),
       location: location,
       floor: floor,
       room: room,
@@ -448,7 +458,7 @@ function filterReducer (state, action) {
   }
 }
 
-function initialFilter (projects, locations, location, floor, room, format, formats, structure, structures) {
+function initialFilter ({projects, locations, location, floor, room, format, formats, structure, structures}) {
   if (format) {
     return initialFilterByFormat(projects, format, formats)
   } else if (structure) {
@@ -457,7 +467,7 @@ function initialFilter (projects, locations, location, floor, room, format, form
     return initialFilterByLocation(projects, room, locations)
   } else if (floor) {
     return initialFilterByLocation(projects, floor, locations)
-  }else if (location) {
+  } else if (location) {
     return initialFilterByLocation(projects, location, locations)
   } else {
     return projects
@@ -469,11 +479,11 @@ function initialFilterByLocation (projects, location, locations) {
 }
 
 function initialFilterByFormat (projects, format, formats) {
-  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(formats, format.id)))
+  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(formats, format)))
 }
 
 function initialFilterByStructure (projects, structure, structures) {
-  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(structures, structure.id)))
+  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(structures, structure)))
 }
 
 

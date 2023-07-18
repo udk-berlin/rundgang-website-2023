@@ -79,4 +79,8 @@ const Day = styled.div`
     background: ${({theme}) => theme.colors.pink};
     color: ${({theme}) => theme.colors.white};
   }
+
+  :last-child {
+    border-right: 0;
+  }
 `

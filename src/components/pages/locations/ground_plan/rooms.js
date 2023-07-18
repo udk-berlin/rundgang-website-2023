@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
 import { useData } from "@/providers/data/data";
+import { mappeRoom } from "@/utils/room_mapper";
 
 export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsContainerHeight }) {
   const filter = useFilter()
@@ -40,13 +41,13 @@ function LocationsGroundPlanRoom ({ key, room }) {
       })
   }
 
-  const roomName = roomNameMapperToId(room.name)
+  const mappedRoom = mappeRoom(room.name)
 
   return (
     <LocationsGroundPlanRoomContainer key={key} selected={(filter.room && filter.room.id === room.id)} onClick={handleClick}>
       <div>
-        {roomName.id ? <span><FormattedMessage id={roomName.id}/>: </span> : <></>}
-        {roomName.name}
+        {mappedRoom.id ? <span><FormattedMessage id={mappedRoom.id}/>: </span> : <></>}
+        {mappedRoom.name}
       </div>
     </LocationsGroundPlanRoomContainer>
   )
@@ -73,22 +74,6 @@ function LocationsGroundPlanRoomsAll () {
       </div>
     </LocationsGroundPlanRoomContainer>
   )
-}
-
-export function roomNameMapperToId(name) {
-  if (name.startsWith('R-') || name.startsWith('RE-') || name.startsWith('R ') || name.startsWith('RE ')) {
-    return {id: 'room', name: name.replace('RE-', '').replace('R-', '').replace('RE ', '').replace('R ', '')}
-  } else if (name.startsWith('V-') || name.startsWith('VF-') || name.startsWith('V ') || name.startsWith('VF ')) {
-    return {id: 'corridor', name: name.replace('VF-', '').replace('V-', '').replace('VF ', '').replace('V ', '')}
-  } else if (name.startsWith('TH-') || name.startsWith('TPH-') || name.startsWith('TH ') || name.startsWith('TPH ')) {
-    return {id: 'stairs', name: name.replace('TH-', '').replace('TPH-', '').replace('TH ', '').replace('TPH ', '')}
-  } else if (name.startsWith('TF-') || name.startsWith('TF ')) {
-    return {id: 'technic', name: name.replace('TF-', '').replace('TF ', '')}
-  } else if (name === 'Außenvitrine') {
-    return {id: null, name: name}
-  } else {
-    return {id: 'room', name: name}
-  }
 }
 
 const LocationsGroundPlanRoomsContainer = styled.div`

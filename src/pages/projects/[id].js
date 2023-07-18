@@ -1,27 +1,54 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
 
 import Page from "@/components/pages/page";
 import Project from "@/components/pages/projects/project/project";
-import { SavedProjectsProvider } from '@/providers/saved_projects'
 import LoadingLayout from "@/components/layout/loading";
-import { DataProvider, useData } from "@/providers/data/data";
 
-export default function ProjectPage () {
+import { SavedProjectsProvider } from '@/providers/saved_projects'
+import { DataProvider, useData } from "@/providers/data/data";
+import { LinkProvider, useLink } from "@/providers/link";
+
+export default function ProjectPage() {
+  return (
+    <Page title="project">
+      <LinkProvider>
+        <LinkProviderChildren />
+      </LinkProvider>
+    </Page>
+  );
+}
+
+function LinkProviderChildren() {
   const router = useRouter()
-  const [isLinkClicked, setIsLinkClicked] = useState(false)
+  const link = useLink()
 
   return (
-    <Page title={'project'}>
+    <>
       {
-        isLinkClicked || !router || !router.query || !router.query.id ?
+        link.clicked || !router || !router.query || !router.query.id ?
           <LoadingLayout /> :
           <DataProvider forProject={true} id={router.query.id}>
-            <SavedProjectsProvider>
-              <Project setIsLinkClicked={setIsLinkClicked}/>
-            </SavedProjectsProvider>
+            <DataProviderChildren />
           </DataProvider>
       }
-    </Page>
+    </>
   )
 }
+
+function DataProviderChildren() {
+  const { project } = useData(true)
+
+  return (
+    <>
+      {
+        project ?
+          <SavedProjectsProvider>
+            <Project />
+          </SavedProjectsProvider> :
+          <LoadingLayout />
+      }
+    </>
+  );
+}
+

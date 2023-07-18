@@ -2,7 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react'
 import { gql, useQuery } from "@apollo/client";
 import useSWR from 'swr'
 
-import { getLocationsTreeUrl, getStructuresTreeUrl, getFormatsTreeUrl } from '@/utils/api/api'
+import { getLocationsTreeUrl, getStructuresTreeUrl, getFormatsTreeUrl } from '@/utils/api'
 
 const PROJECTS_QUERY = gql`
   {

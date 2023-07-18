@@ -1,7 +1,7 @@
 const REST_API = 'https://2023.api.rundgang.udk-berlin.de/api/v2'
 const REST_API_LOCATIONS_ROOT_ID = '!ZEZxbNWFYYsDgpkhCL:content.udk-berlin.de'
-export const REST_API_STRUCTURES_ROOT_ID = '!qfrjabHDUXieMVAzFt:content.udk-berlin.de'
-export const REST_API_FORMATS_ROOT_ID = '!fAUMSBXRVvkiNdaXQe:content.udk-berlin.de'
+const REST_API_STRUCTURES_ROOT_ID = '!qfrjabHDUXieMVAzFt:content.udk-berlin.de'
+const REST_API_FORMATS_ROOT_ID = '!fAUMSBXRVvkiNdaXQe:content.udk-berlin.de'
 
 export async function fetcher (url) { return fetch(url).then((res) => res.json()) }
 

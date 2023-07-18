@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 import { LocationsLink } from "@/components/localization/links";
 
-export default function HeaderBarLocations({ setIsLinkClicked }) {
+export default function HeaderBarLocations() {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <LocationsLink setIsLinkClicked={setIsLinkClicked}>
+    <LocationsLink>
       <div
         onMouseEnter={() => setIsActive(true)}
         onMouseLeave={() => setIsActive(false)}

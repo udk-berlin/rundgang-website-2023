@@ -22,7 +22,7 @@ const NUMBER_OF_SLIDER_STATES = 5
 
 import { useData } from "@/providers/data/data";
 
-export default function Project({ setIsLinkClicked }) {
+export default function Project() {
   const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
@@ -46,23 +46,16 @@ export default function Project({ setIsLinkClicked }) {
       disableFilter={true}
       disableSlider={infoGridPos}
       numberOfSliderStates={NUMBER_OF_SLIDER_STATES}
-      setIsLinkClicked={setIsLinkClicked}
     >
       <ThemeProvider theme={responsiveTheme}>
         <ProjectContainer>
-          {
-            project ?
-              <>
-                <ProjectMedia project={project} infoGridPos={infoGridPos}/>
-                <InfoContainer>
-                  <ProjectTitle project={project} link={false} />
-                  <ProjectAuthors project={project} fontSize={1} />
-                  {infoGridPos ? <></> : <InfoGrid project={project} forProjectPage={true} />}
-                  <ProjectText />
-                </InfoContainer>
-              </> :
-              <div>Loading...</div>
-          }
+          <ProjectMedia project={project} infoGridPos={infoGridPos}/>
+          <InfoContainer>
+            <ProjectTitle project={project} link={false} />
+            <ProjectAuthors project={project} fontSize={1} />
+            {infoGridPos ? <></> : <InfoGrid project={project} forProjectPage={true} />}
+            <ProjectText />
+          </InfoContainer>
         </ProjectContainer>
       </ThemeProvider>
     </Layout>
