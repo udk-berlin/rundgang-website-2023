@@ -11,14 +11,27 @@ function shuffleArray(array) {
 
   return array
 }
-export function FilterProvider ({ projects, locations = null, format =  null, formats, formatFilters, structure = null, structures, structureFilters, children }) {
+export function FilterProvider ({ projects, location = null, floor = null, room = null, locations = null, format =  null, formats, formatFilters, structure = null, structures, structureFilters, children }) {
   projects = [...projects]
   shuffleArray(projects)
 
   const [filter, dispatch] = useReducer(
     filterReducer,
     {
-      filteredProjects: initialFilter(projects, format, formats, structure, structures),
+      filteredProjects: initialFilter({
+        projects,
+        locations,
+        location,
+        floor,
+        room,
+        format,
+        formats,
+        structure,
+        structures
+      }),
+      location: location,
+      floor: floor,
+      room: room,
       filteredLocations: locations,
       format: format,
       formats: formats,
@@ -445,14 +458,24 @@ function filterReducer (state, action) {
   }
 }
 
-function initialFilter (projects, format, formats, structure, structures) {
+function initialFilter ({projects, locations, location, floor, room, format, formats, structure, structures}) {
   if (format) {
     return initialFilterByFormat(projects, format, formats)
   } else if (structure) {
     return initialFilterByStructure(projects, structure, structures)
+  } else if (room) {
+    return initialFilterByLocation(projects, room, locations)
+  } else if (floor) {
+    return initialFilterByLocation(projects, floor, locations)
+  } else if (location) {
+    return initialFilterByLocation(projects, location, locations)
   } else {
     return projects
   }
+}
+
+function initialFilterByLocation (projects, location, locations) {
+  return filterProjectsByNodeIds(projects, getItemNodeIds(filterByNodeId(locations, location.id)))
 }
 
 function initialFilterByFormat (projects, format, formats) {

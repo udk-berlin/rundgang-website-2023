@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 import { LocalizedLink } from "@/components/localization/links";
 
-export default function HeaderBarR({ setIsLinkClicked }) {
+export default function HeaderBarR() {
   return (
-    <LocalizedLink setIsLinkClicked={setIsLinkClicked} href={"/"}>
+    <LocalizedLink href={"/"}>
       <div>
         <SVG src={`/assets/svg/layout/r.svg`} />
       </div>

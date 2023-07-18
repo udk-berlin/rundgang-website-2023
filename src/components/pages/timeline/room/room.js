@@ -2,15 +2,20 @@ import styled from "styled-components";
 
 import { FormattedMessage } from 'react-intl'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
+import { LocalizedLink } from "@/components/localization/links";
+import { mapRoom } from "@/utils/room_mapper";
 
 export default function TimelineLocationRoom({ room, index }) {
   const projectIds = Object.values(room.children).filter(child => child.type === 'item').map(child => child.id)
+  const mappedRoom = mapRoom(room)
 
   return (
     <>
       <RoomContainer key={room.id}>
         <Room>
-          <FormattedMessage id={'room'}/>: {room.name}
+          <LocalizedLink href={`/locations/${room.id}`}>
+            { mappedRoom.formattedMessageId ? <span><FormattedMessage id={mappedRoom.formattedMessageId}/>:&nbsp;</span> : <></> } {mappedRoom.name}
+          </LocalizedLink>
         </Room>
       </RoomContainer>
 
@@ -43,7 +48,6 @@ const Room = styled.div`
 
   width: fit-content;
   
-  padding: ${({theme}) => theme.box.padding};
   border: ${({theme}) => theme.border};
   
   background: ${({theme}) => theme.colors.white};
@@ -52,5 +56,19 @@ const Room = styled.div`
   font-weight: ${({theme}) => theme.fontWeights.small};
   color: ${({theme}) => theme.colors.black};
 
-  cursor: default;
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 100%;
+    width: 100%;
+
+    padding: ${({theme}) => theme.box.padding};
+
+    :hover {
+      color: ${({theme}) => theme.colors.white};
+      background: ${({theme}) => theme.colors.pink};
+    }
+  }
 `;

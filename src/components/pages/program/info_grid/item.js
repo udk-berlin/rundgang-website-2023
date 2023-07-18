@@ -13,7 +13,7 @@ const InfoGridItemLinkContainer = styled.div`
   margin-top: var(--info-border-width);
   margin-left: var(--info-border-width);
 
-  margin-left: ${(props) => props.margin}%;
+  margin-left: ${({ margin }) => margin }%;
 `;
 
 const InfoGridItemContainer = styled(InfoGridItemLinkContainer)`
@@ -41,46 +41,40 @@ export function InfoGridItem({ className, children, margin }) {
   );
 }
 
-export function InfoGridCardItem({ id, className, children, margin, withLink }) {
-  const inlineRef = useRef(null);
-  const borderRef = useRef(null);
+export function InfoGridCardItem({ className, margin, href, children }) {
+  // const inlineRef = useRef(null);
+  // const borderRef = useRef(null);
 
-  useEffect(() => {
-    if (borderRef?.current && inlineRef?.current) {
-      borderRef.current.style.marginLeft =
-        scale(hashCode(inlineRef.current.textContent), 0, 99, 0, 70) + "%";
-      borderRef.current.style.width =
-        inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
-      borderRef.current.style.minWidth =
-        inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
-      borderRef.current.style.maxWidth =
-        inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (borderRef?.current && inlineRef?.current) {
+  //     borderRef.current.style.marginLeft =
+  //       scale(hashCode(inlineRef.current.textContent), 0, 99, 0, 70) + "%";
+  //     borderRef.current.style.width =
+  //       inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+  //     borderRef.current.style.minWidth =
+  //       inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+  //     borderRef.current.style.maxWidth =
+  //       inlineRef.current.offsetWidth + convertRemToPixels(0.8) + "px";
+  //   }
+  // }, []);
 
   return (
     <>
       {
         children ?
-          withLink ? (
-            <InfoGridItemLink href={`/program/${id}`} ref={inlineRef} >
+          href ?
+            <InfoGridItemLink href={href} margin={margin}>
               {children}
-            </InfoGridItemLink>
-            ) : (
-              <InfoGridItemContainer
-                ref={borderRef}
-                className={className}
-                // margin={margin}
-              >
-                <div style={{ display: "inline" }} ref={inlineRef}>
-                  {children}
-                </div>
-              </InfoGridItemContainer>
-            )
-         : <></>
+            </InfoGridItemLink> :
+            <InfoGridItemContainer className={className} margin={margin}>
+              <div style={{ display: "inline" }}>
+                {children}
+              </div>
+            </InfoGridItemContainer> :
+          <></>
       }
     </>
-  );
+  )
 }
 
 export function convertRemToPixels(rem) {

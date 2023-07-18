@@ -1,19 +1,30 @@
-import React, {useState} from "react";
+import React from "react";
 
 import Page from "@/components/pages/page";
 import Landing from "@/components/pages/landing/landing";
 import LoadingLayout from "@/components/layout/loading";
+import { LinkProvider, useLink } from "@/providers/link";
 
 export default function IndexPage() {
-  const [isLinkClicked, setIsLinkClicked] = useState(false)
-
   return (
     <Page title="UdK Rundgang 2023" suffix={false}>
-      {
-        isLinkClicked ?
-          <LoadingLayout /> :
-          <Landing setIsLinkClicked={setIsLinkClicked} />
-      }
+      <LinkProvider>
+        <LinkProviderChildren />
+      </LinkProvider>
     </Page>
   );
+}
+
+function LinkProviderChildren() {
+  const link = useLink()
+
+  return (
+    <>
+      {
+        link.clicked ?
+          <LoadingLayout /> :
+          <Landing />
+      }
+    </>
+  )
 }

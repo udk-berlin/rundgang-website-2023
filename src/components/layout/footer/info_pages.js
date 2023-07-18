@@ -7,16 +7,16 @@ import {
   FaqLink,
 } from "@/components/localization/links";
 
-export default function FooterInfoPages({ setIsLinkClicked }) {
+export default function FooterInfoPages() {
   return (
     <InfoPagesContainer>
-      <ContactLink setIsLinkClicked={setIsLinkClicked}>
+      <ContactLink>
         <FormattedMessage id={"contact"} />
       </ContactLink>
-      <ImprintLink setIsLinkClicked={setIsLinkClicked}>
+      <ImprintLink>
         <FormattedMessage id={"imprint"} />
       </ImprintLink>
-      <FaqLink setIsLinkClicked={setIsLinkClicked}>
+      <FaqLink>
         <FormattedMessage id={"faq"} />
       </FaqLink>
     </InfoPagesContainer>

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import useSWR from "swr";
 import styled from 'styled-components'
 
-import { fetcher, getUrl } from "@/utils/api/api";
+import { fetcher, getUrl } from "@/utils/api";
 import { useFilter, useFilterDispatch } from "@/providers/filter";
 import { useData } from "@/providers/data/data";
 

@@ -1,11 +1,16 @@
+import React, { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
+
 import TimelineHeader from "@/components/pages/timeline/header/header";
 import TimelineContent from "@/components/pages/timeline/content";
-import {useEffect, useState} from "react";
-import { ThemeProvider } from "styled-components";
+import Layout from "@/components/layout/layout";
 
 import { breakpoints } from "@/themes/theme";
 import { timelineLTheme, timelineMTheme } from "@/themes/pages/timeline";
+
 import useWindowSize from "@/hooks/window_size";
+
+const NUMBER_OF_SLIDER_STATES = 3
 
 export default function Timeline() {
   const [responsiveTheme, setResponsiveTheme] = useState(timelineLTheme)
@@ -20,9 +25,11 @@ export default function Timeline() {
   }, [windowSize?.width])
 
   return (
-    <ThemeProvider theme={responsiveTheme}>
-      <TimelineHeader />
-      <TimelineContent />
-    </ThemeProvider>
+    <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES}>
+      <ThemeProvider theme={responsiveTheme}>
+        <TimelineHeader />
+        <TimelineContent />
+      </ThemeProvider>
+    </Layout>
   );
 }

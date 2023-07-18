@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 import { HoverLink } from "@/components/hover_link";
 
-export default function FooterTitle({ setIsLinkClicked }) {
+export default function FooterTitle() {
   return (
     <TitleContainer>
-      <HoverLink setIsLinkClicked={setIsLinkClicked} href="/">UdK Berlin Rundgang</HoverLink>
+      <HoverLink href="/">UdK Berlin Rundgang</HoverLink>
     </TitleContainer>
   );
 }

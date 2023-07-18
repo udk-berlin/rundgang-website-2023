@@ -1,24 +1,37 @@
+import React from "react";
+
 import Page from "@/components/pages/page";
 import Imprint from "@/components/pages/imprint";
-import { SavedProjectsProvider } from "@/providers/saved_projects";
-import React, {useState} from "react";
 import LoadingLayout from "@/components/layout/loading";
 import Layout from "@/components/layout/layout";
 
-export default function ImprintPage() {
-  const [isLinkClicked, setIsLinkClicked] = useState(false)
+import { SavedProjectsProvider } from "@/providers/saved_projects";
+import { LinkProvider, useLink } from "@/providers/link";
 
+export default function ImprintPage() {
   return (
     <Page title="imprint">
+      <LinkProvider>
+        <LinkProviderChildren />
+      </LinkProvider>
+    </Page>
+  );
+}
+
+function LinkProviderChildren() {
+  const link = useLink()
+
+  return (
+    <>
       {
-        isLinkClicked ?
+        link.clicked ?
           <LoadingLayout /> :
           <SavedProjectsProvider>
-            <Layout disableFilter={true} disableSlider={true} setIsLinkClicked={setIsLinkClicked} >
+            <Layout disableFilter={true} disableSlider={true}>
               <Imprint />
             </Layout>
           </SavedProjectsProvider>
       }
-    </Page>
-  );
+    </>
+  )
 }

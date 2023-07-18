@@ -2,7 +2,7 @@ import React from 'react'
 import { ProjectDataProvider, useProjectData } from "@/providers/data/project";
 import { ProjectsDataProvider, useProjectsData } from "@/providers/data/projects";
 
-export function DataProvider ({ children, onlyTemporalData = false, forProject = false, id }) {
+export function DataProvider ({ children, onlyTemporalData = false, forProject = false, id = null }) {
   return (
     <>
       {
