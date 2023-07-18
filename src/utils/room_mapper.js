@@ -9,6 +9,8 @@ export function mapRoom(room) {
     return {id: room.id, formattedMessageId: 'technic', name: room.name.replace('TF-', '').replace('TF ', '')}
   } else if (room.name === 'Außenvitrine') {
     return {id: room.id, formattedMessageId: null, name: room.name}
+  } else if (room.name === 'Garten') {
+    return {id: room.id, formattedMessageId: null, name: room.name}
   } else {
     return {id: room.id, formattedMessageId: 'room', name: room.name}
   }

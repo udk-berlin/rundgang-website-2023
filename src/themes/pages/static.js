@@ -9,9 +9,11 @@ export const staticLTheme = {
   ...baseLTheme,
   container: {
     gridTemplateColumns: "1fr 7fr",
+    padding: '2rem 3vw',
   },
   staticTitle: {
     fontSize: "1rem",
+    position: 'fixed',
   },
   accordion: {
     itemWrapper: {
@@ -30,9 +32,11 @@ export const staticMTheme = {
   ...baseMTheme,
   container: {
     gridTemplateColumns: "1fr",
+    padding: '1rem 3vw 3rem 3vw',
   },
   staticTitle: {
     fontSize: "1.2rem",
+    position: 'inline',
   },
   accordion: {
     itemWrapper: {

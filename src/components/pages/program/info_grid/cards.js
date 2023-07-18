@@ -372,7 +372,7 @@ export function InfoGridContext({ project, forProjectPage = false }) {
         Object.values(structures.faculties).map(faculty => {
           return (
             <>
-              <InfoGridCardItem href={`/program/${faculty.id}`} withLink={true} margin="50">{faculty.name}</InfoGridCardItem>
+              <InfoGridCardItem href={`/program/${faculty.id}`} withLink={true} margin="50"><FormattedMessage id={faculty.name} /></InfoGridCardItem>
               {
                 Object.values(faculty.institutes).map(institute => {
                   return (
@@ -416,7 +416,7 @@ export function InfoGridContext({ project, forProjectPage = false }) {
         Object.values(structures.centres).map(centre => {
           return (
             <>
-              <InfoGridCardItem href={`/program/${CENTER_ID}`} withLink={true} margin="50">{centre.name}</InfoGridCardItem>
+              <InfoGridCardItem href={`/program/${CENTER_ID}`} withLink={true} margin="50"><FormattedMessage id={centre.name} /></InfoGridCardItem>
               {Object.values(centre.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>)}
               {
                 Object.values(centre.consultingServices).map(consultingService => {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import InfoGridItemLink from "@/components/pages/program/info_grid/item";
 import { useSlider } from "@/providers/slider";
 import {useData} from "@/providers/data/data";
+import {FormattedMessage} from "react-intl";
 
 const formatToMarginLeftMapper = {
   Ausstellung: "73",
@@ -38,6 +39,7 @@ export default function InfoGridFormat({ project, margin, forProjectPage = false
   contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
       const context = contexts[parent.id]
+
       if (context && context.template && context.template === 'format-element') {
         formats.push(context)
       }
@@ -45,21 +47,21 @@ export default function InfoGridFormat({ project, margin, forProjectPage = false
   })
 
   return (
-    <Container slider={slider}>
+    <FormatContainer slider={slider}>
       {
         formats.map(format => {
           return (
             <InfoGridItemLink href={`/program/${format.id}`} margin={formatToMarginLeftMapper[format.name] && !margin ? formatToMarginLeftMapper[format.name] : formatToMarginLeftMapper.default}>
-              {format.name}
+              <FormattedMessage id={format.name} />
             </InfoGridItemLink>
           )
         })
       }
-    </Container>
+    </FormatContainer>
   );
 }
 
-const Container = styled.div`
+const FormatContainer = styled.div`
   width: 100%;
   max-height: ${(props) =>
     props.slider.position >= props.theme.format.sliderIndex ? "500px" : "0px"};

@@ -28,6 +28,7 @@ export default function StaticLayout({
     <ThemeProvider theme={responsiveTheme}>
       <Container>
         {staticTitle(layout, title)}
+        <div></div>
         {children}
       </Container>
     </ThemeProvider>
@@ -37,15 +38,26 @@ export default function StaticLayout({
 const Container = styled.div`
   display: grid;
   grid-template-columns: ${({ theme }) => theme.container.gridTemplateColumns};
-  padding: 2rem;
+  
+  min-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
+
+  padding: ${({ theme }) => theme.container.padding};
+  
+  border-right: ${({ theme }) => theme.border};
+  border-left: ${({ theme }) => theme.border};
 `;
 const StaticTitle = styled.div`
+  position: ${({ theme }) => theme.staticTitle.position};
+  
+  padding-bottom: 1rem;
+  
   font-weight: 600;
   font-size: ${({ theme }) => theme.staticTitle.fontSize};
-  padding-bottom: 1rem;
 `;
 
 const FaqStaticTitle = styled(StaticTitle)`
+  position: ${({ theme }) => theme.staticTitle.position};
+
   padding: 0.5rem 0;
 `;
 

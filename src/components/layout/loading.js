@@ -19,7 +19,12 @@ export const LoadingContainer =  styled.div`
   min-width: 100vw;
   max-width: 100vw;
 
-  height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
-  min-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
-  max-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
+  min-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height} + ${theme.borderWidth})`};
+  
+  margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
+  padding: ${({ theme }) => theme.MASONRY_GUTTER};
+
+  border-bottom: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
+  border-left: ${({ theme }) => theme.border};
 `

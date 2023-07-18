@@ -91,6 +91,8 @@ const MediaContainer = styled.div`
   flex-direction: ${({ theme }) => theme.media.flexDirection};
   position: relative;
   
+  top: calc(2 * ${({ theme }) => theme.borderWidth});
+  
   height: ${({ theme }) => theme.media.height};
   min-height: ${({ theme }) => theme.media.height};
   max-height: ${({ theme }) => theme.media.height};
@@ -130,6 +132,8 @@ const ThumbnailMediaContainer = styled.img`
   width: ${({ theme }) => theme.media.thumbnail.width};
   min-width: ${({ theme }) => theme.media.thumbnail.width};
   max-width: ${({ theme }) => theme.media.thumbnail.width};
+
+  margin-bottom: calc(-2 * ${({ theme }) => theme.borderWidth});
 `;
 
 const ImageMediaContainer = styled.img`

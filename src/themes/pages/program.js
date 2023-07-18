@@ -1,9 +1,15 @@
 import { baseLTheme, baseMTheme, fontSizes } from "@/themes/theme";
+import {layoutLTheme, layoutMTheme} from "@/themes/layout";
 
+const height =  {
+  l: `calc(100vh - ${layoutLTheme.footer.height} - ${layoutLTheme.header.height} + ${baseLTheme.borderWidth})`,
+  m: `calc(100vh - ${layoutMTheme.footer.height} - ${layoutMTheme.header.height} + ${baseMTheme.borderWidth})`,
+}
 export const programLTheme = {
   ...baseLTheme,
   MASONRY_COLUMNS: 4,
   MASONRY_GUTTER: "0.75rem",
+  height: height.l,
   padding: "0.75rem",
   title: {
     fontSize: fontSizes.m.large,
@@ -38,6 +44,7 @@ export const programMTheme = {
   ...baseMTheme,
   MASONRY_COLUMNS: 2,
   MASONRY_GUTTER: "0.75rem",
+  height: height.m,
   padding: "0.75rem",
   title: {
     fontSize: fontSizes.m.large,
@@ -72,6 +79,7 @@ export const programSTheme = {
   ...baseMTheme,
   MASONRY_COLUMNS: 1,
   MASONRY_GUTTER: "0.75rem",
+  height: height.m,
   padding: "0.75rem",
   title: {
     fontSize: fontSizes.l.medium,

@@ -12,7 +12,7 @@ export default function InfoGridDay({ projectTime }) {
       <DateContainer day={projectTime[0]}>
         <span>{dayToWeekDayMapper[projectTime[0].getDay()]}</span>
         <span>
-          {projectTime[0].getDate() + "." + projectTime[0].getMonth() + "."}
+          {projectTime[0].getDate() + "." + 7 + "."}
         </span>
       </DateContainer>
     </InfoGridDayContainer>
