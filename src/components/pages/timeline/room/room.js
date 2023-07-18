@@ -14,7 +14,7 @@ export default function TimelineLocationRoom({ room, index }) {
       <RoomContainer key={room.id}>
         <Room>
           <LocalizedLink href={`/locations/${room.id}`}>
-            { mappedRoom.formattedMessageId ? <span><FormattedMessage id={mappedRoom.formattedMessageId}/>: </span> : <></> } {mappedRoom.name}
+            { mappedRoom.formattedMessageId ? <span><FormattedMessage id={mappedRoom.formattedMessageId}/>:&nbsp;</span> : <></> } {mappedRoom.name}
           </LocalizedLink>
         </Room>
       </RoomContainer>
