@@ -3,7 +3,6 @@ import { useIntl } from "react-intl";
 import StaticLayout, {
   StaticLayoutParagraph,
 } from "@/components/layout/static_layout";
-import Layout from "@/components/layout/layout";
 
 const IMPRINT = {
   de: [

@@ -15,8 +15,8 @@ import {
 } from "@/themes/pages/program";
 import LoadingLayout from "@/components/layout/loading";
 
-export default function Program({ setIsLinkClicked }) {
-  const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
+export default function Program() {
+  const [responsiveTheme, setResponsiveTheme] = useState(null);
   const windowSize = useWindowSize();
   const filter = useFilter();
 
@@ -25,7 +25,7 @@ export default function Program({ setIsLinkClicked }) {
       setResponsiveTheme(programSTheme);
     } else if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(programMTheme);
-    } else {
+    } else if (windowSize?.width) {
       setResponsiveTheme(programLTheme);
     }
   }, [windowSize?.width]);
@@ -33,9 +33,9 @@ export default function Program({ setIsLinkClicked }) {
   return (
     <>
       {
-        windowSize?.width ?
+        responsiveTheme ?
           (
-            <Layout setIsLinkClicked={setIsLinkClicked} defaultSliderPosition={2}>
+            <Layout defaultSliderPosition={2}>
               <ThemeProvider theme={responsiveTheme}>
                 <ProgramContainer>
                   <Masonry
@@ -48,7 +48,7 @@ export default function Program({ setIsLinkClicked }) {
                 </ProgramContainer>
               </ThemeProvider>
             </Layout>
-          ) : <LoadingLayout />
+          ) : <LoadingLayout></LoadingLayout>
 
       }
     </>
@@ -56,15 +56,12 @@ export default function Program({ setIsLinkClicked }) {
 }
 
 const ProgramContainer = styled.div`
-  min-height: calc(
-    100vh - var(--layout-header-height) - var(--layout-footer-height) +
-      var(--border-width)
-  );
+  min-height: ${({ theme }) => theme.height};
 
-  margin-bottom: -2px;
+  margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
   padding: ${({ theme }) => theme.MASONRY_GUTTER};
 
-  border-bottom: var(--border-width) solid var(--border-color);
-  border-right: var(--border-width) solid var(--border-color);
-  border-left: var(--border-width) solid var(--border-color);
+  border-bottom: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
+  border-left: ${({ theme }) => theme.border};
 `;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FormattedMessage } from 'react-intl'
 import TimelineLocationRooms from '@/components/pages/timeline/room/rooms'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
+import { LocalizedLink } from "@/components/localization/links";
 
 export default function TimelineLocationFloor({ floor }) {
   const rooms = Object.values(floor.children).filter(child => child.template === 'location-room')
@@ -11,7 +12,9 @@ export default function TimelineLocationFloor({ floor }) {
   return (
     <>
       <FloorContainer key={floor.id}>
-        <FormattedMessage id={'floor'} />: {floor.name}
+        <LocalizedLink href={`/locations/${floor.id}`}>
+          <FormattedMessage id={'floor'} />: {floor.name}
+        </LocalizedLink>
       </FloorContainer>
 
       <TimelineLocationRooms rooms={rooms} />
@@ -33,8 +36,7 @@ const FloorContainer = styled.div`
   min-height: ${({theme}) => theme.box.height};
   max-height: ${({theme}) => theme.box.height};
   width: ${({theme}) => theme.floor.width};
-
-  padding: ${({theme}) => theme.box.padding};
+  
   margin-top: calc(${({theme}) => theme.borderWidth} * -1);
   
   border: ${({theme}) => theme.border};
@@ -47,5 +49,18 @@ const FloorContainer = styled.div`
   font-weight: ${({theme}) => theme.fontWeights.small};
   color: ${({theme}) => theme.colors.black};
 
-  cursor: default;
+  a {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    
+    padding: ${({theme}) => theme.box.padding};
+    
+    :hover {
+      color: ${({theme}) => theme.colors.white};
+      background: ${({theme}) => theme.colors.pink};
+    }
+  }
 `;

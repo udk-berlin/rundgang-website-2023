@@ -68,7 +68,7 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
                 }
                 selected={category.selected(f)}
               >
-                {f.name}
+                <FormattedMessage id={f.name} />
               </FilterNameContainer>
             ))}
           </FiltersContainer>

@@ -9,6 +9,7 @@ import InfoGridFormat from "@/components/pages/program/info_grid/format";
 import { InfoGridContainer } from "@/components/pages/program/info_grid/info_grid";
 
 export default function ProjectInfoGrid({ project, forProjectPage = false }) {
+
   return (
     <ProjectInfoGridContainer>
       <FormatDateContainer>
@@ -47,15 +48,11 @@ const ProjectInfoGridContainer = styled(InfoGridContainer)`
 `;
 
 const FormatDateContainer = styled.div`
-  /* max-width: ${(props) =>
-    props.slider.position >= props.theme.format.sliderIndex
-      ? "500px"
-      : "0px"}; */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 
-  &:first-child {
+  :first-child {
     align-items: start;
   }
 

@@ -7,17 +7,17 @@ import HeaderBarLocalization from "@/components/layout/header/bar/localization";
 import HeaderBarLocations from "@/components/layout/header/bar/locations";
 import HeaderBarProgram from "@/components/layout/header/bar/program";
 
-export default function HeaderBar({ setIsLinkClicked }) {
+export default function HeaderBar() {
   return (
     <HeaderBarContainer>
       <HeaderBarLeftContainer>
-        <HeaderBarLocations setIsLinkClicked={setIsLinkClicked}/>
-        <HeaderBarProgram setIsLinkClicked={setIsLinkClicked} />
+        <HeaderBarLocations />
+        <HeaderBarProgram />
       </HeaderBarLeftContainer>
-      <HeaderBarTimeline setIsLinkClicked={setIsLinkClicked} />
+      <HeaderBarTimeline />
       <HeaderBarRightContainer>
-        <HeaderBarSavedProjects setIsLinkClicked={setIsLinkClicked} />
-        <HeaderBarLocalization setIsLinkClicked={setIsLinkClicked} />
+        <HeaderBarSavedProjects />
+        <HeaderBarLocalization />
       </HeaderBarRightContainer>
     </HeaderBarContainer>
   );

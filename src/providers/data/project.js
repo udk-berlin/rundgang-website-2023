@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useMemo } from 'react'
 import {gql, useQuery} from "@apollo/client";
 import useSWR from "swr";
-import {fetcher, getRenderJsonUrl} from "@/utils/api/api";
+import {fetcher, getRenderJsonUrl} from "@/utils/api";
 
 const CONTEXTS_QUERY = gql`
 {

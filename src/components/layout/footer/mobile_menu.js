@@ -45,33 +45,42 @@ export default function MobileMenu() {
 }
 
 const MobileMenuContainer = styled.div`
-  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(15px);
-  padding: 0.5rem;
 
-  > a {
-    color: white;
-  }
   width: min-content;
+
   margin-left: auto;
   margin-right: 0;
-  border: var(--border-width) solid var(--border-color);
 
+  border: var(--border-width) solid var(--border-color);
+  border-bottom: 0;
+
+  padding: 0.5rem;
+
+  background-color: rgb(255, 255, 255);
+  backdrop-filter: blur(5px);
+
+  font-size: 1.2rem;
   font-weight: 500;
+  color: black;
+  //text-transform: uppercase;
+
+  > a {
+    color: black;
+  }
 `;
 
 const MobileLocalizationContainer = styled.div`
   > div {
     > div {
-      color: white;
+      color: black;
+      font-size: 1.2rem;
       > div {
         > a {
-          color: white;
+          color: black;
         }
       }
     }

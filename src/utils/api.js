@@ -13,10 +13,6 @@ export async function get (query) {
   return await fetcher(getUrl(query))
 }
 
-export async function getId (id) {
-  return await get(id)
-}
-
 export async function getTree (id) {
   return await get(`${id}/tree`)
 }

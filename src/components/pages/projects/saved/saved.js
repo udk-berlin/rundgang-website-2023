@@ -1,57 +1,30 @@
+import React, { useEffect, useState } from "react";
 import Masonry from "react-responsive-masonry";
 import styled, { ThemeProvider } from "styled-components";
 
+import ProjectCell from "@/components/pages/program/project_cell";
+import Layout from "@/components/layout/layout";
+
 import { useFilter } from "@/providers/filter";
 import { useSavedProjects } from "@/providers/saved_projects";
+import useWindowSize from "@/hooks/window_size";
 
-import ProjectCell from "@/components/pages/program/project_cell";
-import {useEffect, useMemo, useState} from "react";
+import { breakpoints } from "@/themes/theme";
 import {
   programLTheme,
   programMTheme,
   programSTheme,
 } from "@/themes/pages/program";
-import useWindowSize from "@/hooks/window_size";
-import { breakpoints } from "@/themes/theme";
-import {gql, useQuery} from "@apollo/client";
-
-const CONTEXTS_QUERY = gql`
-{
-  contexts {
-    id,
-    name,
-    template,
-    parents {
-      id
-    }
-  }
-}
-`;
-
-
-function buildObjects(res) {
-  const obj = {}
-
-  if (res && res.data && res.data.contexts) {
-    res.data.contexts.forEach(context => {
-      obj[context.id] = context
-    })
-  }
-
-  return obj
-}
 
 export default function SavedProjects() {
   const filter = useFilter();
   const savedProjects = useSavedProjects();
+
   const projects = getSavedAndFilteredProjects(
     savedProjects,
     filter.filteredProjects,
     true
   );
-
-  let contextsResponse = useQuery(CONTEXTS_QUERY);
-  const contexts = useMemo(() => buildObjects(contextsResponse), [contextsResponse]);
 
   const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
   const windowSize = useWindowSize();
@@ -67,23 +40,32 @@ export default function SavedProjects() {
   }, [windowSize?.width]);
 
   return (
-    <ThemeProvider theme={responsiveTheme}>
-      <SavedProjectsContainer>
-        <Masonry
-          columnsCount={responsiveTheme.MASONRY_COLUMNS}
-          gutter={responsiveTheme.MASONRY_GUTTER}
-        >
-          {projects.map((project) => (
-            <ProjectCell project={project} contexts={contexts}/>
-          ))}
-        </Masonry>
-      </SavedProjectsContainer>
-    </ThemeProvider>
+    <Layout>
+      <ThemeProvider theme={responsiveTheme}>
+        <SavedProjectsContainer>
+          <Masonry
+            columnsCount={responsiveTheme.MASONRY_COLUMNS}
+            gutter={responsiveTheme.MASONRY_GUTTER}
+          >
+            {projects.map((project) => (
+              <ProjectCell project={project} />
+            ))}
+          </Masonry>
+        </SavedProjectsContainer>
+      </ThemeProvider>
+    </Layout>
   );
 }
 
 const SavedProjectsContainer = styled.div`
-  padding: var(--program-padding);
+  min-height: ${({ theme }) => theme.height};
+
+  margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
+  padding: ${({ theme }) => theme.MASONRY_GUTTER};
+
+  border-bottom: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
+  border-left: ${({ theme }) => theme.border};
 `;
 
 function getSavedAndFilteredProjects(savedProjects, filteredProjects, useFast = false) {
