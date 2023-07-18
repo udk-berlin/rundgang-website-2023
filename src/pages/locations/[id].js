@@ -48,16 +48,19 @@ function DataProviderChildren({ id }) {
     let level
     let room
 
-    if (template === 'location-building' || template === 'location-level' || template === 'location-room') {
+    if (template === 'location-building') {
       location = data[0]
+    }
 
-      if (template === 'location-level' || template === 'location-room') {
-        level = Object.values(location.children)[0]
+    if (template === 'location-level') {
+      location = filterByNodeId(Object.values(locations), data[0].id).data[0]
+      level = Object.values(data[0].children)[0]
+    }
 
-        if (template === 'location-room') {
-          room = Object.values(level.children)[0]
-        }
-      }
+    if (template === 'location-room') {
+      location = filterByNodeId(Object.values(locations), data[0].id).data[0]
+      level = Object.values(filterByNodeId(Object.values(locations), Object.values(data[0].children)[0].id).data[0].children)[0]
+      room = Object.values(Object.values(data[0].children)[0].children)[0]
     }
 
     components = <FilterProvider

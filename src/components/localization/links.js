@@ -6,23 +6,20 @@ import styled from "styled-components";
 
 import styles from "@/styles/localization/Links.module.css";
 
-import { useLinkDispatch } from "@/providers/link";
-
 export function SwitchLocalizationLink() {
-  const dispatch = useLinkDispatch()
   const router = useRouter();
   const language = useIntl();
 
   return (
     <SwitchLocalizationWrapper>
       <SwitchLocalizationLinkContainer selected={language.locale === "de"}>
-        <Link onClick={() => dispatch({type: 'clicked'})} href={router.asPath} locale={"de"}>
+        <Link href={router.asPath} locale={"de"}>
           DE
         </Link>
       </SwitchLocalizationLinkContainer>
       <SlashContainer>&nbsp;/&nbsp;</SlashContainer>
       <SwitchLocalizationLinkContainer selected={language.locale === "en"}>
-        <Link onClick={() => dispatch({type: 'clicked'})} href={router.asPath} locale={"en"}>
+        <Link href={router.asPath} locale={"en"}>
           EN
         </Link>
       </SwitchLocalizationLinkContainer>
@@ -54,11 +51,10 @@ const SwitchLocalizationLinkContainer = styled.div`
 `;
 
 export function LocalizedLink({ href, children }) {
-  const dispatch = useLinkDispatch()
   const language = useIntl();
 
   return (
-    <Link onClick={() => dispatch({type: 'clicked'})} className={styles.link} href={href} locale={language.locale}>
+    <Link className={styles.link} href={href} locale={language.locale}>
       {children}
     </Link>
   );
