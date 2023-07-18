@@ -3,6 +3,7 @@ import { FormattedMessage } from "react-intl";
 
 import { InfoGridCardItem } from "@/components/pages/program/info_grid/item";
 import { useData } from "@/providers/data/data";
+import { mapRoom } from "@/utils/room_mapper";
 
 const CENTER_ID = '!uGRoYVWPeAFDnpWCYl:content.udk-berlin.de'
 
@@ -35,7 +36,7 @@ export function InfoGridLocation({ project, forProjectPage = false }) {
 
           locations.push(
             {
-              room: room,
+              room: mapRoom(room),
               floor: floor,
               building: building,
             }
@@ -68,8 +69,7 @@ export function InfoGridLocation({ project, forProjectPage = false }) {
               {
                 location.room ?
                   <InfoGridCardItem href={`/locations/${location.room.id}`} margin="50">
-                    <FormattedMessage id="room" />
-                    :&nbsp;
+                    {location.room.formattedMessageId ? <span><FormattedMessage id={location.room.formattedMessageId} />: </span> : <></>}
                     {location.room.name}
                   </InfoGridCardItem> : <></>
               }

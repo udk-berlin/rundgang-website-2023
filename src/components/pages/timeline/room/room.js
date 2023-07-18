@@ -3,18 +3,18 @@ import styled from "styled-components";
 import { FormattedMessage } from 'react-intl'
 import TimelineProjectsGroups from "@/components/pages/timeline/project/projects_groups";
 import { LocalizedLink } from "@/components/localization/links";
-import { mappeRoom } from "@/utils/room_mapper";
+import { mapRoom } from "@/utils/room_mapper";
 
 export default function TimelineLocationRoom({ room, index }) {
   const projectIds = Object.values(room.children).filter(child => child.type === 'item').map(child => child.id)
-  const mappedRoom = mappeRoom(room.name)
+  const mappedRoom = mapRoom(room)
 
   return (
     <>
       <RoomContainer key={room.id}>
         <Room>
           <LocalizedLink href={`/locations/${room.id}`}>
-            { mappedRoom.id ? <><FormattedMessage id={mappedRoom.id}/>:</> : <></> } {mappedRoom.name}
+            { mappedRoom.formattedMessageId ? <span><FormattedMessage id={mappedRoom.formattedMessageId}/>: </span> : <></> } {mappedRoom.name}
           </LocalizedLink>
         </Room>
       </RoomContainer>

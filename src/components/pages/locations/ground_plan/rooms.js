@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useFilter, useFilterDispatch } from '@/providers/filter'
 import { sortByName } from "@/components/pages/locations/ground_plan/content";
 import { useData } from "@/providers/data/data";
-import { mappeRoom } from "@/utils/room_mapper";
+import { mapRoom } from "@/utils/room_mapper";
 
 export default function LocationsGroundPlanRooms ({ locationsGroundPlanFloorsContainerHeight }) {
   const filter = useFilter()
@@ -41,12 +41,12 @@ function LocationsGroundPlanRoom ({ key, room }) {
       })
   }
 
-  const mappedRoom = mappeRoom(room.name)
+  const mappedRoom = mapRoom(room)
 
   return (
     <LocationsGroundPlanRoomContainer key={key} selected={(filter.room && filter.room.id === room.id)} onClick={handleClick}>
       <div>
-        {mappedRoom.id ? <span><FormattedMessage id={mappedRoom.id}/>: </span> : <></>}
+        {mappedRoom.formattedMessageId ? <span><FormattedMessage id={mappedRoom.formattedMessageId}/>: </span> : <></>}
         {mappedRoom.name}
       </div>
     </LocationsGroundPlanRoomContainer>

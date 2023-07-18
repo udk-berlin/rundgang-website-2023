@@ -1,15 +1,15 @@
-export function mappeRoom(name) {
-  if (name.startsWith('R-') || name.startsWith('RE-') || name.startsWith('R ') || name.startsWith('RE ')) {
-    return {id: 'room', name: name.replace('RE-', '').replace('R-', '').replace('RE ', '').replace('R ', '')}
-  } else if (name.startsWith('V-') || name.startsWith('VF-') || name.startsWith('V ') || name.startsWith('VF ')) {
-    return {id: 'corridor', name: name.replace('VF-', '').replace('V-', '').replace('VF ', '').replace('V ', '')}
-  } else if (name.startsWith('TH-') || name.startsWith('TPH-') || name.startsWith('TH ') || name.startsWith('TPH ')) {
-    return {id: 'stairs', name: name.replace('TH-', '').replace('TPH-', '').replace('TH ', '').replace('TPH ', '')}
-  } else if (name.startsWith('TF-') || name.startsWith('TF ')) {
-    return {id: 'technic', name: name.replace('TF-', '').replace('TF ', '')}
-  } else if (name === 'Außenvitrine') {
-    return {id: null, name: name}
+export function mapRoom(room) {
+  if (room.name.startsWith('R-') || room.name.startsWith('RE-') || room.name.startsWith('R ') || room.name.startsWith('RE ')) {
+    return {id: room.id, formattedMessageId: 'room', name: room.name.replace('RE-', '').replace('R-', '').replace('RE ', '').replace('R ', '')}
+  } else if (room.name.startsWith('V-') || room.name.startsWith('VF-') || room.name.startsWith('V ') || room.name.startsWith('VF ')) {
+    return {id: room.id, formattedMessageId: 'corridor', name: room.name.replace('VF-', '').replace('V-', '').replace('VF ', '').replace('V ', '')}
+  } else if (room.name.startsWith('TH-') || room.name.startsWith('TPH-') || room.name.startsWith('TH ') || room.name.startsWith('TPH ')) {
+    return {id: room.id, formattedMessageId: 'stairs', name: room.name.replace('TH-', '').replace('TPH-', '').replace('TH ', '').replace('TPH ', '')}
+  } else if (room.name.startsWith('TF-') || room.name.startsWith('TF ')) {
+    return {id: room.id, formattedMessageId: 'technic', name: room.name.replace('TF-', '').replace('TF ', '')}
+  } else if (room.name === 'Außenvitrine') {
+    return {id: room.id, formattedMessageId: null, name: room.name}
   } else {
-    return {id: 'room', name: name}
+    return {id: room.id, formattedMessageId: 'room', name: room.name}
   }
 }
