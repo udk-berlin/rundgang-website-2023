@@ -1,4 +1,4 @@
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 import { breakpoints } from "@/themes/theme";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";

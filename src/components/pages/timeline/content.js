@@ -9,7 +9,7 @@ import TimelineLocations from "@/components/pages/timeline/location/locations";
 import { breakpoints } from "@/themes/theme";
 import { NUMBER_OF_HOURS, DAYS, timelineWidthsWithoutVW } from "@/themes/pages/timeline";
 
-import useWindowSize from '@/hooks/window_size'
+import { useWindowSize } from "@/providers/window_size";
 
 export default function TimelineContent() {
   const windowSize = useWindowSize()

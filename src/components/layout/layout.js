@@ -5,7 +5,9 @@ import Header from "@/components/layout/header/header";
 import Footer from "@/components/layout/footer/footer";
 import FooterMobile from "@/components/layout/footer/footer_mobile";
 import { useEffect, useState } from "react";
-import useWindowSize from "@/hooks/window_size";
+
+import { useWindowSize } from "@/providers/window_size";
+
 import {
   breakpoints,
   layoutLTheme,
@@ -19,40 +21,35 @@ export default function Layout({
   disableSlider = false,
   defaultSliderPosition = 0
 }) {
-  const [responsiveTheme, setResponsiveTheme] = useState(layoutLTheme);
-  const [mobile, setMobile] = useState(false);
+  const [responsiveTheme, setResponsiveTheme] = useState(null);
+  const [footer, setFooter] = useState(<></>);
   const windowSize = useWindowSize();
 
   useEffect(() => {
     if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(layoutMTheme);
-      setMobile(true);
-    } else {
+      setFooter(<FooterMobile numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />)
+    } else if (windowSize?.width > breakpoints.m) {
       setResponsiveTheme(layoutLTheme);
-      setMobile(false);
+      setFooter(<Footer numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />)
     }
   }, [windowSize?.width]);
 
   return (
-    <ThemeProvider theme={responsiveTheme}>
-      <LayoutContainer>
-        <SliderProvider defaultPosition={defaultSliderPosition}>
-          <Header disableFilter={disableFilter} />
-          <Content>{children}</Content>
-          {mobile ? (
-            <FooterMobile
-              numberOfSliderStates={numberOfSliderStates}
-              disableSlider={disableSlider}
-            />
-          ) : (
-            <Footer
-              numberOfSliderStates={numberOfSliderStates}
-              disableSlider={disableSlider}
-            />
-          )}
-        </SliderProvider>
-      </LayoutContainer>
-    </ThemeProvider>
+    <>
+      {
+        responsiveTheme ?
+          <ThemeProvider theme={responsiveTheme}>
+            <LayoutContainer>
+              <SliderProvider defaultPosition={defaultSliderPosition}>
+                <Header disableFilter={disableFilter} />
+                <Content>{children}</Content>
+                {footer}
+              </SliderProvider>
+            </LayoutContainer>
+          </ThemeProvider> : <></>
+      }
+    </>
   );
 }
 

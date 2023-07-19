@@ -30,6 +30,7 @@ const header = {
 
 export const layoutLTheme = {
   ...baseLTheme,
+  id: 'l',
   localization: {
     fontSize: "0.85rem",
     color: "black",
@@ -58,6 +59,7 @@ export const layoutLTheme = {
 
 export const layoutMTheme = {
   ...baseMTheme,
+  id: 'm',
   localization: {
     fontSize: "1.5rem",
     color: "black",

@@ -7,29 +7,29 @@ import LoadingLayout from "@/components/layout/loading";
 import { DataProvider, useData } from "@/providers/data/data";
 import { SavedProjectsProvider } from '@/providers/saved_projects'
 import { FilterProvider } from "@/providers/filter";
-import { useLink, LinkProvider } from "@/providers/link";
+import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function TimelinePage() {
   return (
     <Page title="timeline">
-      <LinkProvider>
-       <LinkProviderChildren />
-      </LinkProvider>
+      <WindowSizeProvider>
+        <WindowSizeChildren />
+      </WindowSizeProvider>
     </Page>
   );
 }
 
-function LinkProviderChildren() {
-  const link = useLink()
+function WindowSizeChildren() {
+  const windowSize = useWindowSize()
 
   return (
     <>
       {
-        link.clicked ?
-          <LoadingLayout /> :
+        windowSize ?
           <DataProvider onlyTemporalData={true}>
             <DataProviderChildren />
-          </DataProvider>
+          </DataProvider> :
+          <></>
       }
     </>
   )
@@ -39,10 +39,9 @@ function DataProviderChildren() {
   const { locations, projects, structures, structureFilters , formats, formatFilters } = useData()
 
   return (
-    <>
+    <SavedProjectsProvider>
       {
         locations && projects && structures && structureFilters && formats && formatFilters ?
-          <SavedProjectsProvider>
           <FilterProvider
             locations={locations}
             projects={projects}
@@ -51,10 +50,8 @@ function DataProviderChildren() {
             formats={formats}
             formatFilters={formatFilters}>
               <Timeline />
-          </FilterProvider>
-          </SavedProjectsProvider>:
-          <LoadingLayout />
+          </FilterProvider> : <LoadingLayout />
       }
-    </>
+    </SavedProjectsProvider>
   );
 }

@@ -10,7 +10,7 @@ import ProjectMedia from "@/components/pages/projects/project/media";
 
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 import {
   projectBreakpoints,
   projectLTheme,
@@ -21,9 +21,10 @@ import {
 const NUMBER_OF_SLIDER_STATES = 5
 
 import { useData } from "@/providers/data/data";
+import LoadingLayout from "@/components/layout/loading";
 
 export default function Project() {
-  const [responsiveTheme, setResponsiveTheme] = useState(projectLTheme);
+  const [responsiveTheme, setResponsiveTheme] = useState(null);
   const [infoGridPos, setInfoGridPos] = useState(true);
   const windowSize = useWindowSize();
   const { project } = useData(true)
@@ -35,30 +36,35 @@ export default function Project() {
     } else if (windowSize?.width <= projectBreakpoints.m) {
       setResponsiveTheme(projectMTheme);
       setInfoGridPos(false);
-    } else {
+    } else if (windowSize?.width > projectBreakpoints.m) {
       setResponsiveTheme(projectLTheme);
       setInfoGridPos(true);
     }
   }, [windowSize?.width]);
 
   return (
-    <Layout
-      disableFilter={true}
-      disableSlider={infoGridPos}
-      numberOfSliderStates={NUMBER_OF_SLIDER_STATES}
-    >
-      <ThemeProvider theme={responsiveTheme}>
-        <ProjectContainer>
-          <ProjectMedia project={project} infoGridPos={infoGridPos}/>
-          <InfoContainer>
-            <ProjectTitle project={project} link={false} />
-            <ProjectAuthors project={project} fontSize={1} />
-            {infoGridPos ? <></> : <InfoGrid project={project} forProjectPage={true} />}
-            <ProjectText />
-          </InfoContainer>
-        </ProjectContainer>
-      </ThemeProvider>
-    </Layout>
+    <>
+      {
+        responsiveTheme ?
+          <Layout
+            disableFilter={true}
+            disableSlider={infoGridPos}
+            numberOfSliderStates={NUMBER_OF_SLIDER_STATES}
+          >
+            <ThemeProvider theme={responsiveTheme}>
+              <ProjectContainer>
+                <ProjectMedia project={project} infoGridPos={infoGridPos}/>
+                <InfoContainer>
+                  <ProjectTitle project={project} link={false} />
+                  <ProjectAuthors project={project} fontSize={1} />
+                  {infoGridPos ? <></> : <InfoGrid project={project} forProjectPage={true} />}
+                  <ProjectText />
+                </InfoContainer>
+              </ProjectContainer>
+            </ThemeProvider>
+          </Layout> : <LoadingLayout />
+      }
+    </>
   );
 }
 

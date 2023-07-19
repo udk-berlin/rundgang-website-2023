@@ -7,6 +7,7 @@ const height =  {
 }
 export const programLTheme = {
   ...baseLTheme,
+  id: 'l',
   MASONRY_COLUMNS: 4,
   MASONRY_GUTTER: "0.75rem",
   height: height.l,
@@ -42,6 +43,7 @@ export const programLTheme = {
 
 export const programMTheme = {
   ...baseMTheme,
+  id: 'm',
   MASONRY_COLUMNS: 2,
   MASONRY_GUTTER: "0.75rem",
   height: height.m,
@@ -77,6 +79,7 @@ export const programMTheme = {
 
 export const programSTheme = {
   ...baseMTheme,
+  id: 's',
   MASONRY_COLUMNS: 1,
   MASONRY_GUTTER: "0.75rem",
   height: height.m,
