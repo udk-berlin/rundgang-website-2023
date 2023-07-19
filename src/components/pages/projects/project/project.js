@@ -71,13 +71,14 @@ export default function Project() {
 const ProjectContainer = styled.div`
   display: flex;
   flex-direction: ${({ theme }) => theme.flexDirection};
-  margin-bottom: ${({ theme }) => theme.marginBottom};
-  
-  border-left: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
+
+  //overflow-y: scroll;
+  //overflow-x: hidden;
 `;
 
 const InfoContainer = styled.div`
   padding: ${({ theme }) => theme.info.padding};
-  overflow: scroll;
+  
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;

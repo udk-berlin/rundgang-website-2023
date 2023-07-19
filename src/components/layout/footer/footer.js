@@ -6,21 +6,29 @@ import FooterTitle from "@/components/layout/footer/title";
 
 export default function Footer({ numberOfSliderStates, disableSlider = false }) {
   return (
-    <FooterContainer>
-      <FooterSlider numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />
-      <FooterTitle />
-      <FooterInfoPages />
-    </FooterContainer>
+    <FooterWrapper>
+      <FooterContainer>
+        <FooterSlider numberOfSliderStates={numberOfSliderStates} disableSlider={disableSlider} />
+        <FooterTitle />
+        <FooterInfoPages />
+      </FooterContainer>
+    </FooterWrapper>
   );
 }
 
-const FooterContainer = styled.div`
+const FooterWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-
+  
   width: 100%;
+`;
+
+const FooterContainer = styled.div`
   height: ${({ theme }) => theme.footer.height};
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 
   display: grid;
   grid-template-columns: ${({ theme }) => theme.footer.gridTemplateColumn1} ${({ theme }) => theme.footer.gridTemplateColumn2} ${({ theme }) => theme.footer.gridTemplateColumn3};

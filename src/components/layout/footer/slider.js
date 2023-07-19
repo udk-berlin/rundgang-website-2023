@@ -35,12 +35,12 @@ export default function FooterSlider({ numberOfSliderStates, disableSlider = fal
 }
 
 const SliderContainer = styled.div`
-  height: 100%;
-  width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: ${({ theme }) => theme.footer.height};
+  width: 100%;
 
   padding: 0 0.8rem;
 
@@ -50,6 +50,8 @@ const SliderContainer = styled.div`
 `;
 
 const CustomSlider = styled(Slider)`
+  height: ${({ theme }) => theme.footer.height};
+  
   color: black;
 
   > .MuiSlider-rail {

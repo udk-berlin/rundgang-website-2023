@@ -55,10 +55,34 @@ export default function Layout({
 
 const LayoutContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100vw;
   grid-template-rows: ${({ theme }) => theme.header.height} 1fr ${({ theme }) => theme.footer.height}
+
+  //height: 100vh;
+  //min-height: 100vh;
+  //max-height: 100vh;
+  //
+  //width: 100vw;
+  //min-width: 100vw;
+  //max-width: 100vw;
   
+  //overflow: hidden;
 `;
 
 const Content = styled.div`
+  height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+  min-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+  max-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+
+  //width: 100vw;
+  //min-width: 100vw;
+  //max-width: 100vw;
+
+  overflow: auto;
+
+  border-left: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
+  
+  //margin-top: ${({ theme }) => theme.header.height};
+  //padding-bottom: calc(${({ theme }) => theme.footer.height} +  2 * ${({ theme }) => theme.borderWidth});
 `;

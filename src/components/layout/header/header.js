@@ -47,15 +47,13 @@ export default function Header({ disableFilter }) {
 }
 
 const HeaderContainer = styled.div`
-  position: sticky;
-  width: 100%;
-  top: 0;
-  height: fit-content;
-  z-index: 99;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 
   display: grid;
   grid-template-columns: 1fr;
-  border: var(--border-width) solid var(--border-color);
+  border: ${({ theme }) => theme.border};
 
   background-color: var(--color-white);
 `;

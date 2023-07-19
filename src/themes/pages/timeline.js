@@ -65,7 +65,7 @@ export const DAYS = {
 
 const timelineWidths = {
   l: "200vw",
-  m: "300vw",
+  m: "400vw",
 };
 
 export const timelineWidthsWithoutVW = {

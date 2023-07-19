@@ -84,7 +84,7 @@ const ContentContainer = styled.div`
   min-width: 100vw;
   max-width: 100vw;
 
-  margin-bottom: -100px;
+  padding-bottom: calc(${({ theme }) => theme.footer.height} +  2 * ${({ theme }) => theme.borderWidth});
   
   border-bottom: ${({theme}) => theme.border};
   border-right: ${({theme}) => theme.border};

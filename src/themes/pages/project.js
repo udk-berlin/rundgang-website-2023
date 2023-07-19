@@ -149,23 +149,23 @@ export const projectSTheme = {
     display: "flex",
     flexDirection: "row",
     height: "auto",
-    width: "100vw",
+    width: '',
     overflowX: "scroll",
     overflowY: "hidden",
     thumbnail: {
       height: "auto",
-      width: "100vw",
+      width: `calc(100vw - 3 * ${baseMTheme.borderWidth})`,
     },
     placeholder: {
       height: "50vh",
-      width: "100vw",
+      width: `calc(100vw - 3 * ${baseMTheme.borderWidth})`,
     },
     audio: {
-      width: "100vw",
+      width: `calc(100vw - 3 * ${baseMTheme.borderWidth})`,
     },
     video: {
       height: "100vw",
-      width: `calc(${1.777777777} * 100vw)`,
+      width: `calc(${1.777777777} * calc(100vw - 3 * ${baseMTheme.borderWidth}))`,
       ratio: 1.777777777,
     },
   },

@@ -36,7 +36,7 @@ export const layoutLTheme = {
     color: "black",
   },
   header: {
-    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height})`,
+    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height} + 2 * ${baseLTheme.borderWidth})`,
     bar: {
       height: header.l.bar.height,
     },
@@ -65,7 +65,7 @@ export const layoutMTheme = {
     color: "black",
   },
   header: {
-    height: `${header.l.bar.height} + ${header.l.filter.bar.height}`,
+    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height} + 2 * ${baseMTheme.borderWidth})`,
     bar: {
       height: header.l.bar.height,
     },

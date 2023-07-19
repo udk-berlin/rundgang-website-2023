@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from "react";
-import styled, {useTheme} from "styled-components";
+import React, { useEffect, useRef } from "react";
+import styled, { useTheme } from "styled-components";
 
 import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
 import getLocalizedData from "@/components/localization/data";
@@ -94,7 +94,7 @@ const MediaContainer = styled.div`
   height: ${({ theme }) => theme.media.height};
   min-height: ${({ theme }) => theme.media.height};
   max-height: ${({ theme }) => theme.media.height};
-
+  
   width: ${({ theme }) => theme.media.width};
   min-width: ${({ theme }) => theme.media.width};
   max-width: ${({ theme }) => theme.media.width};
@@ -131,7 +131,11 @@ const ThumbnailMediaContainer = styled.img`
   min-width: ${({ theme }) => theme.media.thumbnail.width};
   max-width: ${({ theme }) => theme.media.thumbnail.width};
 
-  margin-bottom: calc(-2 * ${({ theme }) => theme.borderWidth});
+
+  //overflow-y: hidden;
+  //overflow-x: hidden;
+
+  //margin-bottom: calc(-2 * ${({ theme }) => theme.borderWidth});
 `;
 
 const ImageMediaContainer = styled.img`
