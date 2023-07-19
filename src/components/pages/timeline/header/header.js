@@ -54,12 +54,9 @@ const HeaderContainer = styled.div`
   position: fixed;
   z-index: 6;
 
-  border-left: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
-
-  width: 100vw;
-  min-width: 100vw;
-  max-width: 100vw;
+  width: calc(100vw - 2 * ${({ theme }) => theme.borderWidth});
+  min-width: calc(100vw - 2 * ${({ theme }) => theme.borderWidth});
+  max-width: calc(100vw - 2 * ${({ theme }) => theme.borderWidth});
 
   overflow: scroll;
 

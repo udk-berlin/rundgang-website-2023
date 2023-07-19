@@ -80,13 +80,7 @@ const ContentContainer = styled.div`
 
   min-height: ${({theme}) => theme.height };
   
-  width: 100vw;
-  min-width: 100vw;
-  max-width: 100vw;
-
-  padding-bottom: calc(${({ theme }) => theme.footer.height} +  2 * ${({ theme }) => theme.borderWidth});
-  
-  border-bottom: ${({theme}) => theme.border};
-  border-right: ${({theme}) => theme.border};
-  border-left: ${({theme}) => theme.border};
+  width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
+  min-width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
+  max-width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
 `;
