@@ -25,20 +25,20 @@ import LoadingLayout from "@/components/layout/loading";
 
 export default function Project() {
   const [responsiveTheme, setResponsiveTheme] = useState(null);
-  const [infoGridPos, setInfoGridPos] = useState(true);
+  const [withInfoGridOverlay, setWithInfoGridOverlay] = useState(true);
   const windowSize = useWindowSize();
   const { project } = useData(true)
 
   useEffect(() => {
     if (windowSize?.width <= projectBreakpoints.s) {
       setResponsiveTheme(projectSTheme);
-      setInfoGridPos(false);
+      setWithInfoGridOverlay(false);
     } else if (windowSize?.width <= projectBreakpoints.m) {
       setResponsiveTheme(projectMTheme);
-      setInfoGridPos(false);
+      setWithInfoGridOverlay(false);
     } else if (windowSize?.width > projectBreakpoints.m) {
       setResponsiveTheme(projectLTheme);
-      setInfoGridPos(true);
+      setWithInfoGridOverlay(true);
     }
   }, [windowSize?.width]);
 
@@ -48,16 +48,16 @@ export default function Project() {
         responsiveTheme ?
           <Layout
             disableFilter={true}
-            disableSlider={infoGridPos}
+            disableSlider={withInfoGridOverlay}
             numberOfSliderStates={NUMBER_OF_SLIDER_STATES}
           >
             <ThemeProvider theme={responsiveTheme}>
               <ProjectContainer>
-                <ProjectMedia project={project} infoGridPos={infoGridPos}/>
+                <ProjectMedia project={project} withInfoGridOverlay={withInfoGridOverlay}/>
                 <InfoContainer>
                   <ProjectTitle project={project} link={false} />
                   <ProjectAuthors project={project} fontSize={1} />
-                  {infoGridPos ? <></> : <InfoGrid project={project} forProjectPage={true} />}
+                  {withInfoGridOverlay ? <></> : <InfoGrid project={project} forProjectPage={true} />}
                   <ProjectText />
                 </InfoContainer>
               </ProjectContainer>
@@ -72,6 +72,9 @@ const ProjectContainer = styled.div`
   display: flex;
   flex-direction: ${({ theme }) => theme.flexDirection};
   margin-bottom: ${({ theme }) => theme.marginBottom};
+  
+  border-left: ${({ theme }) => theme.border};
+  border-right: ${({ theme }) => theme.border};
 `;
 
 const InfoContainer = styled.div`

@@ -31,7 +31,7 @@ const formatToMarginLeftMapper = {
   default: "2",
 };
 
-export default function InfoGridFormat({ project, margin, forProjectPage = false }) {
+export default function InfoGridFormat({ project, margin, forProjectPage = false, asOverlay = false }) {
   const { contexts } = useData(forProjectPage)
   const slider = useSlider();
   const formats = []
@@ -47,7 +47,7 @@ export default function InfoGridFormat({ project, margin, forProjectPage = false
   })
 
   return (
-    <FormatContainer slider={slider}>
+    <FormatContainer asOverlay={asOverlay} slider={slider}>
       {
         formats.map(format => {
           return (
@@ -63,14 +63,10 @@ export default function InfoGridFormat({ project, margin, forProjectPage = false
 
 const FormatContainer = styled.div`
   width: 100%;
-  max-height: ${(props) =>
-    props.slider.position >= props.theme.format.sliderIndex ? "500px" : "0px"};
+  max-height: ${({ asOverlay, slider, theme }) => asOverlay || slider.position >= theme.format.sliderIndex ? "500px" : "0px"};
   overflow-y: hidden;
   transition: all 0.3s;
-  padding: ${(props) =>
-    props.slider.position >= props.theme.format.sliderIndex
-      ? "0.40rem 0 0.2rem 0"
-      : "0"};
+  padding: ${({ asOverlay, slider, theme }) => asOverlay || slider.position >= theme.format.sliderIndex ? "0.40rem 0 0.2rem 0" : "0"};
 
   & > * {
     width: max-content;

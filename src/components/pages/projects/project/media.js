@@ -5,12 +5,12 @@ import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
 import getLocalizedData from "@/components/localization/data";
 import { useData } from "@/providers/data/data";
 
-export default function ProjectMedia({ project, infoGridPos }) {
+export default function ProjectMedia({ project, withInfoGridOverlay }) {
   const { media } = useData(true)
 
   return (
     <MediaContainer>
-      {infoGridPos ? <ProjectInfoGrid project={project} forProjectPage={true} /> : <></>}
+      {withInfoGridOverlay ? <ProjectInfoGrid project={project} forProjectPage={true} asOverlay={withInfoGridOverlay} /> : <></>}
       <ProjectThumbnail project={project} fullSize={true} />
       <ProjectAdditionalMedia project={project} media={media} />
     </MediaContainer>
@@ -90,8 +90,6 @@ const MediaContainer = styled.div`
   display: ${({ theme }) => theme.media.display};
   flex-direction: ${({ theme }) => theme.media.flexDirection};
   position: relative;
-  
-  top: calc(2 * ${({ theme }) => theme.borderWidth});
   
   height: ${({ theme }) => theme.media.height};
   min-height: ${({ theme }) => theme.media.height};

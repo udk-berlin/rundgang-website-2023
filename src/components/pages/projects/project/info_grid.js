@@ -8,12 +8,12 @@ import InfoGridDate from "@/components/pages/program/info_grid/date";
 import InfoGridFormat from "@/components/pages/program/info_grid/format";
 import { InfoGridContainer } from "@/components/pages/program/info_grid/info_grid";
 
-export default function ProjectInfoGrid({ project, forProjectPage = false }) {
+export default function ProjectInfoGrid({ project, forProjectPage = false, asOverlay = false }) {
 
   return (
     <ProjectInfoGridContainer>
       <FormatDateContainer>
-        <InfoGridFormat project={project} forProjectPage={forProjectPage} />
+        <InfoGridFormat project={project} forProjectPage={forProjectPage} asOverlay={asOverlay} />
         <InfoGridDate project={project} />
       </FormatDateContainer>
       <InfoGridLocation project={project} forProjectPage={forProjectPage} />
