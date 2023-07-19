@@ -44,7 +44,7 @@ export default function SavedProjects() {
     <>
       {
         responsiveTheme ?
-          <Layout>
+          <Layout defaultSliderPosition={2}>
             <ThemeProvider theme={responsiveTheme}>
               <SavedProjectsContainer>
                 <Masonry
@@ -68,6 +68,7 @@ const SavedProjectsContainer = styled.div`
 
   margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
   padding: ${({ theme }) => theme.MASONRY_GUTTER};
+  padding-bottom: ${({ theme }) => theme.paddingBottom};
 
   border-bottom: ${({ theme }) => theme.border};
   border-right: ${({ theme }) => theme.border};

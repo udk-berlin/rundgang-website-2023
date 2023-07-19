@@ -12,6 +12,7 @@ export const programLTheme = {
   MASONRY_GUTTER: "0.75rem",
   height: height.l,
   padding: "0.75rem",
+  paddingBottom: "0.75rem",
   title: {
     fontSize: fontSizes.m.large,
     sliderIndex: 1,
@@ -48,6 +49,7 @@ export const programMTheme = {
   MASONRY_GUTTER: "0.75rem",
   height: height.m,
   padding: "0.75rem",
+  paddingBottom: `calc(${layoutLTheme.footer.height} + 0.75rem + ${baseMTheme.borderWidth})`,
   title: {
     fontSize: fontSizes.m.large,
     sliderIndex: 1,
@@ -84,6 +86,7 @@ export const programSTheme = {
   MASONRY_GUTTER: "0.75rem",
   height: height.m,
   padding: "0.75rem",
+  paddingBottom: `calc(${layoutLTheme.footer.height} + 0.75rem + ${baseMTheme.borderWidth})`,
   title: {
     fontSize: fontSizes.l.medium,
     sliderIndex: 1,
