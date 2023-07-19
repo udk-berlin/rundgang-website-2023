@@ -34,7 +34,7 @@ export const locationsLTheme = {
     top: top.l,
     gridTemplateColumns: `${layoutLTheme.footer.gridTemplateColumn1} ${layoutLTheme.footer.gridTemplateColumn2} ${layoutLTheme.footer.gridTemplateColumn3}`,
     info: {
-      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1} - 2 * ${baseLTheme.borderWidth})`,
+      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1})`,
     },
     content: {
       height: '100%',
@@ -49,7 +49,7 @@ export const locationsLTheme = {
     }
   },
   program: {
-    height: `calc(${height.l} - 2 * ${baseLTheme.borderWidth})`,
+    height: height.l,
     width: '',
     position: 'absolute',
     top: top.l,

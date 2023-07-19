@@ -77,8 +77,12 @@ function LocationsGroundPlanRoomsAll () {
 }
 
 const LocationsGroundPlanRoomsContainer = styled.div`
-  max-height: ${({ theme, locationsGroundPlanFloorsContainerHeight }) => `calc(${theme.map.height} - var(--locations-ground-plan-height) - ${locationsGroundPlanFloorsContainerHeight + 'px'} + var(--border-width))`};
-  overflow: ${({ theme })=> theme.groundPlan.rooms.overflow};
+  max-height: ${({ theme, locationsGroundPlanFloorsContainerHeight }) => `calc(${theme.groundPlan.info.height})`};
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  
+  overflow-x: hidden;
   background: var(--color-white);
 
   font-size: var(--info-grid-font-size);
@@ -95,9 +99,8 @@ const LocationsGroundPlanRoomContainer = styled.div`
   padding: 0.2rem 0.4rem;
 
   border-top: calc(0.5 * var(--border-width)) solid var(--border-color);
-  border-right: var(--border-width) solid var(--border-color);
+  border-right: ${({ theme }) => theme.border};
   border-bottom: calc(0.5 * var(--border-width)) solid var(--border-color);
-  border-left: var(--border-width) solid var(--border-color);
 
   cursor: pointer;
 
@@ -106,7 +109,7 @@ const LocationsGroundPlanRoomContainer = styled.div`
   }
 
   :nth-last-child(1) {
-    border-bottom: var(--border-width) solid var(--border-color);
+    border-bottom: ${({ theme }) => theme.border};
   }
 
   :hover {

@@ -47,10 +47,4 @@ export default function Locations() {
   );
 }
 
-const LocationsContainer = styled.div`
-  height: ${({ theme }) => theme.height};
-  min-height: ${({ theme }) => theme.height};
-  max-height: ${({ theme }) => theme.height};
-  
-  overflow: scroll;
-`;
+const LocationsContainer = styled.div``;

@@ -63,7 +63,7 @@ function LocationsGroundPlanFloorAll () {
   }
 
   return (
-    <LocationsGroundPlanFloorContainer key={-1} selected={!(filter.floor)} onClick={handleClick}>
+    <LocationsGroundPlanFloorContainer key={-1} selected={!(filter.floor)} all={true} onClick={handleClick}>
       <div>
         <FormattedMessage id={'floors.all'}/>
       </div>
@@ -88,6 +88,7 @@ const LocationsGroundPlanFloorsContainer = styled.div`
   max-width: 100%;
 
   border: calc(0.5 * var(--border-width)) solid var(--border-color);
+  border-left: 0;
   background: var(--color-white);
 
   font-size: var(--info-grid-font-size);
@@ -103,6 +104,7 @@ const LocationsGroundPlanFloorContainer = styled.div`
   padding: 0.2rem 0.4rem;
 
   border: calc(0.5 * var(--border-width)) solid var(--border-color);
+  border-left: ${({ all }) => all ? '0' : 'calc(0.5 * var(--border-width)) solid var(--border-color)'};
 
   cursor: pointer;
   
@@ -111,8 +113,8 @@ const LocationsGroundPlanFloorContainer = styled.div`
     color: var(--color-white);
   }
 
-  background-color: ${(props) => (props.selected ? 'var(--color-pink)' : 'var(--color-white)')};
-  color: ${(props) => (props.selected ? 'var(--color-white)' : 'var(--color-black)')};
+  background-color: ${({ selected }) => selected ? 'var(--color-pink)' : 'var(--color-white)'};
+  color: ${({ selected }) => selected ? 'var(--color-white)' : 'var(--color-black)'};
 `
 
 const LocationsGroundPlanFloorEmptyContainer = styled.div`

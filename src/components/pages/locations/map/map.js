@@ -196,15 +196,12 @@ const MapContainer = styled.div`
   height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1' })`};
   min-height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1'})`};
   max-height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1'})`};
-  
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+ 
+  // width: 100%;
+  // min-width: 100%;
+  // max-width: 100%;
 
   overflow: hidden;
-
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
 `;
 
 function buildMarker(mapRef, location, cache, useTextBox) {

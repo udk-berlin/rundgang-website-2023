@@ -44,16 +44,13 @@ const LocationsProgramContainer = styled.div`
   display: grid;
   grid-template-columns: ${({ theme }) => theme.program.gridTemplateColumns};
 
-  width: 100vw;
-  min-width: 100vw;
-  max-width: 100vw;
+  width: calc(100vw - 1 * ${({ theme }) => theme.borderWidth});
+  min-width: calc(100vw - 1 * ${({ theme }) => theme.borderWidth});
+  max-width: calc(100vw - 1 * ${({ theme }) => theme.borderWidth});
 
   height: ${({ theme }) => theme.program.height};
   min-height: ${({ theme }) => theme.program.height};
   max-height: ${({ theme }) => theme.program.height};
-
-  border-left: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
 
   cursor: default;
   pointer-events: none;
