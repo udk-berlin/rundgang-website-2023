@@ -40,6 +40,11 @@ export const programLTheme = {
       width: "auto",
     },
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const programMTheme = {
@@ -77,6 +82,11 @@ export const programMTheme = {
       width: "auto",
     },
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const programSTheme = {
@@ -114,4 +124,9 @@ export const programSTheme = {
       width: "auto",
     },
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.16em"
+    }
+  }
 };

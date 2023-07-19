@@ -104,7 +104,7 @@ const DropCap = styled.span`
   }
 
   &:before {
-    margin-top: -0.2em;
+    margin-top: ${({ theme }) => theme.dropCap.before.marginTop};
   }
   &:after {
     margin-bottom: -0.15em;

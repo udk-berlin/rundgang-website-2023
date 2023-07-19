@@ -103,6 +103,11 @@ export const timelineLTheme = {
     width: `100vw`,
     borderLeft: "2px solid black",
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const timelineMTheme = {
@@ -135,4 +140,9 @@ export const timelineMTheme = {
     width: "100vw",
     borderLeft: "0",
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.16em"
+    }
+  }
 };

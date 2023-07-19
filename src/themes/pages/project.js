@@ -58,6 +58,11 @@ export const projectLTheme = {
   text: {
     heading: fontSizes.l.medium,
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const projectMTheme = {
@@ -112,6 +117,11 @@ export const projectMTheme = {
   additionalText: {
     heading: fontSizes.l.medium,
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const projectSTheme = {
@@ -162,4 +172,9 @@ export const projectSTheme = {
   text: {
     heading: fontSizes.l.medium,
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.16em"
+    }
+  }
 };

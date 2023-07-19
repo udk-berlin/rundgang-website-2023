@@ -23,15 +23,16 @@ export default function Accordion({ items }) {
 
   return (
     <>
-      responsiveTheme ?
-      <ThemeProvider theme={responsiveTheme}>
-        <AccordionWrapper>
-          {items.map((item) => (
-            <AccordionItem item={item} />
-          ))}
-        </AccordionWrapper>
-      </ThemeProvider> :
-      <LoadingLayout />
+      {
+        responsiveTheme ?
+          <ThemeProvider theme={responsiveTheme}>
+            <AccordionWrapper>
+              {items.map((item) => (
+                <AccordionItem item={item} />
+              ))}
+            </AccordionWrapper>
+          </ThemeProvider> : <LoadingLayout />
+      }
     </>
   );
 }

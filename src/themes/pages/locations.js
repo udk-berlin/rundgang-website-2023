@@ -88,6 +88,11 @@ export const locationsLTheme = {
       width: "auto",
     },
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const locationsMTheme = {
@@ -157,4 +162,9 @@ export const locationsMTheme = {
       width: "auto",
     },
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.16em"
+    }
+  }
 };
