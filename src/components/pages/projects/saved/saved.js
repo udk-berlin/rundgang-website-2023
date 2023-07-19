@@ -65,14 +65,7 @@ export default function SavedProjects() {
 
 const SavedProjectsContainer = styled.div`
   min-height: ${({ theme }) => theme.height};
-
-  margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
-  padding: ${({ theme }) => theme.MASONRY_GUTTER};
-  padding-bottom: ${({ theme }) => theme.paddingBottom};
-
-  border-bottom: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
+  padding: ${({ theme }) => theme.padding};
 `;
 
 function getSavedAndFilteredProjects(savedProjects, filteredProjects, useFast = false) {

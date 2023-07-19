@@ -13,7 +13,6 @@ import {
   programMTheme,
   programSTheme,
 } from "@/themes/pages/program";
-import LoadingLayout from "@/components/layout/loading";
 
 export default function Program() {
   const [responsiveTheme, setResponsiveTheme] = useState(null);
@@ -52,12 +51,5 @@ export default function Program() {
 
 const ProgramContainer = styled.div`
   min-height: ${({ theme }) => theme.height};
-
-  margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
   padding: ${({ theme }) => theme.padding};
-  padding-bottom: ${({ theme }) => theme.paddingBottom};
-
-  border-bottom: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
 `;
