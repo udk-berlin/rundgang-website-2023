@@ -47,6 +47,14 @@ export default function Header({ disableFilter }) {
 }
 
 const HeaderContainer = styled.div`
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+
+  //width: 100%;
+  
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;

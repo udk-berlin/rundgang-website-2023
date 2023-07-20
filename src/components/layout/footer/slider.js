@@ -58,11 +58,20 @@ const CustomSlider = styled(Slider)`
     color: var(--color-pink-transparent) !important;
     opacity: 1 !important;
   }
+  
+  * {
+    box-shadow: none !important;
+  }
 
   > .MuiSlider-thumb {
     box-shadow: none !important;
-    color: var(--color-white) !important;
-    outline: var(--info-border-width) solid var(--info-border-color) !important;
+    //color: var(--color-white) !important;
+    color: var(--color-black) !important;
+
+    color: ${({ theme }) => theme.footer.slider.thumb.outline};
+    outline: ${({ theme }) => theme.footer.slider.thumb.color};
+    
+    //outline: var(--info-border-width) solid var(--info-border-color) !important;
     width: 15px !important;
     height: 15px !important;
     

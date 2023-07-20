@@ -51,9 +51,6 @@ const Container = styled.div`
   min-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
 
   padding: ${({ theme }) => theme.container.padding};
-  
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
 `;
 const StaticTitle = styled.div`
   position: ${({ theme }) => theme.staticTitle.position};

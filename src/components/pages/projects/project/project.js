@@ -54,12 +54,12 @@ export default function Project() {
             <ThemeProvider theme={responsiveTheme}>
               <ProjectContainer>
                 <ProjectMedia project={project} withInfoGridOverlay={withInfoGridOverlay}/>
-                <InfoContainer>
+                <ProjectInfoContainer>
                   <ProjectTitle project={project} link={false} />
                   <ProjectAuthors project={project} fontSize={1} />
                   {withInfoGridOverlay ? <></> : <InfoGrid project={project} forProjectPage={true} />}
                   <ProjectText />
-                </InfoContainer>
+                </ProjectInfoContainer>
               </ProjectContainer>
             </ThemeProvider>
           </Layout> : <LoadingLayout />
@@ -71,14 +71,8 @@ export default function Project() {
 const ProjectContainer = styled.div`
   display: flex;
   flex-direction: ${({ theme }) => theme.flexDirection};
-
-  //overflow-y: scroll;
-  //overflow-x: hidden;
 `;
 
-const InfoContainer = styled.div`
+const ProjectInfoContainer = styled.div`
   padding: ${({ theme }) => theme.info.padding};
-  
-  overflow-y: scroll;
-  overflow-x: hidden;
 `;

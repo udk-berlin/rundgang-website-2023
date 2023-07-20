@@ -89,7 +89,7 @@ export function ProjectAdditionalMedia({ project, media }) {
 const MediaContainer = styled.div`
   display: ${({ theme }) => theme.media.display};
   flex-direction: ${({ theme }) => theme.media.flexDirection};
-  position: relative;
+  //position: relative;
   
   height: ${({ theme }) => theme.media.height};
   min-height: ${({ theme }) => theme.media.height};
@@ -99,8 +99,8 @@ const MediaContainer = styled.div`
   min-width: ${({ theme }) => theme.media.width};
   max-width: ${({ theme }) => theme.media.width};
 
-  overflow-x: ${({ theme }) => theme.media.overflowX};
-  overflow-y: ${({ theme }) => theme.media.overflowY};
+  // overflow-x: ${({ theme }) => theme.media.overflowX};
+  // overflow-y: ${({ theme }) => theme.media.overflowY};
 `;
 
 const AdditionalMediaContainer = styled.div`

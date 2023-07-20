@@ -1,4 +1,4 @@
-import { baseLTheme, baseMTheme } from "@/themes/theme";
+import { baseLTheme, baseMTheme, colors } from "@/themes/theme";
 
 export const breakpoints = {
   m: 900,
@@ -54,6 +54,12 @@ export const layoutLTheme = {
     infoPages: {
       gridTemplateColumns: "1fr 1fr 1fr",
     },
+    slider: {
+      thumb: {
+        color: colors.pink,
+        outline: `${baseLTheme.border} !important`
+      }
+    }
   },
 };
 
@@ -83,5 +89,11 @@ export const layoutMTheme = {
     infoPages: {
       gridTemplateColumns: "1fr",
     },
+    slider: {
+      thumb: {
+        color: colors.black,
+        outline: ''
+      }
+    }
   },
 };

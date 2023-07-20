@@ -196,7 +196,7 @@ export default function LocationsMap({ projects, locations }) {
       });
   }, [locations, projects]);
 
-  return <MapContainer ref={mapContainerRef} >test</MapContainer>;
+  return <MapContainer ref={mapContainerRef} />;
 }
 
 const MapContainer = styled.div`
