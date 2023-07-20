@@ -1,13 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
-import {
-  MenuContainer,
-  SVGContainer,
-  StyledPath,
-  StyledSVG,
-} from "@/components/pages/landing/menu/l";
-import {useLinkDispatch} from "@/providers/link";
+import { useLinkDispatch } from "@/providers/link";
+import styled from "styled-components";
 
 
 export default function LandingMenuM({ setInfoIsActive, infoIsActive }) {
@@ -200,3 +195,56 @@ function EnSVG({ setInfoIsActive, infoIsActive }) {
     </StyledSVG>
   );
 }
+
+const StyledRect = styled.rect`
+  fill: none;
+
+  pointer-events: all;
+  cursor: pointer;
+`;
+
+export const MenuContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  display: flex;
+  align-items: center;
+
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+`;
+
+export const SVGContainer = styled.div`
+  height: 33vw;
+  min-height: 33vw;
+  max-height: 33vw;
+  
+  padding-left: 1rem;
+`;
+
+export const StyledSVG = styled.svg`
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+
+  height: 33vw;
+  min-height: 33vw;
+  max-height: 33vw;
+  
+  g {
+    pointer-events: all;
+  }
+`;
+
+export const StyledPath = styled.path`
+  fill: ${({ isHovered, isClicked }) => (isHovered || isClicked ? "#fff" : "none")};
+  stroke: #fff;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+`;
