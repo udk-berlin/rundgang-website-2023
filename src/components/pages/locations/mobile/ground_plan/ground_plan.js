@@ -42,9 +42,6 @@ const GroundPlanContainer = styled.div`
   
   overflow: scroll;
   
-  cursor: default;
-  pointer-events: all;
-  
   font-size: 16px;
 `
 
@@ -54,12 +51,6 @@ const ContentColumn = styled.div`
   width: calc(100vw - 0 * ${({ theme }) => theme.borderWidth});
   min-width: calc(100vw - 0 * ${({ theme }) => theme.borderWidth});
   max-width: calc(100vw - 0 * ${({ theme }) => theme.borderWidth});
-
-  // height: calc(calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height}) / 2);
-  // min-height: calc(calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height}) / 2);
-  // max-height: calc(calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height}) / 2);
-  
-  //overflow-x: visible;
   
   background: white;
 `

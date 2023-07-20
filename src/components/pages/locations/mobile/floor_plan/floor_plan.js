@@ -61,8 +61,13 @@ export default function LocationsMobileFloorPlan() {
 
     if (filter.room) {
       const rooms = document.querySelectorAll(`[data-id="${getRoomDataId(filter.room, filter.floor, filter.location)}"]`);
-      if (rooms) {
+      if (rooms && rooms.length > 0) {
         rooms.forEach(room => room.style.fill = 'var(--color-pink)')
+      } else {
+        setTimeout(() => {
+          const rooms = document.querySelectorAll(`[data-id="${getRoomDataId(filter.room, filter.floor, filter.location)}"]`);
+          rooms && rooms.forEach(room => room.style.fill = 'var(--color-pink)')
+        }, 2000)
       }
     }
   }, [filter])
@@ -86,13 +91,17 @@ const LocationsMobileFloorPlanContainer = styled.div`
   min-height: ${({ theme })=> theme.groundPlan.image.height};
   max-height: ${({ theme })=> theme.groundPlan.image.height};
 
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+
+  //background: red;
+
   padding: 1.2rem 0;
 
-  font-size: 16px;
-  
   cursor: default;
-  pointer-events: all;
-  
+  pointer-events: auto;
+
   > div {
     width: 100%;
     height: 100%;
@@ -101,10 +110,10 @@ const LocationsMobileFloorPlanContainer = styled.div`
       width: 100%;
       height: 100%;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      
+      //display: flex;
+      //justify-content: center;
+      //align-items: center;
+
       > svg {
         max-width: 100%;
         max-height: 100%;

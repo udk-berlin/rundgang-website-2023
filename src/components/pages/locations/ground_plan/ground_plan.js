@@ -43,7 +43,6 @@ const GroundPlanContainer = styled.div`
   max-height: ${({ theme })=> theme.groundPlan.height};
 
   cursor: default;
-  pointer-events: none;
 
   font-size: 16px;
 `
@@ -57,5 +56,5 @@ const ContentColumn = styled.div`
   min-height: 100%;
   max-height: 100%;
   
-  pointer-events: all;
+  pointer-events: auto;
 `

@@ -75,7 +75,7 @@ function DataProviderChildren({ id }) {
       structureFilters={structureFilters}
       formats={formats}
       formatFilters={formatFilters}>
-      <Locations />
+      <Locations location={location} />
     </FilterProvider>
   } else {
     components = <LoadingLayout />

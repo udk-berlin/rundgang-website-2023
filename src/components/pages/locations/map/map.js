@@ -1,11 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, {useRef, useEffect, useState} from "react";
 import { createRoot } from "react-dom/client";
 import maplibregl from "maplibre-gl";
 import styled, { useTheme } from "styled-components";
 
 import { useFilterDispatch } from "@/providers/filter";
 import ResponsiveMarker from "@/components/pages/locations/map/marker";
-import {useData} from "@/providers/data/data";
 
 const MAP_CONFIGURATION = {
   style:
@@ -82,12 +81,14 @@ const LOCATION_ID_TO_ORDER_MAPPER = {
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": -1,
 };
 
-export default function LocationsMap({ projects, locations }) {
+export default function LocationsMap({ projects, locations, location }) {
   const theme = useTheme()
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const dispatch = useFilterDispatch();
   const markersCache = { groundPlan: {}, text: {} };
+
+  const centerOffset =  theme.id === 'l' ? 0 : 0.017
 
   useEffect(() => {
     mapRef.current = new maplibregl.Map({
@@ -103,10 +104,9 @@ export default function LocationsMap({ projects, locations }) {
           MAP_CONFIGURATION.bounds.latitude.max,
         ],
       ],
-      center: [
-        MAP_CONFIGURATION.center.longitude,
-        MAP_CONFIGURATION.center.latitude,
-      ],
+      center: location && location.id && location.id in LOCATION_ID_TO_LNG_LAT ?
+        [LOCATION_ID_TO_LNG_LAT[location.id].lng, LOCATION_ID_TO_LNG_LAT[location.id].lat - centerOffset] :
+        [MAP_CONFIGURATION.center.longitude, MAP_CONFIGURATION.center.latitude],
       zoom: theme.id === 'l' ? 12.2 : 11.5,
       maxZoom: 18,
       minZoom: 10,
@@ -179,6 +179,12 @@ export default function LocationsMap({ projects, locations }) {
           if (e.originalEvent.target.id) {
             const id = e.originalEvent.target.id.replaceAll("marker-", "");
 
+            // if (id in LOCATION_ID_TO_LNG_LAT) {
+            //   mapRef.current.flyTo({
+            //     center: [LOCATION_ID_TO_LNG_LAT[id].lng, LOCATION_ID_TO_LNG_LAT[id].lng - centerOffset]
+            //   });
+            // }
+
             dispatch({
               type: "filter-location",
               location: locations[id],
@@ -193,33 +199,23 @@ export default function LocationsMap({ projects, locations }) {
             });
           }
         });
-      });
+    });
   }, [locations, projects]);
 
   return <MapContainer ref={mapContainerRef} />;
 }
 
 const MapContainer = styled.div`
-  // height: ${({ theme }) => theme.map.height};
-  // min-height: ${({ theme }) => theme.map.height};
-  // max-height: ${({ theme }) => theme.map.height};
-  
-  // height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
-  // min-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
-  // max-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
-  //
-  // overflow: hidden;
+  position: relative;
+  z-index: 0;
   
   height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
   min-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
   max-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
 
-  width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
-  min-width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
-  max-width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
-  
-  position: relative;
-  z-index: 0;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 `;
 
 function buildMarker(mapRef, location, cache, useTextBox) {
