@@ -1,7 +1,11 @@
-import styled, { ThemeProvider } from "styled-components";
+import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useEffect, useState } from "react";
-import useWindowSize from "@/hooks/window_size";
+import styled, { ThemeProvider } from "styled-components";
+
+import LoadingLayout from "@/components/layout/loading";
+
+import { useWindowSize } from "@/providers/window_size";
+
 import {
   staticBreakpoints,
   staticLTheme,
@@ -13,25 +17,30 @@ export default function StaticLayout({
   title = "",
   children,
 }) {
-  const [responsiveTheme, setResponsiveTheme] = useState(staticLTheme);
+  const [responsiveTheme, setResponsiveTheme] = useState(null);
   const windowSize = useWindowSize();
 
   useEffect(() => {
     if (windowSize?.width <= staticBreakpoints.m) {
       setResponsiveTheme(staticMTheme);
-    } else {
+    } else if (windowSize?.width > staticBreakpoints.m) {
       setResponsiveTheme(staticLTheme);
     }
   }, [windowSize?.width]);
 
   return (
-    <ThemeProvider theme={responsiveTheme}>
-      <Container>
-        {staticTitle(layout, title)}
-        <div></div>
-        {children}
-      </Container>
-    </ThemeProvider>
+    <>
+      {
+        responsiveTheme ?
+        <ThemeProvider theme={responsiveTheme}>
+          <Container>
+            {staticTitle(layout, title)}
+            <div></div>
+            {children}
+          </Container>
+        </ThemeProvider> : <LoadingLayout />
+      }
+    </>
   );
 }
 
@@ -42,9 +51,6 @@ const Container = styled.div`
   min-height: ${({ theme }) => `calc(100vh - ${theme.header.height} - ${theme.footer.height})`};
 
   padding: ${({ theme }) => theme.container.padding};
-  
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
 `;
 const StaticTitle = styled.div`
   position: ${({ theme }) => theme.staticTitle.position};

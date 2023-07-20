@@ -26,16 +26,21 @@ const FooterWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
+  
   width: 100%;
 `;
 
 const FooterContainer = styled.div`
-  /* height: var(--layout-header-bar-container-height); */
-
   display: grid;
   grid-template-columns: 8fr min-content;
 
-  border: var(--border-width) solid var(--border-color);
+  height: ${({ theme }) => theme.footer.height};
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  
+  border: ${({ theme }) => theme.border};
+  
   background: var(--color-white);
 
   > *:nth-child(1) {
@@ -48,10 +53,11 @@ const FooterContainer = styled.div`
 `;
 
 const SVG = styled(ReactSVG)`
-  width: calc(0.75 * var(--layout-header-bar-container-height));
-  height: calc(0.75 * var(--layout-header-bar-container-height));
+  width: calc(0.9 * ${({ theme }) => theme.footer.height});
+  height: calc(0.9 * ${({ theme }) => theme.footer.height});
+
+  padding: 0.3rem;
   cursor: pointer;
-  padding: 0.4rem;
 
   > div {
     width: 100%;

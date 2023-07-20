@@ -1,4 +1,4 @@
-import { baseLTheme, baseMTheme } from "@/themes/theme";
+import { baseLTheme, baseMTheme, colors } from "@/themes/theme";
 
 export const breakpoints = {
   m: 900,
@@ -30,12 +30,13 @@ const header = {
 
 export const layoutLTheme = {
   ...baseLTheme,
+  id: 'l',
   localization: {
     fontSize: "0.85rem",
     color: "black",
   },
   header: {
-    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height})`,
+    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height} + 2 * ${baseLTheme.borderWidth})`,
     bar: {
       height: header.l.bar.height,
     },
@@ -53,17 +54,24 @@ export const layoutLTheme = {
     infoPages: {
       gridTemplateColumns: "1fr 1fr 1fr",
     },
+    slider: {
+      thumb: {
+        color: colors.pink,
+        outline: `${baseLTheme.border} !important`
+      }
+    }
   },
 };
 
 export const layoutMTheme = {
   ...baseMTheme,
+  id: 'm',
   localization: {
     fontSize: "1.5rem",
     color: "black",
   },
   header: {
-    height: `${header.l.bar.height} + ${header.l.filter.bar.height}`,
+    height: `calc(${header.l.bar.height} + ${header.l.filter.bar.height} + 2 * ${baseMTheme.borderWidth})`,
     bar: {
       height: header.l.bar.height,
     },
@@ -81,5 +89,11 @@ export const layoutMTheme = {
     infoPages: {
       gridTemplateColumns: "1fr",
     },
+    slider: {
+      thumb: {
+        color: colors.black,
+        outline: ''
+      }
+    }
   },
 };

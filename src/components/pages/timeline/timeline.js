@@ -8,28 +8,34 @@ import Layout from "@/components/layout/layout";
 import { breakpoints } from "@/themes/theme";
 import { timelineLTheme, timelineMTheme } from "@/themes/pages/timeline";
 
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
+import LoadingLayout from "@/components/layout/loading";
 
 const NUMBER_OF_SLIDER_STATES = 3
 
 export default function Timeline() {
-  const [responsiveTheme, setResponsiveTheme] = useState(timelineLTheme)
+  const [responsiveTheme, setResponsiveTheme] = useState(null)
   const windowSize = useWindowSize()
 
   useEffect(() => {
     if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(timelineMTheme)
-    } else {
+    } else if (windowSize?.width > breakpoints.m) {
       setResponsiveTheme(timelineLTheme)
     }
   }, [windowSize?.width])
 
   return (
-    <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES}>
-      <ThemeProvider theme={responsiveTheme}>
-        <TimelineHeader />
-        <TimelineContent />
-      </ThemeProvider>
-    </Layout>
+    <>
+      {
+        responsiveTheme ?
+          <Layout numberOfSliderStates={NUMBER_OF_SLIDER_STATES}>
+            <ThemeProvider theme={responsiveTheme}>
+              <TimelineHeader />
+              <TimelineContent />
+            </ThemeProvider>
+          </Layout> : <LoadingLayout />
+      }
+    </>
   );
 }

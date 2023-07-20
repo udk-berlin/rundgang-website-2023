@@ -1,16 +1,16 @@
-import React, {useEffect, useRef} from "react";
-import styled, {useTheme} from "styled-components";
+import React, { useEffect, useRef } from "react";
+import styled, { useTheme } from "styled-components";
 
 import ProjectInfoGrid from "@/components/pages/projects/project/info_grid";
 import getLocalizedData from "@/components/localization/data";
 import { useData } from "@/providers/data/data";
 
-export default function ProjectMedia({ project, infoGridPos }) {
+export default function ProjectMedia({ project, withInfoGridOverlay }) {
   const { media } = useData(true)
 
   return (
     <MediaContainer>
-      {infoGridPos ? <ProjectInfoGrid project={project} forProjectPage={true} /> : <></>}
+      {withInfoGridOverlay ? <ProjectInfoGrid project={project} forProjectPage={true} asOverlay={withInfoGridOverlay} /> : <></>}
       <ProjectThumbnail project={project} fullSize={true} />
       <ProjectAdditionalMedia project={project} media={media} />
     </MediaContainer>
@@ -89,14 +89,12 @@ export function ProjectAdditionalMedia({ project, media }) {
 const MediaContainer = styled.div`
   display: ${({ theme }) => theme.media.display};
   flex-direction: ${({ theme }) => theme.media.flexDirection};
-  position: relative;
-  
-  top: calc(2 * ${({ theme }) => theme.borderWidth});
+  position: ${({ theme }) => theme.media.position};
   
   height: ${({ theme }) => theme.media.height};
   min-height: ${({ theme }) => theme.media.height};
   max-height: ${({ theme }) => theme.media.height};
-
+  
   width: ${({ theme }) => theme.media.width};
   min-width: ${({ theme }) => theme.media.width};
   max-width: ${({ theme }) => theme.media.width};
@@ -133,7 +131,10 @@ const ThumbnailMediaContainer = styled.img`
   min-width: ${({ theme }) => theme.media.thumbnail.width};
   max-width: ${({ theme }) => theme.media.thumbnail.width};
 
-  margin-bottom: calc(-2 * ${({ theme }) => theme.borderWidth});
+  //overflow-y: hidden;
+  //overflow-x: hidden;
+
+  //margin-bottom: calc(-2 * ${({ theme }) => theme.borderWidth});
 `;
 
 const ImageMediaContainer = styled.img`

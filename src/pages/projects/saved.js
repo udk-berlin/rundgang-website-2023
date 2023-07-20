@@ -6,30 +6,29 @@ import LoadingLayout from "@/components/layout/loading";
 
 import { FilterProvider } from "@/providers/filter";
 import { SavedProjectsProvider } from "@/providers/saved_projects";
-import { LinkProvider, useLink } from "@/providers/link";
 import { DataProvider, useData } from "@/providers/data/data";
+import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function SavedProjectsPage() {
   return (
     <Page title="Saved Projects">
-      <LinkProvider>
-        <LinkProviderChildren />
-      </LinkProvider>
+      <WindowSizeProvider>
+        <WindowSizeChildren />
+      </WindowSizeProvider>
     </Page>
   );
 }
 
-function LinkProviderChildren() {
-  const link = useLink()
+function WindowSizeChildren () {
+  const windowSize = useWindowSize()
 
   return (
     <>
       {
-        link.clicked ?
-          <LoadingLayout /> :
+        windowSize ?
           <DataProvider>
             <DataProviderChildren />
-          </DataProvider>
+          </DataProvider>: <></>
       }
     </>
   )
@@ -39,23 +38,21 @@ function DataProviderChildren () {
   const { projects, structures, structureFilters, formats, formatFilters } = useData()
 
   return (
-    <>
+    <SavedProjectsProvider>
       {
         projects && structures && structureFilters && formats && formatFilters ?
-          <SavedProjectsProvider>
-            <FilterProvider
-              projects={projects}
-              structures={structures}
-              structureFilters={structureFilters}
-              formats={formats}
-              formatFilters={formatFilters}
-            >
-              <SavedProjects />
-            </FilterProvider>
-          </SavedProjectsProvider> :
+          <FilterProvider
+            projects={projects}
+            structures={structures}
+            structureFilters={structureFilters}
+            formats={formats}
+            formatFilters={formatFilters}
+          >
+            <SavedProjects />
+          </FilterProvider> :
           <LoadingLayout />
       }
-    </>
+    </SavedProjectsProvider>
   )
 }
 

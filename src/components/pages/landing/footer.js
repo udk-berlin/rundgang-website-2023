@@ -65,6 +65,14 @@ function LFooterContainer ({ children }) {
 }
 
 const MFooterContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  
   display: grid;
   grid-template-columns: 1fr 1fr;
 

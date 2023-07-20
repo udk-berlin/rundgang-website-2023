@@ -9,7 +9,7 @@ import TimelineLocations from "@/components/pages/timeline/location/locations";
 import { breakpoints } from "@/themes/theme";
 import { NUMBER_OF_HOURS, DAYS, timelineWidthsWithoutVW } from "@/themes/pages/timeline";
 
-import useWindowSize from '@/hooks/window_size'
+import { useWindowSize } from "@/providers/window_size";
 
 export default function TimelineContent() {
   const windowSize = useWindowSize()
@@ -80,13 +80,7 @@ const ContentContainer = styled.div`
 
   min-height: ${({theme}) => theme.height };
   
-  width: 100vw;
-  min-width: 100vw;
-  max-width: 100vw;
-
-  margin-bottom: -100px;
-  
-  border-bottom: ${({theme}) => theme.border};
-  border-right: ${({theme}) => theme.border};
-  border-left: ${({theme}) => theme.border};
+  width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
+  min-width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
+  max-width: calc(100vw - 3 * ${({ theme }) => theme.borderWidth});
 `;

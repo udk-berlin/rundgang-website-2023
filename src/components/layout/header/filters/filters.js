@@ -80,8 +80,9 @@ export default function HeaderFilters({ showFilters, setShowFilters }) {
 
 const HeaderFiltersContainer = styled.div`
   display: ${({ showFilters }) => (showFilters ? "block" : "none")};
-
+  
   position: absolute;
+  z-index: 100;
   top: calc(
     var(--layout-header-bar-container-height) +
       var(--layout-header-search-container-height) + 1 * var(--border-width)

@@ -8,12 +8,12 @@ import InfoGridDate from "@/components/pages/program/info_grid/date";
 import InfoGridFormat from "@/components/pages/program/info_grid/format";
 import { InfoGridContainer } from "@/components/pages/program/info_grid/info_grid";
 
-export default function ProjectInfoGrid({ project, forProjectPage = false }) {
+export default function ProjectInfoGrid({ project, forProjectPage = false, asOverlay = false }) {
 
   return (
     <ProjectInfoGridContainer>
       <FormatDateContainer>
-        <InfoGridFormat project={project} forProjectPage={forProjectPage} />
+        <InfoGridFormat project={project} forProjectPage={forProjectPage} asOverlay={asOverlay} />
         <InfoGridDate project={project} />
       </FormatDateContainer>
       <InfoGridLocation project={project} forProjectPage={forProjectPage} />
@@ -23,13 +23,18 @@ export default function ProjectInfoGrid({ project, forProjectPage = false }) {
 }
 
 const ProjectInfoGridContainer = styled(InfoGridContainer)`
+  position: fixed;
+  top:  ${({ theme }) => theme.header.height};
+  left: 0;
+  
   display: flex;
   align-items: start;
+
+  width: ${({ theme }) => theme.media.width};
+  min-width: ${({ theme }) => theme.media.width};
+  max-width: ${({ theme }) => theme.media.width};
+  
   padding: 1.5rem 1rem;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 
   cursor: default;
 

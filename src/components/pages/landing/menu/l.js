@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
-import {useLinkDispatch} from "@/providers/link";
+import { useLinkDispatch } from "@/providers/link";
 
 export default function LandingMenuL({ setInfoIsActive }) {
   const language = useIntl();

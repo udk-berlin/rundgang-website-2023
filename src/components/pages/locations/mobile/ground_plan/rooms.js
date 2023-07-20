@@ -77,12 +77,15 @@ function LocationsGroundPlanRoomsAll () {
 }
 
 const LocationsGroundPlanRoomsContainer = styled.div`
-  max-height: ${({ theme, locationsGroundPlanFloorsContainerHeight }) => `calc(${theme.groundPlan.info.height})`};
+  // max-height: ${({ theme, locationsGroundPlanFloorsContainerHeight }) => `calc(${theme.groundPlan.info.height})`};
+  height: fit-content;
+  
   width: 100%;
   min-width: 100%;
   max-width: 100%;
   
   overflow-x: hidden;
+  overflow-y: hidden;
   background: var(--color-white);
 
   font-size: var(--info-grid-font-size);
@@ -99,6 +102,7 @@ const LocationsGroundPlanRoomContainer = styled.div`
   padding: 0.2rem 0.4rem;
 
   border-top: calc(0.5 * var(--border-width)) solid var(--border-color);
+  //border-right: ${({ theme }) => theme.border};
   border-bottom: calc(0.5 * var(--border-width)) solid var(--border-color);
 
   cursor: pointer;

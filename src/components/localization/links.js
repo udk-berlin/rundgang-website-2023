@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
 
-import styles from "@/styles/localization/Links.module.css";
-
 export function SwitchLocalizationLink() {
   const router = useRouter();
   const language = useIntl();
@@ -54,7 +52,7 @@ export function LocalizedLink({ href, children }) {
   const language = useIntl();
 
   return (
-    <Link className={styles.link} href={href} locale={language.locale}>
+    <Link href={href} locale={language.locale}>
       {children}
     </Link>
   );

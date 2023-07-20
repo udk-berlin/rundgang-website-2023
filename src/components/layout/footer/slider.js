@@ -35,14 +35,19 @@ export default function FooterSlider({ numberOfSliderStates, disableSlider = fal
 }
 
 const SliderContainer = styled.div`
-  height: 100%;
-  width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
+  height: ${({ theme }) => theme.footer.height};
+  min-height: ${({ theme }) => theme.footer.height};
+  max-height: ${({ theme }) => theme.footer.height};
+
+  width: 100%;
+
   padding: 0 0.8rem;
+
+  border-right: ${({ theme }) => theme.border};
 
   input {
     width: 100%;
@@ -50,17 +55,26 @@ const SliderContainer = styled.div`
 `;
 
 const CustomSlider = styled(Slider)`
+  height: ${({ theme }) => theme.footer.height};
+  min-height: ${({ theme }) => theme.footer.height};
+  max-height: ${({ theme }) => theme.footer.height};
+  
   color: black;
 
   > .MuiSlider-rail {
     color: var(--color-pink-transparent) !important;
     opacity: 1 !important;
   }
+  
+  * {
+    box-shadow: none !important;
+  }
 
   > .MuiSlider-thumb {
     box-shadow: none !important;
-    color: var(--color-white) !important;
-    outline: var(--info-border-width) solid var(--info-border-color) !important;
+    color: ${({ theme }) => theme.footer.slider.thumb.color};
+    outline: ${({ theme }) => theme.footer.slider.thumb.outline};
+    
     width: 15px !important;
     height: 15px !important;
     

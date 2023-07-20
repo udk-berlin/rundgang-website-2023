@@ -7,7 +7,7 @@ import Layout from "@/components/layout/layout";
 
 import { useFilter } from "@/providers/filter";
 import { useSavedProjects } from "@/providers/saved_projects";
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 
 import { breakpoints } from "@/themes/theme";
 import {
@@ -15,6 +15,7 @@ import {
   programMTheme,
   programSTheme,
 } from "@/themes/pages/program";
+import LoadingLayout from "@/components/layout/loading";
 
 export default function SavedProjects() {
   const filter = useFilter();
@@ -26,7 +27,7 @@ export default function SavedProjects() {
     true
   );
 
-  const [responsiveTheme, setResponsiveTheme] = useState(programLTheme);
+  const [responsiveTheme, setResponsiveTheme] = useState(null);
   const windowSize = useWindowSize();
 
   useEffect(() => {
@@ -34,38 +35,37 @@ export default function SavedProjects() {
       setResponsiveTheme(programSTheme);
     } else if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(programMTheme);
-    } else {
+    } else if (windowSize?.width > breakpoints.m) {
       setResponsiveTheme(programLTheme);
     }
   }, [windowSize?.width]);
 
   return (
-    <Layout>
-      <ThemeProvider theme={responsiveTheme}>
-        <SavedProjectsContainer>
-          <Masonry
-            columnsCount={responsiveTheme.MASONRY_COLUMNS}
-            gutter={responsiveTheme.MASONRY_GUTTER}
-          >
-            {projects.map((project) => (
-              <ProjectCell project={project} />
-            ))}
-          </Masonry>
-        </SavedProjectsContainer>
-      </ThemeProvider>
-    </Layout>
+    <>
+      {
+        responsiveTheme ?
+          <Layout defaultSliderPosition={2}>
+            <ThemeProvider theme={responsiveTheme}>
+              <SavedProjectsContainer>
+                <Masonry
+                  columnsCount={responsiveTheme.MASONRY_COLUMNS}
+                  gutter={responsiveTheme.MASONRY_GUTTER}
+                >
+                  {projects.map((project) => (
+                    <ProjectCell project={project} />
+                  ))}
+                </Masonry>
+              </SavedProjectsContainer>
+            </ThemeProvider>
+          </Layout> : <LoadingLayout />
+      }
+    </>
   );
 }
 
 const SavedProjectsContainer = styled.div`
   min-height: ${({ theme }) => theme.height};
-
-  margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
-  padding: ${({ theme }) => theme.MASONRY_GUTTER};
-
-  border-bottom: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
+  padding: ${({ theme }) => theme.padding};
 `;
 
 function getSavedAndFilteredProjects(savedProjects, filteredProjects, useFast = false) {

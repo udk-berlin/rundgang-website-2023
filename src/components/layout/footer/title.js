@@ -13,7 +13,7 @@ export default function FooterTitle() {
 const TitleContainer = styled.div`
   width: 100%;
   height: 100%;
-
+  
   > div {
     width: 100%;
     height: 100%;
