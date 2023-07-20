@@ -8,7 +8,7 @@ import Layout from "@/components/layout/layout";
 
 import ProjectMedia from "@/components/pages/projects/project/media";
 
-import InfoGrid from "@/components/pages/program/info_grid/info_grid";
+import InfoGrid from "@/components/pages/program/project/info_grid/info_grid";
 import { ProjectText } from "@/components/pages/projects/project/text";
 import { useWindowSize } from "@/providers/window_size";
 import {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Masonry from "react-responsive-masonry";
 import styled, { ThemeProvider } from "styled-components";
 
-import ProjectCell from "@/components/pages/program/project_cell";
+import ProjectCell from "@/components/pages/program/project/cell";
 import Layout from "@/components/layout/layout";
 
 import { useFilter } from "@/providers/filter";

@@ -1,20 +1,19 @@
 import styled, { useTheme } from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
-import InfoGridDate from "@/components/pages/program/info_grid/date";
-import {
-  InfoGridContext,
-  InfoGridLocation,
-} from "@/components/pages/program/info_grid/cards";
+
+import ProjectInfoGridDate from "@/components/pages/program/project/info_grid/date/date";
+import ProjectInfoGridStructures from "@/components/pages/program/project/info_grid/structures";
+
 import { useSlider } from "@/providers/slider";
 import { useWindowSize } from "@/providers/window_size";
-import {useData} from "@/providers/data/data";
+import { ProjectInfoGridLocations } from "@/components/pages/program/project/info_grid/locations";
 
-export default function InfoGridCarousel({ project, forProjectPage = false }) {
+export default function ProjectInfoGridCarousel({ project, forProjectPage = false }) {
   return (
     <Carousel>
-      <InfoGridDate project={project} />
-      <InfoGridLocation project={project} forProjectPage={forProjectPage} />
-      <InfoGridContext project={project} forProjectPage={forProjectPage} />
+      <ProjectInfoGridDate project={project} />
+      <ProjectInfoGridLocations project={project} forProjectPage={forProjectPage} />
+      <ProjectInfoGridStructures project={project} forProjectPage={forProjectPage} />
     </Carousel>
   );
 }

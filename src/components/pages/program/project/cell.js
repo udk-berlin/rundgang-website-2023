@@ -11,40 +11,35 @@ import ProjectLink from "@/components/pages/projects/project/link";
 import { ProjectThumbnail } from "@/components/pages/projects/project/media";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
-import InfoGrid from "@/components/pages/program/info_grid/info_grid";
 import { useWindowSize } from "@/providers/window_size";
 import { breakpoints } from "@/themes/theme";
+import ProjectInfoGrid from "@/components/pages/program/project/info_grid/info_grid";
 
-export default function ProjectCell({ project, index }) {
-  const [cellHovered, setCellHovered] = useState(false);
+const SAVED_ACTIVE = "/assets/svg/layout/saved_active.svg"
+const SAVED_PASSIVE = "/assets/svg/layout/saved_passive.svg"
+
+export default function ProgramProjectCell({ project, index }) {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <ProjectCellContainer
-      onMouseEnter={() => setCellHovered(true)}
-      onMouseLeave={() => setCellHovered(false)}
-    >
+    <ProjectCellContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <ProjectLink project={project}>
         <ProjectThumbnail project={project} index={index} />
       </ProjectLink>
+      <ProjectSavedOverlay project={project} isHovered={isHovered} setIsHovered={setIsHovered}/>
 
-      <SVGOverlay
-        project={project}
-        pathActive={"/assets/svg/layout/saved_active.svg"}
-        pathPassive={"/assets/svg/layout/saved_passive.svg"}
-        cellHovered={cellHovered}
-      />
       <ProjectTitle project={project} fontSize={1} />
       <ProjectAuthors project={project} fontSize={0.7} />
-      <InfoGrid project={project} />
+      <ProjectInfoGrid project={project} />
     </ProjectCellContainer>
   )
 }
 
-export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
-  const [isHovered, setIsHovered] = useState(false);
+function ProjectSavedOverlay({ project, isHovered, setIsHovered }) {
   const [mobile, setMobile] = useState(false);
   const savedProjects = useSavedProjects();
   const setSavedProjects = useSetSavedProjects();
+
   const windowSize = useWindowSize();
 
   useEffect(() => {
@@ -68,26 +63,22 @@ export function SVGOverlay({ pathActive, pathPassive, cellHovered, project }) {
   let svg;
   if (mobile) {
     if (!savedProjects.includes(project.id)) {
-      svg = <SVGHOverlay src={pathPassive} />;
+      svg = <SVGHOverlay src={SAVED_PASSIVE} />;
     } else if (savedProjects && savedProjects.includes(project.id)) {
-      svg = <SVGHOverlay src={pathActive} />;
+      svg = <SVGHOverlay src={SAVED_ACTIVE} />;
     }
   } else {
-    if (cellHovered && !savedProjects.includes(project.id)) {
-      svg = <SVGHOverlay src={pathPassive} />;
+    if (isHovered && !savedProjects.includes(project.id)) {
+      svg = <SVGHOverlay src={SAVED_PASSIVE} />;
     } else if (savedProjects && savedProjects.includes(project.id)) {
-      svg = <SVGHOverlay src={pathActive} />;
+      svg = <SVGHOverlay src={SAVED_ACTIVE} />;
     }
   }
 
   return (
-    <SVGOverlayContainer
-      onClick={handleClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div onClick={handleClick} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       {svg}
-    </SVGOverlayContainer>
+    </div>
   );
 }
 
@@ -103,11 +94,12 @@ const ProjectCellContainer = styled.div`
 
 const SVGHOverlay = styled(ReactSVG)`
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0;
+  right: 0;
+  
   width: 40px;
   height: 40px;
+  
   cursor: pointer;
 `;
 
-const SVGOverlayContainer = styled.div``;

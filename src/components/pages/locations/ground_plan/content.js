@@ -67,7 +67,7 @@ const LocationsGroundPlanContentContainer = styled.div`
 const LocationsGroundPlanInfoContainer = styled.div`
   // height: ${({ theme })=> theme.groundPlan.info.height};
   // min-height: ${({ theme })=> theme.groundPlan.info.height};
-  // max-height: ${({ theme })=> theme.groundPlan.info.height};
+  max-height: ${({ theme })=> theme.groundPlan.info.height};
 
   width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
   min-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};

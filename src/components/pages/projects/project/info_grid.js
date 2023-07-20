@@ -3,10 +3,10 @@ import styled from "styled-components";
 import {
   InfoGridContext,
   InfoGridLocation,
-} from "@/components/pages/program/info_grid/cards";
-import InfoGridDate from "@/components/pages/program/info_grid/date";
-import InfoGridFormat from "@/components/pages/program/info_grid/format";
-import { InfoGridContainer } from "@/components/pages/program/info_grid/info_grid";
+} from "@/components/pages/program/project/info_grid/structures";
+import InfoGridDate from "@/components/pages/program/project/info_grid/date/date";
+import InfoGridFormat from "@/components/pages/program/project/info_grid/formats";
+import { InfoGridContainer } from "@/components/pages/program/project/info_grid/info_grid";
 
 export default function ProjectInfoGrid({ project, forProjectPage = false, asOverlay = false }) {
 
