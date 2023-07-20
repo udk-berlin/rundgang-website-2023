@@ -82,11 +82,7 @@ function LocationsGroundPlanFloorEmpty () {
 const LocationsGroundPlanFloorsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-
+  
   border: calc(0.5 * var(--border-width)) solid var(--border-color);
   border-left: 0;
   border-right: 0;

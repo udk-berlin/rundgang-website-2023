@@ -40,13 +40,13 @@ export default function Layout({
       {
         responsiveTheme ?
           <ThemeProvider theme={responsiveTheme}>
-            <LayoutContainer>
-              <SliderProvider defaultPosition={defaultSliderPosition}>
+            <SliderProvider defaultPosition={defaultSliderPosition}>
+              <LayoutContainer>
                 <Header disableFilter={disableFilter} />
-                <Content>{children}</Content>
+                <LayoutContentContainer>{children}</LayoutContentContainer>
                 {footer}
-              </SliderProvider>
-            </LayoutContainer>
+              </LayoutContainer>
+            </SliderProvider>
           </ThemeProvider> : <></>
       }
     </>
@@ -61,28 +61,24 @@ const LayoutContainer = styled.div`
   //height: 100vh;
   //min-height: 100vh;
   //max-height: 100vh;
-  //
-  //width: 100vw;
-  //min-width: 100vw;
-  //max-width: 100vw;
   
-  //overflow: hidden;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 `;
 
-const Content = styled.div`
-  height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
-  min-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
-  max-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+const LayoutContentContainer = styled.div`
+  // height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+  // min-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+  // max-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
 
-  //width: 100vw;
-  //min-width: 100vw;
-  //max-width: 100vw;
-
-  overflow: auto;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 
   border-left: ${({ theme }) => theme.border};
   border-right: ${({ theme }) => theme.border};
-  
-  //margin-top: ${({ theme }) => theme.header.height};
-  //padding-bottom: calc(${({ theme }) => theme.footer.height} +  2 * ${({ theme }) => theme.borderWidth});
+
+  overflow-y: auto;
+  overflow-x: hidden;
 `;

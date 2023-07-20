@@ -127,6 +127,7 @@ export const locationsMTheme = {
     height: 'fit-content',
     width: '100vw',
     position: '',
+    padding: '0.75rem',
     top: '',
     left: '',
     gridTemplateColumns: '',

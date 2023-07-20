@@ -20,6 +20,7 @@ const FooterWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 99;
   
   width: 100%;
 `;
