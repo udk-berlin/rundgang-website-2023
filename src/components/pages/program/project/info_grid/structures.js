@@ -1,88 +1,144 @@
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 
-import { InfoGridCardItem } from "@/components/pages/program/info_grid/item";
 import { useData } from "@/providers/data/data";
-import { mapRoom } from "@/utils/room_mapper";
+import { HoverLink } from "@/components/hover_link";
 
 const CENTER_ID = '!uGRoYVWPeAFDnpWCYl:content.udk-berlin.de'
 
-export function InfoGridLocation({ project, forProjectPage = false }) {
+export default function ProjectInfoGridStructures({ project, forProjectPage = false }) {
   const { contexts } = useData(forProjectPage)
-  const locations = []
-
-  contexts && project.parents?.forEach(parent => {
-    if (parent && parent.id) {
-      let context = contexts[parent.id]
-
-      if (context && context.template) {
-        if (context.template === 'location-room') {
-          let room = context
-          let floor
-          let building
-
-          context = room.parents && room.parents[0] ? contexts[room.parents[0].id] : null
-
-          if (context && context.template && context.template  === 'location-level') {
-            floor = context
-            context = floor.parents && floor.parents[0] ? contexts[floor.parents[0].id] : null
-
-            if (context && context.template && context.template === 'location-building') {
-              building = context
-            }
-          } else if (context && context.template && context.template === 'location-building') {
-            building = context
-          }
-
-          locations.push(
-            {
-              room: mapRoom(room),
-              floor: floor,
-              building: building,
-            }
-          )
-        }
-      }
-    }
-  })
+  const structures = extractStructures(project, contexts)
 
   return (
-    <Container>
+    <InfoGridStructuresContainer>
       {
-        locations.map(location => {
+        Object.values(structures.faculties).map(faculty => {
           return (
             <>
+              <InfoGridStructure href={`/program/${faculty.id}`} withLink={true} margin="50"><FormattedMessage id={faculty.name} /></InfoGridStructure>
               {
-                location.building ?
-                  <InfoGridCardItem href={`/locations/${location.building.id}`} margin="10">
-                    {location.building.name}
-                  </InfoGridCardItem> : <></>
+                Object.values(faculty.institutes).map(institute => {
+                  return (
+                    <>
+                      <InfoGridStructure id={institute.id} margin="15">{institute.name}</InfoGridStructure>
+                      {Object.values(institute.classes).map(clazz => <InfoGridStructure id={clazz.id} margin="20">{clazz.name}</InfoGridStructure>)}
+                      {
+                        Object.values(institute.subjects).map(subject => {
+                          return (
+                            <>
+                              <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>
+                              {Object.values(subject.subjects).map(secondSubject => <InfoGridStructure id={secondSubject.id} margin="20">{secondSubject.name}</InfoGridStructure>)}
+                            </>
+                          )
+                        })
+                      }
+                      {
+                        Object.values(institute.courses).map(course => {
+                            return (
+                              <>
+                                <InfoGridStructure id={course.id} margin="50">{course.name}</InfoGridStructure>
+                                {Object.values(course.subjects).map(subject => <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>)}
+                                {Object.values(course.classes).map(clazz => <InfoGridStructure id={clazz.id} margin="20">{clazz.name}</InfoGridStructure>)}
+                              </>
+                            )
+                          }
+                        )
+                      }
+                    </>
+                  )
+                })
+
               }
+              {Object.values(faculty.subjects).map(subject => <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>)}
+              {Object.values(faculty.courses).map(course => <InfoGridStructure id={course.id} margin="50">{course.name}</InfoGridStructure>)}
+            </>
+          )
+        })
+      }
+      {
+        Object.values(structures.centres).map(centre => {
+          return (
+            <>
+              <InfoGridStructure href={`/program/${CENTER_ID}`} withLink={true} margin="50"><FormattedMessage id={centre.name} /></InfoGridStructure>
+              {Object.values(centre.subjects).map(subject => <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>)}
               {
-                location.floor ?
-                  <InfoGridCardItem href={`/locations/${location.floor.id}`} margin="25">
-                    <FormattedMessage id="floor" />
-                    :&nbsp;
-                    {location.floor.name}
-                  </InfoGridCardItem> : <></>
-              }
-              {
-                location.room ?
-                  <InfoGridCardItem href={`/locations/${location.room.id}`} margin="50">
-                    {location.room.formattedMessageId ? <span><FormattedMessage id={location.room.formattedMessageId} />: </span> : <></>}
-                    {location.room.name}
-                  </InfoGridCardItem> : <></>
+                Object.values(centre.consultingServices).map(consultingService => {
+                  return (
+                    <>
+                      <InfoGridStructure id={consultingService.id} margin="15">{consultingService.name}</InfoGridStructure>
+                      {
+                        Object.values(consultingService.seminars).map(seminar => <InfoGridStructure id={seminar.id} margin="50">{seminar.name}</InfoGridStructure>)
+                      }
+                    </>
+                  )
+                })
               }
             </>
           )
         })
       }
-    </Container>
+
+      {
+        Object.values(structures.initiatives).map(initiative => {
+          return (
+            <>
+              <InfoGridStructure margin="50">{initiative.name}</InfoGridStructure>
+            </>
+          )
+        })
+      }
+    </InfoGridStructuresContainer>
   );
 }
 
-export function InfoGridContext({ project, forProjectPage = false }) {
-  const { contexts } = useData(forProjectPage)
+const InfoGridStructuresContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  & > * {
+    margin-right: var(--info-border-width);
+  }
+`;
+
+function InfoGridStructure({ margin, href, children }) {
+  return (
+    <>
+      {
+        children ?
+          href ?
+            <InfoGridStructureContainer margin={margin}>
+              <HoverLink href={href}>{children}</HoverLink>
+            </InfoGridStructureContainer> :
+            <InfoGridStructureContainerPadded margin={margin}>
+              <div style={{ display: "inline" }}>
+                {children}
+              </div>
+            </InfoGridStructureContainerPadded> :
+          <></>
+      }
+    </>
+  )
+}
+
+const InfoGridStructureContainer = styled.div`
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: white;
+  color: black;
+
+  outline: var(--info-border-width) solid var(--info-border-color);
+  margin-top: var(--info-border-width);
+
+  margin-left: ${({ margin }) => margin }%;
+`;
+
+const InfoGridStructureContainerPadded = styled(InfoGridStructureContainer)`
+  padding: 0.2rem 0.4rem;
+`;
+
+function extractStructures(project, contexts) {
   const structures = { faculties: {}, centres: {}, initiatives: {} }
 
   contexts && project.parents?.forEach(parent => {
@@ -366,94 +422,5 @@ export function InfoGridContext({ project, forProjectPage = false }) {
     }
   })
 
-  return (
-    <Container>
-      {
-        Object.values(structures.faculties).map(faculty => {
-          return (
-            <>
-              <InfoGridCardItem href={`/program/${faculty.id}`} withLink={true} margin="50"><FormattedMessage id={faculty.name} /></InfoGridCardItem>
-              {
-                Object.values(faculty.institutes).map(institute => {
-                  return (
-                    <>
-                      <InfoGridCardItem id={institute.id} margin="15">{institute.name}</InfoGridCardItem>
-                      {Object.values(institute.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="20">{clazz.name}</InfoGridCardItem>)}
-                      {
-                        Object.values(institute.subjects).map(subject => {
-                          return (
-                            <>
-                              <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>
-                              {Object.values(subject.subjects).map(secondSubject => <InfoGridCardItem id={secondSubject.id} margin="20">{secondSubject.name}</InfoGridCardItem>)}
-                            </>
-                          )
-                        })
-                      }
-                      {
-                        Object.values(institute.courses).map(course => {
-                          return (
-                            <>
-                              <InfoGridCardItem id={course.id} margin="50">{course.name}</InfoGridCardItem>
-                              {Object.values(course.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>)}
-                              {Object.values(course.classes).map(clazz => <InfoGridCardItem id={clazz.id} margin="20">{clazz.name}</InfoGridCardItem>)}
-                            </>
-                          )
-                        }
-                        )
-                      }
-                    </>
-                  )
-                })
-
-              }
-              {Object.values(faculty.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>)}
-              {Object.values(faculty.courses).map(course => <InfoGridCardItem id={course.id} margin="50">{course.name}</InfoGridCardItem>)}
-            </>
-          )
-        })
-      }
-      {
-        Object.values(structures.centres).map(centre => {
-          return (
-            <>
-              <InfoGridCardItem href={`/program/${CENTER_ID}`} withLink={true} margin="50"><FormattedMessage id={centre.name} /></InfoGridCardItem>
-              {Object.values(centre.subjects).map(subject => <InfoGridCardItem id={subject.id} margin="10">{subject.name}</InfoGridCardItem>)}
-              {
-                Object.values(centre.consultingServices).map(consultingService => {
-                 return (
-                   <>
-                     <InfoGridCardItem id={consultingService.id} margin="15">{consultingService.name}</InfoGridCardItem>
-                     {
-                       Object.values(consultingService.seminars).map(seminar => <InfoGridCardItem id={seminar.id} margin="50">{seminar.name}</InfoGridCardItem>)
-                     }
-                   </>
-                 )
-                })
-              }
-            </>
-          )
-        })
-      }
-
-      {
-        Object.values(structures.initiatives).map(initiative => {
-          return (
-            <>
-              <InfoGridCardItem margin="50">{initiative.name}</InfoGridCardItem>
-            </>
-          )
-        })
-      }
-    </Container>
-  );
+  return structures
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  & > * {
-    margin-right: var(--info-border-width);
-  }
-`;

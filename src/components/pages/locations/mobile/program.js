@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import ProjectCell from "@/components/pages/program/project_cell";
+import ProjectCell from "@/components/pages/program/project/cell";
 import { useFilter } from "@/providers/filter";
 
 export default function LocationsMobileProgram() {

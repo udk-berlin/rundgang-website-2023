@@ -8,7 +8,7 @@ import ResponsiveMarker from "@/components/pages/locations/map/marker";
 
 const MAP_CONFIGURATION = {
   style:
-    "https://api.maptiler.com/maps/d450193f-53a4-40fc-8f3f-97a0321d7139/style.json?key=Zn4TzWj4KtRhJ9I5TDxf",
+    "https://osm.udk-berlin.de/styles/udk-rundgang-2023/style.json",
   bounds: {
     longitude: { min: 13.1397254, max: 13.5871903 },
     latitude: { min: 52.382394, max: 52.606099 },
