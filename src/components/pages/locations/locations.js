@@ -38,8 +38,8 @@ export default function Locations({ location }) {
                 <LocationsContainer>
                   {locations && projects ? <LocationsMap projects={projects} locations={locations} location={location} /> : <></>}
                   {responsiveTheme.id === 'l' ? <LocationsGroundPlan /> : <LocationsMobileGroundPlan />}
-                  {/*{responsiveTheme.id === 'l' ? <LocationsFloorPlanPopup /> : <></>}*/}
-                  {/*{responsiveTheme.id === 'l' ? <LocationsProgram /> : <></>}*/}
+                  {responsiveTheme.id === 'l' ? <LocationsFloorPlanPopup /> : <></>}
+                  {responsiveTheme.id === 'l' ? <LocationsProgram /> : <></>}
                 </LocationsContainer>
             </ThemeProvider>
           </Layout> : <LoadingLayout />

@@ -32,6 +32,10 @@ const InfoPagesContainer = styled.div`
 
   width: 100%;
   height: 100%;
+  
+  margin-left: calc(2 * ${({ theme }) => theme.borderWidth});
+
+  border-left: ${({ theme }) => theme.border};
 
   font-size: 0.85rem;
 

@@ -40,17 +40,28 @@ const SliderContainer = styled.div`
   align-items: center;
 
   height: ${({ theme }) => theme.footer.height};
-  width: 100%;
+  min-height: ${({ theme }) => theme.footer.height};
+  max-height: ${({ theme }) => theme.footer.height};
+
+  width: ${({ theme }) => theme.footer.gridTemplateColumn1};
+  min-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
+  max-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
 
   padding: 0 0.8rem;
 
+  border-right: ${({ theme }) => theme.border};
+
   input {
-    width: 100%;
+    width: ${({ theme }) => theme.footer.gridTemplateColumn1};
+    min-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
+    max-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
   }
 `;
 
 const CustomSlider = styled(Slider)`
   height: ${({ theme }) => theme.footer.height};
+  min-height: ${({ theme }) => theme.footer.height};
+  max-height: ${({ theme }) => theme.footer.height};
   
   color: black;
 
@@ -65,13 +76,9 @@ const CustomSlider = styled(Slider)`
 
   > .MuiSlider-thumb {
     box-shadow: none !important;
-    //color: var(--color-white) !important;
-    color: var(--color-black) !important;
-
-    color: ${({ theme }) => theme.footer.slider.thumb.outline};
-    outline: ${({ theme }) => theme.footer.slider.thumb.color};
+    color: ${({ theme }) => theme.footer.slider.thumb.color};
+    outline: ${({ theme }) => theme.footer.slider.thumb.outline};
     
-    //outline: var(--info-border-width) solid var(--info-border-color) !important;
     width: 15px !important;
     height: 15px !important;
     

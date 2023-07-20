@@ -21,28 +21,24 @@ const FooterWrapper = styled.div`
   bottom: 0;
   left: 0;
   z-index: 99;
-  
-  width: 100%;
+
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 `;
 
 const FooterContainer = styled.div`
+  display: grid;
+  grid-template-columns: ${({ theme }) => theme.footer.gridTemplateColumn1} ${({ theme }) => theme.footer.gridTemplateColumn2} ${({ theme }) => theme.footer.gridTemplateColumn3};
+  
   height: ${({ theme }) => theme.footer.height};
+  min-height: ${({ theme }) => theme.footer.height};
+  max-height: ${({ theme }) => theme.footer.height};
+  
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;
 
-  display: grid;
-  grid-template-columns: ${({ theme }) => theme.footer.gridTemplateColumn1} ${({ theme }) => theme.footer.gridTemplateColumn2} ${({ theme }) => theme.footer.gridTemplateColumn3};
-  align-items: center;
-
   border: ${({ theme }) => theme.border};
   background: white;
-
-  > *:nth-child(1) {
-    border-right: ${({ theme }) => theme.border};
-  }
-
-  > *:nth-child(3) {
-    border-left: ${({ theme }) => theme.border};
-  }
 `;

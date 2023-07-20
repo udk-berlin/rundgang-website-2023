@@ -87,9 +87,9 @@ const LocationsGroundPlanFloorsContainer = styled.div`
   min-width: 100%;
   max-width: 100%;
 
-  border: calc(0.5 * var(--border-width)) solid var(--border-color);
-  border-left: 0;
-  border-right: 0;
+  border-top: calc(0.5 * var(--border-width)) solid var(--border-color);
+  border-bottom: calc(0.5 * var(--border-width)) solid var(--border-color);
+  
   background: var(--color-white);
 
   font-size: var(--info-grid-font-size);

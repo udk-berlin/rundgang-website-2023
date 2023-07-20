@@ -27,8 +27,8 @@ const EmptyColumn = styled.div`
 `
 
 const GroundPlanContainer = styled.div`
-  position: ${({ theme })=> theme.groundPlan.position};
-  top: ${({ theme })=> theme.groundPlan.top};
+  position: absolute;
+  top: 0;
   z-index: 3;
 
   display: grid;
@@ -38,23 +38,24 @@ const GroundPlanContainer = styled.div`
   min-width: 100%;
   max-width: 100%;
   
-  height: ${({ theme })=> theme.groundPlan.height};
-  min-height: ${({ theme })=> theme.groundPlan.height};
-  max-height: ${({ theme })=> theme.groundPlan.height};
+  // height: ${({ theme })=> theme.groundPlan.height};
+  // min-height: ${({ theme })=> theme.groundPlan.height};
+  // max-height: ${({ theme })=> theme.groundPlan.height};
 
   cursor: default;
+  pointer-events: none;
 
   font-size: 16px;
 `
 
 const ContentColumn = styled.div`
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  min-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  max-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
   
-  height: 100%;
-  min-height: 100%;
-  max-height: 100%;
+  //height: 100%;
+  //min-height: 100%;
+  //max-height: 100%;
   
   pointer-events: auto;
 `

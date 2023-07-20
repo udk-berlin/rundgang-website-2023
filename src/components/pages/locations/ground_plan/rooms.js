@@ -99,7 +99,6 @@ const LocationsGroundPlanRoomContainer = styled.div`
   padding: 0.2rem 0.4rem;
 
   border-top: calc(0.5 * var(--border-width)) solid var(--border-color);
-  border-right: ${({ theme }) => theme.border};
   border-bottom: calc(0.5 * var(--border-width)) solid var(--border-color);
 
   cursor: pointer;

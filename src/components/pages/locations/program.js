@@ -29,17 +29,17 @@ const LocationsProgramEmptyColumn = styled.div`
 `;
 
 const LocationsProgramContainer = styled.div`
-  position: ${({ theme }) => theme.program.position};
-  top: ${({ theme }) => theme.program.top};
-  left: ${({ theme }) => theme.program.left};
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 3;
 
   display: grid;
   grid-template-columns: ${({ theme }) => theme.program.gridTemplateColumns};
 
-  width: calc(100vw - 1 * ${({ theme }) => theme.borderWidth});
-  min-width: calc(100vw - 1 * ${({ theme }) => theme.borderWidth});
-  max-width: calc(100vw - 1 * ${({ theme }) => theme.borderWidth});
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 
   height: ${({ theme }) => theme.program.height};
   min-height: ${({ theme }) => theme.program.height};
@@ -54,17 +54,19 @@ const LocationsProgramContainer = styled.div`
 `;
 
 const LocationsProgramContentColumn = styled.div`
-  pointer-events: all;
-  overflow: scroll;
-  background: white;
-  padding: ${({ theme }) => theme.program.padding};
-  border-left: ${({ theme }) => theme.program.borderLeft};
-
-  width: ${({ theme }) => theme.program.width};
-  min-width: ${({ theme }) => theme.program.width};
-  max-width: ${({ theme }) => theme.program.width};
-
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.program.padding};
+
+  width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  min-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  max-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  
+  padding: ${({ theme }) => theme.program.padding};
+  
+  border-left: ${({ theme }) => theme.program.borderLeft};
+
+  background: white;
+  overflow: scroll;
+  pointer-events: all;
 `;
