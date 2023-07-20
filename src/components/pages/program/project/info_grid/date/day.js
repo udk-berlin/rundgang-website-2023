@@ -1,29 +1,23 @@
 import styled from "styled-components";
 
-import { InfoGridItem } from "@/components/pages/program/info_grid/item";
 import { TimelineLink } from "@/components/localization/links";
 
 const dayToWeekDayMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-export default function InfoGridDay({ projectTime }) {
+export default function ProjectInfoGridDay({ date }) {
   return (
     <InfoGridDayContainer>
-      <InfoGridItem>
+      <Box>
         <span>Date:</span>
-      </InfoGridItem>
+      </Box>
 
       <StyledTimelineLink>
         <TimelineLink href={'/timeline'}>
-        <DateContainer day={projectTime[0]}>
-          <span>{dayToWeekDayMapper[projectTime[0].getDay()]}</span>
-          <span>
-          {projectTime[0].getDate() +
-            "." +
-            (projectTime[0].getMonth() + 1) +
-            "."}
-        </span>
-        </DateContainer>
-      </TimelineLink>
+          <DateContainer day={date.start}>
+            <span>{dayToWeekDayMapper[date.start.getDay()]}</span>
+            <span>{date.start.getDate() + "." + (date.start.getMonth() + 1) + "."}</span>
+          </DateContainer>
+        </TimelineLink>
       </StyledTimelineLink>
     </InfoGridDayContainer>
   );
@@ -37,6 +31,21 @@ const InfoGridDayContainer = styled.div`
   }
 `;
 
+const Box = styled.div`
+  margin-top: ${({ theme }) => theme.borderWidth};
+  margin-left:  ${({ theme }) => theme.borderWidth};
+  margin-left: ${({ margin }) => margin }%;
+
+  padding: ${({ theme }) => theme.box.padding};
+
+  background: white;
+  outline: ${({ theme }) => theme.border};
+  
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: black;
+`;
+
 const StyledTimelineLink = styled.div`
   *:hover {
     background: ${({ theme }) => theme.colors.pink};
@@ -44,7 +53,7 @@ const StyledTimelineLink = styled.div`
   }
 `;
 
-const DateContainer = styled(InfoGridItem)`
+const DateContainer = styled(Box)`
   display: flex;
   justify-content: space-evenly;
   grid-column-start: ${(props) => dateToPosition(props.day)};

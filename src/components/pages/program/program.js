@@ -4,7 +4,7 @@ import Masonry from "react-responsive-masonry";
 
 import { useFilter } from "@/providers/filter";
 
-import ProjectCell from "@/components/pages/program/project_cell";
+import ProgramProjectCell from "@/components/pages/program/project/cell";
 import Layout from "@/components/layout/layout";
 import { useWindowSize } from "@/providers/window_size";
 import { breakpoints } from "@/themes/theme";
@@ -39,7 +39,7 @@ export default function Program() {
                 columnsCount={responsiveTheme.MASONRY_COLUMNS}
                 gutter={responsiveTheme.MASONRY_GUTTER}>
                 {filter.filteredProjects.map((project, index) => (
-                  <ProjectCell project={project} index={index}/>
+                  <ProgramProjectCell project={project} index={index}/>
                 ))}
               </Masonry>
             </ProgramContainer>

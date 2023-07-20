@@ -1,31 +1,46 @@
 import styled from "styled-components";
 
-import { InfoGridItem } from "@/components/pages/program/info_grid/item";
 import { TimelineLink } from "@/components/localization/links";
 
-export default function InfoGridTime({ start, end }) {
+export default function ProjectInfoGridTime({ date }) {
+  const position = dateToPosition(date.start, date.end)
+
   return (
     <StyledTimelineLink>
       <TimelineLink href={'/timeline'}>
-        <InfoGridTimeContainer
-          pos={timeToMarginWidth(start, end)}
-          margin={timeToMarginWidth(start, end)[0]}
-        >
-          <TimeContainer date={start} />
+        <InfoGridTimeContainer width={position.width} margin={position.margin}>
+          <TimeContainer date={date.start} />
           <Line />
-          <TimeContainer date={end} />
+          <TimeContainer date={date.end} />
         </InfoGridTimeContainer>
       </TimelineLink>
     </StyledTimelineLink>
   );
 }
 
-const InfoGridTimeContainer = styled(InfoGridItem)`
-  min-width: 110px;
-  width: ${({ pos }) => pos[1]}%;
-
+const InfoGridTimeContainer = styled.div`
   display: flex;
   align-items: center;
+  
+  min-width: 110px;
+  width: ${({ width }) => width}%;
+  
+  margin-top:  ${({ theme }) => theme.borderWidth};
+  margin-left: ${({ margin }) => margin }%;
+
+  padding: ${({ theme }) => theme.box.padding};
+
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: black;
+  
+  background: white;
+  outline: ${({ theme }) => theme.border};
+  
+  :hover {
+    background: ${({ theme }) => theme.colors.pink};
+    color: white;
+  }
 
   & > :nth-last-child(1) {
     margin-right: var(--info-border-width);
@@ -55,7 +70,7 @@ const Line = styled.div`
   margin: 5px;
 `;
 
-function timeToMarginWidth(start, end) {
+function dateToPosition(start, end) {
   let startOfDay = 10;
   let endOfDay = 24;
   let lengthOfDay = endOfDay - startOfDay;
@@ -67,7 +82,15 @@ function timeToMarginWidth(start, end) {
     scale(end.getHours() - start.getHours(), 0, lengthOfDay, 0, 100) +
     scale(end.getHours() - start.getHours(), 0, 59, 0, 100 / lengthOfDay);
 
-  return [margin, width];
+  if (margin > 62) {
+    margin = 62
+  }
+
+  if (width < 0) {
+    width = 100 - margin - 1
+  }
+
+  return {margin, width};
 }
 
 export function scale(number, inMin, inMax, outMin, outMax) {
