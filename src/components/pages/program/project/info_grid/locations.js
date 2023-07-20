@@ -64,7 +64,7 @@ const InfoGridLocationsLinkContainer = styled.div`
   width: max-content;
   
   margin-top:  ${({ theme }) => theme.borderWidth};
-  margin-left: ${({ forProjectPage, margin, theme }) => forProjectPage ||  theme.MASONRY_COLUMNS === 1 ? `${margin * 150}%` : `calc(calc(100vw / ${({ theme }) => theme.MASONRY_COLUMNS} - ${({ theme }) => theme.MASONRY_GUTTER} * ${({ theme }) => theme.MASONRY_COLUMNS + 1} / ${({ theme }) => theme.MASONRY_COLUMNS}) * ${({ margin }) => margin})`};
+  margin-left: calc(calc(${({ theme }) => theme.MASONRY_COLUMNS ? '100vw' : '50vw' } / ${({ theme }) => theme.MASONRY_COLUMNS ? theme.MASONRY_COLUMNS > 1 ? theme.MASONRY_COLUMNS : 2 : 3 } - ${({ theme }) => theme.MASONRY_GUTTER ?  theme.MASONRY_GUTTER : '0px'} * ${({ theme }) => theme.MASONRY_COLUMNS ? theme.MASONRY_COLUMNS + 1 : 0} / ${({ theme }) => theme.MASONRY_COLUMNS ? theme.MASONRY_COLUMNS : 1}) * ${({ margin }) => margin});
   padding: ${({ theme }) => theme.box.padding};
   
   font-size: 0.7rem;
