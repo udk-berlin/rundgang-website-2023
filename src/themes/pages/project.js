@@ -28,6 +28,7 @@ export const projectLTheme = {
     sliderOffset: 2,
   },
   media: {
+    position: "relative",
     display: "",
     flexDirection: "",
     height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
@@ -87,6 +88,7 @@ export const projectMTheme = {
     sliderOffset: 2,
   },
   media: {
+    position: "relative",
     display: "",
     flexDirection: "",
     height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
@@ -146,12 +148,13 @@ export const projectSTheme = {
     sliderOffset: 2,
   },
   media: {
+    position: "initial",
     display: "flex",
     flexDirection: "row",
     height: "auto",
     width: '',
-    overflowX: "scroll",
-    overflowY: "hidden",
+    overflowX: "auto",
+    overflowY: "auto",
     thumbnail: {
       height: "auto",
       width: `calc(100vw - 3 * ${baseMTheme.borderWidth})`,

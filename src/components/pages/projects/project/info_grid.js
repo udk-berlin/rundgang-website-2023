@@ -23,13 +23,18 @@ export default function ProjectInfoGrid({ project, forProjectPage = false, asOve
 }
 
 const ProjectInfoGridContainer = styled(InfoGridContainer)`
+  position: fixed;
+  top:  ${({ theme }) => theme.header.height};
+  left: 0;
+  
   display: flex;
   align-items: start;
+
+  width: ${({ theme }) => theme.media.width};
+  min-width: ${({ theme }) => theme.media.width};
+  max-width: ${({ theme }) => theme.media.width};
+  
   padding: 1.5rem 1rem;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 
   cursor: default;
 

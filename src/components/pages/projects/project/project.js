@@ -74,5 +74,14 @@ const ProjectContainer = styled.div`
 `;
 
 const ProjectInfoContainer = styled.div`
+  position: relative;
+  
+  height: ${({ theme }) => theme.media.height};
+  min-height: ${({ theme }) => theme.media.height};
+  max-height: ${({ theme }) => theme.media.height};
+
   padding: ${({ theme }) => theme.info.padding};
+
+  overflow-x: ${({ theme }) => theme.media.overflowX};
+  overflow-y: ${({ theme }) => theme.media.overflowY};
 `;

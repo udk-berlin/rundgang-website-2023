@@ -43,18 +43,14 @@ const SliderContainer = styled.div`
   min-height: ${({ theme }) => theme.footer.height};
   max-height: ${({ theme }) => theme.footer.height};
 
-  width: ${({ theme }) => theme.footer.gridTemplateColumn1};
-  min-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
-  max-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
+  width: 100%;
 
   padding: 0 0.8rem;
 
   border-right: ${({ theme }) => theme.border};
 
   input {
-    width: ${({ theme }) => theme.footer.gridTemplateColumn1};
-    min-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
-    max-width: ${({ theme }) => theme.footer.gridTemplateColumn1};
+    width: 100%;
   }
 `;
 
