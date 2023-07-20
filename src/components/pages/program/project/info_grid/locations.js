@@ -5,7 +5,7 @@ import { useData } from "@/providers/data/data";
 import { mapRoom } from "@/utils/room_mapper";
 import { LocalizedLink } from "@/components/localization/links";
 
-export function ProjectInfoGridLocations({ project, forProjectPage = false }) {
+export default function ProjectInfoGridLocations({ project, forProjectPage = false }) {
   const { contexts } = useData(forProjectPage)
   const locations = extractLocations(project, contexts)
 
@@ -18,7 +18,7 @@ export function ProjectInfoGridLocations({ project, forProjectPage = false }) {
               {
                 location.building ?
                   <LocalizedLink href={`/locations/${location.building.id}`}>
-                    <InfoGridLocationsLinkContainer margin={0.1}>
+                    <InfoGridLocationsLinkContainer margin={0.1} forProjectPage={forProjectPage}>
                       {location.building.name}
                     </InfoGridLocationsLinkContainer>
                   </LocalizedLink> : <></>
@@ -26,7 +26,7 @@ export function ProjectInfoGridLocations({ project, forProjectPage = false }) {
               {
                 location.floor ?
                   <LocalizedLink href={`/locations/${location.floor.id}`}>
-                    <InfoGridLocationsLinkContainer margin={0.2}>
+                    <InfoGridLocationsLinkContainer margin={0.2} forProjectPage={forProjectPage}>
                       <FormattedMessage id="floor" />
                       :&nbsp;
                       {location.floor.name}
@@ -36,7 +36,7 @@ export function ProjectInfoGridLocations({ project, forProjectPage = false }) {
               {
                 location.room ?
                   <LocalizedLink href={`/locations/${location.room.id}`}>
-                    <InfoGridLocationsLinkContainer margin={0.4}>
+                    <InfoGridLocationsLinkContainer margin={0.4} forProjectPage={forProjectPage}>
                       {location.room.formattedMessageId ? <span><FormattedMessage id={location.room.formattedMessageId} />: </span> : <></>}
                       {location.room.name}
                     </InfoGridLocationsLinkContainer>
@@ -64,8 +64,7 @@ const InfoGridLocationsLinkContainer = styled.div`
   width: max-content;
   
   margin-top:  ${({ theme }) => theme.borderWidth};
-  margin-left: calc(calc(100vw / ${({ theme }) => theme.MASONRY_COLUMNS} - ${({ theme }) => theme.MASONRY_GUTTER} * ${({ theme }) => theme.MASONRY_COLUMNS + 1} / ${({ theme }) => theme.MASONRY_COLUMNS}) * ${({ margin }) => margin}); //${({ margin }) => margin}%;
-
+  margin-left: ${({ forProjectPage, margin, theme }) => forProjectPage ||  theme.MASONRY_COLUMNS === 1 ? `${margin * 150}%` : `calc(calc(100vw / ${({ theme }) => theme.MASONRY_COLUMNS} - ${({ theme }) => theme.MASONRY_GUTTER} * ${({ theme }) => theme.MASONRY_COLUMNS + 1} / ${({ theme }) => theme.MASONRY_COLUMNS}) * ${({ margin }) => margin})`};
   padding: ${({ theme }) => theme.box.padding};
   
   font-size: 0.7rem;

@@ -16,9 +16,7 @@ export default function ProjectInfoGridStructures({ project, forProjectPage = fa
         Object.values(structures.faculties).map(faculty => {
           return (
             <>
-              <InfoGridStructure href={`/program/${faculty.id}`} withLink={true} margin="50">
-                <FormattedMessage id={faculty.name} />
-              </InfoGridStructure>
+              <InfoGridStructure href={`/program/${faculty.id}`} withLink={true} margin="50"><FormattedMessage id={faculty.name} /></InfoGridStructure>
               {
                 Object.values(faculty.institutes).map(institute => {
                   return (
@@ -37,19 +35,20 @@ export default function ProjectInfoGridStructures({ project, forProjectPage = fa
                       }
                       {
                         Object.values(institute.courses).map(course => {
-                          return (
-                            <>
-                              <InfoGridStructure id={course.id} margin="50">{course.name}</InfoGridStructure>
-                              {Object.values(course.subjects).map(subject => <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>)}
-                              {Object.values(course.classes).map(clazz => <InfoGridStructure id={clazz.id} margin="20">{clazz.name}</InfoGridStructure>)}
-                            </>
-                          )
-                        }
+                            return (
+                              <>
+                                <InfoGridStructure id={course.id} margin="50">{course.name}</InfoGridStructure>
+                                {Object.values(course.subjects).map(subject => <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>)}
+                                {Object.values(course.classes).map(clazz => <InfoGridStructure id={clazz.id} margin="20">{clazz.name}</InfoGridStructure>)}
+                              </>
+                            )
+                          }
                         )
                       }
                     </>
                   )
                 })
+
               }
               {Object.values(faculty.subjects).map(subject => <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>)}
               {Object.values(faculty.courses).map(course => <InfoGridStructure id={course.id} margin="50">{course.name}</InfoGridStructure>)}
@@ -65,14 +64,14 @@ export default function ProjectInfoGridStructures({ project, forProjectPage = fa
               {Object.values(centre.subjects).map(subject => <InfoGridStructure id={subject.id} margin="10">{subject.name}</InfoGridStructure>)}
               {
                 Object.values(centre.consultingServices).map(consultingService => {
-                 return (
-                   <>
-                     <InfoGridStructure id={consultingService.id} margin="15">{consultingService.name}</InfoGridStructure>
-                     {
-                       Object.values(consultingService.seminars).map(seminar => <InfoGridStructure id={seminar.id} margin="50">{seminar.name}</InfoGridStructure>)
-                     }
-                   </>
-                 )
+                  return (
+                    <>
+                      <InfoGridStructure id={consultingService.id} margin="15">{consultingService.name}</InfoGridStructure>
+                      {
+                        Object.values(consultingService.seminars).map(seminar => <InfoGridStructure id={seminar.id} margin="50">{seminar.name}</InfoGridStructure>)
+                      }
+                    </>
+                  )
                 })
               }
             </>
@@ -101,6 +100,42 @@ const InfoGridStructuresContainer = styled.div`
   & > * {
     margin-right: var(--info-border-width);
   }
+`;
+
+function InfoGridStructure({ margin, href, children }) {
+  return (
+    <>
+      {
+        children ?
+          href ?
+            <InfoGridStructureContainer margin={margin}>
+              <HoverLink href={href}>{children}</HoverLink>
+            </InfoGridStructureContainer> :
+            <InfoGridStructureContainerPadded margin={margin}>
+              <div style={{ display: "inline" }}>
+                {children}
+              </div>
+            </InfoGridStructureContainerPadded> :
+          <></>
+      }
+    </>
+  )
+}
+
+const InfoGridStructureContainer = styled.div`
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: white;
+  color: black;
+
+  outline: var(--info-border-width) solid var(--info-border-color);
+  margin-top: var(--info-border-width);
+
+  margin-left: ${({ margin }) => margin }%;
+`;
+
+const InfoGridStructureContainerPadded = styled(InfoGridStructureContainer)`
+  padding: 0.2rem 0.4rem;
 `;
 
 function extractStructures(project, contexts) {
@@ -389,31 +424,3 @@ function extractStructures(project, contexts) {
 
   return structures
 }
-
-function InfoGridStructure({ href, margin, children }) {
-  return (
-    <InfoGridStructureLink href={href} margin={margin}>
-      {children}
-    </InfoGridStructureLink>
-  )
-}
-
-function InfoGridStructureLink({ href, children, margin }) {
-  return (
-    <InfoGridStructureLinkContainer margin={margin}>
-      <HoverLink href={href}>{children}</HoverLink>
-    </InfoGridStructureLinkContainer>
-  );
-}
-
-const InfoGridStructureLinkContainer = styled.div`
-  margin-top: ${({ theme }) => theme.borderWidth }%;
-  margin-left: ${({ margin }) => margin }%;
-  
-  background: white;
-  outline: ${({ theme }) => theme.border };
-
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: black;
-`;

@@ -2,11 +2,11 @@ import styled, { useTheme } from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
 
 import ProjectInfoGridDate from "@/components/pages/program/project/info_grid/date/date";
-import ProjectInfoGridStructures from "@/components/pages/program/project/info_grid/structures";
 
 import { useSlider } from "@/providers/slider";
 import { useWindowSize } from "@/providers/window_size";
-import { ProjectInfoGridLocations } from "@/components/pages/program/project/info_grid/locations";
+import ProjectInfoGridLocations from "@/components/pages/program/project/info_grid/locations";
+import ProjectInfoGridStructures from "@/components/pages/program/project/info_grid/structures";
 
 export default function ProjectInfoGridCarousel({ project, forProjectPage = false }) {
   return (

@@ -1,23 +1,24 @@
 import styled from "styled-components";
 
-import {
-  InfoGridContext,
-  InfoGridLocation,
-} from "@/components/pages/program/project/info_grid/structures";
-import InfoGridDate from "@/components/pages/program/project/info_grid/date/date";
-import InfoGridFormat from "@/components/pages/program/project/info_grid/formats";
+
+import ProjectInfoGridLocations from "@/components/pages/program/project/info_grid/locations";
+
+import ProjectInfoGridDate from "@/components/pages/program/project/info_grid/date/date";
+import ProjectInfoGridFormats from "@/components/pages/program/project/info_grid/formats";
+
 import { InfoGridContainer } from "@/components/pages/program/project/info_grid/info_grid";
+import ProjectInfoGridStructures from "@/components/pages/program/project/info_grid/structures";
 
 export default function ProjectInfoGrid({ project, forProjectPage = false, asOverlay = false }) {
 
   return (
     <ProjectInfoGridContainer>
       <FormatDateContainer>
-        <InfoGridFormat project={project} forProjectPage={forProjectPage} asOverlay={asOverlay} />
-        <InfoGridDate project={project} />
+        <ProjectInfoGridFormats project={project} forProjectPage={forProjectPage} asOverlay={asOverlay} />
+        <ProjectInfoGridDate project={project} />
       </FormatDateContainer>
-      <InfoGridLocation project={project} forProjectPage={forProjectPage} />
-      <InfoGridContext project={project} forProjectPage={forProjectPage} />
+      <ProjectInfoGridLocations project={project} forProjectPage={forProjectPage} />
+      <ProjectInfoGridStructures project={project} forProjectPage={forProjectPage} />
     </ProjectInfoGridContainer>
   );
 }
