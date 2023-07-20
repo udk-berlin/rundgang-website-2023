@@ -11,17 +11,17 @@ import {
   FIRST_DAY_START_HOUR,
 } from "@/themes/pages/timeline";
 
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 import { range } from "@/utils/range";
 
 export default function TimelineHours() {
   const windowSize = useWindowSize();
-  const [useHalfDayHours, setUseHalfDayHours] = useState(false);
+  const [useHalfDayHours, setUseHalfDayHours] = useState(null);
 
   useEffect(() => {
     if (windowSize?.width <= breakpoints.m) {
       setUseHalfDayHours(true);
-    } else {
+    } else if (windowSize?.width > breakpoints.m) {
       setUseHalfDayHours(false);
     }
   }, [windowSize?.width]);

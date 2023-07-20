@@ -37,7 +37,6 @@ const InfoGridDateElement = styled.div`
 
   &:first-child > :first-child > :first-child {
     visibility: visible;
-    /* background-color: red; */
   }
 `;
 

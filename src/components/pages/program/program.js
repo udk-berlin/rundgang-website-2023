@@ -6,14 +6,13 @@ import { useFilter } from "@/providers/filter";
 
 import ProjectCell from "@/components/pages/program/project_cell";
 import Layout from "@/components/layout/layout";
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 import { breakpoints } from "@/themes/theme";
 import {
   programLTheme,
   programMTheme,
   programSTheme,
 } from "@/themes/pages/program";
-import LoadingLayout from "@/components/layout/loading";
 
 export default function Program() {
   const [responsiveTheme, setResponsiveTheme] = useState(null);
@@ -25,43 +24,32 @@ export default function Program() {
       setResponsiveTheme(programSTheme);
     } else if (windowSize?.width <= breakpoints.m) {
       setResponsiveTheme(programMTheme);
-    } else if (windowSize?.width) {
+    } else if (windowSize?.width > breakpoints.m) {
       setResponsiveTheme(programLTheme);
     }
   }, [windowSize?.width]);
 
   return (
-    <>
+    <Layout defaultSliderPosition={2}>
       {
         responsiveTheme ?
-          (
-            <Layout defaultSliderPosition={2}>
-              <ThemeProvider theme={responsiveTheme}>
-                <ProgramContainer>
-                  <Masonry
-                    columnsCount={responsiveTheme.MASONRY_COLUMNS}
-                    gutter={responsiveTheme.MASONRY_GUTTER}>
-                    {filter.filteredProjects.map((project, index) => (
-                      <ProjectCell project={project} index={index}/>
-                    ))}
-                  </Masonry>
-                </ProgramContainer>
-              </ThemeProvider>
-            </Layout>
-          ) : <LoadingLayout></LoadingLayout>
-
+          <ThemeProvider theme={responsiveTheme}>
+            <ProgramContainer>
+              <Masonry
+                columnsCount={responsiveTheme.MASONRY_COLUMNS}
+                gutter={responsiveTheme.MASONRY_GUTTER}>
+                {filter.filteredProjects.map((project, index) => (
+                  <ProjectCell project={project} index={index}/>
+                ))}
+              </Masonry>
+            </ProgramContainer>
+          </ThemeProvider> : <></>
       }
-    </>
+    </Layout>
   );
 }
 
 const ProgramContainer = styled.div`
   min-height: ${({ theme }) => theme.height};
-
-  margin-bottom: calc(${({ theme }) => theme.borderWidth} * -1);
-  padding: ${({ theme }) => theme.MASONRY_GUTTER};
-
-  border-bottom: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
+  padding: ${({ theme }) => theme.padding};
 `;

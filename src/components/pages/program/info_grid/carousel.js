@@ -6,7 +6,7 @@ import {
   InfoGridLocation,
 } from "@/components/pages/program/info_grid/cards";
 import { useSlider } from "@/providers/slider";
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 import {useData} from "@/providers/data/data";
 
 export default function InfoGridCarousel({ project, forProjectPage = false }) {

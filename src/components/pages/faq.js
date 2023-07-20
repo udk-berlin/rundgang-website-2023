@@ -28,7 +28,7 @@ const FAQS = {
       texts: [
         "Um den Rundgang 2023 für alle Personen sicher zu gestalten, wird in diesem Jahr ein Awarenessteam an allen Tagen am Standort Hardenbergstraße 33 und am Eröffnungstag am Standort Grunewaldstraße 2-5 eingesetzt. Du erkennst die Mitarbeitenden des Awarenessteams an ihren lila Westen mit der Aufschrift „Awareness“.",
         "</br>",
-        "Solltest Du Dich unwohl fühlen oder unangebrachtes Verhalten beobachten, wende Dich bitte an das Awarenessteam (Die Telefonnummer wird am 21. Juli hier veröffentlicht) oder das Sicherheitspersonal. Dies gilt ausnahmslos für alle Standorte des Rundgangs.",
+        "Solltest Du Dich unwohl fühlen oder unangebrachtes Verhalten beobachten, wende Dich bitte an das Awarenessteam (0049 151 28093534) oder das Sicherheitspersonal. Dies gilt ausnahmslos für alle Standorte des Rundgangs.",
         "</br>",
         "Das Awarenessteam setzt sich aus Mitarbeitenden des <a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/awareness/'>Access-Netzwerks</a> zusammen. Die Aufgaben des Awarenessteams umfassen beim Rundgang die Verbindung klassischer Sicherheitsaufgaben mit feministischer Haltung, diskriminierungssensibler Arbeitsweise, kommunikativen Lösungsstrategien, selbstkritischer Reflexion und Awarenessansatz. Auch an der Tür werden Awarenesspersonen eingesetzt, um in möglichen Konfliktsituationen vermitteln zu können."
       ]
@@ -88,6 +88,8 @@ const FAQS = {
         "Damit unser Sicherheitskonzept eingehalten werden kann, wird es für die Standorte Hardenbergstraße 33 und Grunewaldstraße 2-5 eine Einlassbeschränkung geben. Diese wurde im Vorfeld aufgrund des Sicherheitskonzepts und der Brandschutzvorlage festgelegt. Wird der Einlass vorübergehend gestoppt, kann dies daran liegen, dass die Obergrenze der Personenzahl im Gebäude erreicht ist.",
         "Am Einlass achtet der Sicherheitsdienst außerdem darauf, dass keine gefährlichen Gegenstände oder Glasflaschen mit ins Gebäude gebracht werden.",
         "Die Öffnungszeiten des Rundgangs 2023 findest Du <a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/gebaeudeoeffnungszeiten/'>hier</a>. Bitte beachte, dass diese sich während des Rundgangs von den regulären Öffnungszeiten der Standorte unterscheiden.",
+        "</br>",
+        "Das Mitführen von Hunden und anderen Haustieren ist beim Rundgang nicht erlaubt. Eine Ausnahme bilden Blindenführhunde oder Assistenzhunde (bitte schriftlichen Nachweis mitführen)."
       ]
     },
     {
@@ -222,7 +224,7 @@ const FAQS = {
       title: "Awareness",
       texts: [
         "In order to make the 2023 Rundgang safe for everyone, this year an awareness team will be deployed on all days at the Hardenbergstraße 33 and on the opening day at the Grunewaldstraße 2-5. You will recognize the awareness team members by their purple vests with \"Awareness\" written on them.",
-        "If you feel uncomfortable or observe inappropriate behavior, please contact the awareness team (the phone number will be published here on July 21) or the security staff. This applies to all locations on the Rundgang without exception.",
+        "If you feel uncomfortable or observe inappropriate behavior, please contact the awareness team (0049 151 28093534) or the security staff. This applies to all locations on the Rundgang without exception.",
         "The awareness team is made up of <a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/awareness/'>Access Network</a> staff. The tasks of the awareness team during the Rundgang include the combination of classic security tasks with feminist attitudes,  working methods sensitive to discrimination, communicative solution strategies, self-critical reflection and an awareness approach. Awareness persons are also deployed at the door to mediate in possible conflict situations."
 ]
     },
@@ -243,10 +245,14 @@ const FAQS = {
         "Students, teachers and staff of the UdK Berlin as well as participants in the Rundgang program will have priority admission on all days. Registration is required for this.",
         "</br>",
         "We kindly ask all students, teachers and staff of the UdK Berlin as well as all program participants to register early in order to guarantee a smooth admission. Attention: Only those who are registered and can show an appropriate wristband will be given priority admission!",
+        "</br>",
         "Information about registration can be found here. The employee or student ID card alone does not allow priority admission to the event.",
+        "</br>",
         "In order to comply with our security concept, there will be an admission restriction for the locations Hardenbergstraße 33 and Grunewaldstraße 2-5. This was determined in advance based on the security concept and the fire protection concept. If admission is temporarily stopped, this may be because the upper limit for the number of people in the building has been reached.",
         "At the entrance, the security service also makes sure that no dangerous objects or glass bottles are brought into the building.",
         "You can find the opening hours of the Rundgang 2023 <a href='https://www.udk-berlin.de/universitaet/stabsstelle-ueberfakultaere-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/2023/gebaeudeoeffnungszeiten/'>here</a>. Please note that these will differ from the regular opening hours of the locations during the Rundgang.",
+        "</br>",
+        "Dogs and other pets are not allowed at the Rundgang. An exception are guide dogs for the blind or assistance dogs (please bring written proof)."
       ]
     },
     {

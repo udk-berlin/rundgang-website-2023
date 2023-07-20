@@ -34,7 +34,7 @@ export const locationsLTheme = {
     top: top.l,
     gridTemplateColumns: `${layoutLTheme.footer.gridTemplateColumn1} ${layoutLTheme.footer.gridTemplateColumn2} ${layoutLTheme.footer.gridTemplateColumn3}`,
     info: {
-      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1} - 2 * ${baseLTheme.borderWidth})`,
+      height: `calc(${height.l} - ${layoutLTheme.footer.gridTemplateColumn1})`,
     },
     content: {
       height: '100%',
@@ -49,7 +49,7 @@ export const locationsLTheme = {
     }
   },
   program: {
-    height: `calc(${height.l} - 2 * ${baseLTheme.borderWidth})`,
+    height: height.l,
     width: '',
     position: 'absolute',
     top: top.l,
@@ -88,6 +88,11 @@ export const locationsLTheme = {
       width: "auto",
     },
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const locationsMTheme = {
@@ -122,6 +127,7 @@ export const locationsMTheme = {
     height: 'fit-content',
     width: '100vw',
     position: '',
+    padding: '0.75rem',
     top: '',
     left: '',
     gridTemplateColumns: '',
@@ -157,4 +163,9 @@ export const locationsMTheme = {
       width: "auto",
     },
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.16em"
+    }
+  }
 };

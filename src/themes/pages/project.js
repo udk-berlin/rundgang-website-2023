@@ -28,6 +28,7 @@ export const projectLTheme = {
     sliderOffset: 2,
   },
   media: {
+    position: "relative",
     display: "",
     flexDirection: "",
     height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
@@ -58,6 +59,11 @@ export const projectLTheme = {
   text: {
     heading: fontSizes.l.medium,
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const projectMTheme = {
@@ -82,6 +88,7 @@ export const projectMTheme = {
     sliderOffset: 2,
   },
   media: {
+    position: "relative",
     display: "",
     flexDirection: "",
     height: `calc(100vh - ${layoutLTheme.header.height} - ${layoutLTheme.footer.height})`,
@@ -112,6 +119,11 @@ export const projectMTheme = {
   additionalText: {
     heading: fontSizes.l.medium,
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.2em"
+    }
+  }
 };
 
 export const projectSTheme = {
@@ -136,30 +148,36 @@ export const projectSTheme = {
     sliderOffset: 2,
   },
   media: {
+    position: "initial",
     display: "flex",
     flexDirection: "row",
     height: "auto",
-    width: "100vw",
-    overflowX: "scroll",
-    overflowY: "hidden",
+    width: '',
+    overflowX: "auto",
+    overflowY: "auto",
     thumbnail: {
       height: "auto",
-      width: "100vw",
+      width: `calc(100vw - 3 * ${baseMTheme.borderWidth})`,
     },
     placeholder: {
       height: "50vh",
-      width: "100vw",
+      width: `calc(100vw - 3 * ${baseMTheme.borderWidth})`,
     },
     audio: {
-      width: "100vw",
+      width: `calc(100vw - 3 * ${baseMTheme.borderWidth})`,
     },
     video: {
       height: "100vw",
-      width: `calc(${1.777777777} * 100vw)`,
+      width: `calc(${1.777777777} * calc(100vw - 3 * ${baseMTheme.borderWidth}))`,
       ratio: 1.777777777,
     },
   },
   text: {
     heading: fontSizes.l.medium,
   },
+  dropCap: {
+    before: {
+      marginTop: "-0.16em"
+    }
+  }
 };

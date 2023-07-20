@@ -12,7 +12,7 @@ import { ProjectThumbnail } from "@/components/pages/projects/project/media";
 import ProjectTitle from "@/components/pages/projects/project/title";
 import ProjectAuthors from "@/components/pages/projects/project/authors";
 import InfoGrid from "@/components/pages/program/info_grid/info_grid";
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 import { breakpoints } from "@/themes/theme";
 
 export default function ProjectCell({ project, index }) {

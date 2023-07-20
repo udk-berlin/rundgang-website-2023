@@ -1,5 +1,7 @@
-import { InfoGridItem } from "@/components/pages/program/info_grid/item";
 import styled from "styled-components";
+
+import { InfoGridItem } from "@/components/pages/program/info_grid/item";
+import { TimelineLink } from "@/components/localization/links";
 
 const dayToWeekDayMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -9,15 +11,20 @@ export default function InfoGridDay({ projectTime }) {
       <InfoGridItem>
         <span>Date:</span>
       </InfoGridItem>
-      <DateContainer day={projectTime[0]}>
-        <span>{dayToWeekDayMapper[projectTime[0].getDay()]}</span>
-        <span>
+
+      <StyledTimelineLink>
+        <TimelineLink href={'/timeline'}>
+        <DateContainer day={projectTime[0]}>
+          <span>{dayToWeekDayMapper[projectTime[0].getDay()]}</span>
+          <span>
           {projectTime[0].getDate() +
             "." +
             (projectTime[0].getMonth() + 1) +
             "."}
         </span>
-      </DateContainer>
+        </DateContainer>
+      </TimelineLink>
+      </StyledTimelineLink>
     </InfoGridDayContainer>
   );
 }
@@ -27,6 +34,13 @@ const InfoGridDayContainer = styled.div`
   grid-template-columns: min-content 1fr 1fr 1fr;
   & > *:nth-last-child(1) {
     margin-right: var(--info-border-width);
+  }
+`;
+
+const StyledTimelineLink = styled.div`
+  *:hover {
+    background: ${({ theme }) => theme.colors.pink};
+    color: white;
   }
 `;
 

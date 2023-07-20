@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from 'next/router'
 
 import Page from "@/components/pages/page";
@@ -8,34 +8,36 @@ import LoadingLayout from "@/components/layout/loading";
 import { DataProvider, useData } from "@/providers/data/data";
 import { SavedProjectsProvider } from '@/providers/saved_projects'
 import { FilterProvider } from "@/providers/filter";
-import {LinkProvider, useLink} from "@/providers/link";
+import {useWindowSize, WindowSizeProvider} from "@/providers/window_size";
 
 export default function LocationsPage() {
   return (
     <Page title="locations">
-      <LinkProvider>
-        <LinkProviderChildren />
-      </LinkProvider>
+      <WindowSizeProvider>
+        <WindowSizeChildren />
+      </WindowSizeProvider>
     </Page>
   );
 }
 
-function LinkProviderChildren() {
+function WindowSizeChildren() {
   const router = useRouter()
-  const link = useLink()
+  const windowSize = useWindowSize()
 
   return (
-    <>
+    <SavedProjectsProvider>
       {
-        link.clicked || !router || !router.query || !router.query.id ?
-          <LoadingLayout /> :
+        windowSize ? (router && router.query && router.query.id) ?
           <DataProvider>
             <DataProviderChildren id={router.query.id} />
-          </DataProvider>
+          </DataProvider> :
+          <LoadingLayout /> :
+          <></>
       }
-    </>
+    </SavedProjectsProvider>
   )
 }
+
 
 function DataProviderChildren({ id }) {
   const { locations, projects, structures, structureFilters , formats, formatFilters } = useData()
@@ -73,16 +75,16 @@ function DataProviderChildren({ id }) {
       structureFilters={structureFilters}
       formats={formats}
       formatFilters={formatFilters}>
-      <Locations />
+      <Locations location={location} />
     </FilterProvider>
   } else {
     components = <LoadingLayout />
   }
 
   return (
-    <SavedProjectsProvider>
+    <>
       {components}
-    </SavedProjectsProvider>
+    </>
   )
 }
 

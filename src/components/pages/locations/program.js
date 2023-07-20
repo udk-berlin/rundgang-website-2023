@@ -4,18 +4,11 @@ import styled from "styled-components";
 import ProjectCell from "@/components/pages/program/project_cell";
 import { useFilter } from "@/providers/filter";
 
-export default function LocationsProgram({ setLocationSelected, responsiveTheme}) {
+export default function LocationsProgram() {
   const filter = useFilter();
 
   if (!filter.location) {
-    setLocationSelected(false)
     return <></>;
-  }
-
-  if (responsiveTheme.id === 'm') {
-    setLocationSelected(true)
-  } else {
-    setLocationSelected(false)
   }
 
   return (
@@ -36,9 +29,9 @@ const LocationsProgramEmptyColumn = styled.div`
 `;
 
 const LocationsProgramContainer = styled.div`
-  position: ${({ theme }) => theme.program.position};
-  top: ${({ theme }) => theme.program.top};
-  left: ${({ theme }) => theme.program.left};
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 3;
 
   display: grid;
@@ -52,9 +45,6 @@ const LocationsProgramContainer = styled.div`
   min-height: ${({ theme }) => theme.program.height};
   max-height: ${({ theme }) => theme.program.height};
 
-  border-left: ${({ theme }) => theme.border};
-  border-right: ${({ theme }) => theme.border};
-
   cursor: default;
   pointer-events: none;
 
@@ -64,17 +54,19 @@ const LocationsProgramContainer = styled.div`
 `;
 
 const LocationsProgramContentColumn = styled.div`
-  pointer-events: all;
-  overflow: scroll;
-  background: white;
-  padding: ${({ theme }) => theme.program.padding};
-  border-left: ${({ theme }) => theme.program.borderLeft};
-
-  width: ${({ theme }) => theme.program.width};
-  min-width: ${({ theme }) => theme.program.width};
-  max-width: ${({ theme }) => theme.program.width};
-
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.program.padding};
+
+  width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  min-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  max-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  
+  padding: ${({ theme }) => theme.program.padding};
+  
+  border-left: ${({ theme }) => theme.program.borderLeft};
+
+  background: white;
+  overflow: scroll;
+  pointer-events: all;
 `;

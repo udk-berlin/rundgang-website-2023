@@ -1,22 +1,21 @@
-import React, { useRef, useEffect } from "react";
+import React, {useRef, useEffect, useState} from "react";
 import { createRoot } from "react-dom/client";
 import maplibregl from "maplibre-gl";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { useFilterDispatch } from "@/providers/filter";
 import ResponsiveMarker from "@/components/pages/locations/map/marker";
-import {useData} from "@/providers/data/data";
 
 const MAP_CONFIGURATION = {
   style:
     "https://osm.udk-berlin.de/styles/udk-rundgang-2023/style.json",
   bounds: {
     longitude: { min: 13.1397254, max: 13.5871903 },
-    latitude: { min: 52.442394, max: 52.586099 },
+    latitude: { min: 52.382394, max: 52.606099 },
   },
   center: {
-    longitude: 13.339633,
-    latitude: 52.505,
+    longitude: 13.349633,
+    latitude: 52.521,
   },
 };
 
@@ -37,7 +36,10 @@ const LOCATION_ID_TO_MAX_ZOOM = {
   //'!FqPOhaHHAjYeliMfOU:content.udk-berlin.de': 16,
   //'!bwyfqxrdHCbwOYLLgp:content.udk-berlin.de': 14.4,
   //'!jocCvZKGntdCmvmmUG:content.udk-berlin.de': 15.2,
-  '!RpTarLRqYYIdDCBLyV:content.udk-berlin.de': 15.2
+  "!RpTarLRqYYIdDCBLyV:content.udk-berlin.de": 15.2,
+
+  "!YOMEVNrNhhIBxSAhNQ:content.udk-berlin.de": 15.2,
+  "!CmGOTOZlDoWMcJFHkZ:content.udk-berlin.de": 15.2,
 };
 
 const LOCATION_ID_TO_LNG_LAT = {
@@ -70,17 +72,23 @@ const LOCATION_ID_TO_LNG_LAT = {
   //'!bwyfqxrdHCbwOYLLgp:content.udk-berlin.de': {lng: 13.322555087168652, lat: 52.51741297926878},
   //'!jocCvZKGntdCmvmmUG:content.udk-berlin.de': {lng: 13.3281, lat: 52.50895},
   "!RpTarLRqYYIdDCBLyV:content.udk-berlin.de": { lng: 13.329100213983617, lat: 52.50967878838072 },
+  "!YOMEVNrNhhIBxSAhNQ:content.udk-berlin.de": { lng: 13.377022646883148, lat: 52.553236436886955 },
+  "!CmGOTOZlDoWMcJFHkZ:content.udk-berlin.de": { lng: 13.321916506276636, lat: 52.51264659409021 },
+  "!IKWVNtgTydTHMgpUwQ:content.udk-berlin.de": { lng: 13.36031847972046, lat: 52.50000813130538 },
 };
 
 const LOCATION_ID_TO_ORDER_MAPPER = {
   "!XGSFQYZUnFtQNzOBnD:content.udk-berlin.de": -1,
 };
 
-export default function LocationsMap({ projects, locations, locationSelected = false }) {
+export default function LocationsMap({ projects, locations, location }) {
+  const theme = useTheme()
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const dispatch = useFilterDispatch();
   const markersCache = { groundPlan: {}, text: {} };
+
+  const centerOffset =  theme.id === 'l' ? 0 : 0.017
 
   useEffect(() => {
     mapRef.current = new maplibregl.Map({
@@ -96,11 +104,10 @@ export default function LocationsMap({ projects, locations, locationSelected = f
           MAP_CONFIGURATION.bounds.latitude.max,
         ],
       ],
-      center: [
-        MAP_CONFIGURATION.center.longitude,
-        MAP_CONFIGURATION.center.latitude,
-      ],
-      zoom: 12.5,
+      center: location && location.id && location.id in LOCATION_ID_TO_LNG_LAT ?
+        [LOCATION_ID_TO_LNG_LAT[location.id].lng, LOCATION_ID_TO_LNG_LAT[location.id].lat - centerOffset] :
+        [MAP_CONFIGURATION.center.longitude, MAP_CONFIGURATION.center.latitude],
+      zoom: theme.id === 'l' ? 12.2 : 11.5,
       maxZoom: 18,
       minZoom: 10,
       pitchWithRotate: false,
@@ -172,6 +179,12 @@ export default function LocationsMap({ projects, locations, locationSelected = f
           if (e.originalEvent.target.id) {
             const id = e.originalEvent.target.id.replaceAll("marker-", "");
 
+            // if (id in LOCATION_ID_TO_LNG_LAT) {
+            //   mapRef.current.flyTo({
+            //     center: [LOCATION_ID_TO_LNG_LAT[id].lng, LOCATION_ID_TO_LNG_LAT[id].lng - centerOffset]
+            //   });
+            // }
+
             dispatch({
               type: "filter-location",
               location: locations[id],
@@ -186,25 +199,23 @@ export default function LocationsMap({ projects, locations, locationSelected = f
             });
           }
         });
-      });
+    });
   }, [locations, projects]);
 
-  return <MapContainer ref={mapContainerRef} locationSelected={locationSelected} />;
+  return <MapContainer ref={mapContainerRef} />;
 }
 
 const MapContainer = styled.div`
-  height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1' })`};
-  min-height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1'})`};
-  max-height: ${({ theme, locationSelected }) => `calc(${theme.map.height} / ${locationSelected ? theme.map.heightShrinkOnSelectedLocation : '1'})`};
+  position: relative;
+  z-index: 0;
   
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+  min-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
+  max-height: calc(100vh - ${({ theme }) => theme.header.height} - ${({ theme }) => theme.footer.height});
 
-  overflow: hidden;
-
-  border-right: ${({ theme }) => theme.border};
-  border-left: ${({ theme }) => theme.border};
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 `;
 
 function buildMarker(mapRef, location, cache, useTextBox) {

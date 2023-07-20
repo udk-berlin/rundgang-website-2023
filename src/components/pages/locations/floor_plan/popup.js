@@ -28,15 +28,15 @@ const LocationsFloorPlanEmptyColumn = styled.div`
 
 const LocationsFloorPlanPopupContainer = styled.div`
   position: absolute;
-  top: var(--locations-overlays-top);
+  top: 0;
   z-index: 4;
 
   display: grid;
   grid-template-columns: ${({ theme }) => theme.footer.gridTemplateColumn1} ${({ theme }) => theme.footer.gridTemplateColumn2} ${({ theme }) => theme.footer.gridTemplateColumn3};
 
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
 
   cursor: default;
   pointer-events: none;

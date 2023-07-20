@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 
+import LoadingLayout from "@/components/layout/loading";
 import {
   staticBreakpoints,
   staticLTheme,
   staticMTheme,
 } from "@/themes/pages/static";
-import useWindowSize from "@/hooks/window_size";
+import { useWindowSize } from "@/providers/window_size";
 
 export default function Accordion({ items }) {
-  const [responsiveTheme, setResponsiveTheme] = useState(staticLTheme);
+  const [responsiveTheme, setResponsiveTheme] = useState(null);
   const windowSize = useWindowSize();
 
   useEffect(() => {
     if (windowSize?.width <= staticBreakpoints.m) {
       setResponsiveTheme(staticMTheme);
-    } else {
+    } else if (windowSize?.width > staticBreakpoints.m) {
       setResponsiveTheme(staticLTheme);
     }
   }, [windowSize?.width]);
 
   return (
-    <ThemeProvider theme={responsiveTheme}>
-      <AccordionWrapper>
-        {items.map((item) => (
-          <AccordionItem item={item} />
-        ))}
-      </AccordionWrapper>
-    </ThemeProvider>
+    <>
+      {
+        responsiveTheme ?
+          <ThemeProvider theme={responsiveTheme}>
+            <AccordionWrapper>
+              {items.map((item) => (
+                <AccordionItem item={item} />
+              ))}
+            </AccordionWrapper>
+          </ThemeProvider> : <LoadingLayout />
+      }
+    </>
   );
 }
 

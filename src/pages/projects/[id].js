@@ -7,32 +7,33 @@ import LoadingLayout from "@/components/layout/loading";
 
 import { SavedProjectsProvider } from '@/providers/saved_projects'
 import { DataProvider, useData } from "@/providers/data/data";
-import { LinkProvider, useLink } from "@/providers/link";
+import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function ProjectPage() {
   return (
     <Page title="project">
-      <LinkProvider>
-        <LinkProviderChildren />
-      </LinkProvider>
+      <WindowSizeProvider>
+        <WindowSizeChildren />
+      </WindowSizeProvider>
     </Page>
   );
 }
 
-function LinkProviderChildren() {
+function WindowSizeChildren() {
   const router = useRouter()
-  const link = useLink()
+  const windowSize = useWindowSize()
 
   return (
-    <>
+    <SavedProjectsProvider>
       {
-        link.clicked || !router || !router.query || !router.query.id ?
-          <LoadingLayout /> :
+        windowSize ? (router && router.query && router.query.id) ?
           <DataProvider forProject={true} id={router.query.id}>
             <DataProviderChildren />
-          </DataProvider>
+          </DataProvider> :
+          <LoadingLayout /> :
+          <></>
       }
-    </>
+    </SavedProjectsProvider>
   )
 }
 
@@ -43,9 +44,7 @@ function DataProviderChildren() {
     <>
       {
         project ?
-          <SavedProjectsProvider>
-            <Project />
-          </SavedProjectsProvider> :
+          <Project /> :
           <LoadingLayout />
       }
     </>

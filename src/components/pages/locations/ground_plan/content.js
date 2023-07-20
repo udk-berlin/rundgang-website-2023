@@ -39,9 +39,9 @@ const LocationsGroundPlanLocationNameContainer = styled.div`
 `
 
 const LocationsGroundPlanLocationContainer = styled.div`
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  min-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  max-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
 
   cursor: default;
 
@@ -50,19 +50,14 @@ const LocationsGroundPlanLocationContainer = styled.div`
   
   background: white;
   border-top: ${({ theme })=> theme.border};
-  border-right: ${({ theme })=> theme.border};
 `
 
 const LocationsGroundPlanContentContainer = styled.div`
   position: relative;
-
-  width: calc(100% + var(--border-width));
-  min-width: calc(100% + var(--border-width));
-  max-width: calc(100% + var(--border-width));
-
-  height: ${({ theme })=> theme.groundPlan.content.height};
-  min-height: ${({ theme })=> theme.groundPlan.content.height};
-  max-height: ${({ theme })=> theme.groundPlan.content.height};
+  
+  // height: ${({ theme })=> theme.groundPlan.content.height};
+  // min-height: ${({ theme })=> theme.groundPlan.content.height};
+  // max-height: ${({ theme })=> theme.groundPlan.content.height};
 
   cursor: default;
   
@@ -70,13 +65,15 @@ const LocationsGroundPlanContentContainer = styled.div`
 `
 
 const LocationsGroundPlanInfoContainer = styled.div`
-  height: ${({ theme })=> theme.groundPlan.info.height};
-  min-height: ${({ theme })=> theme.groundPlan.info.height};
-  max-height: ${({ theme })=> theme.groundPlan.info.height};
+  // height: ${({ theme })=> theme.groundPlan.info.height};
+  // min-height: ${({ theme })=> theme.groundPlan.info.height};
+  // max-height: ${({ theme })=> theme.groundPlan.info.height};
 
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  min-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+  max-width: ${({ theme })=> theme.groundPlan.gridTemplateColumn1};
+
+  border-right: ${({ theme }) => theme.border};
 
   overflow: ${({ theme })=> theme.groundPlan.content.overflow};
 `

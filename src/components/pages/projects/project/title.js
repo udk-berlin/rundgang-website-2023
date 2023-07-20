@@ -17,8 +17,10 @@ export default function ProjectTitle({ project, fontSize = 2, link }) {
     <>
       <ProjectTitleMeasureContainer ref={measureContainerRef}>
         <ProjectTitleHeightMeasureContainerForMeasuring fontSize={fontSize}>
-          <DropCap fontSize={fontSize}>{project?.name.substring(0, 1)}</DropCap>
-          {project?.name.substring(1)}
+          <ProjectLink project={project} link={link}>
+            <DropCap fontSize={fontSize}>{project?.name.substring(0, 1)}</DropCap>
+            {project?.name.substring(1)}
+          </ProjectLink>
         </ProjectTitleHeightMeasureContainerForMeasuring>
       </ProjectTitleMeasureContainer>
 
@@ -57,6 +59,7 @@ const ProjectTitleHeightMeasureContainerForMeasuring = styled.div`
   font-size: ${({ theme }) => theme.title.fontSize};
   font-weight: 600;
   line-height: 1;
+  text-transform: uppercase;
 `;
 
 const ProjectTitleContainer = styled.div`
@@ -64,7 +67,7 @@ const ProjectTitleContainer = styled.div`
 
   max-height: ${({ slider, theme, height }) =>
     slider.position >= theme.title.sliderIndex
-      ? `calc(${height}px + ${theme.MASONRY_GUTTER}) `
+      ? `calc(${height}px + ${theme.MASONRY_GUTTER})`
       : "0px"};
 
   padding-top: ${(props) =>
@@ -101,7 +104,7 @@ const DropCap = styled.span`
   }
 
   &:before {
-    margin-top: -0.2em;
+    margin-top: ${({ theme }) => theme.dropCap.before.marginTop};
   }
   &:after {
     margin-bottom: -0.15em;
