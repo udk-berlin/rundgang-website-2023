@@ -1,28 +1,41 @@
-import { InfoGridItem } from "@/components/pages/program/info_grid/item";
 import styled from "styled-components";
+
+import { InfoGridItem } from "@/components/pages/program/info_grid/item";
+import { TimelineLink } from "@/components/localization/links";
 
 export default function InfoGridTime({ start, end }) {
   return (
-    <InfoGridTimeContainer
-      pos={timeToMarginWidth(start, end)}
-      margin={timeToMarginWidth(start, end)[0]}
-    >
-      <TimeContainer date={start} />
-      <Line />
-      <TimeContainer date={end} />
-    </InfoGridTimeContainer>
+    <StyledTimelineLink>
+      <TimelineLink href={'/timeline'}>
+        <InfoGridTimeContainer
+          pos={timeToMarginWidth(start, end)}
+          margin={timeToMarginWidth(start, end)[0]}
+        >
+          <TimeContainer date={start} />
+          <Line />
+          <TimeContainer date={end} />
+        </InfoGridTimeContainer>
+      </TimelineLink>
+    </StyledTimelineLink>
   );
 }
 
 const InfoGridTimeContainer = styled(InfoGridItem)`
   min-width: 110px;
-  width: ${(prop) => prop.pos[1]}%;
+  width: ${({ pos }) => pos[1]}%;
 
   display: flex;
   align-items: center;
 
   & > :nth-last-child(1) {
     margin-right: var(--info-border-width);
+  }
+`;
+
+const StyledTimelineLink = styled.div`
+  div:hover {
+    background: ${({ theme }) => theme.colors.pink};
+    color: white;
   }
 `;
 
