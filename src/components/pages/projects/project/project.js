@@ -1,16 +1,18 @@
-import React, { useEffect, useMemo, useState } from "react";
-import useSWR from "swr";
+import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 
-import ProjectAuthors from "@/components/pages/projects/project/authors";
 import ProjectTitle from "@/components/pages/projects/project/title";
-import Layout from "@/components/layout/layout";
-
-import ProjectMedia from "@/components/pages/projects/project/media";
-
-import InfoGrid from "@/components/pages/program/project/info_grid/info_grid";
+import ProjectAuthors from "@/components/pages/projects/project/authors";
 import { ProjectText } from "@/components/pages/projects/project/text";
+import ProjectInfoGrid from "@/components/pages/program/project/info_grid/info_grid";
+import ProjectMedia from "@/components/pages/projects/project/media";
+import Layout from "@/components/layout/layout";
+import LoadingLayout from "@/components/layout/loading";
+
+import { useData } from "@/providers/data/data";
 import { useWindowSize } from "@/providers/window_size";
+import { useMetaHeaderTitleDispatch } from "@/providers/title";
+
 import {
   projectBreakpoints,
   projectLTheme,
@@ -20,14 +22,17 @@ import {
 
 const NUMBER_OF_SLIDER_STATES = 5
 
-import { useData } from "@/providers/data/data";
-import LoadingLayout from "@/components/layout/loading";
-
 export default function Project() {
   const [responsiveTheme, setResponsiveTheme] = useState(null);
   const [withInfoGridOverlay, setWithInfoGridOverlay] = useState(true);
   const windowSize = useWindowSize();
   const { project } = useData(true)
+  const dispatch = useMetaHeaderTitleDispatch()
+
+  dispatch({
+    type: 'set-title',
+    name: project.name
+  })
 
   useEffect(() => {
     if (windowSize?.width <= projectBreakpoints.s) {
@@ -57,7 +62,7 @@ export default function Project() {
                 <ProjectInfoContainer>
                   <ProjectTitle project={project} link={false} />
                   <ProjectAuthors project={project} fontSize={1} />
-                  {withInfoGridOverlay ? <></> : <InfoGrid project={project} forProjectPage={true} />}
+                  {withInfoGridOverlay ? <></> : <ProjectInfoGrid project={project} forProjectPage={true} />}
                   <ProjectText />
                 </ProjectInfoContainer>
               </ProjectContainer>
