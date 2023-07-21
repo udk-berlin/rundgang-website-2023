@@ -10,7 +10,7 @@ import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function ImprintPage() {
   return (
-    <Page title="imprint">
+    <Page metaHeaderConfig={{ initialTitle: 'imprint' }}>
       <WindowSizeProvider>
         <WindowSizeChildren />
       </WindowSizeProvider>

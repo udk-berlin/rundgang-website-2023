@@ -9,7 +9,7 @@ import {SavedProjectsProvider} from "@/providers/saved_projects";
 
 export default function IndexPage() {
   return (
-    <Page title="UdK Rundgang 2023" suffix={false}>
+    <Page metaHeaderConfig={{ initialTitle: 'UdK Rundgang 2023', titleWithSuffix: false }}>
       <WindowSizeProvider>
         <WindowSizeChildren />
       </WindowSizeProvider>

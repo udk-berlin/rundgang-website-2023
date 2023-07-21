@@ -11,7 +11,7 @@ import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function TimelinePage() {
   return (
-    <Page title="timeline">
+    <Page metaHeaderConfig={{ initialTitle: 'timeline' }}>
       <WindowSizeProvider>
         <WindowSizeChildren />
       </WindowSizeProvider>

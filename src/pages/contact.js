@@ -10,7 +10,7 @@ import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function ContactPage() {
   return (
-    <Page title="contact">
+    <Page metaHeaderConfig={{ initialTitle: 'contact' }}>
       <WindowSizeProvider>
         <WindowSizeChildren />
       </WindowSizeProvider>

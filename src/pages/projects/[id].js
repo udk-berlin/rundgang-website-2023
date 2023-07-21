@@ -11,7 +11,7 @@ import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function ProjectPage() {
   return (
-    <Page title="project">
+    <Page metaHeaderConfig={{ initialTitle: 'project' }}>
       <WindowSizeProvider>
         <WindowSizeChildren />
       </WindowSizeProvider>

@@ -10,7 +10,7 @@ import { useWindowSize, WindowSizeProvider } from "@/providers/window_size";
 
 export default function FaqPage() {
   return (
-    <Page title="faq">
+    <Page metaHeaderConfig={{ initialTitle: 'faq' }}>
       <WindowSizeProvider>
         <WindowSizeChildren />
       </WindowSizeProvider>
