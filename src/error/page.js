@@ -5,18 +5,22 @@ import MetaHeader from '@/components/pages/meta_header'
 import LocalizationProvider from "@/components/localization/provider";
 import Layout from "@/components/layout/layout";
 
+import { MetaHeaderTitleProvider } from "@/providers/title";
+
 export default function ErrorPage () {
 
   return (
     <LocalizationProvider>
-      <MetaHeader title={'error'} />
-      <main>
-        <Layout disableFilter={true} disableSlider={true}>
-          <ErrorMessageContainer>
-            <FormattedMessage id={'error.message'} />
-          </ErrorMessageContainer>
-        </Layout>
-      </main>
+      <MetaHeaderTitleProvider initialTitle={'error'} >
+        <MetaHeader />
+        <main>
+          <Layout disableFilter={true} disableSlider={true}>
+            <ErrorMessageContainer>
+              <FormattedMessage id={'error.message'} />
+            </ErrorMessageContainer>
+          </Layout>
+        </main>
+      </MetaHeaderTitleProvider>
     </LocalizationProvider>
   )
 }

@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 
 import { useMetaHeaderTitle } from "@/providers/title";
 
-export default function MetaHeader({ titleWithSuffix }) {
+export default function MetaHeader({ titleWithSuffix = true }) {
   const language = useIntl();
   const title = useMetaHeaderTitle()
 
