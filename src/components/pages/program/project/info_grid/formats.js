@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl";
 
 import { useSlider } from "@/providers/slider";
 import { useData } from "@/providers/data/data";
-import { LocationsLink } from "@/components/localization/links";
+import { LocalizedLink } from "@/components/localization/links";
 
 const formatToMarginLeftMapper = {
   default: "0",
@@ -41,11 +41,11 @@ export default function ProjectInfoGridFormats({ project, margin, forProjectPage
     <InfoGridFormatsContainer asOverlay={asOverlay} slider={slider}>
       {formats.map(format => {
         return (
-          <LocationsLink href={`/program/${format.id}`}>
+          <LocalizedLink href={`/program/${format.id}`}>
             <InfoGridFormatLinkContainer margin={formatToMarginLeftMapper[format.name] && !margin ? formatToMarginLeftMapper[format.name] : formatToMarginLeftMapper.default}>
               <FormattedMessage id={format.name}/>
             </InfoGridFormatLinkContainer>
-          </LocationsLink>
+          </LocalizedLink>
         )
       })}
     </InfoGridFormatsContainer>

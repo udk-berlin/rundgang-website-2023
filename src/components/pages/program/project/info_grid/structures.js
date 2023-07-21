@@ -139,7 +139,8 @@ const InfoGridStructureContainerPadded = styled(InfoGridStructureContainer)`
 `;
 
 function extractStructures(project, contexts) {
-  const structures = { faculties: {}, centres: {}, initiatives: {} }
+  let structures = { faculties: {}, centres: {}, initiatives: {} }
+
 
   contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
@@ -320,46 +321,11 @@ function extractStructures(project, contexts) {
         }
       } else if (context && context.template === 'class') {
         let clazz = context
-        context = clazz.parents && clazz.parents[0] ? contexts[clazz.parents[0].id] : null
 
-        if (context && context.template && context.template === 'institute') {
-          let institute = context
-          context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+        clazz.parents.forEach(parent => {
+          context = parent && parent.id ? contexts[parent.id] : null
 
-          if (context && context.template && context.template === 'faculty') {
-            let faculty = context
-
-            if (!structures.faculties[faculty.id]) {
-              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-            }
-
-            if (!structures.faculties[faculty.id].institutes[institute.id]) {
-              structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-            }
-
-            if (!structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id]) {
-              structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id] = {...clazz}
-            }
-          }
-        } else if (context && context.template === 'course') {
-          let course = context
-          context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
-
-          if (context && context.template && context.template === 'faculty') {
-            let faculty = context
-
-            if (!structures.faculties[faculty.id]) {
-              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-            }
-
-            if (!structures.faculties[faculty.id].courses[course.id]) {
-              structures.faculties[faculty.id].courses[course.id] = {...course, subjects: {}, classes: {}}
-            }
-
-            if (!structures.faculties[faculty.id].courses[course.id].classes[clazz.id]) {
-              structures.faculties[faculty.id].courses[course.id].classes[clazz.id] = {...clazz}
-            }
-          } else if (context && context.template && context.template === 'institute') {
+          if (context && context.template && context.template === 'institute') {
             let institute = context
             context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
 
@@ -374,53 +340,65 @@ function extractStructures(project, contexts) {
                 structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
               }
 
-              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
-                structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id]) {
-                structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id] = {...clazz}
+              if (!structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id]) {
+                structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id] = {...clazz}
               }
             }
+          } else if (context && context.template === 'course') {
+            structures = extractCourse(context, contexts, structures, clazz)
           }
-        }
+        })
       } else if (context && context.template === 'course') {
-        let course = context
-        context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
-
-        if (context && context.template && context.template === 'faculty') {
-          let faculty = context
-
-          if (!structures.faculties[faculty.id]) {
-            structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-          }
-
-          if (!structures.faculties[faculty.id].courses[course.id]) {
-            structures.faculties[faculty.id].courses[course.id] = {...course, subjects: {}, classes: {}}
-          }
-        } else if (context && context.template && context.template === 'institute') {
-          let institute = context
-          context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
-
-          if (context && context.template && context.template === 'faculty') {
-            let faculty = context
-
-            if (!structures.faculties[faculty.id]) {
-              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-            }
-
-            if (!structures.faculties[faculty.id].institutes[institute.id]) {
-              structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-            }
-
-            if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
-              structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
-            }
-          }
-        }
+        structures = extractCourse(context, contexts, structures)
       }
     }
   })
+
+  return structures
+}
+
+function extractCourse(context, contexts, structures, clazz) {
+  let course = context
+  context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
+
+  if (context && context.template && context.template === 'faculty') {
+    let faculty = context
+
+    if (!structures.faculties[faculty.id]) {
+      structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+    }
+
+    if (!structures.faculties[faculty.id].courses[course.id]) {
+      structures.faculties[faculty.id].courses[course.id] = {...course, subjects: {}, classes: {}}
+    }
+
+    if (clazz && !structures.faculties[faculty.id].courses[course.id].classes[clazz.id]) {
+      structures.faculties[faculty.id].courses[course.id].classes[clazz.id] = {...clazz}
+    }
+  } else if (context && context.template && context.template === 'institute') {
+    let institute = context
+    context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+
+    if (context && context.template && context.template === 'faculty') {
+      let faculty = context
+
+      if (!structures.faculties[faculty.id]) {
+        structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
+      }
+
+      if (!structures.faculties[faculty.id].institutes[institute.id]) {
+        structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
+      }
+
+      if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
+        structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
+      }
+
+      if (clazz && !structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id]) {
+        structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id] = {...clazz}
+      }
+    }
+  }
 
   return structures
 }
