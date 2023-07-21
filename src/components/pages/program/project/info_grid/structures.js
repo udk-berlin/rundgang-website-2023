@@ -141,215 +141,27 @@ const InfoGridStructureContainerPadded = styled(InfoGridStructureContainer)`
 function extractStructures(project, contexts) {
   let structures = { faculties: {}, centres: {}, initiatives: {} }
 
-
   contexts && project.parents?.forEach(parent => {
     if (parent && parent.id) {
       let context = contexts[parent.id]
       if (context && context.template === 'institute') {
-        let institute = context
-
-        context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
-
-        if (context && context.template && context.template === 'faculty') {
-          let faculty = context
-
-          if (!structures.faculties[faculty.id]) {
-            structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-          }
-
-          if (!structures.faculties[faculty.id].institutes[institute.id]) {
-            structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-          }
-        }
+        structures = extractInstitute({ context, contexts, structures })
       } else if (context && context.template === 'faculty') {
-        let faculty = context
-
-        if (!structures.faculties[faculty.id]) {
-          structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-        }
+        structures = extractFaculty({ context, structures })
       } else if (context && context.template === 'centre') {
-        let centre = context
-
-        if (!structures.centres[centre.id]) {
-          structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
-        }
+        structures = extractCentre({ context, structures })
       } else if (context && context.template === 'initiative') {
-        let initiative = context
-
-        if (!structures.initiatives[initiative.id]) {
-          structures.initiatives[initiative.id] = {...initiative}
-        }
+        structures = extractInitiative({context, structures})
       } else if (context && context.template === 'consulting service') {
-        let consultingService = context
-        context = consultingService.parents && consultingService.parents[0] ? contexts[consultingService.parents[0].id] : null
-
-        if (context && context.template && context.template === 'centre') {
-          let centre = context
-
-          if (!structures.centres[centre.id]) {
-            structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
-          }
-
-          if (!structures.centres[centre.id].consultingServices[consultingService.id]) {
-            structures.centres[centre.id].consultingServices[consultingService.id] = {...consultingService, seminars: {}}
-          }
-        }
-
+        structures = extractConsultingServices({context, contexts, structures})
       } else if (context && context.template === 'subject') {
-        let subject = context
-        context = subject.parents && subject.parents[0] ? contexts[subject.parents[0].id] : null
-
-        if (context && context.template && context.template === 'centre') {
-          let centre = context
-
-          if (!structures.centres[centre.id]) {
-            structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
-          }
-
-          if (!structures.centres[centre.id].subjects[subject.id]) {
-            structures.centres[centre.id].subjects[subject.id] = {...subject, subjects: {}}
-          }
-        } else if (context && context.template && context.template === 'faculty') {
-          let faculty = context
-
-          if (!structures.faculties[faculty.id]) {
-            structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-          }
-
-          if (!structures.faculties[faculty.id].subjects[subject.id]) {
-            structures.faculties[faculty.id].subjects[subject.id] = {...subject, subjects: {}}
-          }
-        } else if (context && context.template && context.template === 'institute') {
-          let institute = context
-          context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
-
-          if (context && context.template && context.template === 'faculty') {
-            let faculty = context
-
-            if (!structures.faculties[faculty.id]) {
-              structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-            }
-
-            if (!structures.faculties[faculty.id].institutes[institute.id]) {
-              structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-            }
-
-            if (!structures.faculties[faculty.id].institutes[institute.id].subjects[subject.id]) {
-              structures.faculties[faculty.id].institutes[institute.id].subjects[subject.id] = {...subject, subjects: {}}
-            }
-          }
-        } else if (context && context.template && context.template === 'course') {
-          let course = context
-          context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            let institute = context
-            context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
-
-            if (context && context.template && context.template === 'faculty') {
-              let faculty = context
-
-              if (!structures.faculties[faculty.id]) {
-                structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id]) {
-                structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
-                structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id].subjects[subject.id]) {
-                structures.faculties[faculty.id].institutes[institute.id].courses[course.id].subjects[subject.id] = {...subject, subjects: {}}
-              }
-            }
-          }
-        } else if (context && context.template && context.template === 'subject') {
-          let secondSubject = context
-          context = secondSubject.parents && secondSubject.parents[0] ? contexts[secondSubject.parents[0].id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            let institute = context
-            context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
-
-            if (context && context.template && context.template === 'faculty') {
-              let faculty = context
-
-              if (!structures.faculties[faculty.id]) {
-                structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id]) {
-                structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id]) {
-                structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id] = {...secondSubject, subjects: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id].subjects[subject.id]) {
-                structures.faculties[faculty.id].institutes[institute.id].subjects[secondSubject.id].subjects[subject.id] = {...subject, subjects: {}}
-              }
-            }
-          }
-        }
+        structures = extractSubject({context, contexts, structures})
       } else if (context && context.template === 'seminar') {
-        let seminar = context
-        context = seminar.parents && seminar.parents[0] ? contexts[seminar.parents[0].id] : null
-
-        if (context && context.template && context.template === 'consulting service') {
-          let consultingService = context
-          context = consultingService.parents && consultingService.parents[0] ? contexts[consultingService.parents[0].id] : null
-
-          if (context && context.template && context.template === 'centre') {
-            let centre = context
-
-            if (!structures.centres[centre.id]) {
-              structures.centres[centre.id] = {...centre, subjects: {}, consultingServices: {}}
-            }
-
-            if (!structures.centres[centre.id].consultingServices[consultingService.id]) {
-              structures.centres[centre.id].consultingServices[consultingService.id] = {...consultingService, seminars: {}}
-            }
-
-            if (!structures.centres[centre.id].consultingServices[consultingService.id].seminars[seminar.id]) {
-              structures.centres[centre.id].consultingServices[consultingService.id].seminars[seminar.id] = {...seminar}
-            }
-          }
-        }
+        structures = extractSeminar({ context, contexts, structures })
       } else if (context && context.template === 'class') {
-        let clazz = context
-
-        clazz.parents.forEach(parent => {
-          context = parent && parent.id ? contexts[parent.id] : null
-
-          if (context && context.template && context.template === 'institute') {
-            let institute = context
-            context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
-
-            if (context && context.template && context.template === 'faculty') {
-              let faculty = context
-
-              if (!structures.faculties[faculty.id]) {
-                structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id]) {
-                structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-              }
-
-              if (!structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id]) {
-                structures.faculties[faculty.id].institutes[institute.id].classes[clazz.id] = {...clazz}
-              }
-            }
-          } else if (context && context.template === 'course') {
-            structures = extractCourse(context, contexts, structures, clazz)
-          }
-        })
+        structures = extractClass({ context, contexts, structures })
       } else if (context && context.template === 'course') {
-        structures = extractCourse(context, contexts, structures)
+        structures = extractCourse({ context, contexts, structures })
       }
     }
   })
@@ -357,48 +169,192 @@ function extractStructures(project, contexts) {
   return structures
 }
 
-function extractCourse(context, contexts, structures, clazz) {
-  let course = context
-  context = course.parents && course.parents[0] ? contexts[course.parents[0].id] : null
+function extractFaculty({context, structures, institute = null, subject = null, course= null }) {
+  let faculty = { institutes: {}, subjects: {}, courses: {}, ...context }
 
-  if (context && context.template && context.template === 'faculty') {
-    let faculty = context
+  if (institute) {
+    faculty.institutes[institute.id] = { classes: {}, subjects: {}, courses: {}, ...institute}
+  }
 
-    if (!structures.faculties[faculty.id]) {
-      structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-    }
+  if (subject) {
+    faculty.subjects[subject.id] = { subjects: {}, ...subject }
+  }
 
-    if (!structures.faculties[faculty.id].courses[course.id]) {
-      structures.faculties[faculty.id].courses[course.id] = {...course, subjects: {}, classes: {}}
-    }
+  if (course) {
+    faculty.courses[course.id] = { subjects: {}, classes: {}, ...course}
+  }
 
-    if (clazz && !structures.faculties[faculty.id].courses[course.id].classes[clazz.id]) {
-      structures.faculties[faculty.id].courses[course.id].classes[clazz.id] = {...clazz}
-    }
-  } else if (context && context.template && context.template === 'institute') {
-    let institute = context
-    context = institute.parents && institute.parents[0] ? contexts[institute.parents[0].id] : null
+  if (!structures.faculties[faculty.id]) {
+    structures.faculties[faculty.id] = {...faculty}
+  } else {
+    const institutes = {...structures.faculties[faculty.id].institutes, ...faculty.institutes}
+    const subjects = {...structures.faculties[faculty.id].subjects, ...faculty.subjects}
+    const courses = {...structures.faculties[faculty.id].courses, ...faculty.courses}
+    structures.faculties[faculty.id] = {...structures.faculties[faculty.id], ...faculty, institutes: institutes, subjects: subjects, courses: courses}
+  }
+
+  return structures
+}
+
+function extractCentre({context, structures, subject = null, consultingService = null }) {
+  let centre = { subjects: {}, consultingServices: {}, ...context }
+
+  if (subject) {
+    centre.subjects[subject.id] = { subjects: {}, ...subject}
+  }
+
+  if (consultingService) {
+    centre.consultingServices[consultingService.id] = { ...consultingService }
+  }
+
+  if (!structures.centres[centre.id]) {
+    structures.centres[centre.id] = {...centre}
+  } else {
+    const subjects = {...structures.centres[centre.id].subjects, ...centre.subjects}
+    const consultingServices = {...structures.centres[centre.id].consultingServices, ...centre.consultingServices}
+    structures.centres[centre.id] = {...structures.centres[centre.id], ...centre, subjects: subjects, consultingServices: consultingServices}
+  }
+
+  return structures
+}
+
+function extractInitiative({ context, structures }) {
+  let initiative = { ...context }
+
+  if (!structures.initiatives[initiative.id]) {
+    structures.initiatives[initiative.id] = {...initiative}
+  }
+
+  return structures
+}
+
+function extractInstitute({context, contexts, structures, course= null, clazz = null, subject = null }) {
+  let institute = { courses: {}, classes: {}, subjects: {}, ...context }
+
+  if (course) {
+    institute.courses[course.id] = {...course}
+  }
+
+  if (clazz) {
+    institute.classes[clazz.id] = { seminars: {}, ...clazz}
+  }
+
+  if (subject) {
+    institute.subjects[subject.id] = {...subject}
+  }
+
+  institute.parents?.forEach(parent => {
+    context = contexts[parent.id]
 
     if (context && context.template && context.template === 'faculty') {
-      let faculty = context
-
-      if (!structures.faculties[faculty.id]) {
-        structures.faculties[faculty.id] = {...faculty, institutes: {}, subjects: {}, courses: {}}
-      }
-
-      if (!structures.faculties[faculty.id].institutes[institute.id]) {
-        structures.faculties[faculty.id].institutes[institute.id] = {...institute, classes: {}, subjects: {}, courses: {}}
-      }
-
-      if (!structures.faculties[faculty.id].institutes[institute.id].courses[course.id]) {
-        structures.faculties[faculty.id].institutes[institute.id].courses[course.id] = {...course, subjects: {}, classes: {}}
-      }
-
-      if (clazz && !structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id]) {
-        structures.faculties[faculty.id].institutes[institute.id].courses[course.id].classes[clazz.id] = {...clazz}
-      }
+      structures = extractFaculty({ context, structures, institute })
     }
+  })
+
+  return structures
+}
+
+function extractSubject({ context, contexts, structures, secondSubject = null }) {
+  let subject = { subjects: {}, ...context }
+
+  if (secondSubject) {
+    subject.subjects[secondSubject.id] = {...secondSubject}
   }
+
+  subject.parents?.forEach(parent => {
+    context = contexts[parent.id]
+
+    if (context && context.template && context.template === 'centre') {
+      structures = extractCentre({context, structures, subject})
+    } else if (context && context.template && context.template === 'faculty') {
+      structures = extractFaculty({context, structures, subject})
+    } else if (context && context.template && context.template === 'institute') {
+      structures = extractInstitute({ context, contexts, structures, subject })
+    } else if (context && context.template && context.template === 'course') {
+      structures = extractCourse({context, contexts, structures, subject})
+    } else if (context && context.template && context.template === 'subject') {
+      structures = extractSubject({context, contexts, structures, secondSubject: subject})
+    }
+  })
+
+  return structures
+}
+
+function extractCourse({ context, contexts, structures, subject = null, clazz = null }) {
+  let course = {classes: {}, subjects: {}, ...context}
+
+  if (clazz) {
+    course.classes[clazz.id] = { seminars: {}, ...clazz }
+  }
+
+  if (subject) {
+    course.classes[subject.id] = {...subject}
+  }
+
+  course.parents?.forEach(parent => {
+    context = contexts[parent.id]
+
+    if (context && context.template && context.template === 'faculty') {
+      structures = extractFaculty({ context, structures, course })
+    } else if (context && context.template && context.template === 'institute') {
+      structures = extractInstitute({ context, contexts, structures, course })
+    }
+  })
+
+  return structures
+}
+
+function extractClass({ context, contexts, structures, seminar = null }) {
+  let clazz = { seminars: {}, ...context }
+
+  if (seminar) {
+    clazz.seminars[seminar.id] = { ...seminar }
+  }
+
+  clazz.parents?.forEach(parent => {
+    context = contexts[parent.id]
+
+    if (context && context.template && context.template === 'institute') {
+      structures = extractInstitute({ context, contexts, structures, clazz })
+
+    } else if (context && context.template === 'course') {
+      structures = extractCourse({ context, contexts, structures, clazz })
+    }
+  })
+
+  return structures
+}
+
+function extractSeminar({ context, contexts, structures }) {
+  let seminar = { ...context }
+
+  seminar.parents?.forEach(parent => {
+    context = contexts[parent.id]
+
+    if (context && context.template && context.template === 'consulting service') {
+      structures = extractConsultingServices({ context, contexts, structures, seminar })
+    } else if (context && context.template && context.template === 'class') {
+      structures = extractClass({ context, contexts, structures, seminar })
+    }
+  })
+
+  return structures
+}
+
+function extractConsultingServices({ context, contexts, structures, seminar = null }) {
+  let consultingService = { seminars: {}, ...context }
+
+  if (seminar) {
+    consultingService.seminars[seminar.id] = {...seminar}
+  }
+
+  consultingService.parents?.forEach(parent => {
+    context = contexts[parent.id]
+
+    if (context && context.template && context.template === 'centre') {
+      structures = extractCentre({ context, structures, consultingService})
+    }
+  })
 
   return structures
 }
